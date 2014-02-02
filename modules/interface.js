@@ -17,18 +17,6 @@ Root.classify("Root.UI.Component", { // consider renaming
 
 });
 
-Root.classify("Root.UI.Test", {
-
-	extend: Root.UI.Component,
-
-	events: {
-		click: function(){
-			this.destroy();
-		}
-	}
-
-});
-
 Root.classify("Root.UI.LinkNode", {
 
 	extend: Root.UI.Component,
