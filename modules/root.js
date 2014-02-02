@@ -14,7 +14,7 @@ Root.addMethods = function(obj, newMethods){
 
 		obj[method] = newMethods[method];
 	}
-}
+};
 
 Root.addMethods(Root, {
 
@@ -73,7 +73,7 @@ Root.addMethods(Root, {
 		};
 
 		var newClass = parent[className];
-		newClass.prototype.blueprint = newClass; // consider using a different name than blueprint
+		newClass.prototype._class = newClass;
 
 		if (superClass){ // inheritance
 			var newPrototype = newClass.prototype,
@@ -167,7 +167,7 @@ Root.addMethods(Root, {
 			window.onload = function(){
 				original();
 				handler();
-			}
+			};
 		}
 	}
 

@@ -8,7 +8,7 @@ Root.classify("Root.UI.Component", { // consider renaming
 
 	initialize: function(node, config){
 		this.node = node;
-		config = config || this.blueprint.defaults;
+		config = config || this._class.defaults;
 		
 		for (var part in config){
 			node[part] = config[part];
