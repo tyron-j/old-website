@@ -12,7 +12,8 @@
 
 /* Sizes */
 
-@diamondsize: 500px;
+@diamondsize: 400px;
+@stdradius: 5px;
 
 /* Mixins */
 
@@ -24,11 +25,31 @@
 	border-radius: @radius;
 }
 
+.boxShadow(@blur, @color){
+    -webkit-box-shadow: 0 0 @blur 0 @color;
+    -moz-box-shadow: 0 0 @blur 0 @color;
+    box-shadow: 0 0 @blur 0 @color;
+}
+
 .center(@width, @height: @width){
 	left: 50%;
 	top: 50%;
 	margin-left: -(@width / 2);
 	margin-top: -(@height / 2);
+	position: absolute;
+}
+
+.centerText(@lineheight){
+	text-align: center;
+	vertical-align: middle;
+	line-height: @lineheight;
+}
+
+.linearGradient(@color1, @color2){
+	background: -webkit-linear-gradient(left, @color1, @color2);
+	background: -moz-linear-gradient(right, @color1, @color2);
+	background: -o-linear-gradient(right, @color1, @color2);
+	background: linear-gradient(to right, @color1, @color2);
 }
 
 .rotate(@rotation){
@@ -49,66 +70,95 @@
 	.setDimensions(@width, @height);
 }
 
+.stackLeft(){
+	position: relative;
+	float: left;
+}
+
 /* Classes */
+
+html, body {
+	height: 100%;
+}
 
 body {
 	background-color: @darkgray;
 	margin: 0;
 }
 
+.LeftColumn, .RightColumn {
+	width: 20%;
+	height: 100%;
+	// background-color: @darkergray;
+}
+
+.LeftColumn {
+	.linearGradient(@darkergray, @darkgray);
+
+	float: left;
+}
+
+.RightColumn {
+	.linearGradient(@darkgray, @darkergray);
+
+	float: right;
+}
+
+.FirstName, .LastName {
+	.centerText(@diamondsize);
+	.setDimensions(@diamondsize);
+	.stackLeft;
+
+	color: white;
+	font-family: "Century Gothic";
+	font-size: 2em;
+}
+
 .OuterDiamond {
-	.borderRadius(5px);
+	// .borderRadius(@stdradius);
+	.boxShadow(50px, @darkergray);
 	.rotate(-45deg);
 	.setDimensions(@diamondsize);
+	.stackLeft;
 
-	position: relative;
-	margin: auto;
-	overflow: hidden;
+	// overflow: hidden;
 }
 
 .CentralDiamond {
-	.borderRadius(5px);
+	// .borderRadius(@stdradius);
+	.boxShadow(25px, @darkergray);
 	// .rotate(45deg);
 	.setInCenter(@diamondsize / 8);
 
-	position: absolute;
 	background-color: white;
 	z-index: 1;
 }
 
 .Quadrant {
 	.setDimensions(@diamondsize / 2);
+	.stackLeft;
 
-	position: relative;
-	float: left;
 	overflow: hidden;
 }
 
-#q1 {
-	background-color: @darkergray;
-}
-
-#q2 {
+.Teal {
 	background-color: @teal;
 }
 
-#q3 {
-	background-color: @teal;
-}
-
-#q4 {
+.DarkerGray {
 	background-color: @darkergray;
 }
 
 .InnerDiamond {
+	.centerText(sqrt(2) * (@diamondsize / 2));
 	.rotate(45deg);
 	.setInCenter(sqrt(2) * (@diamondsize / 2));
 
-	position: absolute;
+	color: white;
+	font-family: "Century Gothic";
+	font-size: 1.25em;
 }
 
 .Container {
-	.setInCenter(800px, 500px);
-
-	position: absolute;
+	.setInCenter(@diamondsize * 3, @diamondsize);
 }
