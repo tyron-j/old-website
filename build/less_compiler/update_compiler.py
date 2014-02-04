@@ -17,7 +17,9 @@ def main():
 	text = ':: compiles all the less files to css files\n\ncd C:\Users\Tyron\Documents\GitHub\website\styles\n'
 
 	for x in arr:
-		text += '\nlessc -x less/' + x + " > compiled/" + x[:-5] + ".css"
+		text += '\ncall lessc -x less/' + x + " > compiled/" + x[:-5] + ".css"
+
+	text += '\n\ncd C:\Users\Tyron\Documents\GitHub\website'
 
 	bat.write(text)
 	bat.close()

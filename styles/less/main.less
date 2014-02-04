@@ -1,0 +1,170 @@
+// main.css
+
+
+
+// Colors:
+
+@lightgray: rgb(200, 200, 200);
+@gray: rgb(125, 125, 125);
+@darkgray: rgb(50, 50, 50);
+@darkergray: rgb(25, 25, 25);
+@teal: rgb(50, 150, 150);
+
+// Standard Values:
+
+@diamondsize: 360px;
+@stdfont: "Century Gothic";
+@stdradius: 5px;
+
+// Mixins:
+
+.borderRadius(@radius){
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.boxShadow(@blur, @color){
+    -webkit-box-shadow: 0 0 @blur 0 @color;
+    -moz-box-shadow: 0 0 @blur 0 @color;
+    box-shadow: 0 0 @blur 0 @color;
+}
+
+.center(@width, @height: @width){
+	left: 50%;
+	top: 50%;
+	margin-left: -(@width / 2);
+	margin-top: -(@height / 2);
+	position: absolute;
+}
+
+.centerText(@lineheight){
+	text-align: center;
+	vertical-align: middle;
+	line-height: @lineheight;
+}
+
+.linearGradient(@color1, @color2){
+	background: -webkit-linear-gradient(left, @color1, @color2);
+	background: -moz-linear-gradient(right, @color1, @color2);
+	background: -o-linear-gradient(right, @color1, @color2);
+	background: linear-gradient(to right, @color1, @color2);
+}
+
+.rotate(@rotation){
+	-webkit-transform: rotate(@rotation);
+	-moz-transform: rotate(@rotation);
+	-ms-transform: rotate(@rotation);
+	-o-transform: rotate(@rotation);
+	transform: rotate(@rotation);
+}
+
+.setDimensions(@width, @height: @width){
+	width: @width;
+	height: @height;
+}
+
+.setFont(@size, @color){
+	color: @color;
+	font-family: @stdfont;
+	font-size: @size;
+}
+
+.setInCenter(@width, @height: @width){
+	.center(@width, @height);
+	.setDimensions(@width, @height);
+}
+
+.stackLeft(){
+	position: relative;
+	float: left;
+}
+
+// Classes:
+
+html, body {
+	height: 100%;
+}
+
+body {
+	background-color: @darkgray;
+	margin: 0;
+}
+
+.LeftColumn, .RightColumn {
+	width: 20%;
+	height: 100%;
+	// background-color: @darkergray;
+}
+
+.LeftColumn {
+	.linearGradient(@darkergray, @darkgray);
+
+	float: left;
+}
+
+.RightColumn {
+	.linearGradient(@darkgray, @darkergray);
+
+	float: right;
+}
+
+.Name {
+	.centerText(@diamondsize);
+	.setDimensions(@diamondsize);
+	.setFont(2em, white);
+	.stackLeft;
+}
+
+.OuterDiamond {
+	// .borderRadius(@stdradius);
+	// .boxShadow(50px, @darkergray);
+	.rotate(-45deg);
+	.setDimensions(@diamondsize);
+	.stackLeft;
+
+	// overflow: hidden;
+
+	& > div:last-of-type { // only works for @darkergray
+		z-index: -1;
+	}
+}
+
+.CentralDiamond {
+	// .borderRadius(@stdradius);
+	.boxShadow(25px, @darkergray);
+	// .rotate(45deg);
+	.setInCenter(@diamondsize / 8);
+
+	background-color: white;
+	z-index: 1;
+}
+
+.InnerDiamond {
+	.setDimensions(@diamondsize / 2);
+	.stackLeft;
+	.boxShadow(50px, @darkergray);
+
+	overflow: hidden;
+}
+
+.Teal {
+	background-color: @teal;
+}
+
+.DarkerGray {
+	background-color: @darkergray;
+}
+
+.DiamondContent {
+	.centerText(sqrt(2) * (@diamondsize / 2));
+	.rotate(45deg);
+	.setFont(1.25em, white);
+	.setInCenter(sqrt(2) * (@diamondsize / 2));
+}
+
+.Container {
+	.setInCenter(@diamondsize * 3, @diamondsize);
+}

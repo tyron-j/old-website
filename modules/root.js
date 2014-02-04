@@ -1,6 +1,6 @@
 // root.js
 
-
+// Array.prototype.forEach and the Node object are not available in IE8
 
 // Common Functions:
 
@@ -177,7 +177,7 @@ Root.namespace("Root.UI");
 
 Root.addMethods(Root.UI, {
 
-	initialize: function(){ // needs testing
+	initialize: function(){ // implement handling multiple class names
 		var RootUI = Root.UI,
 			cn, instance;
 

@@ -1,0 +1,39 @@
+// portfolio.css
+
+
+
+@import "main.less";
+
+// Standard Values:
+
+@numlinks: 3;
+@stdmargin: 125px;
+
+// Mixins:
+
+.reflect(@height, @length: 50%, @opacity: 0.25){ // not standardized across browsers yet
+	-webkit-box-reflect: below @height -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255, 255, 255, @opacity)));
+}
+
+.formatBackground(){
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+// Classes:
+
+.LinkContainer {
+	.setInCenter(@numlinks * (@diamondsize / 2) + (@numlinks + 1) * @stdmargin, (@diamondsize / 2));
+
+	& > * {
+		margin-left: @stdmargin;
+	}
+}
+
+.Diamond {
+	.InnerDiamond;
+
+	.boxShadow(50px, @darkergray);
+	.rotate(-45deg);
+}
