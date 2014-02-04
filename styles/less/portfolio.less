@@ -37,3 +37,19 @@
 	.boxShadow(50px, @darkergray);
 	.rotate(-45deg);
 }
+
+.OuterMiniDiamond {
+	.boxShadow(1px, white);
+	.rotate(-45deg);
+	.setDimensions(@diamondsize / 16);
+
+	background-color: @darkergray;
+	position: fixed;
+	right: 50px;
+	top: 50px;
+}
+
+.InnerMiniDiamond {
+	.setDimensions(@diamondsize / 32);
+	.stackLeft;
+}

@@ -1,3 +1,7 @@
+// root_test.js
+
+
+
 (function(){
 	Root.classify("Root.UI.TestClass", {
 		initialize: function(testString0, testString1, testString2){
