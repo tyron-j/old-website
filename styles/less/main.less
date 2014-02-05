@@ -1,4 +1,4 @@
-// main.css
+// main.less
 
 
 
@@ -46,6 +46,11 @@
 	line-height: @lineheight;
 }
 
+.fitToParent(){
+	width: 100%;
+	height: 100%;
+}
+
 .linearGradient(@color1, @color2){
 	background: -webkit-linear-gradient(left, @color1, @color2);
 	background: -moz-linear-gradient(right, @color1, @color2);
@@ -82,6 +87,11 @@
 	float: left;
 }
 
+.stackRight(){
+	position: relative;
+	float: right;
+}
+
 // Classes:
 
 html, body {
@@ -91,6 +101,10 @@ html, body {
 body {
 	background-color: @darkgray;
 	margin: 0;
+}
+
+.Container {
+	.setInCenter(@diamondsize * 3, @diamondsize);
 }
 
 .LeftColumn, .RightColumn {
@@ -127,19 +141,19 @@ body {
 
 	// overflow: hidden;
 
+	& > .CentralDiamond {
+		// .borderRadius(@stdradius);
+		.boxShadow(25px, @darkergray);
+		// .rotate(45deg);
+		.setInCenter(@diamondsize / 8);
+
+		background-color: white;
+		z-index: 1;
+	}
+
 	& > div:last-of-type { // only works for @darkergray
 		z-index: -1;
 	}
-}
-
-.CentralDiamond {
-	// .borderRadius(@stdradius);
-	.boxShadow(25px, @darkergray);
-	// .rotate(45deg);
-	.setInCenter(@diamondsize / 8);
-
-	background-color: white;
-	z-index: 1;
 }
 
 .InnerDiamond {
@@ -150,14 +164,6 @@ body {
 	overflow: hidden;
 }
 
-.Teal {
-	background-color: @teal;
-}
-
-.DarkerGray {
-	background-color: @darkergray;
-}
-
 .DiamondContent {
 	.centerText(sqrt(2) * (@diamondsize / 2));
 	.rotate(45deg);
@@ -165,6 +171,12 @@ body {
 	.setInCenter(sqrt(2) * (@diamondsize / 2));
 }
 
-.Container {
-	.setInCenter(@diamondsize * 3, @diamondsize);
+// Color Classes:
+
+.Teal {
+	background-color: @teal;
+}
+
+.DarkerGray {
+	background-color: @darkergray;
 }

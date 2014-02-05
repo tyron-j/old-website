@@ -1,0 +1,84 @@
+// about.less
+
+
+
+@import "base.less"; // change the import settings later
+
+// Standard Values:
+
+@containerwidth: 450px;
+@containerheight: @containerwidth * 1.6;
+@iframemargin: 100px;
+@iframeheight: @containerheight - (@diamondsize / 2) - @iframemargin;
+@scrollbarwidth: 20px;
+@scrollerheight: @scrollbarwidth * 2;
+@textmargin: 15px;
+
+// Mixins:
+
+// Classes:
+
+.AboutContainer {
+	.setInCenter(@containerwidth, @containerheight);
+}
+
+.AboutDiamond {
+	.Diamond;
+
+	margin-left: (@containerwidth / 2) - (@diamondsize / 4);
+}
+
+.IFrame {
+	.stackLeft;
+
+	& > .ScrollWindow {
+		height: 100%;
+		overflow: hidden;
+
+		& > .ScrollContent {
+			position: relative;
+			width: 100%;
+
+			& > .TextContent {
+				.setFont(1em, white);
+
+				margin: @textmargin;
+			}
+		}
+	}
+	& > .ScrollBar {
+		float: right;
+		width: @scrollbarwidth;
+		height: 100%;
+
+		& > .Scroller {
+			width: 100%;
+			height: @scrollerheight;
+		}
+	}
+}
+
+.AboutIFrame {
+	.IFrame;
+
+	.setDimensions(@containerwidth, @iframeheight);
+
+	margin-top: @iframemargin;
+}
+
+// Transparent Color Classes:
+
+.FaintWhite {
+	background-color: rgba(255, 255, 255, 0.25);
+}
+
+.FaintBlack {
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+// Span Classes:
+
+.HighLight {
+	color: @teal;
+	font-style: italic;
+}
