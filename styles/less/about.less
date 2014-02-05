@@ -18,19 +18,7 @@
 
 // Classes:
 
-.AboutContainer {
-	.setInCenter(@containerwidth, @containerheight);
-}
-
-.AboutDiamond {
-	.Diamond;
-
-	margin-left: (@containerwidth / 2) - (@diamondsize / 4);
-}
-
 .IFrame {
-	.stackLeft;
-
 	& > .ScrollWindow {
 		height: 100%;
 		overflow: hidden;
@@ -58,21 +46,34 @@
 	}
 }
 
-.AboutIFrame {
-	.IFrame;
+.AboutContainer {
+	.setInCenter(@containerwidth, @containerheight);
 
-	.setDimensions(@containerwidth, @iframeheight);
+	& > .AboutDiamond {
+		.Diamond;
 
-	margin-top: @iframemargin;
+		margin-left: (@containerwidth / 2) - (@diamondsize / 4);
+	}
+
+	& > .AboutIFrame {
+		.IFrame;
+
+		.setDimensions(@containerwidth, @iframeheight);
+		.stackLeft;
+
+		margin-top: @iframemargin;
+	}
 }
 
 // Transparent Color Classes:
 
 .FaintWhite {
+	background-color: white; // fallback
 	background-color: rgba(255, 255, 255, 0.25);
 }
 
 .FaintBlack {
+	background-color: @darkergray; // fallback
 	background-color: rgba(0, 0, 0, 0.25);
 }
 

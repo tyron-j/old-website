@@ -6,10 +6,38 @@
 
 // Standard Values:
 
+@fixedmargin: 50px;
 @numlinks: 3;
 @stdmargin: 125px;
+@popoverwidth: 125px;
+@popoverheight: 25px;
+@popovermargin: 10px;
 
 // Mixins:
+
+.arrowLeft(@size, @color){
+	border-top: @size solid transparent;
+	border-bottom: @size solid transparent;
+	border-right: @size solid @color;
+}
+
+.arrowRight(@size, @color){
+	border-top: @size solid transparent;
+	border-bottom: @size solid transparent;
+	border-left: @size solid @color;
+}
+
+.arrowUp(@size, @color){
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-bottom: @size solid @color;
+}
+
+.arrowDown(@size, @color){
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-top: @size solid @color;
+}
 
 .reflect(@height, @length: 50%, @opacity: 0.25){ // not standardized across browsers yet
 	-webkit-box-reflect: below @height -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255, 255, 255, @opacity)));
@@ -45,11 +73,42 @@
 
 	background-color: @darkergray;
 	position: fixed;
-	right: 50px;
-	top: 50px;
+	right: @fixedmargin;
+	top: @fixedmargin;
 
 	& > .InnerMiniDiamond {
 		.setDimensions(@diamondsize / 32);
 		.stackLeft;
 	}
+}
+
+.IndexPopover {
+	position: fixed;
+	right: @fixedmargin * 1.75;
+	top: @fixedmargin;
+
+	& > .PopoverContent {
+		.FaintWhite;
+
+		.stackLeft;
+
+		padding: 0 @popovermargin @popovermargin @popovermargin;
+	}
+	& > .Arrow {
+		.arrowRight(10px, white);
+		.stackLeft;
+
+		opacity: 0.25;
+	}
+}
+
+.PopoverItem {
+	.Teal;
+
+	.centerText(@popoverheight);
+	.setDimensions(@popoverwidth, @popoverheight);
+	.setFont(1em, white);
+
+	position: relative;
+	margin-top: @popovermargin;
 }
