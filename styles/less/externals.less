@@ -1,0 +1,53 @@
+// externals.less
+
+
+
+@import "base.less"; // change the import settings later
+
+// Standard Values:
+
+@smallsize: @diamondsize / 4;
+@leftmargin: (sqrt(2) - 1) * @smallsize;
+@topmargin: ((1 / sqrt(2)) - 1) * @smallsize;
+@newrowmargin: (1 / sqrt(2)) * @smallsize +  @leftmargin;
+@gridwidth: (3 * sqrt(2) * @smallsize) + @leftmargin;
+@gridheight: (3 * sqrt(2) * @smallsize) + @topmargin;
+
+// Classes:
+
+.GridContainer {
+	.setInCenter(@gridwidth, @gridheight);
+
+	padding-top: -@topmargin;
+
+	& > * {
+		margin-top: @topmargin;
+		margin-left: @leftmargin;
+
+		&:nth-child(5n + 4){
+			margin-left: @newrowmargin;
+		}
+
+		&:nth-child(5n + 4), &:nth-child(5n){
+			& > .SmallContent {
+				.DarkerGray;
+			}
+		}
+	}
+}
+
+.SmallDiamond {
+	.Diamond;
+
+	.boxShadow;
+	.setDimensions(@smallsize);
+}
+
+.SmallContent {
+	.Teal;
+
+	.centerText(sqrt(2) * @smallsize);
+	.rotate(45deg);
+	.setFont(1em, white);
+	.setInCenter(sqrt(2) * @smallsize);
+}
