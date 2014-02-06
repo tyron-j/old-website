@@ -1,0 +1,47 @@
+// gallery.less
+
+
+
+@import "base.less"; // change the import settings later
+
+// Standard Values:
+
+@windowwidth: @slideshowwidth - @scrollbarwidth;
+@numthumbnails: 3;
+@thumbnailmargin: 10px;
+@thumbnailwidth: (@windowwidth - (@thumbnailmargin * (@numthumbnails + 1))) / @numthumbnails;
+@thumbnailheight: @thumbnailwidth / 1.6;
+
+// Classes:
+
+.GalleryContainer {
+	.SlideshowContainer;
+}
+
+.GalleryIFrame {
+	.IFrame;
+
+	.setDimensions(@slideshowwidth, @slideshowheight);
+}
+
+.ThumbNail {
+	.Teal;
+
+	.setDimensions(@thumbnailwidth, @thumbnailheight);
+	.stackLeft;
+
+	// remove these later
+	.centerText(@thumbnailheight);
+	.setFont(1.25em, white);
+
+	margin: @thumbnailmargin 0 0 @thumbnailmargin;
+}
+
+.SlideshowButton {
+	.setDimensions(@controllerheight);
+
+	background-color: white;
+	float: left;
+	margin-top: @controllermargin;
+	margin-left: (@slideshowwidth / 2) - (@controllerheight / 2);
+}

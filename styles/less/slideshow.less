@@ -17,11 +17,11 @@
 
 // Classes:
 
-.SlideShowContainer {
+.SlideshowContainer {
 	.setInCenter(@slideshowwidth, @slideshowheight + @controllermargin + @controllerheight);
 }
 
-.SlideShow {
+.Slideshow {
 	.FaintBlack;
 
 	.setDimensions(@slideshowwidth, @slideshowheight);
@@ -38,13 +38,13 @@
 		.stackLeft;
 
 		&:hover {
-			cursor: pointer;
+			cursor: pointer; // remove later
 		}
 	}
 	& > .Previous {
 		.arrowLeft(@arrowwidth, @teal);
 	}
-	& > .GalleryButton {
+	& > a > .GalleryButton {
 		.setDimensions(@controllerheight);
 
 		// background-color: white;

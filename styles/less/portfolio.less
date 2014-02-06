@@ -92,6 +92,17 @@
 		.stackLeft;
 
 		padding: 0 @popovermargin @popovermargin @popovermargin;
+		
+		& > a > .PopoverItem {
+			.Teal;
+
+			.centerText(@popoverheight);
+			.setDimensions(@popoverwidth, @popoverheight);
+			.setFont(1em, white);
+
+			position: relative;
+			margin-top: @popovermargin;
+		}
 	}
 	& > .Arrow {
 		.arrowRight(10px, white);
@@ -99,15 +110,4 @@
 
 		opacity: 0.25;
 	}
-}
-
-.PopoverItem {
-	.Teal;
-
-	.centerText(@popoverheight);
-	.setDimensions(@popoverwidth, @popoverheight);
-	.setFont(1em, white);
-
-	position: relative;
-	margin-top: @popovermargin;
 }
