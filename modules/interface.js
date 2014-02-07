@@ -8,62 +8,65 @@ Root.classify("Root.UI.Component", { // consider renaming
 
 	initialize: function(node, config){
 		this.node = node;
-		config = config || this._class.defaults;
-		
-		for (var part in config){
-			node[part] = config[part];
+
+		var defaults = this._class.defaults;
+
+		for (var def in defaults){
+			node[def] = defaults[def];
+		}
+
+		if (config){
+			for (var con in config){
+				node[con] = config[con];
+			}
 		}
 	}
 
 });
 
-Root.classify("Root.UI.LinkNode", {
+Root.classify("Root.UI.InnerDiamond", {
 
 	extend: Root.UI.Component,
 
 	events: {
 		mouseover: function(){
-			var from = this.height;
+			var h = this.horizontal,
+				v = this.vertical,
+
+				from = this.pos;
 
 			this.animate({
-				begin: function(){
-					console.log("Lifting began");
-				},
 				ease: Root.Easers.Circle.two,
-				tick: function(delta){ // consider creating a module that contains all of the animation functions
-					this.height = from + (this.max - from) * delta;
-					this.style.bottom = this.height + "px";
+				tick: function(delta){
+					this.pos = from + (this.max - from) * delta;
+					this.style[h] = this.style[v] = this.pos + "px";
 				},
-				duration: 500,
-				end: function(){
-					console.log("Lifting ended");
-				}
+				duration: 500
 			});
 		},
 		mouseout: function(){
-			var from = this.height;
+			var h = this.horizontal,
+				v = this.vertical,
+			
+				from = this.pos;
 
 			this.animate({
-				begin: function(){
-					console.log("Dropping began");
-				},
 				ease: Root.Easers.Circle.three,
 				tick: function(delta){
-					this.height = from * delta;
-					this.style.bottom = this.height + "px";
+					this.pos = from * delta;
+					this.style[h] = this.style[v] = this.pos + "px";
 				},
-				duration: 500,
-				end: function(){
-					console.log("Dropping ended");
-				}
+				duration: 500
 			});
 		}
 	},
 
 	statics: {
 		defaults: {
-			height: 0,
-			max: 50
+			horizontal: "left",
+			vertical: "top",
+			pos: 0,
+			max: 25
 		}
 	}
 
