@@ -24,37 +24,31 @@ Root.classify("Root.UI.Component", { // consider renaming
 
 });
 
-Root.classify("Root.UI.InnerDiamond", {
+Root.classify("Root.UI.Diamond", { // liftable
 
 	extend: Root.UI.Component,
 
 	events: {
 		mouseover: function(){
-			var h = this.horizontal,
-				v = this.vertical,
-
-				from = this.pos;
+			var from = this.pos;
 
 			this.animate({
 				ease: Root.Easers.Circle.two,
 				tick: function(delta){
 					this.pos = from + (this.max - from) * delta;
-					this.style[h] = this.style[v] = this.pos + "px";
+					this.style.bottom = this.pos + "px";
 				},
 				duration: 500
 			});
 		},
 		mouseout: function(){
-			var h = this.horizontal,
-				v = this.vertical,
-			
-				from = this.pos;
+			var from = this.pos;
 
 			this.animate({
 				ease: Root.Easers.Circle.three,
 				tick: function(delta){
 					this.pos = from * delta;
-					this.style[h] = this.style[v] = this.pos + "px";
+					this.style.bottom = this.pos + "px";
 				},
 				duration: 500
 			});
@@ -63,8 +57,6 @@ Root.classify("Root.UI.InnerDiamond", {
 
 	statics: {
 		defaults: {
-			horizontal: "left",
-			vertical: "top",
 			pos: 0,
 			max: 25
 		}

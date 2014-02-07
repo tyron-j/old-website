@@ -1,6 +1,6 @@
 // root.js
 
-// Array.prototype.forEach and the Node object are not available in IE8
+
 
 // Common Functions:
 
@@ -80,7 +80,7 @@ Root.addMethods(Root, {
 				superPrototype = superClass.prototype,
 				superMethods = superClass._methods;
 
-			superMethods.forEach(function(method){ // consider creating a reference to the methods object and copying that instead
+			superMethods.iterate(function(method){ // consider creating a reference to the methods object and copying that instead
 				newPrototype[method] = superPrototype[method]; // inherit methods
 			});
 
@@ -114,7 +114,7 @@ Root.addMethods(Root, {
 				newClass._methods = superClass._methods;
 			}
 
-			superClass._statics.forEach(function(staticMember){
+			superClass._statics.iterate(function(staticMember){
 				newClass[staticMember] = superClass[staticMember];
 			});
 
@@ -177,7 +177,7 @@ Root.namespace("Root.UI");
 
 Root.addMethods(Root.UI, {
 
-	initialize: function(){ // implement handling multiple class names
+	initialize: function(){ // this will not instantiate UI components nested within another UI component
 		var RootUI = Root.UI,
 			cn, instance;
 
@@ -195,13 +195,115 @@ Root.addMethods(Root.UI, {
 
 			instantiate(element.nextElementSibling);
 		}(document.body.firstElementChild);
+
+		/* modified version that can handle multiple class names
+		!function instantiate(element){
+			if (!element){
+				return;
+			}
+
+			if (cn = element.className){
+				cn = cn.split(" ");
+				for (var i = 0, len = cn.length; i < len; i++){
+					if (instance = RootUI[cn[i]]){
+						new instance(element, JSON.parse(element.getAttribute("config")));
+						break;
+					}
+				}
+			}
+
+			if (!instance){
+				instantiate(element.firstElementChild);
+			}
+
+			instantiate(element.nextElementSibling);
+		}(document.body.firstElementChild);
+		*/
 	}
 
 });
 
 // Compatibility and Convenience Functions:
 
+Root.addMethods(Array.prototype, {
+
+	contains: function(value){
+		for (var i = 0, len = this.length; i < len; i++){
+			if (this[i] === value){
+				return true;
+			}
+		}
+
+		return false;
+	},
+
+	iterate: (Array.prototype.forEach
+		|| function(callback){ // needs testing
+			for (var i = 0, len = this.len; i < len; i++){
+				callback(this[i]);
+			}
+		}
+	),
+
+	removeDuplicates: function(){ // consider a more conventional implementation
+		this.sort();
+
+		for (var i = 0, o, p, n; i < this.length; i++){
+			o = i;
+			p = o + 1;
+			n = 0;
+
+			while (this[p] === this[o]){
+				p++;
+				n++;
+			}
+			
+			this.splice(o + 1, n);
+		}
+	}
+
+});
+
 Root.addMethods(Element.prototype, {
+
+	animate: function(options){
+		clearInterval(this.animation);
+
+		if (options.begin){
+			options.begin();
+		}
+
+		var start = new Date(),
+
+			ease = options.ease,
+			tick = options.tick,
+			delay = options.delay || 10,
+			duration = options.duration || 1000,
+
+			that = this;
+			
+		this.animation = setInterval(function(){
+			progress = (new Date() - start) / duration;
+
+			if (progress > 1){
+				progress = 1;
+			}
+
+			tick.call(that, ease(progress));
+
+			if (progress == 1){
+				clearInterval(that.animation);
+
+				if (options.end){
+					options.end();
+				}
+			}
+		}, delay);
+	},
+
+	destroy: function(){
+		this.parentNode.removeChild(this);
+	},
 
 	handle: (Element.prototype.addEventListener // W3C
 		? function(eventType, callback, useCapture){ // wantsUntrusted parameter has not been standardized yet
@@ -259,80 +361,6 @@ Root.addMethods(Element.prototype, {
 			}
 		)
 	),
-
-	animate: function(options){
-		clearInterval(this.animation);
-
-		if (options.begin){
-			options.begin();
-		}
-
-		var start = new Date(),
-
-			ease = options.ease,
-			tick = options.tick,
-			delay = options.delay || 10,
-			duration = options.duration || 1000,
-
-			that = this;
-			
-		this.animation = setInterval(function(){
-			progress = (new Date() - start) / duration;
-
-			if (progress > 1){
-				progress = 1;
-			}
-
-			tick.call(that, ease(progress));
-
-			if (progress == 1){
-				clearInterval(that.animation);
-
-				if (options.end){
-					options.end();
-				}
-			}
-		}, delay);
-	},
-
-	destroy: function(){
-		this.parentNode.removeChild(this);
-	}
-
-});
-
-Root.addMethods(Array.prototype, {
-
-	contains: function(value){
-		for (var i = 0, len = this.length; i < len; i++){
-			if (this[i] === value){
-				return true;
-			}
-		}
-
-		return false;
-	},
-
-	removeDuplicates: function(){ // consider a more conventional implementation
-		this.sort();
-
-		for (var i = 0, o, p, n; i < this.length; i++){
-			o = i;
-			p = o + 1;
-			n = 0;
-
-			while (this[p] === this[o]){
-				p++;
-				n++;
-			}
-			
-			this.splice(o + 1, n);
-		}
-	}
-
-});
-
-Root.addMethods(Node.prototype, {
 
 	insertAfter: function(newElement, reference){
 		this.insertBefore(newElement, reference.nextSibling);
