@@ -11,6 +11,7 @@
 @thumbnailmargin: 10px;
 @thumbnailwidth: (@windowwidth - (@thumbnailmargin * (@numthumbnails + 1))) / @numthumbnails;
 @thumbnailheight: @thumbnailwidth / 1.6;
+@iconsize: @tinyboxsize * 5;
 
 // Classes:
 
@@ -40,8 +41,15 @@
 .SlideshowButton {
 	.setDimensions(@controllerheight);
 
-	background-color: white;
 	float: left;
 	margin-top: @controllermargin;
 	margin-left: (@slideshowwidth / 2) - (@controllerheight / 2);
+
+	& > .SlideshowIcon {
+		.boxShadow(5px, white);
+		.setInCenter(@iconsize, @iconsize / 1.6);
+		
+		background-color: white;
+		position: relative; // position must be the same as parent div
+	}
 }

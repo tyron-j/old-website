@@ -47,10 +47,10 @@
 	& > a > .GalleryButton {
 		.setDimensions(@controllerheight);
 
-		// background-color: white;
 		margin: 0 @buttonmargin 0 @buttonmargin;
 
 		& > .TinyBox {
+			.boxShadow(5px, white); // consider removing this
 			.setDimensions(@tinyboxsize);
 			.stackLeft;
 

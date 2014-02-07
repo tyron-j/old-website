@@ -21,9 +21,10 @@
 	padding-top: -@topmargin;
 
 	& > * {
-		margin-top: @topmargin;
-		margin-left: @leftmargin;
-
+		&:nth-child(n){
+			margin-top: @topmargin;
+			margin-left: @leftmargin;
+		}
 		&:nth-child(5n + 4){
 			margin-left: @newrowmargin;
 		}
@@ -39,11 +40,11 @@
 .SmallDiamond {
 	.Diamond;
 
-	.boxShadow;
+	.boxShadow(25px, @darkergray);
 	.setDimensions(@smallsize);
 }
 
-.SmallContent {
+.SmallContent { // change to .SmallDiamond > a > .SmallContent later
 	.Teal;
 
 	.centerText(sqrt(2) * @smallsize);
