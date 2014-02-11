@@ -181,6 +181,7 @@ Root.addMethods(Root.UI, {
 		var RootUI = Root.UI,
 			cn, instance;
 
+		/* original version - can't handle multiple class names
 		!function instantiate(element){
 			if (!element){
 				return;
@@ -195,8 +196,8 @@ Root.addMethods(Root.UI, {
 
 			instantiate(element.nextElementSibling);
 		}(document.body.firstElementChild);
+		*/
 
-		/* modified version that can handle multiple class names
 		!function instantiate(element){
 			if (!element){
 				return;
@@ -218,7 +219,6 @@ Root.addMethods(Root.UI, {
 
 			instantiate(element.nextElementSibling);
 		}(document.body.firstElementChild);
-		*/
 	}
 
 });
@@ -269,7 +269,7 @@ Root.addMethods(Element.prototype, {
 	animate: function(options){
 		clearInterval(this.animation);
 
-		if (options.begin){
+		if (options.begin){ // need to call clearInterval first, so the begin function is part of the options parameter
 			options.begin();
 		}
 
@@ -278,7 +278,7 @@ Root.addMethods(Element.prototype, {
 			ease = options.ease,
 			tick = options.tick,
 			delay = options.delay || 10,
-			duration = options.duration || 1000,
+			duration = options.duration || 500,
 
 			that = this;
 			
@@ -372,23 +372,25 @@ Root.addMethods(Element.prototype, {
 
 Root.Easers = {
 
-	linear: function(progress){
-		return progress;
+	Linear: {
+		up: function(progress){
+			return progress;
+		},
+		down: function(progress){
+			return 1 - progress;
+		}
 	},
 
 	Circle: {
 		one: function(progress){ // needs testing
 			return Math.sin(Math.acos(progress));
 		},
-
 		two: function(progress){
 			return Math.sin(Math.acos(progress - 1));
 		},
-
 		three: function(progress){
 			return 1 - Math.sin(Math.acos(progress - 1));
 		},
-		
 		four: function(progress){
 			return 1 - Math.sin(Math.acos(progress));
 		}

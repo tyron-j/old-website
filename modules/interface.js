@@ -4,7 +4,7 @@
 
 // UI Components:
 
-Root.classify("Root.UI.Component", { // consider renaming
+Root.classify("Root.UI.Component", {
 
 	initialize: function(node, config){
 		this.node = node;
@@ -37,8 +37,7 @@ Root.classify("Root.UI.Diamond", { // liftable
 				tick: function(delta){
 					this.pos = from + (this.max - from) * delta;
 					this.style.bottom = this.pos + "px";
-				},
-				duration: 500
+				}
 			});
 		},
 		mouseout: function(){
@@ -49,8 +48,7 @@ Root.classify("Root.UI.Diamond", { // liftable
 				tick: function(delta){
 					this.pos = from * delta;
 					this.style.bottom = this.pos + "px";
-				},
-				duration: 500
+				}
 			});
 		}
 	},
@@ -59,6 +57,44 @@ Root.classify("Root.UI.Diamond", { // liftable
 		defaults: {
 			pos: 0,
 			max: 25
+		}
+	}
+
+});
+
+Root.classify("Root.UI.Overlay", {
+
+	extend: Root.UI.Component,
+
+	events: {
+		mouseover: function(){
+			var from = this.opa;
+
+			this.animate({
+				ease: Root.Easers.Circle.three,
+				tick: function(delta){
+					this.opa = from * delta;
+					this.style.opacity = this.opa;
+				}
+			});
+		},
+		mouseout: function(){
+			var from = this.opa;
+
+			this.animate({
+				ease: Root.Easers.Circle.two,
+				tick: function(delta){
+					this.opa = from + (this.max - from) * delta;
+					this.style.opacity = this.opa;
+				}
+			});
+		}
+	},
+
+	statics: {
+		defaults: {
+			opa: 1,
+			max: 1
 		}
 	}
 
