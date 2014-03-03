@@ -10,6 +10,7 @@
 			this.testString2 = testString2;
 			// this.privateMember = testPrivate;
 			this.node = document.createElement("div");
+			this.node.instance = this;
 			this.node.style.cssText = "position: absolute; width: 100px; height: 100px; background-color: orange";
 			document.body.appendChild(this.node);
 		},

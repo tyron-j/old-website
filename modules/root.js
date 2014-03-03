@@ -59,18 +59,23 @@ Root.addMethods(Root, {
 			parent = window;
 		}
 
-		parent[className] = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9){
-			this.initialize(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+		if (events && typeof(events) == "object"){
+			parent[className] = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9){
+				this.initialize(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 
-			if (events && typeof(events) == "object" && this.node && this.node.handle){ // consider using a different way to find out if the class is part of the UI module
 				var node = this.node;
-				node.instance = this;
 
 				for (var eventType in events){
 					node.handle(eventType, events[eventType]);
 				}
-			}
-		};
+			};
+		}
+		else {
+			parent[className] = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9){
+				this.initialize(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+			};
+		}
+		
 
 		var newClass = parent[className];
 		newClass.prototype._class = newClass;
@@ -219,6 +224,23 @@ Root.addMethods(Root.UI, {
 
 			instantiate(element.nextElementSibling);
 		}(document.body.firstElementChild);
+	}
+
+});
+
+Root.namespace("Root.Event");
+
+Root.addMethods(Root.Event, {
+
+	getTarget: function(evt){
+		return evt.target || evt.srcElement;
+	},
+
+	getClient: function(evt){ // may not need this
+		return {
+			x: evt.clientX,
+			y: evt.clientY
+		};
 	}
 
 });

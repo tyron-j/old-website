@@ -14,6 +14,15 @@
 @scrollerheight: @scrollbarwidth * 2;
 @textmargin: 15px;
 
+// Mixins:
+
+.unselectable(){
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
 // Classes:
 
 .IFrame {
@@ -24,6 +33,7 @@
 		& > .ScrollContent {
 			position: relative;
 			width: 100%;
+			overflow: auto;
 
 			& > .TextContent {
 				.setFont(1em, white);
@@ -38,6 +48,7 @@
 		height: 100%;
 
 		& > .Scroller {
+			position: relative;
 			width: 100%;
 			height: @scrollerheight;
 		}
@@ -46,6 +57,7 @@
 
 .AboutContainer {
 	.setInCenter(@containerwidth, @containerheight);
+	.unselectable();
 
 	& > .AboutDiamond {
 		.Diamond;
