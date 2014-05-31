@@ -193,7 +193,7 @@ Root.addProperties(Root, {
 
 	modulesPath: Root.path.replace(Root.path.match(/root\.js/i)[0], 'modules/'),
 
-	mainPath: Root.path.replace(Root.path.match(/root\.js/i)[0], 'main.js'),
+	mainPath: 'main.js', // may change this later
 
 	appendScript: function (url) {
 		var script = document.createElement('script');
@@ -258,6 +258,10 @@ Root.addProperties(Root, {
 // Prototype extensions:
 
 Root.addProperties(Array.prototype, {
+
+	contains: function (val) {
+		return this.indexOf(val) > -1;
+	},
 	
 	organize: function () { // sort and remove duplicates
 		this.sort();
@@ -274,6 +278,41 @@ Root.addProperties(Array.prototype, {
 
 			this.splice(o + 1, n);
 		}
+	}
+
+});
+
+Root.addProperties(Element.prototype, {
+
+	handle: function (evt, callback, useCapture) {
+		var callbackName = callback.name || evt;
+
+		if (!this._handlers){
+			this._handlers = {}; // to allow the removal of event listeners later
+		}
+
+		this._handlers[callbackName] = callback;
+		this.addEventListener(evt, callback, useCapture);
+	},
+
+	ignore: function (evt, callback, useCapture) {
+		var callbackName = callback && callback.name || evt;
+		callback = callback || this._handlers[callbackName];
+
+		this.removeEventListener(evt, callback, useCapture);
+		delete this._handlers[callbackName];
+	},
+
+	animate: function () {
+		// new implementation?
+	},
+
+	destroy: function () {
+		this.parentNode.removeChild(this);
+	},
+
+	insertAfter: function (newElement, reference) {
+		this.insertBefore(newElement, reference.nextSibling);
 	}
 
 });
