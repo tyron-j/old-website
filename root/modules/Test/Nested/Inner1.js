@@ -1,4 +1,4 @@
-// Inner1 module
+// Inner1.js
 
 Root.export('Root.Test.Nested.Inner1', {
 	

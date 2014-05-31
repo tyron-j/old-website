@@ -1,4 +1,4 @@
-// Outer2 module
+// Outer2.js
 
 Root.import(['Root.Test.Nested.Inner2', 'Root.Test.Nested.Inner3'],
 	function (Inner2, Inner3) {

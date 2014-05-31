@@ -1,4 +1,4 @@
-// Inner3 module
+// Inner3.js
 
 Root.import(['Root.Test.Outer3'],
 	function (Outer3) {

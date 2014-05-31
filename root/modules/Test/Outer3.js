@@ -1,4 +1,4 @@
-// Outer3 module
+// Outer3.js
 
 Root.export('Root.Test.Outer3', {
 
