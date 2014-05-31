@@ -45,6 +45,7 @@ Root.addProperties(Root, {
 		parts.forEach(function (part) { // consider using a while loop with shift
 			if (parent[part] === undefined) {
 				parent[part] = {};
+				parent[part]._namespaced = true;
 			}
 
 			parent = parent[part];
@@ -65,6 +66,20 @@ Root.addProperties(Root, {
 				return false;
 			}
 		});
+	},
+
+	consolidate: function (obj1, obj2, overwrite) { // merge two objects with the option to overwrite obj1 properties with obj2 properties
+		if (overwrite) {
+			for (var key in obj2) {
+				obj1[key] = obj2[key];
+			}
+		} else {
+			for (var key in obj2) {
+				if (!(key in obj1)) {
+					obj1[key] = obj2[key];
+				}
+			}
+		}
 	},
 
 	walkTree: function (root, callback) { // needs testing
@@ -217,7 +232,7 @@ Root.addProperties(Root, {
 			modulesPath = Root.modulesPath;
 
 		modules.forEach(function (module) { // modules are passed in as strings
-			if (exists(module)) {
+			if (exists(module) && !namespace(module)._namespaced) {
 				moduleLoader.update(module, namespace(module)); // abusing the namespace function
 			} else {
 				moduleLoader.append(module); // add the string for now, replace the string with the actual object later
@@ -235,6 +250,11 @@ Root.addProperties(Root, {
 	export: function (module, moduleObj) {
 		var original = module, // preserve full module name
 			parent = module.split('.');
+
+		if (Root.exists(module)) { // already checked if it was namespaced in Root.import
+			Root.consolidate(moduleObj, Root.namespace(module));
+			delete moduleObj._namespaced;
+		}
 
 		module = parent.pop();
 		parent = Root.namespace(parent.join('.'));
