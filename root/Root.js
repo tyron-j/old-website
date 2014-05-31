@@ -1,0 +1,314 @@
+// Root.js
+
+// TO-DO: implement Root.Debug
+
+Root = {
+
+	addProperties: function (obj, props) {
+		for (var prop in props) {
+			if (obj[prop] !== undefined) {
+				throw new Error("object already contains property: " + prop);
+			}
+
+			obj[prop] = props[prop];
+		}
+	},
+
+	path: (function () { // this needs to be here
+		var scripts = document.getElementsByTagName('script'),
+			path;
+
+		[].some.call(scripts, function (script) {
+			if (/root\.js/i.test(script.getAttribute('src'))) {
+				path = script.getAttribute('src');
+				return true;
+			}
+		});
+
+		return path;
+	})()
+
+};
+
+// Components:
+
+Root.addProperties(Root, {
+	
+	namespace: function (ns) {
+		var parts = ns.split('.'),
+			parent;
+
+		window[parts[0]] = window[parts[0]] || {};
+		
+		parent = window[parts.shift()];
+
+		parts.forEach(function (part) { // consider using a while loop with shift
+			if (parent[part] === undefined) {
+				parent[part] = {};
+			}
+
+			parent = parent[part];
+		});
+
+		return parent;
+	},
+
+	exists: function (property) {
+		var levels = property.split('.'),
+			parent = window;
+
+		return !levels.some(function (level) {
+			if (parent[level] === undefined) {
+				return true;
+			} else {
+				parent = parent[level];
+				return false;
+			}
+		});
+	},
+
+	walkTree: function (root, callback) { // needs testing
+		if (!callback) { // root parameter is optional
+			callback = root;
+			root = document.body;
+		}
+
+		callback(root);
+		
+		[].forEach.call(root.children, function (child) {
+			Root.walkTree(child, callback);
+		});
+	},
+
+	/* usage:
+		var SomeClass = Root.classify({
+			// specifications
+		});
+
+		Root.export('Root.SomeClass', SomeClass); // export SomeClass as Root.SomeClass
+	*/
+	classify: function (options) {
+		var newClass = options.initialize,
+			superClass = options.extend,
+			methods = options.methods,
+			statics = options.statics;
+
+		if (superClass) {
+			if (!newClass) {
+				newClass = function () {
+					superClass.apply(this, arguments);
+				}
+			}
+
+			/* original code:
+			var newPrototype = newClass.prototype,
+				superPrototype = superClass.prototype;
+
+			for (var prop in superPrototype) {
+				newPrototype[prop] = superPrototype[prop] // inherit properties
+			}
+			*/
+			newClass.prototype = new superClass(); // needs to be tested more thoroughly
+			// newClass.constructor = newClass; // this seems to be unnecessary
+			var newPrototype = newClass.prototype,
+				superPrototype = superClass.prototype;
+
+			/* usage:
+				this.callSuper('initialize', [arg1, arg2, arg3]);
+			*/
+			if (!newPrototype.callSuper) {
+				newPrototype.callSuper = function (methodName, args) {
+					return superPrototype[methodName].apply(this, args);
+				}
+			}
+
+			if (methods) {
+				for (var method in methods) {
+					newPrototype[method] = methods[method]; // add new method or overwrite inherited method
+				}
+			}
+
+			superClass._statics.forEach(function (staticMember) {
+				newClass[staticMember] = superClass[staticMember];
+			});
+
+			if (statics) {
+				newClass._statics = superClass._statics.slice();
+			} else {
+				newClass._statics = superClass._statics;
+			}
+		} else { // if no superClass
+			if (!newClass) {
+				throw new Error('initialize is required');
+			}
+
+			if (methods) {
+				newClass.prototype = methods;
+			}
+
+			newClass._statics = [];
+		}
+
+		newClass.prototype.initialize = newClass;
+		
+		if (statics) {
+			for (var staticMember in statics) {
+				newClass[staticMember] = statics[staticMember];
+				newClass._statics.push(staticMember);
+			}
+
+			newClass._statics.organize();
+		}
+
+		return newClass;
+	},
+
+	addLoadHandler: function (callback) { // needs testing
+		if (typeof window.onload !== 'function') {
+			window.onload = callback;
+		} else {
+			var original = window.onload;
+
+			window.onload = function () {
+				original();
+				callback();
+			}
+		}
+	},
+
+	/* structure:
+		{
+			'module_1': [ // array of module objects that require module_1
+				[module_object_1], // these arrays have an 'update' callback for when a required module is exported
+				[module_object_2],
+				[module_object_3]
+			],
+			'module_2': [
+				...
+			],
+			...
+		}
+	*/
+	importQueue: {}, // queue for pending imports
+
+	modulesPath: Root.path.replace(Root.path.match(/root\.js/i)[0], 'modules/'),
+
+	mainPath: Root.path.replace(Root.path.match(/root\.js/i)[0], 'main.js'),
+
+	appendScript: function (url) {
+		var script = document.createElement('script');
+
+		script.setAttribute('type', 'text/javascript');
+		script.setAttribute('src', url);
+		script.setAttribute('async', '');
+
+		document.head.appendChild(script);
+	},
+
+	/* usage:
+		Root.import(['module_1', 'module_2', 'module_3'],
+			function (module_1, module_2, module_3) {
+				// use imported modules
+			}
+		);
+	*/
+	import: function (modules, callback) { // needs testing
+		var moduleLoader = new Root.ModuleLoader(modules.length, callback),
+
+			// shortcuts
+			namespace = Root.namespace,
+			exists = Root.exists,
+			importQueue = Root.importQueue,
+			appendScript = Root.appendScript,
+			modulesPath = Root.modulesPath;
+
+		modules.forEach(function (module) { // modules are passed in as strings
+			if (exists(module)) {
+				moduleLoader.update(module, namespace(module)); // abusing the namespace function
+			} else {
+				moduleLoader.append(module); // add the string for now, replace the string with the actual object later
+
+				if (!(module in importQueue)) {
+					importQueue[module] = [];
+					appendScript(modulesPath + module.replace('Root.', '').split('.').join('/') + '.js');
+				}
+
+				importQueue[module].push(moduleLoader);
+			}
+		});
+	},
+
+	export: function (module, moduleObj) {
+		var original = module, // preserve full module name
+			parent = module.split('.');
+
+		module = parent.pop();
+		parent = Root.namespace(parent.join('.'));
+		parent[module] = moduleObj;
+
+		Root.importQueue[original].forEach(function (moduleLoader) {
+			moduleLoader.update(original, moduleObj);
+		});
+
+		delete Root.importQueue[original];
+	}
+
+});
+
+// Prototype extensions:
+
+Root.addProperties(Array.prototype, {
+	
+	organize: function () { // sort and remove duplicates
+		this.sort();
+
+		for (var i = 0, l = this.length, o, p, n; i < l; i++) {
+			o = i; // original
+			p = o + 1; // pointer
+			n = 0; // number of duplicates
+
+			while (this[p] === this[o]) {
+				p++;
+				n++;
+			}
+
+			this.splice(o + 1, n);
+		}
+	}
+
+});
+
+// Classes:
+
+Root.ModuleLoader = Root.classify({
+
+	initialize: function (total, callback) {
+		this.completed = 0;
+		this.total = total;
+		this.callback = callback;
+		this.moduleArray = [];
+	},
+
+	methods: {
+		append: function (module) {
+			this.moduleArray.push(module);
+		},
+		update: function (module, moduleObj) { // this will be called in the Root.export function
+			this.moduleArray[this.moduleArray.indexOf(module)] = moduleObj; // replacing string with actual object
+			this.completed++;
+
+			if (this.completed === this.total) {
+				this.callback.apply(this.callback, this.moduleArray); // what would be the ideal context?
+			}
+		}
+	}
+
+});
+
+/*
+(function () {
+
+	Root.appendScript(Root.mainPath);
+
+})();
+*/
