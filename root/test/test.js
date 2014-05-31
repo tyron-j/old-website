@@ -8,10 +8,10 @@ Root.import(['Root.UnitTest'],
 		// shortcuts
 		var UT = new UnitTest(),
 
-			assertTrue = UT.assertTrue.bind(UT),
-			assertFalse = UT.assertFalse.bind(UT),
-			assertEquals = UT.assertEquals.bind(UT),
-			assertSame = UT.assertSame.bind(UT);
+			assertTrue = UT.get('assertTrue'),
+			assertFalse = UT.get('assertFalse'),
+			assertEquals = UT.get('assertEquals'),
+			assertSame = UT.get('assertSame');
 
 		UT.runTests({
 

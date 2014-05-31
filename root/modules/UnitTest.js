@@ -9,6 +9,10 @@ Root.export('Root.UnitTest', Root.classify({
 	},
 
 	methods: {
+		get: function (method) {
+			return this[method].bind(this);
+		},
+
 		breakTest: function () {
 			// called on test fail; throws an error to block the test process
 			throw new Error("test " + (this.passedTests + 1) + " failed");

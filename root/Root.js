@@ -100,18 +100,12 @@ Root.addProperties(Root, {
 				}
 			}
 
-			/* original code:
 			var newPrototype = newClass.prototype,
 				superPrototype = superClass.prototype;
 
 			for (var prop in superPrototype) {
 				newPrototype[prop] = superPrototype[prop] // inherit properties
 			}
-			*/
-			newClass.prototype = new superClass(); // needs to be tested more thoroughly
-			// newClass.constructor = newClass; // this seems to be unnecessary
-			var newPrototype = newClass.prototype,
-				superPrototype = superClass.prototype;
 
 			/* usage:
 				this.callSuper('initialize', [arg1, arg2, arg3]);
@@ -163,7 +157,7 @@ Root.addProperties(Root, {
 		return newClass;
 	},
 
-	addLoadHandler: function (callback) { // needs testing
+	addLoadHandler: function (callback) { // consider removing this
 		if (typeof window.onload !== 'function') {
 			window.onload = callback;
 		} else {
@@ -285,26 +279,61 @@ Root.addProperties(Array.prototype, {
 Root.addProperties(Element.prototype, {
 
 	handle: function (evt, callback, useCapture) {
-		var callbackName = callback.name || evt;
+		var callbackName;
 
 		if (!this._handlers){
 			this._handlers = {}; // to allow the removal of event listeners later
 		}
 
-		this._handlers[callbackName] = callback;
-		this.addEventListener(evt, callback, useCapture);
+		if (typeof evt === 'object') { // for multiple events; needs testing
+			useCapture = callback;
+
+			for (var e in evt) {
+				callback = evt[e];
+				callbackName = callback.name || e;
+
+				this._handlers[callbackName] = callback;
+				this.addEventListener(e, callback, useCapture);
+			}
+		} else {
+			callbackName = callback.name || evt;
+
+			this._handlers[callbackName] = callback;
+			this.addEventListener(evt, callback, useCapture);
+		}
 	},
 
 	ignore: function (evt, callback, useCapture) {
-		var callbackName = callback && callback.name || evt;
-		callback = callback || this._handlers[callbackName];
+		var callbackName;
 
-		this.removeEventListener(evt, callback, useCapture);
-		delete this._handlers[callbackName];
-	},
+		if (typeof evt === 'object') { // for multiple events; needs testing
+			useCapture = callback;
 
-	animate: function () {
-		// new implementation?
+			if (evt instanceof Array) { // element.ignore(['click', 'mouseover', 'mouseout'], true)
+				var that = this;
+
+				evt.forEach(function (e) {
+					callback = that._handlers[e];
+
+					that.removeEventListener(e, callback, useCapture);
+					delete that._handlers[e];
+				});
+			} else { // element.ignore({ 'click': handler }, true)
+				for (var e in evt) {
+					callback = evt[e];
+					callbackName = callback.name || e;
+
+					this.removeEventListener(e, callback, useCapture);
+					delete this._handlers[callbackName];
+				}
+			}
+		} else {
+			callbackName = callback && callback.name || evt;
+			callback = callback || this._handlers[callbackName];
+
+			this.removeEventListener(evt, callback, useCapture);
+			delete this._handlers[callbackName];
+		}
 	},
 
 	destroy: function () {
