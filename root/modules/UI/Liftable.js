@@ -12,29 +12,30 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 			initialize: function (node, options) { // currently, extra parameters cannot be passed in
 				this.callSuper('initialize', [node]);
 
-				var from = node.pos = 0;
-				node.max = options && options.max || Root.UI.Liftable.max;
+				var pos = 0,
+					max = options && options.max || Root.UI.Liftable.max,
+					from;
 
 				node.handle({
 					mouseover: function () {
-						from = this.pos;
+						from = pos;
 
 						this.animate({
 							ease: Animation.Circle.two,
 							tick: function (ordinate) {
-								this.pos = from + (this.max - from) * ordinate;
-								this.style.bottom = this.pos + 'px';
+								pos = from + (max - from) * ordinate;
+								this.style.bottom = pos + 'px';
 							}
 						});
 					},
 					mouseout: function () {
-						from = this.pos;
+						from = pos;
 
 						this.animate({
 							ease: Animation.Circle.three,
 							tick: function (ordinate) {
-								this.pos = from * ordinate;
-								this.style.bottom = this.pos + 'px';
+								pos = from * ordinate;
+								this.style.bottom = pos + 'px';
 							}
 						});
 					}
