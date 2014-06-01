@@ -2,7 +2,7 @@
 
 
 
-Root.import(['Root.Animation', 'Root.UI.Behavior'],
+Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 	function (Animation, Behavior) {
 
 		Root.export('Root.UI.Liftable', Root.classify({

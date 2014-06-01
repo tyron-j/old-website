@@ -41,7 +41,7 @@ Root.addProperties(Element.prototype, {
 
 });
 
-Root.export('Root.Animation', {
+Root.export('Root.UI.Animation', {
 
 	Linear: {
 		up: function(progress){
