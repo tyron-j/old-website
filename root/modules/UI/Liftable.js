@@ -9,11 +9,11 @@ Root.import(['Root.Animation', 'Root.UI.Behavior'],
 			
 			extend: Behavior,
 
-			initialize: function (node, max) {
+			initialize: function (node, options) { // currently, extra parameters cannot be passed in
 				this.callSuper('initialize', [node]);
 
 				var from = node.pos = 0;
-				node.max = max || Root.UI.Liftable.max;
+				node.max = options && options.max || Root.UI.Liftable.max;
 
 				node.handle({
 					mouseover: function () {

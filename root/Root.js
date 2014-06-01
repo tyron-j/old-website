@@ -188,9 +188,9 @@ Root.addProperties(Root, {
 	/* structure:
 		{
 			'module_1': [ // array of module objects that require module_1
-				[module_object_1], // these arrays have an 'update' callback for when a required module is exported
-				[module_object_2],
-				[module_object_3]
+				moduleLoader1, // each loader includes an array and has an 'update' callback for when a required module is exported
+				moduleLoader2,
+				moduleLoader3
 			],
 			'module_2': [
 				...
@@ -198,11 +198,11 @@ Root.addProperties(Root, {
 			...
 		}
 	*/
-	importQueue: {}, // queue for pending imports
+	_importQueue: {}, // queue for pending imports
 
-	modulesPath: Root.path.replace(Root.path.match(/root\.js/i)[0], 'modules/'),
+	_modulesPath: Root.path.replace(Root.path.match(/root\.js/i)[0], 'modules/'),
 
-	mainPath: 'main.js', // may change this later
+	_mainPath: 'main.js', // may change this later
 
 	appendScript: function (url) {
 		var script = document.createElement('script');
@@ -222,14 +222,14 @@ Root.addProperties(Root, {
 		);
 	*/
 	import: function (modules, callback) { // needs testing
-		var moduleLoader = new Root.ModuleLoader(modules.length, callback),
+		var moduleLoader = new this.ModuleLoader(modules.length, callback),
 
 			// shortcuts
-			namespace = Root.namespace,
-			exists = Root.exists,
-			importQueue = Root.importQueue,
-			appendScript = Root.appendScript,
-			modulesPath = Root.modulesPath;
+			namespace = this.namespace,
+			exists = this.exists,
+			importQueue = this._importQueue,
+			appendScript = this.appendScript,
+			modulesPath = this._modulesPath;
 
 		modules.forEach(function (module) { // modules are passed in as strings
 			if (exists(module) && !namespace(module)._namespaced) {
@@ -251,20 +251,20 @@ Root.addProperties(Root, {
 		var original = module, // preserve full module name
 			parent = module.split('.');
 
-		if (Root.exists(module)) { // already checked if it was namespaced in Root.import
-			Root.consolidate(moduleObj, Root.namespace(module));
+		if (this.exists(module)) { // already checked if it was namespaced in Root.import
+			this.consolidate(moduleObj, this.namespace(module));
 			delete moduleObj._namespaced;
 		}
 
 		module = parent.pop();
-		parent = Root.namespace(parent.join('.'));
+		parent = this.namespace(parent.join('.'));
 		parent[module] = moduleObj;
 
-		Root.importQueue[original].forEach(function (moduleLoader) {
+		this._importQueue[original].forEach(function (moduleLoader) {
 			moduleLoader.update(original, moduleObj);
 		});
 
-		delete Root.importQueue[original];
+		delete this._importQueue[original];
 	}
 
 });
@@ -396,7 +396,7 @@ Root.ModuleLoader = Root.classify({
 /*
 (function () {
 
-	Root.appendScript(Root.mainPath);
+	Root.appendScript(Root._mainPath);
 
 })();
 */
