@@ -24,7 +24,7 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 							ease: Animation.Circle.three,
 							tick: function (ordinate) {
 								opa = from * ordinate;
-								this.style.opacity = opa;
+								node.style.opacity = opa;
 							},
 							duration: 300
 						});
@@ -36,7 +36,7 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 							ease: Animation.Circle.two,
 							tick: function (ordinate) {
 								opa = from + (max - from) * ordinate;
-								this.style.opacity = opa;
+								node.style.opacity = opa;
 							},
 							duration: 300
 						});

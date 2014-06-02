@@ -4,7 +4,7 @@
 
 Root.addProperties(Element.prototype, {
 
-	animate: function(options){
+	animate: function (options) {
 		clearInterval(this.animation);
 
 		if (options.begin){ // need to call clearInterval first, so the begin function is part of the options parameter
@@ -16,21 +16,19 @@ Root.addProperties(Element.prototype, {
 			ease = options.ease,
 			tick = options.tick,
 			delay = options.delay || 10,
-			duration = options.duration || 500,
-
-			that = this;
+			duration = options.duration || 500;
 			
-		this.animation = setInterval(function(){
+		this.animation = setInterval(function () {
 			progress = (new Date() - start) / duration;
 
 			if (progress > 1){
 				progress = 1;
 			}
 
-			tick.call(that, ease(progress)); // consider using bind instead
+			tick(ease(progress));
 
 			if (progress == 1){
-				clearInterval(that.animation);
+				clearInterval(this.animation);
 
 				if (options.end){
 					options.end();

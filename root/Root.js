@@ -362,6 +362,10 @@ Root.addProperties(Element.prototype, {
 
 	insertAfter: function (newElement, reference) {
 		this.insertBefore(newElement, reference.nextSibling);
+	},
+
+	setStyle: function (styles) {
+		Root.consolidate(this.style, styles, true);
 	}
 
 });
