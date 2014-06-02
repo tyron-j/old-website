@@ -1,0 +1,53 @@
+// values.less
+
+
+
+@import 'base.less';
+
+@diamondsize: 360px;
+@stdfont: "Century Gothic";
+@stdradius: 5px;
+
+@containerwidth: 450px;
+@containerheight: @containerwidth * 1.6;
+@iframemargin: 100px;
+@iframeheight: @containerheight - (@diamondsize / 2) - @iframemargin;
+@scrollbarwidth: 20px;
+@scrollerheight: @scrollbarwidth * 2;
+@textmargin: 15px;
+
+@smallsize: @diamondsize / 4;
+@leftmargin: (sqrt(2) - 1) * @smallsize;
+@topmargin: ((1 / sqrt(2)) - 1) * @smallsize;
+@newrowmargin: (1 / sqrt(2)) * @smallsize +  @leftmargin;
+@gridwidth: (3 * sqrt(2) * @smallsize) + @leftmargin;
+@gridheight: (3 * sqrt(2) * @smallsize) + @topmargin;
+
+@fixedmargin: 50px;
+@numlinks: 3;
+@stdmargin: 125px;
+@popoverwidth: 125px;
+@popoverheight: 25px;
+@popovermargin: 10px;
+
+@resumewidth: 800px;
+@resumeheight: @resumewidth / 1.6;
+@downloadmargin: 25px;
+@downloadwidth: 150px;
+@downloadheight: 50px;
+
+@slideshowwidth: 1000px;
+@slideshowheight: @slideshowwidth / 1.6;
+@arrowwidth: 25px;
+@buttonmargin: 10px;
+@controllermargin: 25px;
+@controllerwidth: 100px + (2 * @buttonmargin);
+@controllerheight: @arrowwidth * 2;
+@tinyboxsize: @controllerheight / 7;
+
+@windowwidth: @slideshowwidth - @scrollbarwidth;
+@numthumbnails: 3;
+@thumbnailmargin: 10px;
+@thumbnailwidth: (@windowwidth - (@thumbnailmargin * (@numthumbnails + 1))) / @numthumbnails;
+@thumbnailheight: @thumbnailwidth / 1.6;
+@iconsize: @tinyboxsize * 5;

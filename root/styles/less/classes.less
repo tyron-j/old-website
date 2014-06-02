@@ -1,0 +1,281 @@
+// classes.less
+
+
+
+@import 'base.less';
+
+.InnerDiamond {
+	.setDimensions(@diamondsize / 2);
+	.stackLeft;
+	.boxShadow(50px, @darkergray);
+
+	overflow: hidden;
+}
+
+.DiamondContent {
+	.centerText(sqrt(2) * (@diamondsize / 2));
+	.rotate(45deg);
+	.setFont(1.25em, white);
+	.setInCenter(sqrt(2) * (@diamondsize / 2));
+}
+
+.IFrame {
+	& > .ScrollWindow {
+		height: 100%;
+		overflow: hidden;
+
+		& > .ScrollContent {
+			position: relative;
+			width: 100%;
+			overflow: auto;
+
+			& > .TextContent {
+				.setFont(1em, white);
+
+				margin: @textmargin;
+			}
+		}
+	}
+	& > .ScrollBar {
+		float: right;
+		width: @scrollbarwidth;
+		height: 100%;
+
+		& > .Scroller {
+			position: relative;
+			width: 100%;
+			height: @scrollerheight;
+		}
+	}
+}
+
+.AboutContainer {
+	.setInCenter(@containerwidth, @containerheight);
+	.unselectable();
+
+	& > .AboutDiamond {
+		.Diamond;
+
+		margin-left: (@containerwidth / 2) - (@diamondsize / 4);
+	}
+
+	& > .AboutIFrame {
+		.IFrame;
+
+		.setDimensions(@containerwidth, @iframeheight);
+		.stackLeft;
+
+		margin-top: @iframemargin;
+	}
+}
+
+.GridContainer {
+	.setInCenter(@gridwidth, @gridheight);
+
+	padding-top: -@topmargin;
+
+	& > * {
+		&:nth-child(n){
+			margin-top: @topmargin;
+			margin-left: @leftmargin;
+		}
+		&:nth-child(5n + 4){
+			margin-left: @newrowmargin;
+		}
+
+		&:nth-child(5n + 4), &:nth-child(5n){
+			& > .SmallContent {
+				.DarkerGray;
+			}
+		}
+	}
+}
+
+.SmallDiamond {
+	.Diamond;
+
+	.boxShadow(25px, @darkergray);
+	.setDimensions(@smallsize);
+}
+
+.SmallContent { // change to .SmallDiamond > a > .SmallContent later
+	.Teal;
+
+	.centerText(sqrt(2) * @smallsize);
+	.rotate(45deg);
+	.setFont(1em, white);
+	.setInCenter(sqrt(2) * @smallsize);
+}
+
+.GalleryContainer {
+	.SlideshowContainer;
+}
+
+.GalleryIFrame {
+	.IFrame;
+
+	.setDimensions(@slideshowwidth, @slideshowheight);
+
+	& > .ScrollWindow > .ScrollContent {
+		padding-bottom: @thumbnailmargin;
+	}
+}
+
+.ThumbNail {
+	.Teal;
+
+	.setDimensions(@thumbnailwidth, @thumbnailheight);
+	.stackLeft;
+
+	// remove these later
+	.centerText(@thumbnailheight);
+	.setFont(1.25em, white);
+
+	margin: @thumbnailmargin 0 0 @thumbnailmargin;
+}
+
+.SlideshowButton {
+	.setDimensions(@controllerheight);
+
+	float: left;
+	margin-top: @controllermargin;
+	margin-left: (@slideshowwidth / 2) - (@controllerheight / 2);
+
+	& > .SlideshowIcon {
+		.boxShadow(5px, white);
+		.setInCenter(@iconsize, @iconsize / 1.6);
+		
+		background-color: white;
+		position: relative; // position must be the same as parent div
+	}
+}
+
+.LinkContainer {
+	.setInCenter(@numlinks * (@diamondsize / 2) + (@numlinks + 1) * @stdmargin, (@diamondsize / 2));
+
+	& > * {
+		margin-left: @stdmargin;
+	}
+}
+
+.Diamond {
+	.InnerDiamond;
+
+	.rotate(-45deg);
+}
+
+.OuterMiniDiamond {
+	.boxShadow(1px, white);
+	.rotate(-45deg);
+	.setDimensions(@diamondsize / 16);
+
+	background-color: @darkergray;
+	position: fixed;
+	right: @fixedmargin;
+	top: @fixedmargin;
+
+	& > .InnerMiniDiamond {
+		.setDimensions(@diamondsize / 32);
+		.stackLeft;
+	}
+}
+
+.IndexPopover {
+	position: fixed;
+	right: @fixedmargin * 1.75;
+	top: @fixedmargin;
+
+	& > .PopoverContent {
+		.FaintWhite;
+
+		.stackLeft;
+
+		padding: 0 @popovermargin @popovermargin @popovermargin;
+		
+		& > a > .PopoverItem {
+			.Teal;
+
+			.centerText(@popoverheight);
+			.setDimensions(@popoverwidth, @popoverheight);
+			.setFont(1em, white);
+
+			position: relative;
+			margin-top: @popovermargin;
+		}
+	}
+	& > .Arrow {
+		.arrowRight(10px, white);
+		.stackLeft;
+
+		opacity: 0.25;
+	}
+}
+
+.ResumeContainer {
+	.setInCenter(@resumewidth, @resumeheight + @downloadmargin + @downloadheight);
+}
+
+.ResumeIFrame {
+	.IFrame;
+
+	.setDimensions(@resumewidth, @resumeheight);
+
+	float: left;
+}
+
+.ResumeDownload { // change the download button later
+	.boxShadow(25px, @darkergray);
+	.centerText(@downloadheight);
+	.setDimensions(@downloadwidth, @downloadheight);
+	.setFont(1.25em, white);
+
+	float: left;
+	margin-top: @downloadmargin;
+	margin-left: (@resumewidth / 2) - (@downloadwidth / 2);
+}
+
+.SlideshowContainer {
+	.setInCenter(@slideshowwidth, @slideshowheight + @controllermargin + @controllerheight);
+}
+
+.Slideshow {
+	.FaintBlack;
+
+	.setDimensions(@slideshowwidth, @slideshowheight);
+}
+
+.Controller {
+	.setDimensions(@controllerwidth, @controllerheight);
+
+	float: left;
+	margin-top: @controllermargin;
+	margin-left: (@slideshowwidth / 2) - (@controllerwidth / 2);
+
+	& > * {
+		.stackLeft;
+
+		&:hover {
+			cursor: pointer; // remove later
+		}
+	}
+	& > .Previous {
+		.arrowLeft(@arrowwidth, @teal);
+	}
+	& > a > .GalleryButton {
+		.setDimensions(@controllerheight);
+
+		margin: 0 @buttonmargin 0 @buttonmargin;
+
+		& > .TinyBox {
+			.boxShadow(5px, white); // consider removing this
+			.setDimensions(@tinyboxsize);
+			.stackLeft;
+
+			background-color: white;
+			margin: @tinyboxsize 0 0 @tinyboxsize;
+		}
+	}
+	& > .Next {
+		.arrowRight(@arrowwidth, @teal);
+	}
+}
