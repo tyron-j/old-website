@@ -21,7 +21,7 @@ Root.import(['Root.UI.Behavior', 'Root.UI.IFrame.ScrollBar', 'Root.UI.IFrame.Scr
 					node.innerHTML = '';
 
 				if (!node.offsetWidth) {
-					node.setStyle({
+					this.setStyle({
 						width: Root.UI.IFrame.width,
 						height: Root.UI.IFrame.height
 					});

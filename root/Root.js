@@ -14,12 +14,12 @@ Root = {
 		}
 	},
 
-	path: (function () { // this needs to be here
+	_path: (function () { // this needs to be here
 		var scripts = document.getElementsByTagName('script'),
 			path;
 
 		[].some.call(scripts, function (script) {
-			if (/root\.js/i.test(script.getAttribute('src'))) {
+			if (/root\.js$/i.test(script.getAttribute('src'))) {
 				path = script.getAttribute('src');
 				return true;
 			}
@@ -79,6 +79,23 @@ Root.addProperties(Root, {
 					obj1[key] = obj2[key];
 				}
 			}
+		}
+	},
+
+	organize: function (arr) { // sort and remove duplicates
+		arr.sort();
+
+		for (var i = 0, l = arr.length, o, p, n; i < l; i++) {
+			o = i; // original
+			p = o + 1; // pointer
+			n = 0; // number of duplicates
+
+			while (arr[p] === arr[o]) {
+				p++;
+				n++;
+			}
+
+			arr.splice(o + 1, n);
 		}
 	},
 
@@ -166,23 +183,10 @@ Root.addProperties(Root, {
 				newClass._statics.push(staticMember);
 			}
 
-			newClass._statics.organize();
+			this.organize(newClass._statics);
 		}
 
 		return newClass;
-	},
-
-	addLoadHandler: function (callback) { // consider removing this
-		if (typeof window.onload !== 'function') {
-			window.onload = callback;
-		} else {
-			var original = window.onload;
-
-			window.onload = function () {
-				original();
-				callback();
-			}
-		}
 	},
 
 	/* structure:
@@ -200,7 +204,7 @@ Root.addProperties(Root, {
 	*/
 	_importQueue: {}, // queue for pending imports
 
-	_modulesPath: Root.path.replace(Root.path.match(/root\.js/i)[0], 'modules/'),
+	_modulesPath: Root._path.replace(Root._path.match(/root\.js/i)[0], 'modules/'),
 
 	_mainPath: 'main.js', // may change this later
 
@@ -265,107 +269,6 @@ Root.addProperties(Root, {
 		});
 
 		delete this._importQueue[original];
-	}
-
-});
-
-// Prototype extensions:
-
-Root.addProperties(Array.prototype, {
-
-	contains: function (val) {
-		return this.indexOf(val) > -1;
-	},
-	
-	organize: function () { // sort and remove duplicates
-		this.sort();
-
-		for (var i = 0, l = this.length, o, p, n; i < l; i++) {
-			o = i; // original
-			p = o + 1; // pointer
-			n = 0; // number of duplicates
-
-			while (this[p] === this[o]) {
-				p++;
-				n++;
-			}
-
-			this.splice(o + 1, n);
-		}
-	}
-
-});
-
-Root.addProperties(Element.prototype, {
-
-	handle: function (evt, callback, useCapture) {
-		var callbackName;
-
-		if (!this._handlers){
-			this._handlers = {}; // to allow the removal of event listeners later
-		}
-
-		if (typeof evt === 'object') { // for multiple events; needs testing
-			useCapture = callback;
-
-			for (var e in evt) {
-				callback = evt[e];
-				callbackName = callback.name || e;
-
-				this._handlers[callbackName] = callback;
-				this.addEventListener(e, callback, useCapture);
-			}
-		} else {
-			callbackName = callback.name || evt;
-
-			this._handlers[callbackName] = callback;
-			this.addEventListener(evt, callback, useCapture);
-		}
-	},
-
-	ignore: function (evt, callback, useCapture) {
-		var callbackName;
-
-		if (typeof evt === 'object') { // for multiple events; needs testing
-			useCapture = callback;
-
-			if (evt instanceof Array) { // element.ignore(['click', 'mouseover', 'mouseout'], true)
-				var that = this;
-
-				evt.forEach(function (e) {
-					callback = that._handlers[e];
-
-					that.removeEventListener(e, callback, useCapture);
-					delete that._handlers[e];
-				});
-			} else { // element.ignore({ 'click': handler }, true)
-				for (var e in evt) {
-					callback = evt[e];
-					callbackName = callback.name || e;
-
-					this.removeEventListener(e, callback, useCapture);
-					delete this._handlers[callbackName];
-				}
-			}
-		} else {
-			callbackName = callback && callback.name || evt;
-			callback = callback || this._handlers[callbackName];
-
-			this.removeEventListener(evt, callback, useCapture);
-			delete this._handlers[callbackName];
-		}
-	},
-
-	destroy: function () {
-		this.parentNode.removeChild(this);
-	},
-
-	insertAfter: function (newElement, reference) {
-		this.insertBefore(newElement, reference.nextSibling);
-	},
-
-	setStyle: function (styles) {
-		Root.consolidate(this.style, styles, true);
 	}
 
 });

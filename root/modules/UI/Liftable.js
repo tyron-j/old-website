@@ -10,17 +10,19 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 			extend: Behavior,
 
 			initialize: function (node, options) {
-				this.callSuper('initialize', [node]); // doesn't do anything at this point
+				this.callSuper('initialize', [node]);
 
 				var pos = 0,
 					max = options && options.max || Root.UI.Liftable.max,
-					from;
+					from,
 
-				node.handle({
+					that = this;
+
+				this.handle({
 					mouseover: function () {
 						from = pos;
 
-						this.animate({
+						that.animate({
 							ease: Animation.Circle.two,
 							tick: function (ordinate) {
 								pos = from + (max - from) * ordinate;
@@ -31,7 +33,7 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 					mouseout: function () {
 						from = pos;
 
-						this.animate({
+						that.animate({
 							ease: Animation.Circle.three,
 							tick: function (ordinate) {
 								pos = from * ordinate;

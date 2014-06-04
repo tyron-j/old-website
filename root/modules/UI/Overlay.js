@@ -14,13 +14,15 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 
 				var opa = 1,
 					max = 1, // set these with options or statics later
-					from;
+					from,
 
-				node.handle({
+					that = this;
+
+				this.handle({
 					mouseover: function () {
 						from = opa;
 
-						this.animate({
+						that.animate({
 							ease: Animation.Circle.three,
 							tick: function (ordinate) {
 								opa = from * ordinate;
@@ -32,7 +34,7 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 					mouseout: function () {
 						from = opa;
 
-						this.animate({
+						that.animate({
 							ease: Animation.Circle.two,
 							tick: function (ordinate) {
 								opa = from + (max - from) * ordinate;

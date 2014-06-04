@@ -1,5 +1,7 @@
 // ScrollBar.js
 
+
+
 Root.import(['Root.UI.Behavior'],
 	function (Behavior) {
 
@@ -16,7 +18,7 @@ Root.import(['Root.UI.Behavior'],
 
 					max = scrollContent.offsetHeight - scrollWindow.offsetHeight;
 
-				node.handle({
+				this.handle({
 					mousedown: function (evt) {
 						//
 					}
