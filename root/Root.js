@@ -4,13 +4,17 @@
 
 Root = {
 
-	addProperties: function (obj, props) {
-		for (var prop in props) {
-			if (obj[prop] !== undefined) {
-				throw new Error("object already contains property: " + prop);
+	consolidate: function (obj1, obj2, overwrite) { // merge two objects with the option to overwrite obj1 properties with obj2 properties
+		if (overwrite) {
+			for (var key in obj2) {
+				obj1[key] = obj2[key];
 			}
-
-			obj[prop] = props[prop];
+		} else {
+			for (var key in obj2) {
+				if (!(key in obj1)) {
+					obj1[key] = obj2[key];
+				}
+			}
 		}
 	},
 
@@ -30,9 +34,11 @@ Root = {
 
 };
 
-// Components:
+// components:
 
-Root.addProperties(Root, {
+Root.consolidate(Root, {
+
+	// utilities:
 	
 	namespace: function (ns) {
 		var parts = ns.split('.'),
@@ -68,20 +74,6 @@ Root.addProperties(Root, {
 		});
 	},
 
-	consolidate: function (obj1, obj2, overwrite) { // merge two objects with the option to overwrite obj1 properties with obj2 properties
-		if (overwrite) {
-			for (var key in obj2) {
-				obj1[key] = obj2[key];
-			}
-		} else {
-			for (var key in obj2) {
-				if (!(key in obj1)) {
-					obj1[key] = obj2[key];
-				}
-			}
-		}
-	},
-
 	organize: function (arr) { // sort and remove duplicates
 		arr.sort();
 
@@ -111,6 +103,42 @@ Root.addProperties(Root, {
 			Root.walkTree(child, callback);
 		});
 	},
+
+	// type checkers:
+
+	_toString: function (obj) {
+		return Object.prototype.toString.call(obj);
+	},
+
+	isArray: function (unknown) {
+		return this._toString(unknown) === '[object Array]';
+	},
+
+	isFunction: function (unknown) {
+		return this._toString(unknown) === '[object Function]';
+	},
+
+	isObject: function (unknown) {
+		return this._toString(unknown) === '[object Object]';
+	},
+
+	isRegExp: function (unknown) {
+		return this._toString(unknown) === '[object RegExp]';
+	},
+
+	isBoolean: function (unknown) {
+		return typeof unknown === 'boolean';
+	},
+
+	isNumber: function (unknown) {
+		return typeof unknown === 'number' && unknown.toString() !== 'NaN';
+	},
+
+	isString: function (unknown) {
+		return typeof unknown === 'string';
+	},
+
+	// core functions:
 
 	/* usage:
 		var SomeClass = Root.classify({
@@ -143,7 +171,7 @@ Root.addProperties(Root, {
 				this.callSuper('initialize', [arg1, arg2, arg3]);
 			*/
 			if (!newPrototype.callSuper) {
-				newPrototype.callSuper = function (methodName, args) {
+				newPrototype.callSuper = function (methodName, args) { // consider changing this to Root._callSuper
 					return superPrototype[methodName].apply(this, args);
 				}
 			}
@@ -273,7 +301,7 @@ Root.addProperties(Root, {
 
 });
 
-// Classes:
+// classes:
 
 Root.ModuleLoader = Root.classify({
 
