@@ -2,7 +2,7 @@
 
 
 
-Root.import(['Root.UnitTest'],
+Root.import(['UnitTest'],
 	function (UnitTest) {
 		
 		// shortcuts
@@ -98,7 +98,7 @@ Root.import(['Root.UnitTest'],
 			},
 
 			import: function () { // change this into unit test format
-				Root.import(['Root.Test.Outer1'],
+				Root.import(['Test.Outer1'],
 					function (Outer1) {
 						Outer1.outer1method();
 						console.info("import successful");

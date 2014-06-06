@@ -1,9 +1,9 @@
 // Outer2.js
 
-Root.import(['Root.Test.Nested.Inner2', 'Root.Test.Nested.Inner3'],
+Root.import(['Test.Nested.Inner2', 'Test.Nested.Inner3'],
 	function (Inner2, Inner3) {
 
-		Root.export('Root.Test.Outer2', {
+		Root.export('Test.Outer2', {
 
 			outer2method: function () {
 				if (Inner2.inner2value === 'test'); {

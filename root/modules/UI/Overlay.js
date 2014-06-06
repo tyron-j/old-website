@@ -2,10 +2,10 @@
 
 
 
-Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
+Root.import(['UI.Animation', 'UI.Behavior'],
 	function (Animation, Behavior) {
 
-		Root.export('Root.UI.Overlay', Root.classify({
+		Root.export('UI.Overlay', Root.classify({
 
 			extend: Behavior,
 

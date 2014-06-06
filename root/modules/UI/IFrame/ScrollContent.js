@@ -2,10 +2,10 @@
 
 
 
-Root.import(['Root.UI.Behavior'],
+Root.import(['UI.Behavior'],
 	function (Behavior) {
 
-		Root.export('Root.UI.IFrame.ScrollContent', Root.classify({
+		Root.export('UI.IFrame.ScrollContent', Root.classify({
 
 			extend: Behavior,
 

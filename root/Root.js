@@ -232,6 +232,8 @@ Root.consolidate(Root, {
 	*/
 	_importQueue: {}, // queue for pending imports
 
+	_imported: {}, // imported modules
+
 	_modulesPath: Root._path.replace(Root._path.match(/root\.js/i)[0], 'modules/'),
 
 	_mainPath: 'main.js', // may change this later
@@ -254,33 +256,39 @@ Root.consolidate(Root, {
 		);
 	*/
 	import: function (modules, callback) { // needs testing
-		var moduleLoader = new this.ModuleLoader(modules.length, callback),
+		var moduleLoader = new ModuleLoader(modules.length, callback),
 
 			// shortcuts
 			namespace = this.namespace,
 			exists = this.exists,
 			importQueue = this._importQueue,
 			appendScript = this.appendScript,
-			modulesPath = this._modulesPath;
+			modulesPath = this._modulesPath,
+
+			original;
 
 		modules.forEach(function (module) { // modules are passed in as strings
-			if (exists(module) && !namespace(module)._namespaced) {
-				moduleLoader.update(module, namespace(module)); // abusing the namespace function
-			} else {
-				moduleLoader.append(module); // add the string for now, replace the string with the actual object later
+			original = module;
+			module = 'Root._imported.' + module;
+			
+			moduleLoader.append(original); // add the string for now, replace the string with the actual object later
 
-				if (!(module in importQueue)) {
-					importQueue[module] = [];
-					appendScript(modulesPath + module.replace('Root.', '').split('.').join('/') + '.js');
+			if (exists(module) && !namespace(module)._namespaced) {
+				moduleLoader.update(original, namespace(module)); // abusing the namespace function
+			} else {
+				if (!(original in importQueue)) {
+					importQueue[original] = [];
+					appendScript(modulesPath + original.split('.').join('/') + '.js');
 				}
 
-				importQueue[module].push(moduleLoader);
+				importQueue[original].push(moduleLoader);
 			}
 		});
 	},
 
 	export: function (module, moduleObj) {
 		var original = module, // preserve full module name
+			module = 'Root._imported.' + module,
 			parent = module.split('.');
 
 		if (this.exists(module)) { // already checked if it was namespaced in Root.import
@@ -303,7 +311,7 @@ Root.consolidate(Root, {
 
 // classes:
 
-Root.ModuleLoader = Root.classify({
+var ModuleLoader = Root.classify({
 
 	initialize: function (total, callback) {
 		this.completed = 0;

@@ -2,10 +2,10 @@
 
 
 
-Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
+Root.import(['UI.Animation', 'UI.Behavior'],
 	function (Animation, Behavior) {
 
-		Root.export('Root.UI.Liftable', Root.classify({
+		Root.export('UI.Liftable', Root.classify({
 			
 			extend: Behavior,
 
@@ -13,7 +13,7 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 				this.callSuper('initialize', [node]);
 
 				var pos = 0,
-					max = options && options.max || Root.UI.Liftable.max,
+					max = options && options.max || Root._imported.UI.Liftable.max, // find a better way to access statics
 					from,
 
 					that = this;
