@@ -9,20 +9,27 @@ Root.import(['Root.UI.Behavior'],
 
 			extend: Behavior,
 
-			initialize: function (node) {
+			initialize: function (node, IFrame) {
 				this.callSuper('initialize', node);
 
-				var scroller = node.firstElementChild,
+				var	scrollBar = node,
+					scroller = node.firstElementChild,
 					scrollWindow = node.nextElementSibling,
 					scrollContent = scrollWindow.firstElementChild,
 
-					max = scrollContent.offsetHeight - scrollWindow.offsetHeight;
+					IFrame.scrollContentMax = scrollContent.offsetHeight - scrollWindow.offsetHeight, // max isn't being used anywhere
+
+					that = this;
 
 				this.handle({
 					mousedown: function (evt) {
 						//
 					}
 				});
+			},
+
+			methods: {
+				//
 			}
 
 		}));

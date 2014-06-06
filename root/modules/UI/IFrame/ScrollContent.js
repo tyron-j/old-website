@@ -9,7 +9,7 @@ Root.import(['Root.UI.Behavior'],
 
 			extend: Behavior,
 
-			initialize: function (node) {
+			initialize: function (node, mutual) {
 				this.callSuper('initialize', node);
 				
 			}
