@@ -254,7 +254,7 @@ Root.consolidate(Root, {
 		);
 	*/
 	import: function (modules, callback) { // needs testing
-		var moduleLoader = new this.ModuleLoader(modules.length, callback),
+		var moduleLoader = new ModuleLoader(modules.length, callback),
 
 			// shortcuts
 			namespace = this.namespace,
@@ -264,11 +264,11 @@ Root.consolidate(Root, {
 			modulesPath = this._modulesPath;
 
 		modules.forEach(function (module) { // modules are passed in as strings
+			moduleLoader.append(module); // add the string for now, replace the string with the actual object later
+
 			if (exists(module) && !namespace(module)._namespaced) {
 				moduleLoader.update(module, namespace(module)); // abusing the namespace function
 			} else {
-				moduleLoader.append(module); // add the string for now, replace the string with the actual object later
-
 				if (!(module in importQueue)) {
 					importQueue[module] = [];
 					appendScript(modulesPath + module.replace('Root.', '').split('.').join('/') + '.js');
@@ -303,7 +303,7 @@ Root.consolidate(Root, {
 
 // classes:
 
-Root.ModuleLoader = Root.classify({
+var ModuleLoader = Root.classify({
 
 	initialize: function (total, callback) {
 		this.completed = 0;
