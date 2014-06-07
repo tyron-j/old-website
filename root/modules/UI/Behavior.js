@@ -2,7 +2,7 @@
 
 
 
-Root.export('UI.Behavior', Root.classify({
+Root.export('Root.UI.Behavior', Root.classify({
 
 	initialize: function (node) {
 		this.node = node;

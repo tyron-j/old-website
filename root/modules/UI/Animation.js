@@ -2,7 +2,7 @@
 
 
 
-Root.export('UI.Animation', {
+Root.export('Root.UI.Animation', {
 
 	Linear: {
 		up: function(progress){

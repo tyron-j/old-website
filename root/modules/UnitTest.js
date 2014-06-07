@@ -2,7 +2,7 @@
 
 
 
-Root.export('UnitTest', Root.classify({
+Root.export('Root.UnitTest', Root.classify({
 	
 	initialize: function () {
 		this.passedTests = 0;

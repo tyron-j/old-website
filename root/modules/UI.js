@@ -2,7 +2,7 @@
 
 
 
-Root.export('UI', {
+Root.export('Root.UI', {
 
 	/* structure:
 		{		

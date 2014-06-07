@@ -2,10 +2,10 @@
 
 
 
-Root.import(['UI.Behavior', 'UI.IFrame.ScrollBar', 'UI.IFrame.Scroller', 'UI.IFrame.ScrollContent'],
+Root.import(['Root.UI.Behavior', 'Root.UI.IFrame.ScrollBar', 'Root.UI.IFrame.Scroller', 'Root.UI.IFrame.ScrollContent'],
 	function (Behavior, ScrollBar, Scroller, ScrollContent) {
 
-		Root.export('UI.IFrame', Root.classify({
+		Root.export('Root.UI.IFrame', Root.classify({
 
 			extend: Behavior,
 
@@ -20,14 +20,12 @@ Root.import(['UI.Behavior', 'UI.IFrame.ScrollBar', 'UI.IFrame.Scroller', 'UI.IFr
 					// content = node.innerHTML; // consider changing this
 					// node.innerHTML = '';
 
-				/* can't access modules through Root anymore
 				if (!node.offsetWidth) {
 					this.setStyle({
 						width: Root.UI.IFrame.width,
 						height: Root.UI.IFrame.height
 					});
 				}
-				*/
 
 				scrollBar.classList.add(options && options.scrollBarClass || 'ScrollBar');
 				scroller.classList.add(options && options.scrollerClass || 'Scroller');
