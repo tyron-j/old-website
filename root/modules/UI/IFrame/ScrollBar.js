@@ -17,13 +17,11 @@ Root.import(['Root.UI.Behavior'],
 					scrollWindow = node.nextElementSibling,
 					scrollContent = scrollWindow.firstElementChild,
 
-					IFrame.scrollContentMax = scrollContent.offsetHeight - scrollWindow.offsetHeight, // max isn't being used anywhere
-
 					that = this;
 
 				this.handle({
 					mousedown: function (evt) {
-						//
+						IFrame.setAbsoluteTop(node);
 					}
 				});
 			},

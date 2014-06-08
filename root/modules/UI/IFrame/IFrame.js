@@ -15,7 +15,7 @@ Root.import(['Root.UI.Behavior', 'Root.UI.IFrame.ScrollBar', 'Root.UI.IFrame.Scr
 				var scrollBar = node.appendChild(document.createElement('div')),
 					scroller = scrollBar.appendChild(document.createElement('div')),
 					scrollWindow = node.appendChild(document.createElement('div')),
-					scrollContent = scrollWindow.appendChild(document.createElement('div')),
+					scrollContent = scrollWindow.appendChild(document.createElement('div'));
 
 					// content = node.innerHTML; // consider changing this
 					// node.innerHTML = '';
@@ -32,9 +32,14 @@ Root.import(['Root.UI.Behavior', 'Root.UI.IFrame.ScrollBar', 'Root.UI.IFrame.Scr
 				scrollWindow.classList.add(options && options.scrollWindowClass || 'ScrollWindow');
 				scrollContent.classList.add(options && options.scrollContentClass || 'ScrollContent');
 
+				this.scrollerMax = scrollBar.offsetHeight - scroller.offsetHeight;
+				this.scrollContentMax = scrollContent.offsetHeight - scrollWindow.offsetHeight; // this might be too soon
+
 				/* this.scrollBar = */new ScrollBar(scrollBar, this);
 				/* this.scroller = */new Scroller(scroller, this);
 				/* this.scrollContent = */new ScrollContent(scrollContent, this);
+
+				this.body = new Behavior(document.body);
 
 				// this.scrollContent.innerHTML = content;
 			},
@@ -56,7 +61,7 @@ Root.import(['Root.UI.Behavior', 'Root.UI.IFrame.ScrollBar', 'Root.UI.IFrame.Scr
 						this.currentTop = parseInt(scroller.style.top) || 0;
 
 						var cursorPosition = evt.pageY - this.absoluteTop,
-							delta = cursorPosition - (this.cursorPosition - scroller.offsetHeight / 2);
+							delta = cursorPosition - (this.currentTop - scroller.offsetHeight / 2);
 
 						scroller.style.top = Math.max(Math.min(this.currentTop + delta, this.scrollerMax), 0); + 'px';
 
@@ -70,7 +75,7 @@ Root.import(['Root.UI.Behavior', 'Root.UI.IFrame.ScrollBar', 'Root.UI.IFrame.Scr
 					scrollContent.style.bottom = (newPosition / this.scrollerMax) * this.scrollerContentMax + 'px';
 				},
 
-				startDrag: function (evt, scroller, scrollContent) { // bind this to the IFrame instance as this.boundStartDrag
+				startDrag: function (evt, scroller, scrollContent) {
 					var delta = evt.clientY - this.initialY;
 
 					scroller.style.top = Math.max(Math.min(this.currentTop + delta, this.scrollerMax), 0) + 'px';
@@ -79,8 +84,8 @@ Root.import(['Root.UI.Behavior', 'Root.UI.IFrame.ScrollBar', 'Root.UI.IFrame.Scr
 				},
 
 				stopDrag: function () { // needs testing
-					document.body.removeEventListener('mousemove', this.boundStartDrag);
-					document.body.removeEventListener('mousemove', this.stopDrag);
+					this.body.ignore('mousemove', this.boundStartDrag);
+					this.body.ignore('mousemove', this.stopDrag);
 				},
 
 				scrollUp: function (scroller, scrollContent) {

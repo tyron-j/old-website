@@ -76,7 +76,7 @@
 			});
 		},
 
-		organize: function (arr) { // sort and remove duplicates
+		organize: function (arr) { // sort and remove duplicates in an array
 			arr.sort();
 
 			for (var i = 0, l = arr.length, o, p, n; i < l; i++) {
@@ -93,7 +93,7 @@
 			}
 		},
 
-		walkTree: function (root, callback) { // needs testing
+		walkTree: function (root, callback) {
 			if (!callback) { // root parameter is optional
 				callback = root;
 				root = document.body;
@@ -106,7 +106,7 @@
 			});
 		},
 
-		// type checkers:
+		// type checkers (consider moving under Root.Util):
 
 		_toString: function (obj) {
 			return Object.prototype.toString.call(obj);
@@ -268,8 +268,8 @@
 			modules.forEach(function (module) { // modules are passed in as strings
 				moduleLoader.append(module); // add the string for now, replace the string with the actual object later
 
-				if (exists(module) && !namespace(module)._namespaced) {
-					moduleLoader.update(module, namespace(module)); // abusing the namespace function
+				if (exists(module) && !namespace(module)._namespaced) { // abusing the namespace function
+					moduleLoader.update(module, namespace(module));
 				} else {
 					if (!(module in importQueue)) {
 						importQueue[module] = [];
