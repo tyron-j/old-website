@@ -4,6 +4,19 @@
 
 (function () {
 
+	var config = new XMLHttpRequest();
+
+	config.addEventListener('readystatechange', function () {
+		if (config.readyState === 4 && config.status === 200) {
+			config = config.responseText;
+		}
+	});
+
+	config.open('GET', '../config.json', false);
+	config.send();
+
+	console.log(config);
+
 	Root = {
 
 		consolidate: function (obj1, obj2, overwrite) { // merge two objects with the option to overwrite obj1 properties with obj2 properties
@@ -172,10 +185,8 @@
 				/* usage:
 					this.callSuper('initialize', [arg1, arg2, arg3]);
 				*/
-				if (!newPrototype.callSuper) {
-					newPrototype.callSuper = function (methodName, args) { // consider changing this to Root._callSuper
-						return superPrototype[methodName].apply(this, args);
-					}
+				newPrototype.callSuper = function (methodName, args) { // need context for superPrototype
+					return superPrototype[methodName].apply(this, args);
 				}
 
 				if (methods) {
