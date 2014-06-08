@@ -4,6 +4,7 @@
 
 (function () {
 
+	/* use once Apache server has been set up
 	var config = new XMLHttpRequest();
 
 	config.addEventListener('readystatechange', function () {
@@ -16,6 +17,7 @@
 	config.send();
 
 	console.log(config);
+	*/
 
 	Root = {
 
