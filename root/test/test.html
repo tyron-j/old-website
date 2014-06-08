@@ -1,19 +1,18 @@
+<!-- Apache server urls are not relative; the urls must be specified from the root directory at all times -->
+
 <html>
 	<head>
-		<link rel = 'stylesheet' type = 'text/css' href = '../themes/current/base.css' />
+		<link rel = 'stylesheet/less' type = 'text/css' href = 'themes/diamond/base.less' />
+		<script type = 'text/javascript' src = 'less/less-1.7.1.min.js'></script>
 	</head>
 	<body>
 		<div class = 'LeftColumn'>
 		</div>
 		<div class = 'Container'>
-			<div style = 'width: 100px; height: 100px; background-color: teal; margin: auto; margin-top: 150px; position: relative;'></div>
 		</div>
 		<div class = 'RightColumn'>
 		</div>
 	</body>
-	<script type = 'text/javascript' async>
-		window.div = document.getElementsByTagName('div')[2];
-	</script>
-	<script type = 'text/javascript' src = '../Root.js'></script>
-	<script type = 'text/javascript' src = 'test.js'></script>
+	<script type = 'text/javascript' src = 'Root.js'></script>
+	<script type = 'text/javascript' src = 'test/test.js'></script>
 </html>

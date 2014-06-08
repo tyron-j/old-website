@@ -4,21 +4,19 @@
 
 (function () {
 
-	/* use once Apache server has been set up
+	// fetch config file
 	var config = new XMLHttpRequest();
 
 	config.addEventListener('readystatechange', function () {
 		if (config.readyState === 4 && config.status === 200) {
-			config = config.responseText;
+			config = JSON.parse(config.responseText);
 		}
 	});
 
 	config.open('GET', '../config.json', false);
 	config.send();
 
-	console.log(config);
-	*/
-
+	// elementary components:
 	Root = {
 
 		consolidate: function (obj1, obj2, overwrite) { // merge two objects with the option to overwrite obj1 properties with obj2 properties
@@ -34,6 +32,8 @@
 				}
 			}
 		},
+
+		_debug: config.debug,
 
 		_path: (function () { // this needs to be here
 			var scripts = document.getElementsByTagName('script'),

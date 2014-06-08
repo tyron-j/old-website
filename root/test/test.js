@@ -13,6 +13,7 @@ Root.import(['Root.UnitTest'],
 			assertEquals = UT.get('assertEquals'),
 			assertSame = UT.get('assertSame');
 
+		// tests
 		UT.runTests({
 
 			classify: function () {
@@ -108,5 +109,11 @@ Root.import(['Root.UnitTest'],
 
 		});
 
+		// div
+
+		div = document.createElement('div');
+		div.style.cssText = 'width: 100px; height: 100px; background-color: teal; margin: auto; margin-top: 150px; position: relative;';
+		document.getElementsByClassName('Container')[0].appendChild(div);
+		
 	}
 );
