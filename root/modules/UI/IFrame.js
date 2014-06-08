@@ -9,7 +9,7 @@ Root.import(['Root.UI.Behavior'],
 
 			extend: Behavior,
 
-			initialize: function (node, options) { // needs testing
+			initialize: function (node, options) {
 				this.callSuper('initialize', node);
 
 				// create essential elements
@@ -26,38 +26,38 @@ Root.import(['Root.UI.Behavior'],
 				scrollWindow.classList.add(options && options.scrollWindowClass || 'ScrollWindow');
 				scrollContent.classList.add(options && options.scrollContentClass || 'ScrollContent');
 
-				// for testing
-				scrollBar.classList.add('FaintWhite');
-				scroller.classList.add('Teal');
-
 				// initialize settings
-				Root.consolidate(this, {
-					scrollerMax: scrollBar.offsetHeight - scroller.offsetHeight,
-					scrollContentMax: scrollContent.offsetHeight - scrollWindow.offsetHeight,
-					body: new Behavior(document.body)
-				});
+				this.scrollerMax = scrollBar.offsetHeight - scroller.offsetHeight;
+				this.scrollContentMax = scrollContent.offsetHeight - scrollWindow.offsetHeight;
+				this.body = new Behavior(document.body);
 
 				// event handlers
 
 				(new Behavior(scrollBar)).handle({
 					mousedown: function (evt) {
-						that.setAbsoluteTop(scrollBar);
-						that.moveScroller(evt, scrollBar, scroller, scrollContent);
+						if (scrollBar === evt.target) {
+							that.currentTop = parseInt(scroller.style.top) || 0;
+
+							that.setAbsoluteTop(scrollBar); // can this be called just once?
+							that.moveScroller(evt, scrollBar, scroller, scrollContent);
+						}
 					}
 				});
 
 				(new Behavior(scroller)).handle({
 					mousedown: function (evt) {
-						evt.preventDefault(); // check what this does
+						evt.preventDefault();
 
 						that.currentTop = parseInt(scroller.style.top) || 0;
 						that.initialY = evt.clientY;
 
-						that.body.handle('mousemove', function (evt) {
-							that.startDrag(evt, scroller, scrollContent);
-						});
-						that.body.handle('mouseup', function () {
-							that.stopDrag();
+						that.body.handle({
+							mousemove: function (evt) {
+								that.startDrag(evt, scroller, scrollContent);
+							},
+							mouseup: function () {
+								that.stopDrag();
+							}
 						});
 					}
 				});
@@ -86,16 +86,12 @@ Root.import(['Root.UI.Behavior'],
 				},
 
 				moveScroller: function (evt, scrollBar, scroller, scrollContent) {
-					if (scrollBar === evt.target) {
-						this.currentTop = parseInt(scroller.style.top) || 0;
+					var cursorPos = evt.pageY - this.absoluteTop,
+						delta = cursorPos - (this.currentTop + scroller.offsetHeight / 2);
 
-						var cursorPos = evt.pageY - this.absoluteTop,
-							delta = cursorPos - (this.currentTop + scroller.offsetHeight / 2);
+					scroller.style.top = Math.max(Math.min(this.currentTop + delta, this.scrollerMax), 0) + 'px';
 
-						scroller.style.top = Math.max(Math.min(this.currentTop + delta, this.scrollerMax), 0) + 'px';
-
-						this.reposition(scroller, scrollContent);
-					}
+					this.reposition(scroller, scrollContent);
 				},
 
 				reposition: function (scroller, scrollContent) {
@@ -112,9 +108,8 @@ Root.import(['Root.UI.Behavior'],
 					this.reposition(scroller, scrollContent);
 				},
 
-				stopDrag: function () { // needs testing
-					this.body.ignore('mousemove');
-					this.body.ignore('mouseup');
+				stopDrag: function () {
+					this.body.ignore(['mousemove', 'mouseup']);
 				},
 
 				scrollUp: function (scroller, scrollContent) {
@@ -129,11 +124,6 @@ Root.import(['Root.UI.Behavior'],
 					this.reposition(scroller, scrollContent);
 				}
 
-			},
-
-			statics: {
-				width: '500px',
-				height: '500px'
 			}
 
 		}));
