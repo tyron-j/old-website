@@ -1,7 +1,7 @@
 To start the Apache server:
 
 - Go to "C:\Program Files (x86)\Apache Software Foundation\Apache2.2\bin"
-- Open "httpd.exe" (create a batch file for this later)
+- Open "httpd.exe"
 
 
 
