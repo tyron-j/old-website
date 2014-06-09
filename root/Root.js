@@ -13,7 +13,7 @@
 		}
 	});
 
-	config.open('GET', '../config.json', false);
+	config.open('GET', 'root/config.json', false); // change the path to config.json later
 	config.send();
 
 	// elementary components:
@@ -31,11 +31,13 @@
 					}
 				}
 			}
+
+			// return obj1; // needs testing
 		},
 
-		_debug: config.debug,
+		_debug: config.debug, // make these "actually" private
 
-		_path: (function () { // this needs to be here
+		_path: (function () {
 			var scripts = document.getElementsByTagName('script'),
 				path;
 
