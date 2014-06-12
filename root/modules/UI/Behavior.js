@@ -2,7 +2,7 @@
 
 
 
-Root.export('Root.UI.Behavior', Root.classify({
+Root.export('UI/Behavior', Root.classify({
 
 	initialize: function (node) {
 		this.node = node;
@@ -106,7 +106,7 @@ Root.export('Root.UI.Behavior', Root.classify({
 		},
 
 		setStyle: function (styles) { // needs testing
-			Root.consolidate(this.node.style, styles, true);
+			Root.consolidate(this.node.style, styles, true); // TO-DO: consolidate is no longer a property of Root
 		},
 
 		destroy: function () {

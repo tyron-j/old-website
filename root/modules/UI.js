@@ -2,7 +2,7 @@
 
 
 
-Root.export('Root.UI', {
+Root.export('UI', {
 
 	/* structure:
 		{		
@@ -17,7 +17,7 @@ Root.export('Root.UI', {
 			...
 		}
 	*/
-	_manifestQueue: {},
+	_manifestQueue: {}, // TO-DO: make these "actually" private as well
 
 	_importArray: [],
 
@@ -26,7 +26,7 @@ Root.export('Root.UI', {
 			importArray = this._importArray,
 			behavior;
 
-		Root.walkTree(function (element) {
+		Root.walkTree(function (element) { // TO-DO: walkTree is no longer a property of Root
 			behavior = element.getAttribute('behavior');
 
 			if (behavior) {

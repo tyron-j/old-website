@@ -2,10 +2,10 @@
 
 
 
-Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
+Root.import(['UI/Animation', 'UI/Behavior'],
 	function (Animation, Behavior) {
 
-		Root.export('Root.UI.Liftable', Root.classify({
+		var Liftable = Root.classify({
 			
 			extend: Behavior,
 
@@ -13,7 +13,7 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 				this.callSuper('initialize', [node]);
 
 				var pos = 0,
-					max = options && options.max || Root.UI.Liftable.max,
+					max = options && options.max || Liftable.max,
 					from,
 
 					that = this;
@@ -48,7 +48,9 @@ Root.import(['Root.UI.Animation', 'Root.UI.Behavior'],
 				max: 25
 			}
 
-		}));
+		});
+
+		Root.export('UI/Liftable', Liftable);
 
 	}
 )

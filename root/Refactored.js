@@ -121,7 +121,7 @@
 		});
 	}
 
-	// type checkers (consider moving under Root.Util):
+	// type checkers (consider moving under the Utils module):
 
 	function toStr (obj) {
 		return Object.prototype.toString.call(obj);

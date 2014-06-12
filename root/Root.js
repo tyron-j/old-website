@@ -1,170 +1,156 @@
 // Root.js
 
-// TO-DO: implement Root.Debug
+
 
 (function () {
 
 	// fetch config file
-	var config = new XMLHttpRequest();
+	var rootPath, config, debug;
+
+	(function (scripts) {
+		[].some.call(scripts, function (script) {
+			if (/root\.js$/i.test(script.getAttribute('src'))) {
+				rootPath = script.getAttribute('src');
+				return true;
+			}
+		});
+	})(document.getElementsByTagName('script'));
+
+	config = new XMLHttpRequest();
 
 	config.addEventListener('readystatechange', function () {
-		if (config.readyState === 4 && config.status === 200) {
+		if (config.readyState === 4 && config.status === 200) { // TO-DO: add a failure condition
 			config = JSON.parse(config.responseText);
 		}
 	});
 
-	config.open('GET', 'root/config.json', false); // change the path to config.json later
+	config.open('GET', rootPath.replace(rootPath.match(/root\.js/i)[0], 'config.json'), false);
 	config.send();
 
-	// elementary components:
-	Root = {
+	debug = config.debug;
 
-		consolidate: function (obj1, obj2, overwrite) { // merge two objects with the option to overwrite obj1 properties with obj2 properties
-			if (overwrite) {
-				for (var key in obj2) {
+	// utilities:
+
+	function appendScript (url) {
+		var script = document.createElement('script');
+
+		script.setAttribute('type', 'text/javascript');
+		script.setAttribute('src', url);
+		script.setAttribute('async', '');
+
+		document.head.appendChild(script);
+	}
+
+	// TO-DO: allow the merging of more than two objects
+	function consolidate (obj1, obj2, overwrite) { // merge two objects with the option to overwrite obj1 properties with obj2 properties
+		if (overwrite) {
+			for (var key in obj2) {
+				obj1[key] = obj2[key];
+			}
+		} else {
+			for (var key in obj2) {
+				if (!(key in obj1)) {
 					obj1[key] = obj2[key];
 				}
-			} else {
-				for (var key in obj2) {
-					if (!(key in obj1)) {
-						obj1[key] = obj2[key];
-					}
-				}
+			}
+		}
+
+		return obj1;
+	}
+
+	function organize (arr) { // sort and remove duplicates in an array
+		arr.sort();
+
+		for (var i = 0, l = arr.length, o, p, n; i < l; i++) {
+			o = i; // original
+			p = o + 1; // pointer
+			n = 0; // number of duplicates
+
+			while (arr[p] === arr[o]) {
+				p++;
+				n++;
 			}
 
-			// return obj1; // needs testing
-		},
+			arr.splice(o + 1, n);
+		}
+	}
 
-		_debug: config.debug, // make these "actually" private
+	function walkTree (root, callback) {
+		if (!callback) { // root parameter is optional
+			callback = root;
+			root = document.body;
+		}
 
-		_path: (function () {
-			var scripts = document.getElementsByTagName('script'),
-				path;
-
-			[].some.call(scripts, function (script) {
-				if (/root\.js$/i.test(script.getAttribute('src'))) {
-					path = script.getAttribute('src');
-					return true;
-				}
-			});
-
-			return path;
-		})()
-
-	};
-
-	// components:
-
-	Root.consolidate(Root, {
-
-		// utilities:
+		callback(root);
 		
-		namespace: function (ns) {
-			var parts = ns.split('.'),
-				parent;
+		[].forEach.call(root.children, function (child) {
+			walkTree(child, callback);
+		});
+	}
 
-			window[parts[0]] = window[parts[0]] || {};
-			
-			parent = window[parts.shift()];
+	// type checkers (consider moving under the Utils module):
 
-			parts.forEach(function (part) { // consider using a while loop with shift
-				if (parent[part] === undefined) {
-					parent[part] = {};
-					parent[part]._namespaced = true;
-				}
+	function toStr (obj) {
+		return Object.prototype.toString.call(obj);
+	}
 
-				parent = parent[part];
-			});
+	function isArray (unknown) {
+		return toStr(unknown) === '[object Array]';
+	}
 
-			return parent;
-		},
+	function isFunction (unknown) {
+		return toStr(unknown) === '[object Function]';
+	}
 
-		exists: function (property) {
-			var levels = property.split('.'),
-				parent = window;
+	function isObject (unknown) {
+		return toStr(unknown) === '[object Object]';
+	}
 
-			return !levels.some(function (level) {
-				if (parent[level] === undefined) {
-					return true;
-				} else {
-					parent = parent[level];
-					return false;
-				}
-			});
-		},
+	function isRegExp (unknown) {
+		return toStr(unknown) === '[object RegExp]';
+	}
 
-		organize: function (arr) { // sort and remove duplicates in an array
-			arr.sort();
+	function isBoolean (unknown) {
+		return typeof unknown === 'boolean';
+	}
 
-			for (var i = 0, l = arr.length, o, p, n; i < l; i++) {
-				o = i; // original
-				p = o + 1; // pointer
-				n = 0; // number of duplicates
+	function isNumber (unknown) {
+		return typeof unknown === 'number' && unknown.toString() !== 'NaN';
+	}
 
-				while (arr[p] === arr[o]) {
-					p++;
-					n++;
-				}
+	function isString (unknown) {
+		return typeof unknown === 'string';
+	}
 
-				arr.splice(o + 1, n);
-			}
-		},
+	// Root module:
 
-		walkTree: function (root, callback) {
-			if (!callback) { // root parameter is optional
-				callback = root;
-				root = document.body;
-			}
+	var importQueue, exported, modulesPath;
 
-			callback(root);
-			
-			[].forEach.call(root.children, function (child) {
-				Root.walkTree(child, callback);
-			});
-		},
+	/* structure:
+		{
+			'module_1': [ // array of module loaders that require module_1
+				moduleLoader1, // each loader includes an array and has an 'update' callback for when a required module is exported
+				moduleLoader2,
+				moduleLoader3
+			],
+			'module_2': [
+				...
+			],
+			...
+		}
+	*/
+	importQueue = {}; // queue for pending imports
+	exported = {}; // hash for exported modules
+	modulesPath = rootPath.replace(rootPath.match(/root\.js/i)[0], 'modules/');
 
-		// type checkers (consider moving under Root.Util):
-
-		_toString: function (obj) {
-			return Object.prototype.toString.call(obj);
-		},
-
-		isArray: function (unknown) {
-			return this._toString(unknown) === '[object Array]';
-		},
-
-		isFunction: function (unknown) {
-			return this._toString(unknown) === '[object Function]';
-		},
-
-		isObject: function (unknown) {
-			return this._toString(unknown) === '[object Object]';
-		},
-
-		isRegExp: function (unknown) {
-			return this._toString(unknown) === '[object RegExp]';
-		},
-
-		isBoolean: function (unknown) {
-			return typeof unknown === 'boolean';
-		},
-
-		isNumber: function (unknown) {
-			return typeof unknown === 'number' && unknown.toString() !== 'NaN';
-		},
-
-		isString: function (unknown) {
-			return typeof unknown === 'string';
-		},
-
-		// core functions:
+	Root = Object.freeze({
 
 		/* usage:
 			var SomeClass = Root.classify({
 				// specifications
 			});
 
-			Root.export('Root.SomeClass', SomeClass); // export SomeClass as Root.SomeClass
+			Root.export('SomeClass', SomeClass);
 		*/
 		classify: function (options) {
 			var newClass = options.initialize,
@@ -228,39 +214,10 @@
 					newClass._statics.push(staticMember);
 				}
 
-				this.organize(newClass._statics);
+				organize(newClass._statics);
 			}
 
 			return newClass;
-		},
-
-		/* structure:
-			{
-				'module_1': [ // array of module objects that require module_1
-					moduleLoader1, // each loader includes an array and has an 'update' callback for when a required module is exported
-					moduleLoader2,
-					moduleLoader3
-				],
-				'module_2': [
-					...
-				],
-				...
-			}
-		*/
-		_importQueue: {}, // queue for pending imports
-
-		_modulesPath: Root._path.replace(Root._path.match(/root\.js/i)[0], 'modules/'),
-
-		_mainPath: 'main.js', // may change this later
-
-		appendScript: function (url) {
-			var script = document.createElement('script');
-
-			script.setAttribute('type', 'text/javascript');
-			script.setAttribute('src', url);
-			script.setAttribute('async', '');
-
-			document.head.appendChild(script);
 		},
 
 		/* usage:
@@ -270,25 +227,18 @@
 				}
 			);
 		*/
-		import: function (modules, callback) { // needs testing
-			var moduleLoader = new ModuleLoader(modules.length, callback),
-
-				// shortcuts
-				namespace = this.namespace,
-				exists = this.exists,
-				importQueue = this._importQueue,
-				appendScript = this.appendScript,
-				modulesPath = this._modulesPath;
+		import: function (modules, callback) {
+			var moduleLoader = new ModuleLoader(modules.length, callback);
 
 			modules.forEach(function (module) { // modules are passed in as strings
 				moduleLoader.append(module); // add the string for now, replace the string with the actual object later
 
-				if (exists(module) && !namespace(module)._namespaced) { // abusing the namespace function
-					moduleLoader.update(module, namespace(module));
+				if (module in exported) {
+					moduleLoader.update(module, exported[module]);
 				} else {
 					if (!(module in importQueue)) {
 						importQueue[module] = [];
-						appendScript(modulesPath + module.replace('Root.', '').split('.').join('/') + '.js');
+						appendScript(modulesPath + module + '.js');
 					}
 
 					importQueue[module].push(moduleLoader);
@@ -297,28 +247,20 @@
 		},
 
 		export: function (module, moduleObj) {
-			var original = module, // preserve full module name
-				parent = module.split('.');
-
-			if (this.exists(module)) { // already checked if it was namespaced in Root.import
-				this.consolidate(moduleObj, this.namespace(module));
-				delete moduleObj._namespaced;
+			if (module in exported) {
+				consolidate(moduleObj, exported[module]);
 			}
 
-			module = parent.pop();
-			parent = this.namespace(parent.join('.'));
-			parent[module] = moduleObj;
+			exported[module] = moduleObj;
 
-			this._importQueue[original].forEach(function (moduleLoader) {
-				moduleLoader.update(original, moduleObj);
+			importQueue[module].forEach(function (moduleLoader) {
+				moduleLoader.update(module, moduleObj);
 			});
 
-			delete this._importQueue[original];
+			delete importQueue[module];
 		}
-
+		
 	});
-
-	// classes:
 
 	var ModuleLoader = Root.classify({
 
@@ -330,27 +272,22 @@
 		},
 
 		methods: {
+
 			append: function (module) {
 				this.moduleArray.push(module);
 			},
+
 			update: function (module, moduleObj) { // this will be called in the Root.export function
 				this.moduleArray[this.moduleArray.indexOf(module)] = moduleObj; // replacing string with actual object
 				this.completed++;
 
 				if (this.completed === this.total) {
-					this.callback.apply(this.callback, this.moduleArray); // what would be the ideal context?
+					this.callback.apply(this.callback, this.moduleArray); // TO-DO: figure out the ideal context
 				}
 			}
+
 		}
 
 	});
-
-	/*
-	(function () {
-
-		Root.appendScript(Root._mainPath);
-
-	})();
-	*/
 
 })();
