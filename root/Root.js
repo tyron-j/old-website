@@ -4,7 +4,8 @@
 
 (function () {
 
-	// fetch config file
+	// setup:
+
 	var rootPath, config, debug;
 
 	(function (scripts) {
@@ -16,11 +17,15 @@
 		});
 	})(document.getElementsByTagName('script'));
 
+	// configuration:
+
 	config = new XMLHttpRequest();
 
 	config.addEventListener('readystatechange', function () {
-		if (config.readyState === 4 && config.status === 200) { // TO-DO: add a failure condition
-			config = JSON.parse(config.responseText);
+		if (config.readyState === 4) {
+			if ((config.status >= 200 && config.status < 300) || config.status === 304) {
+				config = JSON.parse(config.responseText);
+			}
 		}
 	});
 
@@ -41,8 +46,7 @@
 		document.head.appendChild(script);
 	}
 
-	// TO-DO: allow the merging of more than two objects
-	function consolidate (obj1, obj2, overwrite) { // merge two objects with the option to overwrite obj1 properties with obj2 properties
+	function consolidate (obj1, obj2, overwrite) { // to-do: allow the merging of more than two objects
 		if (overwrite) {
 			for (var key in obj2) {
 				obj1[key] = obj2[key];
@@ -88,7 +92,7 @@
 		});
 	}
 
-	// type checkers (consider moving under the Utils module):
+	// validators:
 
 	function toStr (obj) {
 		return Object.prototype.toString.call(obj);
@@ -122,18 +126,18 @@
 		return typeof unknown === 'string';
 	}
 
-	// Root module:
+	// Root:
 
 	var importQueue, exported, modulesPath;
 
 	/* structure:
 		{
-			'module_1': [ // array of module loaders that require module_1
-				moduleLoader1, // each loader includes an array and has an 'update' callback for when a required module is exported
+			'module1': [ // array of module loaders that require module1
+				moduleLoader1, // each module loader includes an array and has an 'update' callback for when a required module is exported
 				moduleLoader2,
 				moduleLoader3
 			],
-			'module_2': [
+			'module2': [
 				...
 			],
 			...
@@ -160,7 +164,7 @@
 
 			if (superClass) {
 				if (!newClass) {
-					newClass = function () {
+					newClass = function () { // needs testing
 						superClass.apply(this, arguments);
 					}
 				}
@@ -247,7 +251,7 @@
 		},
 
 		export: function (module, moduleObj) {
-			if (module in exported) {
+			if (module in exported) { // is this still necessary?
 				consolidate(moduleObj, exported[module]);
 			}
 
@@ -282,7 +286,7 @@
 				this.completed++;
 
 				if (this.completed === this.total) {
-					this.callback.apply(this.callback, this.moduleArray); // TO-DO: figure out the ideal context
+					this.callback.apply(this.callback, this.moduleArray); // to-do: figure out the ideal context
 				}
 			}
 

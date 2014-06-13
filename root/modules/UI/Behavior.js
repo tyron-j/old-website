@@ -106,7 +106,7 @@ Root.export('UI/Behavior', Root.classify({
 		},
 
 		setStyle: function (styles) { // needs testing
-			Root.consolidate(this.node.style, styles, true); // TO-DO: consolidate is no longer a property of Root
+			Root.consolidate(this.node.style, styles, true); // to-do: consolidate is no longer a property of Root
 		},
 
 		destroy: function () {
