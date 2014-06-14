@@ -11,36 +11,43 @@ Root.export('UI/Behavior', Root.classify({
 	methods : {
 
 		animate: function (options) {
-			clearInterval(this.animation);
+			cancelAnimationFrame(this._animation);
 
-			if (options.begin){ // need to call clearInterval first, so the begin function is part of the options parameter
+			if (options.begin) {
 				options.begin();
 			}
 
-			var start = new Date(),
-
+			var duration = options.duration || 500,
 				ease = options.ease,
 				tick = options.tick,
-				delay = options.delay || 10,
-				duration = options.duration || 500;
-				
-			this.animation = setInterval(function () {
-				progress = (new Date() - start) / duration;
+				that = this,
 
-				if (progress > 1){
+				start,
+				now;
+
+			function draw (time) {
+				start = start || time;
+				now = time;
+				progress = (now - start) / duration;
+
+				if (progress > 1) {
 					progress = 1;
 				}
 
 				tick(ease(progress));
 
-				if (progress == 1){
-					clearInterval(this.animation);
+				if (progress === 1) {
+					cancelAnimationFrame(that._animation);
 
-					if (options.end){
+					if (options.end) {
 						options.end();
 					}
+				} else {
+					that._animation = requestAnimationFrame(draw);
 				}
-			}, delay);
+			}
+
+			that._animation = requestAnimationFrame(draw);
 		},
 
 		handle: function (evt, callback, useCapture) {
@@ -103,10 +110,6 @@ Root.export('UI/Behavior', Root.classify({
 
 		insertAfter: function (newElement, reference) {
 			this.node.insertBefore(newElement, reference.nextSibling);
-		},
-
-		setStyle: function (styles) { // needs testing
-			Root.consolidate(this.node.style, styles, true); // to-do: consolidate is no longer a property of Root
 		},
 
 		destroy: function () {
