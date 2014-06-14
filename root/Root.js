@@ -6,7 +6,7 @@
 
 	// setup:
 
-	var rootPath, config, debug;
+	var rootPath, config, common, debug;
 
 	(function (scripts) {
 		[].some.call(scripts, function (script) {
@@ -32,6 +32,7 @@
 	config.open('GET', rootPath.replace(rootPath.match(/root\.js/i)[0], 'config.json'), false);
 	config.send();
 
+	common = config.common;
 	debug = config.debug;
 
 	// utilities:
@@ -44,22 +45,6 @@
 		script.setAttribute('async', '');
 
 		document.head.appendChild(script);
-	}
-
-	function consolidate (obj1, obj2, overwrite) { // to-do: allow the merging of more than two objects
-		if (overwrite) {
-			for (var key in obj2) {
-				obj1[key] = obj2[key];
-			}
-		} else {
-			for (var key in obj2) {
-				if (!(key in obj1)) {
-					obj1[key] = obj2[key];
-				}
-			}
-		}
-
-		return obj1;
 	}
 
 	function organize (arr) { // sort and remove duplicates in an array
@@ -79,56 +64,9 @@
 		}
 	}
 
-	function walkTree (root, callback) {
-		if (!callback) { // root parameter is optional
-			callback = root;
-			root = document.body;
-		}
-
-		callback(root);
-		
-		[].forEach.call(root.children, function (child) {
-			walkTree(child, callback);
-		});
-	}
-
-	// validators:
-
-	function toStr (obj) {
-		return Object.prototype.toString.call(obj);
-	}
-
-	function isArray (unknown) {
-		return toStr(unknown) === '[object Array]';
-	}
-
-	function isFunction (unknown) {
-		return toStr(unknown) === '[object Function]';
-	}
-
-	function isObject (unknown) {
-		return toStr(unknown) === '[object Object]';
-	}
-
-	function isRegExp (unknown) {
-		return toStr(unknown) === '[object RegExp]';
-	}
-
-	function isBoolean (unknown) {
-		return typeof unknown === 'boolean';
-	}
-
-	function isNumber (unknown) {
-		return typeof unknown === 'number' && unknown.toString() !== 'NaN';
-	}
-
-	function isString (unknown) {
-		return typeof unknown === 'string';
-	}
-
 	// Root:
 
-	var importQueue, exported, modulesPath;
+	var importQueue, exported, modulesPath, commonPath;
 
 	/* structure:
 		{
@@ -146,6 +84,7 @@
 	importQueue = {}; // queue for pending imports
 	exported = {}; // hash for exported modules
 	modulesPath = rootPath.replace(rootPath.match(/root\.js/i)[0], 'modules/');
+	commonPath = modulesPath + 'common/';
 
 	Root = Object.freeze({
 
@@ -242,7 +181,11 @@
 				} else {
 					if (!(module in importQueue)) {
 						importQueue[module] = [];
-						appendScript(modulesPath + module + '.js');
+						if (module in common) { // needs testing
+							appendScript(commonPath + module + '.js');
+						} else {
+							appendScript(modulesPath + module + '.js');
+						}
 					}
 
 					importQueue[module].push(moduleLoader);
@@ -251,10 +194,6 @@
 		},
 
 		export: function (module, moduleObj) {
-			if (module in exported) { // is this still necessary?
-				consolidate(moduleObj, exported[module]);
-			}
-
 			exported[module] = moduleObj;
 
 			importQueue[module].forEach(function (moduleLoader) {

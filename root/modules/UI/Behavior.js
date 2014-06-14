@@ -10,7 +10,7 @@ Root.export('UI/Behavior', Root.classify({
 
 	methods : {
 
-		animate: function (options) {
+		animate: function (options) { // to-do: create a fallback in case requestAnimationFrame is not available
 			cancelAnimationFrame(this._animation);
 
 			if (options.begin) {

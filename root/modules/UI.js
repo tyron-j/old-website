@@ -2,68 +2,58 @@
 
 
 
-Root.export('UI', {
+Root.import(['Utils'],
+	function (Utils) {
 
-	/* structure:
-		{		
-			'module_1': [ // array of elements that require module_1
-				element1,
-				element2,
-				element3
-			],
-			'module_2': [
-				...
-			],
-			...
-		}
-	*/
-	_manifestQueue: {}, // to-do: make these "actually" private as well
+		Root.export('UI', {
 
-	_importArray: [],
+			manifest: function () {
+				var manifestQueue = {},
+					importArray = [],
+					behavior;
 
-	manifest: function () { // needs testing
-		var manifestQueue = this._manifestQueue,
-			importArray = this._importArray,
-			behavior;
+				Utils.walkTree(function (element) {
+					behavior = element.getAttribute('behavior');
 
-		Root.walkTree(function (element) { // to-do: walkTree is no longer a property of Root
-			behavior = element.getAttribute('behavior');
-
-			if (behavior) {
-				if (!(behavior in manifestQueue)) {
-					manifestQueue[behavior] = [];
-					importArray.push(behavior);
-				}
-
-				manifestQueue[behavior].push(element);
-			}
-		});
-
-		Root.import(importArray,
-			function () {
-
-				var modules = [].slice.call(arguments), // arguments are in the same order as importArray
-					moduleName,
-					options;
-
-				modules.forEach(function (module) {
-					moduleName = importArray.shift();
-
-					manifestQueue[moduleName].forEach(function (element) {
-						options = element.getAttribute('options');
-
-						if (options) { // needs testing
-							options = JSON.parse(options);
+					if (behavior) {
+						// behavior = 'UI/' + behavior; // consider applying this method
+						if (!(behavior in manifestQueue)) {
+							manifestQueue[behavior] = [];
+							importArray.push(behavior);
 						}
 
-						new module(element, options);
-					});
-
-					delete manifestQueue[moduleName];
+						manifestQueue[behavior].push(element);
+					}
 				});
 
-			}
-		);
-	}
+				Root.import(importArray,
+					function () {
 
-});
+						var modules = [].slice.call(arguments),
+							moduleName,
+							options;
+
+						modules.forEach(function (module) {
+							moduleName = importArray.shift();
+
+							manifestQueue[moduleName].forEach(function (element) {
+								options = element.getAttribute('options');
+
+								if (options) { // needs testing
+									options = JSON.parse(options);
+								}
+
+								new module(element, options);
+							});
+
+							delete manifestQueue[moduleName];
+						});
+
+					}
+				);
+			}
+
+		});
+
+	}
+);

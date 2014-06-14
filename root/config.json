@@ -1,4 +1,8 @@
 {
+	"common": {
+		"Ajax": true,
+		"Utils": true
+	},
 	"debug": false,
 	"theme": "diamond"
 }
