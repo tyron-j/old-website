@@ -24,11 +24,11 @@
 				status = getStatus(xhr);
 
 				if (status === token || (token === 'complete' && status !== 'pending')) { // needs testing
-					callback(xhr);
+					callback(xhr.responseText);
 				}
 			});
 		} else if (status === token || token === 'complete') {
-			callback(xhr);
+			callback(xhr.responseText);
 		}
 	}
 
