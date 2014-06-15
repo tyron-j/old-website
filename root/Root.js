@@ -29,7 +29,7 @@
 		}
 	});
 
-	config.open('GET', rootPath.replace(rootPath.match(/root\.js/i)[0], 'config.json'), false);
+	config.open('GET', rootPath.replace(/root\.js$/i, 'config.json'), false);
 	config.send();
 
 	common = config.common;
@@ -83,7 +83,7 @@
 	*/
 	importQueue = {}; // queue for pending imports
 	exported = {}; // hash for exported modules
-	modulesPath = rootPath.replace(rootPath.match(/root\.js/i)[0], 'modules/');
+	modulesPath = rootPath.replace(/root\.js$/i, 'modules/');
 	commonPath = modulesPath + 'common/';
 
 	Root = Object.freeze({
