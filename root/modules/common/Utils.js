@@ -70,7 +70,7 @@
 		},
 
 		isNumber: function (unknown) {
-			return typeof unknown === 'number' && unknown.toString() !== 'NaN';
+			return typeof unknown === 'number' && unknown.toString() !== 'NaN' && unknown.toString() !== 'Infinity';
 		},
 
 		isString: function (unknown) {

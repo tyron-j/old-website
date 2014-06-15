@@ -6,9 +6,8 @@
 
 	var UnitTest = Root.classify({
 		
-		initialize: function () {
-			this.testee = "";
-			this.passedTests = 0;
+		initialize: function (module) {
+			this.module = module;
 		},
 
 		methods: {
@@ -18,18 +17,18 @@
 
 			breakTest: function () {
 				// called on test fail; throws an error to block the test process
-				throw new Error(UnitTest.prefix + this.testee + ": test " + (this.passedTests + 1) + " failed");
+				throw new Error(UnitTest.prefix + ' ' + this.module + '.' + this.testee + ": test " + (this.passedTests + 1) + " failed");
 			},
 
 			assertTrue: function (statement) {
-				if (statement === false) {
+				if (statement !== true) {
 					this.breakTest();
 				}
 				this.passedTests++;
 			},
 
 			assertFalse: function (statement) {
-				if (statement === true) {
+				if (statement !== false) {
 					this.breakTest();
 				}
 				this.passedTests++;
@@ -42,11 +41,11 @@
 				this.passedTests++;
 			},
 
-			assertEquals: function (val1, val2, recursion) {
+			assertEquals: function (val1, val2, recursion) { // needs testing
 				if (typeof val1 === 'object' && typeof val2 === 'object') {
 					if (val1 instanceof Array && val2 instanceof Array) {
 						if (val1.length !== val2.length) {
-							this.breaktest();
+							this.breakTest();
 						}
 						for (var i = 0, l = val1.length; i < l; i++) {
 							this.assertEquals(val1[i], val2[i], true);
@@ -63,7 +62,7 @@
 						}
 					}
 				} else {
-					if (val1 != val2) {
+					if (val1 !== val2) {
 						this.breakTest();
 					}
 				}
@@ -87,13 +86,13 @@
 				}
 
 				if (successful) {
-					console.info(UnitTest.prefix + "successful");
+					console.info(UnitTest.prefix + ' [' + this.module + "] successful");
 				}
 			}
 		},
 
 		statics: {
-			prefix: '[unit test] '
+			prefix: '[unit test]'
 		}
 
 	});

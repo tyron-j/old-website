@@ -1,11 +1,11 @@
-// test.js
+// test for Root.js
 
 
 
 Root.import(['UnitTest'],
 	function (UnitTest) {
 		
-		var UT = new UnitTest(),
+		var UT = new UnitTest('Root'),
 
 			// shortcuts
 			assertTrue = UT.get('assertTrue'),
@@ -106,7 +106,7 @@ Root.import(['UnitTest'],
 
 				var grandChildInstance = new GrandChildClass();
 
-				assertSame(grandChildInstance.setValue("testing grandChildInstance"), "testing grandChildInstance testSuffix")
+				assertSame(grandChildInstance.setValue("testing grandChildInstance"), "testing grandChildInstance testSuffix");
 			},
 
 			import: function () {
@@ -119,12 +119,6 @@ Root.import(['UnitTest'],
 			}
 
 		});
-
-		// div
-
-		div = document.createElement('div');
-		div.style.cssText = 'width: 100px; height: 100px; background-color: teal; margin: auto; margin-top: 150px; position: relative;';
-		document.getElementsByClassName('Container')[0].appendChild(div);
 		
 	}
 );

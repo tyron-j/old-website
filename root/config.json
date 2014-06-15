@@ -1,6 +1,7 @@
 {
 	"common": {
 		"Ajax": true,
+		"UnitTest": true,
 		"Utils": true
 	},
 	"debug": false,

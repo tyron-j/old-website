@@ -12,5 +12,15 @@
 		</div>
 	</body>
 	<script type = 'text/javascript' src = 'root/Root.js'></script>
-	<script type = 'text/javascript' src = 'root/test/Root.js'></script>
+
+	<!-- tests -->
+	<script type = 'text/javascript' src = 'root/test/common/Root.js'></script>
+	<script type = 'text/javascript' src = 'root/test/common/Utils.js'></script>
+
+	<!-- for testing behaviors -->
+	<script type = 'text/javascript'>
+		div = document.createElement('div');
+		div.style.cssText = 'width: 100px; height: 100px; background-color: teal; margin: auto; margin-top: 150px; position: relative;';
+		document.getElementsByClassName('Container')[0].appendChild(div);
+	</script>
 </html>
