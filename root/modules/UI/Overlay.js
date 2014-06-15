@@ -10,10 +10,10 @@ Root.import(['UI/Animation', 'UI/Behavior'],
 			extend: Behavior,
 
 			initialize: function (node, options) {
-				this.callSuper('initialize', [node]);
+				Behavior.call(this, node);
 
 				var opa = 1,
-					max = 1, // set these with options or statics later
+					max = 1,
 					from,
 
 					that = this;

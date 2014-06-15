@@ -73,6 +73,8 @@
 			},
 
 			runTests: function (tests) {
+				var successful = true;
+
 				try {
 					for (test in tests) {
 						this.testee = test;
@@ -81,8 +83,12 @@
 					}
 				} catch (e) {
 					console.error(e.message);
+					successful = false;
 				}
-				console.info(UnitTest.prefix + "successful");
+
+				if (successful) {
+					console.info(UnitTest.prefix + "successful");
+				}
 			}
 		},
 

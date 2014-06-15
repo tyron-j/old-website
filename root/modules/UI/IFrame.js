@@ -10,7 +10,7 @@ Root.import(['UI/Behavior'],
 			extend: Behavior,
 
 			initialize: function (node, options) {
-				this.callSuper('initialize', node);
+				Behavior.call(this, node);
 
 				// create essential elements
 				var scrollBar = node.appendChild(document.createElement('div')),
@@ -21,10 +21,15 @@ Root.import(['UI/Behavior'],
 					that = this;
 
 				// initialize styles
-				scrollBar.classList.add(options && options.scrollBarClass || 'ScrollBar');
-				scroller.classList.add(options && options.scrollerClass || 'Scroller');
-				scrollWindow.classList.add(options && options.scrollWindowClass || 'ScrollWindow');
-				scrollContent.classList.add(options && options.scrollContentClass || 'ScrollContent');
+				node.classList.add('IFrame');
+				scrollBar.classList.add('ScrollBar');
+				scroller.classList.add('Scroller');
+				scrollWindow.classList.add('ScrollWindow');
+				scrollContent.classList.add('ScrollContent');
+
+				// test purposes
+				scrollBar.classList.add('FaintWhite');
+				scroller.classList.add('Teal');
 
 				// initialize settings
 				this.scrollerMax = scrollBar.offsetHeight - scroller.offsetHeight;

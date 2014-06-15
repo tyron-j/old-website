@@ -10,7 +10,7 @@ Root.import(['UI/Animation', 'UI/Behavior'],
 			extend: Behavior,
 
 			initialize: function (node, options) {
-				this.callSuper('initialize', [node]);
+				Behavior.call(this, node);
 
 				var pos = 0,
 					max = options && options.max || Liftable.max,

@@ -103,7 +103,7 @@
 
 			if (superClass) {
 				if (!newClass) {
-					newClass = function () { // needs testing
+					newClass = function () {
 						superClass.apply(this, arguments);
 					}
 				}
@@ -113,13 +113,6 @@
 
 				for (var prop in superPrototype) {
 					newPrototype[prop] = superPrototype[prop] // inherit properties
-				}
-
-				/* usage:
-					this.callSuper('initialize', [arg1, arg2, arg3]);
-				*/
-				newPrototype.callSuper = function (methodName, args) { // need context for superPrototype
-					return superPrototype[methodName].apply(this, args);
 				}
 
 				if (methods) {
@@ -148,8 +141,6 @@
 
 				newClass._statics = [];
 			}
-
-			newClass.prototype.initialize = newClass;
 			
 			if (statics) {
 				for (var staticMember in statics) {

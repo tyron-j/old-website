@@ -5,9 +5,9 @@
 Root.import(['UnitTest'],
 	function (UnitTest) {
 		
-		// shortcuts
 		var UT = new UnitTest(),
 
+			// shortcuts
 			assertTrue = UT.get('assertTrue'),
 			assertFalse = UT.get('assertFalse'),
 			assertEquals = UT.get('assertEquals'),
@@ -72,12 +72,12 @@ Root.import(['UnitTest'],
 					extend: TestClass,
 
 					initialize: function (childStr0, childStr1, childStr2) {
-						this.callSuper('initialize', [childStr0, childStr1, childStr2]);
+						TestClass.call(this, childStr0, childStr1, childStr2);
 					},
 
 					methods: {
 						setValue: function (val) {
-							return this.callSuper('setValue', [val + " testSuffix"]);
+							return TestClass.prototype.setValue.call(this, val + " testSuffix");
 						}
 					}
 
@@ -98,15 +98,15 @@ Root.import(['UnitTest'],
 
 				assertSame(ChildClass.modify(obj, "x"), "modified");
 
-				// var GrandChildClass = Root.classify({
+				var GrandChildClass = Root.classify({ // to-do: test this part more thoroughly
 
-				// 	extend: ChildClass
+					extend: ChildClass
 
-				// });
+				});
 
-				// var grandChildInstance = new GrandChildClass();
+				var grandChildInstance = new GrandChildClass();
 
-				// assertSame(grandChildInstance.setValue("testing grandChildInstance"), "testing grandChildInstance testSuffix")
+				assertSame(grandChildInstance.setValue("testing grandChildInstance"), "testing grandChildInstance testSuffix")
 			},
 
 			import: function () {
