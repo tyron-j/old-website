@@ -3,7 +3,7 @@
 Root.export('Test/Outer3', {
 
 	outer3method: function () {
-		console.info("export successful");
+		console.info("[export] successful");
 	}
 
 });
