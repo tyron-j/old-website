@@ -35,10 +35,21 @@
 	var Request = Root.classify({
 
 		initialize: function (type, url, data, async) {
-			this.xhr = new XMLHttpRequest();
+			var query = '',
+				xhr = this.xhr = new XMLHttpRequest();
 
-			this.xhr.open(type, url, async);
-			this.xhr.send(data);
+			xhr.open(type, url, async);
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+			if (data) {
+				for (var key in data) {
+					query += key + '=' + data[key] + '&';
+				}
+
+				query = query.replace(/\&$/, '');
+			}
+
+			xhr.send(query);
 		},
 
 		methods: {
