@@ -4,8 +4,8 @@
 
 (function () {
 
-	Root.import(['Ajax', 'UI/Behavior'],
-		function (Ajax, Behavior) {
+	Root.import(['Ajax', 'Task', 'UI/Behavior'],
+		function (Ajax, Task, Behavior) {
 
 			var SlideShow = Root.classify({
 
@@ -14,7 +14,7 @@
 				initialize: function (node, options) {
 					var that = this;
 
-					this.getSlides(options.src).onSuccess(function () { // to-do: configure options properly
+					this.getSlides(options.src).onSuccess(function (slides) { // to-do: configure options properly
 						//
 					});
 				},
@@ -22,17 +22,25 @@
 				methods: {
 
 					getSlides: function (url) {
-						return Ajax.get(url).onSuccess(function (res) {
-							var images = res.match(/href\=\".+\"/g);
+						var task = new Task();
 
-							images.shift();
+						Ajax.get(url).onSuccess(function (res) { // to-do: add a fail condition
+							var slides = res.match(/href\=\".+\"/g); // get the file names; to-do: make sure they're image files
 
-							images = images.map(function (image) {
-								return image.replace(/^href\=/, '').replace(/\"/g, '');
+							slides.shift(); // remove parent directory
+
+							slides = slides.map(function (slide) {
+								var div = document.createElement('div');
+
+								div.style.backgroundImage = 'url(' + url + '/' + slide.replace(/^href\=/, '').replace(/\"/g, '') + ')';
+
+								return div;
 							});
 
-							// to-do: append slides
+							task.resolve(slides);
 						});
+
+						return task;
 					}
 
 				},
@@ -48,4 +56,4 @@
 		}
 	);
 
-});
+})();

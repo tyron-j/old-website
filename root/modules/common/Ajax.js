@@ -23,11 +23,11 @@
 			xhr.addEventListener('readystatechange', function () {
 				status = getStatus(xhr);
 
-				if (status === token || (token === 'complete' && status !== 'pending')) { // needs testing
+				if (status === token || (token === 'whatever' && status !== 'pending')) { // needs testing
 					callback(xhr.responseText);
 				}
 			});
-		} else if (status === token || token === 'complete') {
+		} else if (status === token || token === 'whatever') {
 			callback(xhr.responseText);
 		}
 	}
@@ -64,8 +64,8 @@
 				return this;
 			},
 
-			onComplete: function (callback) {
-				handle(this.xhr, 'complete', callback);
+			onWhatever: function (callback) {
+				handle(this.xhr, 'whatever', callback);
 				return this;
 			}
 
