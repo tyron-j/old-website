@@ -3,6 +3,7 @@
 		"Ajax": true,
 		"Task": true,
 		"UnitTest": true,
+		"User": true,
 		"Utils": true
 	},
 	"debug": false,

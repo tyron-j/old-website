@@ -23,7 +23,7 @@
 
 	Root.export('Utils', {
 
-		consolidate: function (objects, overwrite) { // needs testing
+		consolidate: function (objects, overwrite) { // to-do: consider making overwrite true by default
 			var obj1 = objects[0];
 
 			for (var i = 1, len = objects.length, obj2; i < len; i++) {

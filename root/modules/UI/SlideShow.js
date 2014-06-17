@@ -1,6 +1,6 @@
 // SlideShow.js
 
-
+// to-do: consider setting certain styles with CSS
 
 Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 	function (Ajax, Task, Utils, Behavior) {
@@ -12,15 +12,26 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 			initialize: function (node, options) {
 				var that = this;
 
+				Behavior.call(this, node);
+				node.classList.add('SlideShow');
+
+				node.style.overflow = 'hidden';
+
+				this.dimensions = {
+					width: node.offsetWidth || SlideShow.width,
+					height: node.offsetHeight || SlideShow.height
+				};
+
 				this.getSlides(options.src).onSuccess(function (slides) { // to-do: configure options properly
-					//
+					that.appendSlides(slides);
 				});
 			},
 
 			methods: {
 
 				getSlides: function (url) {
-					var task = new Task();
+					var task = new Task(),
+						that = this;
 
 					Ajax.get(url).onSuccess(function (res) { // to-do: add a fail condition
 						var slides = res.match(/href\=\".+\"/g), // get the file names
@@ -38,6 +49,8 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 
 							div.style.backgroundImage = 'url(' + url + '/' + slide + ')';
 
+							Utils.consolidate([div.style, that.dimensions], true);
+
 							return div;
 						});
 
@@ -47,16 +60,41 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 					return task;
 				},
 
+				appendSlides: function (slides) { // overwrite this method for different slide show types
+					var slideShow = this.node,
+						container = slideShow.appendChild(document.createElement('div')),
+						slideStyle = {
+							backgroundPosition: 'center',
+							backgroundRepeat: 'no-repeat',
+							backgroundSize: 'contain',
+							display: 'inline-block',
+							position: 'relative'
+						};
+
+					Utils.consolidate([container.style, {
+						fontSize: 0, // remove space between 
+						position: 'relative', // for transitions
+						width: this.dimensions.width * slides.length
+					}], true);
+
+					slides.forEach(function (slide) {
+						Utils.consolidate([slide.style, slideStyle], true);
+						container.appendChild(slide);
+					});
+				},
+
 				transition: function () {
-					//
+					// update container.style.left and container.style.right
 				}
 
 			},
 
 			statics: {
 
-				imgTypes: ['bmp', 'jpg', 'png']
-				
+				imgTypes: ['bmp', 'jpg', 'png'],
+				width: 1000,
+				height: 625
+
 			}
 
 		});

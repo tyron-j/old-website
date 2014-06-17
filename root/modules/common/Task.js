@@ -56,6 +56,8 @@ Root.import(['Utils'],
 					this.result = result;
 
 					execute(this.successHandlers, result);
+
+					return this;
 				},
 
 				cancel: function (result) {
@@ -63,6 +65,8 @@ Root.import(['Utils'],
 					this.result = result;
 
 					execute(this.failHandlers, result);
+
+					return this;
 				}
 
 			}
@@ -73,7 +77,7 @@ Root.import(['Utils'],
 
 			extend: Task,
 
-			initialize: function (tasks) { // tasks passed in as array
+			initialize: function (tasks) { // tasks passed in as array; to-do: consider using [].slice.call(arguments) if only objects of the same type is expected
 				var that = this;
 
 				Task.call(this);
