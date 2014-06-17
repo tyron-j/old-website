@@ -38,6 +38,10 @@
 			var query = '',
 				xhr = this.xhr = new XMLHttpRequest();
 
+			if (async === undefined) {
+				async = true;
+			}
+
 			xhr.open(type, url, async);
 			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 

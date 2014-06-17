@@ -45,6 +45,10 @@
 			return obj1;
 		},
 
+		contains: function (arr, item) { // needs testing
+			return arr.indexOf(item) >= 0;
+		},
+
 		walkTree: walkTree,
 
 		// validators:
@@ -75,6 +79,10 @@
 
 		isString: function (unknown) {
 			return typeof unknown === 'string';
+		},
+
+		isUndefined: function (unknown) { // needs testing
+			return unknown === undefined;
 		}
 
 	});
