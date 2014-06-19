@@ -1,0 +1,45 @@
+// classes.less
+
+
+
+@import 'unity.less';
+
+// IFrame:
+
+.IFrame {
+	& > .ScrollWindow {
+		height: 100%;
+		overflow: hidden;
+
+		& > .ScrollContent { // refer to legacy code for text content styling
+			position: relative;
+			width: 100%;
+		}
+	}
+	
+	& > .ScrollBar {
+		float: right;
+		width: @scrollBarWidth;
+		height: 100%;
+
+		& > .Scroller {
+			position: relative;
+			width: 100%;
+			height: @scrollerHeight;
+		}
+	}
+}
+
+// SlideShow:
+
+.SlideShow {
+	overflow: hidden;
+
+	& > .Slide {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+		display: inline-block;
+		position: relative;
+	}
+}

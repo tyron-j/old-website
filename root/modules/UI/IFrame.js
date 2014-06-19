@@ -1,6 +1,6 @@
 // IFrame.js
 
-
+// to-do: make and test changes
 
 Root.import(['UI/Behavior'],
 	function (Behavior) {
@@ -43,7 +43,7 @@ Root.import(['UI/Behavior'],
 						if (scrollBar === evt.target) {
 							that.currentTop = parseInt(scroller.style.top) || 0;
 
-							that.setAbsoluteTop(scrollBar); // can this be called just once?
+							that.setAbsoluteTop(scrollBar); // to-do: can this be called just once?
 							that.moveScroller(evt, scrollBar, scroller, scrollContent);
 						}
 					}
@@ -51,17 +51,17 @@ Root.import(['UI/Behavior'],
 
 				(new Behavior(scroller)).handle({
 					mousedown: function (evt) {
-						evt.preventDefault();
+						evt.preventDefault(); // to-do: check if this is necessary, and why
 
 						that.currentTop = parseInt(scroller.style.top) || 0;
 						that.initialY = evt.clientY;
 
 						that.body.handle({
 							mousemove: function (evt) {
-								that.startDrag(evt, scroller, scrollContent);
+								that.handleDrag(evt, scroller, scrollContent);
 							},
 							mouseup: function () {
-								that.stopDrag();
+								that.ignoreDrag();
 							}
 						});
 					}
@@ -105,7 +105,7 @@ Root.import(['UI/Behavior'],
 					scrollContent.style.bottom = (newPosition / this.scrollerMax) * this.scrollerContentMax + 'px';
 				},
 
-				startDrag: function (evt, scroller, scrollContent) {
+				handleDrag: function (evt, scroller, scrollContent) {
 					var delta = evt.clientY - this.initialY;
 
 					scroller.style.top = Math.max(Math.min(this.currentTop + delta, this.scrollerMax), 0) + 'px';
@@ -113,8 +113,8 @@ Root.import(['UI/Behavior'],
 					this.reposition(scroller, scrollContent);
 				},
 
-				stopDrag: function () {
-					this.body.ignore(['mousemove', 'mouseup']);
+				ignoreDrag: function () {
+					this.body.ignore(['mousemove', 'mouseup']); // to-do: remove all listeners
 				},
 
 				scrollUp: function (scroller, scrollContent) {

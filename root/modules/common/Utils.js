@@ -79,10 +79,6 @@
 
 		isString: function (unknown) {
 			return typeof unknown === 'string';
-		},
-
-		isUndefined: function (unknown) { // needs testing
-			return unknown === undefined;
 		}
 
 	});

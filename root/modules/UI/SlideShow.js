@@ -1,6 +1,6 @@
 // SlideShow.js
 
-// to-do: consider setting certain styles with CSS
+
 
 Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 	function (Ajax, Task, Utils, Behavior) {
@@ -13,9 +13,6 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 				var that = this;
 
 				Behavior.call(this, node);
-				node.classList.add('SlideShow');
-
-				node.style.overflow = 'hidden';
 
 				this.dimensions = {
 					width: node.offsetWidth || SlideShow.width,
@@ -61,30 +58,21 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 				},
 
 				appendSlides: function (slides) { // overwrite this method for different slide show types
-					var slideShow = this.node,
-						container = slideShow.appendChild(document.createElement('div')),
-						slideStyle = {
-							backgroundPosition: 'center',
-							backgroundRepeat: 'no-repeat',
-							backgroundSize: 'contain',
-							display: 'inline-block',
-							position: 'relative'
-						};
+					var container = this.node.appendChild(document.createElement('div'));
 
 					Utils.consolidate([container.style, {
-						fontSize: 0, // remove space between 
 						position: 'relative', // for transitions
 						width: this.dimensions.width * slides.length
 					}], true);
 
 					slides.forEach(function (slide) {
-						Utils.consolidate([slide.style, slideStyle], true);
+						slide.classList.add('Slide'); // make sure default theme is being used
 						container.appendChild(slide);
 					});
 				},
 
-				transition: function () {
-					// update container.style.left and container.style.right
+				transition: function () { // update container.style.left and container.style.right
+					//
 				}
 
 			},

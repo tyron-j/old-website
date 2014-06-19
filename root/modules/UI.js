@@ -43,6 +43,11 @@ Root.import(['Utils'],
 									options = JSON.parse(options);
 								}
 
+								style = moduleName.split('/');
+								style = style[style.length - 1];
+
+								element.classList.add(style);
+
 								new module(element, options);
 							});
 

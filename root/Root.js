@@ -44,6 +44,7 @@
 		script.setAttribute('src', url);
 		script.setAttribute('async', '');
 
+		// consider adding a 'load' event listener here if modifying the implementation of Root.export
 		document.head.appendChild(script);
 	}
 

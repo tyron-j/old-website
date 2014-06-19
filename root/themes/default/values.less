@@ -1,0 +1,29 @@
+// values.less
+
+
+
+@import 'unity.less';
+
+// standard values:
+
+@stdFont: 'Century Gothic';
+@stdRadius: 5px;
+
+// IFrame:
+
+@scrollBarWidth: 20px;
+@scrollerHeight: @scrollBarWidth * 2;
+@textMargin: 15px;
+
+// SlideShow:
+
+@slideShowWidth: 1000px;
+@slideShowHeight: @slideShowWidth / 1.6;
+
+// Gallery:
+
+@galleryWidth: @slideShowWidth - @scrollBarWidth;
+@numThumbnails: 3; // subject to change
+@thumbnailMargin: 10px;
+@thumbnailWidth: (@galleryWidth - (@thumbnailMargin * (@numThumbnails + 1))) / @numThumbnails;
+@thumbnailHeight: @thumbnailWidth / 1.6;
