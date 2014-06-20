@@ -1,14 +1,12 @@
 <html>
 	<head>
-		<link rel = 'stylesheet/less' type = 'text/css' href = 'root/themes/diamond/base.less' />
+		<link rel = 'stylesheet/less' type = 'text/css' href = 'root/themes/default/unity.less' />
 		<script type = 'text/javascript' src = 'root/less/less-1.7.1.min.js'></script>
 	</head>
 	<body>
-		<div class = 'LeftColumn'>
-		</div>
-		<div class = 'Container'>
-		</div>
-		<div class = 'RightColumn'>
+		<div behavior = 'UI/SlideShow' options = '{
+			"src": "sandbox/images"
+		}'>
 		</div>
 	</body>
 	<script type = 'text/javascript' src = 'root/Root.js'></script>
@@ -16,11 +14,5 @@
 	<!-- tests -->
 	<script type = 'text/javascript' src = 'root/tests/modules/common/Root.js'></script>
 	<script type = 'text/javascript' src = 'root/tests/modules/common/Utils.js'></script>
-
-	<!-- for testing behaviors -->
-	<script type = 'text/javascript'>
-		div = document.createElement('div');
-		div.style.cssText = 'width: 100px; height: 100px; background-color: teal; margin: auto; margin-top: 150px; position: relative;';
-		document.getElementsByClassName('Container')[0].appendChild(div);
-	</script>
+	<script type = 'text/javascript' src = 'root/tests/modules/UI.js'></script>
 </html>

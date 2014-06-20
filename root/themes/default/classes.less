@@ -33,9 +33,12 @@
 // SlideShow:
 
 .SlideShow {
+	.setInCenter(@slideShowWidth, @slideShowHeight);
+
 	overflow: hidden;
 
-	& > .Slide {
+	& .Slide {
+		background-color: black;
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: contain;

@@ -15,8 +15,8 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 				Behavior.call(this, node);
 
 				this.dimensions = {
-					width: node.offsetWidth || SlideShow.width,
-					height: node.offsetHeight || SlideShow.height
+					width: node.offsetWidth,
+					height: node.offsetHeight
 				};
 
 				this.getSlides(options.src).onSuccess(function (slides) { // to-do: configure options properly
@@ -43,10 +43,11 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 							return Utils.contains(SlideShow.imgTypes, ext); // make sure the file is an image
 						}).map(function (slide) {
 							var div = document.createElement('div');
-
+							
 							div.style.backgroundImage = 'url(' + url + '/' + slide + ')';
 
 							Utils.consolidate([div.style, that.dimensions], true);
+							div.classList.add('Slide'); // make sure default theme is being used
 
 							return div;
 						});
@@ -66,7 +67,6 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 					}], true);
 
 					slides.forEach(function (slide) {
-						slide.classList.add('Slide'); // make sure default theme is being used
 						container.appendChild(slide);
 					});
 				},
@@ -79,9 +79,7 @@ Root.import(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 
 			statics: {
 
-				imgTypes: ['bmp', 'jpg', 'png'],
-				width: 1000,
-				height: 625
+				imgTypes: ['bmp', 'jpg', 'png']
 
 			}
 
