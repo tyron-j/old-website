@@ -173,6 +173,7 @@
 				} else {
 					if (!(module in importQueue)) {
 						importQueue[module] = [];
+						
 						if (module in common) { // needs testing
 							appendScript(commonPath + module + '.js');
 						} else {
