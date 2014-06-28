@@ -123,14 +123,14 @@
 					}
 				}
 
-				superClass._statics.forEach(function (staticMember) {
+				superClass.statics.forEach(function (staticMember) {
 					newClass[staticMember] = superClass[staticMember];
 				});
 
 				if (statics) {
-					newClass._statics = superClass._statics.slice();
+					newClass.statics = superClass.statics.slice();
 				} else {
-					newClass._statics = superClass._statics;
+					newClass.statics = superClass.statics;
 				}
 			} else { // if no superClass
 				if (!newClass) {
@@ -141,24 +141,24 @@
 					newClass.prototype = methods;
 				}
 
-				newClass._statics = [];
+				newClass.statics = [];
 			}
 			
 			if (statics) {
 				for (var staticMember in statics) {
 					newClass[staticMember] = statics[staticMember];
-					newClass._statics.push(staticMember);
+					newClass.statics.push(staticMember);
 				}
 
-				organize(newClass._statics);
+				organize(newClass.statics);
 			}
 
 			return newClass;
 		},
 
 		/* usage:
-			enko.inject(['module_1', 'module_2', 'module_3'],
-				function (module_1, module_2, module_3) {
+			enko.inject(['module1', 'module2', 'module3'],
+				function (module1, module2, module3) {
 					// use injected modules
 				}
 			);

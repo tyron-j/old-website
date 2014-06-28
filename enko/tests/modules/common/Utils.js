@@ -58,7 +58,19 @@ enko.inject(['utils', 'unittest'],
 				assertSame(objStr, JSON.stringify(obj2));
 			},
 
+			isElement: function () {
+				assertTrue(utils.isElement(document.createElement('div')));
+				assertFalse(utils.isElement([]));
+				assertFalse(utils.isElement(function(){}));
+				assertFalse(utils.isElement({}));
+				assertFalse(utils.isElement(/test/));
+				assertFalse(utils.isElement(true));
+				assertFalse(utils.isElement(0));
+				assertFalse(utils.isElement('test'));
+			},
+
 			isArray: function () {
+				assertFalse(utils.isArray(document.createElement('div')));
 				assertTrue(utils.isArray([]));
 				assertFalse(utils.isArray(function(){}));
 				assertFalse(utils.isArray({}));
@@ -69,6 +81,7 @@ enko.inject(['utils', 'unittest'],
 			},
 
 			isFunction: function () {
+				assertFalse(utils.isFunction(document.createElement('div')));
 				assertFalse(utils.isFunction([]));
 				assertTrue(utils.isFunction(function(){}));
 				assertFalse(utils.isFunction({}));
@@ -79,6 +92,7 @@ enko.inject(['utils', 'unittest'],
 			},
 
 			isObject: function () {
+				assertFalse(utils.isObject(document.createElement('div')));
 				assertFalse(utils.isObject([]));
 				assertFalse(utils.isObject(function(){}));
 				assertTrue(utils.isObject({}));
@@ -89,6 +103,7 @@ enko.inject(['utils', 'unittest'],
 			},
 
 			isRegExp: function () {
+				assertFalse(utils.isRegExp(document.createElement('div')));
 				assertFalse(utils.isRegExp([]));
 				assertFalse(utils.isRegExp(function(){}));
 				assertFalse(utils.isRegExp({}));
@@ -99,6 +114,7 @@ enko.inject(['utils', 'unittest'],
 			},
 
 			isBoolean: function () {
+				assertFalse(utils.isBoolean(document.createElement('div')));
 				assertFalse(utils.isBoolean([]));
 				assertFalse(utils.isBoolean(function(){}));
 				assertFalse(utils.isBoolean({}));
@@ -109,6 +125,7 @@ enko.inject(['utils', 'unittest'],
 			},
 
 			isNumber: function () {
+				assertFalse(utils.isNumber(document.createElement('div')));
 				assertFalse(utils.isNumber([]));
 				assertFalse(utils.isNumber(function(){}));
 				assertFalse(utils.isNumber({}));
@@ -121,6 +138,7 @@ enko.inject(['utils', 'unittest'],
 			},
 
 			isString: function () {
+				assertFalse(utils.isString(document.createElement('div')));
 				assertFalse(utils.isString([]));
 				assertFalse(utils.isString(function(){}));
 				assertFalse(utils.isString({}));

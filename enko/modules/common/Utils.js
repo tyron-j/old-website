@@ -8,7 +8,7 @@
 		return Object.prototype.toString.call(obj);
 	}
 
-	function walkTree (root, callback) {
+	function walkTree (root, callback) { // consider using a TreeWalker
 		if (!callback) { // root parameter is optional
 			callback = root;
 			root = document.body;
@@ -16,7 +16,7 @@
 
 		callback(root);
 		
-		[].forEach.call(root.children, function (child) {
+		[].forEach.call(root.children, function (child) { // to-do: is this too memory-intensive?
 			walkTree(child, callback);
 		});
 	}
@@ -52,6 +52,10 @@
 		walkTree: walkTree,
 
 		// validators:
+
+		isElement: function (unknown) {
+			return toStr(unknown) === '[object HTMLDivElement]';
+		},
 
 		isArray: function (unknown) {
 			return toStr(unknown) === '[object Array]';

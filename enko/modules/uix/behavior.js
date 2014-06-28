@@ -1,6 +1,6 @@
 // behavior.js
 
-
+// to-do: inject utils and use the type checkers
 
 enko.define('uix/behavior', enko.classify({
 
@@ -11,7 +11,7 @@ enko.define('uix/behavior', enko.classify({
 	methods : {
 
 		animate: function (options) { // to-do: create a fallback in case requestAnimationFrame is not available
-			cancelAnimationFrame(this._animation);
+			cancelAnimationFrame(this.animation);
 
 			if (options.begin) {
 				options.begin();
@@ -37,24 +37,24 @@ enko.define('uix/behavior', enko.classify({
 				tick(ease(progress));
 
 				if (progress === 1) {
-					cancelAnimationFrame(that._animation);
+					cancelAnimationFrame(that.animation);
 
 					if (options.end) {
 						options.end();
 					}
 				} else {
-					that._animation = requestAnimationFrame(draw);
+					that.animation = requestAnimationFrame(draw);
 				}
 			}
 
-			that._animation = requestAnimationFrame(draw);
+			that.animation = requestAnimationFrame(draw);
 		},
 
 		handle: function (evt, callback, useCapture) {
 			var callbackName;
 
-			if (!this._handlers){
-				this._handlers = {}; // to allow the removal of event listeners later
+			if (!this.handlers){
+				this.handlers = {}; // to allow the removal of event listeners later
 			}
 
 			if (typeof evt === 'object') { // for multiple events; needs testing
@@ -64,13 +64,13 @@ enko.define('uix/behavior', enko.classify({
 					callback = evt[e];
 					callbackName = callback.name || e;
 
-					this._handlers[callbackName] = callback;
+					this.handlers[callbackName] = callback;
 					this.node.addEventListener(e, callback, useCapture);
 				}
 			} else {
 				callbackName = callback.name || evt;
 
-				this._handlers[callbackName] = callback;
+				this.handlers[callbackName] = callback;
 				this.node.addEventListener(evt, callback, useCapture);
 			}
 		},
@@ -85,10 +85,10 @@ enko.define('uix/behavior', enko.classify({
 					var that = this;
 
 					evt.forEach(function (e) {
-						callback = that._handlers[e];
+						callback = that.handlers[e];
 
 						that.node.removeEventListener(e, callback, useCapture);
-						delete that._handlers[e];
+						delete that.handlers[e];
 					});
 				} else { // element.ignore({ 'click': handler }, true)
 					for (var e in evt) {
@@ -96,15 +96,15 @@ enko.define('uix/behavior', enko.classify({
 						callbackName = callback.name || e;
 
 						this.node.removeEventListener(e, callback, useCapture);
-						delete this._handlers[callbackName];
+						delete this.handlers[callbackName];
 					}
 				}
 			} else {
 				callbackName = callback && callback.name || evt;
-				callback = callback || this._handlers[callbackName];
+				callback = callback || this.handlers[callbackName];
 
 				this.node.removeEventListener(evt, callback, useCapture);
-				delete this._handlers[callbackName];
+				delete this.handlers[callbackName];
 			}
 		},
 
