@@ -1,18 +1,18 @@
-// User.js
+// user.js
 
 
 
-enko.inject(['Utils'],
-	function (Utils) {
+enko.inject(['utils'],
+	function (utils) {
 
-		enko.define('User', {
+		enko.define('user', {
 
 			name: 'guest',
 
 			privileges: [],
 
 			hasPrivilege: function (privilege) {
-				Utils.contains(this.privileges, privilege);
+				utils.contains(this.privileges, privilege);
 			}
 
 		});

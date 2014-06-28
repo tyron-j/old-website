@@ -2,19 +2,19 @@
 
 
 
-enko.inject(['UnitTest'],
+enko.inject(['unittest'],
 	function (UnitTest) {
 		
-		var UT = new UnitTest('enko'),
+		var ut = new UnitTest('enko'),
 
 			// shortcuts
-			assertTrue = UT.get('assertTrue'),
-			assertFalse = UT.get('assertFalse'),
-			assertEquals = UT.get('assertEquals'),
-			assertSame = UT.get('assertSame');
+			assertTrue = ut.get('assertTrue'),
+			assertFalse = ut.get('assertFalse'),
+			assertEquals = ut.get('assertEquals'),
+			assertSame = ut.get('assertSame');
 
 		// tests
-		UT.runTests({
+		ut.runTests({
 
 			classify: function () {
 				var TestClass = enko.classify({
@@ -110,9 +110,9 @@ enko.inject(['UnitTest'],
 			},
 
 			inject: function () {
-				enko.inject(['Test/Outer1'],
-					function (Outer1) {
-						Outer1.outer1method();
+				enko.inject(['test/outer1'],
+					function (outer1) {
+						outer1.outer1method();
 						console.info("[inject] successful");
 					}
 				);

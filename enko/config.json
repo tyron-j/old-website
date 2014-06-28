@@ -1,10 +1,11 @@
 {
 	"common": {
-		"Ajax": true,
-		"Task": true,
-		"UnitTest": true,
-		"User": true,
-		"Utils": true
+		"ajax": true,
+		"browser": true,
+		"task": true,
+		"unittest": true,
+		"user": true,
+		"utils": true
 	},
 	"debug": false,
 	"theme": "diamond"

@@ -1,4 +1,4 @@
-// Utils.js
+// utils.js
 
 
 
@@ -21,7 +21,7 @@
 		});
 	}
 
-	enko.define('Utils', {
+	enko.define('utils', {
 
 		consolidate: function (objects, overwrite) { // to-do: consider making overwrite true by default
 			var obj1 = objects[0];

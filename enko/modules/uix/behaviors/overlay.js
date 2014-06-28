@@ -1,11 +1,11 @@
-// Overlay.js
+// overlay.js
 
 
 
-enko.inject(['UI/Animation', 'UI/Behavior'],
-	function (Animation, Behavior) {
+enko.inject(['uix/animation', 'uix/behavior'],
+	function (animation, Behavior) {
 
-		enko.define('UI/Overlay', enko.classify({
+		enko.define('uix/behaviors/overlay', enko.classify({
 
 			extend: Behavior,
 
@@ -23,7 +23,7 @@ enko.inject(['UI/Animation', 'UI/Behavior'],
 						from = opa;
 
 						that.animate({
-							ease: Animation.Circle.three,
+							ease: animation.arc.three,
 							tick: function (ordinate) {
 								opa = from * ordinate;
 								node.style.opacity = opa;
@@ -35,7 +35,7 @@ enko.inject(['UI/Animation', 'UI/Behavior'],
 						from = opa;
 
 						that.animate({
-							ease: Animation.Circle.two,
+							ease: animation.arc.two,
 							tick: function (ordinate) {
 								opa = from + (max - from) * ordinate;
 								node.style.opacity = opa;

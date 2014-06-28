@@ -1,4 +1,4 @@
-// Ajax.js
+// ajax.js
 
 
 
@@ -7,7 +7,7 @@
 	function getStatus (xhr) {
 		if (xhr.readyState === 4) {
 			if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
-				return 'successful';
+				return 'successful'; // consider changing these tokens to numbers
 			} else {
 				return 'unsuccessful';
 			}
@@ -77,7 +77,7 @@
 
 	});
 
-	enko.define('Ajax', { // to-do: implement something similar to $.when
+	enko.define('ajax', {
 		get: function (url, data, async) {
 			return new Request('GET', url, data, async);
 		},

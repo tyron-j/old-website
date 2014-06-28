@@ -1,4 +1,4 @@
-// UnitTest.js
+// unittest.js
 
 
 
@@ -97,5 +97,5 @@
 
 	});
 
-	enko.define('UnitTest', UnitTest);
+	enko.define('unittest', UnitTest);
 })();

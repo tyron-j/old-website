@@ -1,9 +1,9 @@
-// Task.js
+// task.js
 
 
 
-enko.inject(['Utils'],
-	function (Utils) {
+enko.inject(['utils'],
+	function (utils) {
 
 		function execute (handlers, result) {
 			handlers.forEach(function (handler) {
@@ -41,7 +41,7 @@ enko.inject(['Utils'],
 				},
 
 				onWhatever: function (callback) {
-					if (Utils.isBoolean(this.successful)) {
+					if (utils.isBoolean(this.successful)) {
 						callback(this.result);
 					} else {
 						this.successHandlers.push(callback);
@@ -87,24 +87,20 @@ enko.inject(['Utils'],
 
 				tasks.forEach(function (task) {
 					task.onSuccess(function () {
-						that.progress(true);
+						that.progress();
 					}).onFail(function () {
-						that.progress(false);
+						that.cancel();
 					});
 				});
 			},
 
 			methods: {
 
-				progress: function (successful) {
-					if (successful) {
-						this.completed++;
+				progress: function () {
+					this.completed++;
 
-						if (this.completed === this.total) {
-							this.resolve();
-						}
-					} else {
-						this.cancel();
+					if (this.completed === this.total) {
+						this.resolve();
 					}
 				}
 
@@ -112,7 +108,7 @@ enko.inject(['Utils'],
 
 		});
 
-		enko.define('Task', Task);
+		enko.define('task', Task);
 
 	}
 );

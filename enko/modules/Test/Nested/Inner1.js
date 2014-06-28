@@ -1,6 +1,6 @@
-// Inner1.js
+// inner1.js
 
-enko.define('Test/Nested/Inner1', {
+enko.define('test/nested/inner1', {
 	
 	inner1value: 'test'
 

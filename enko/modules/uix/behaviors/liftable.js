@@ -1,9 +1,9 @@
-// Liftable.js
+// liftable.js
 
 
 
-enko.inject(['UI/Animation', 'UI/Behavior'],
-	function (Animation, Behavior) {
+enko.inject(['uix/animation', 'uix/behavior'],
+	function (animation, Behavior) {
 
 		var Liftable = enko.classify({
 			
@@ -23,7 +23,7 @@ enko.inject(['UI/Animation', 'UI/Behavior'],
 						from = pos;
 
 						that.animate({
-							ease: Animation.Circle.two,
+							ease: animation.arc.two,
 							tick: function (ordinate) {
 								pos = from + (max - from) * ordinate;
 								node.style.bottom = pos + 'px';
@@ -34,7 +34,7 @@ enko.inject(['UI/Animation', 'UI/Behavior'],
 						from = pos;
 
 						that.animate({
-							ease: Animation.Circle.three,
+							ease: animation.arc.three,
 							tick: function (ordinate) {
 								pos = from * ordinate;
 								node.style.bottom = pos + 'px';
@@ -50,7 +50,7 @@ enko.inject(['UI/Animation', 'UI/Behavior'],
 
 		});
 
-		enko.define('UI/Liftable', Liftable);
+		enko.define('uix/behaviors/liftable', Liftable);
 
 	}
 )

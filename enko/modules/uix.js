@@ -1,22 +1,22 @@
-// UI.js
+// uix.js
 
 
 
-enko.inject(['Utils'],
-	function (Utils) {
+enko.inject(['utils'],
+	function (utils) {
 
-		enko.define('UI', {
+		enko.define('uix', {
 
 			manifest: function () {
 				var manifestQueue = {},
 					injectArray = [],
 					behavior;
 
-				Utils.walkTree(function (element) {
-					behavior = element.getAttribute('behavior');
+				utils.walkTree(function (element) {
+					behavior = element.getAttribute('enko-behavior');
 
 					if (behavior) {
-						// behavior = 'UI/' + behavior; // consider applying this method
+						behavior = 'uix/behaviors/' + behavior; // consider applying this method
 						if (!(behavior in manifestQueue)) {
 							manifestQueue[behavior] = [];
 							injectArray.push(behavior);
@@ -37,7 +37,7 @@ enko.inject(['Utils'],
 							moduleName = injectArray.shift();
 
 							manifestQueue[moduleName].forEach(function (element) {
-								options = element.getAttribute('options');
+								options = element.getAttribute('enko-options');
 
 								if (options) { // needs testing
 									options = JSON.parse(options);

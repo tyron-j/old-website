@@ -1,11 +1,11 @@
-// IFrame.js
+// iframe.js
 
 // to-do: make and test changes
 
-enko.inject(['UI/Behavior'],
+enko.inject(['uix/behavior'],
 	function (Behavior) {
 
-		enko.define('UI/IFrame', enko.classify({
+		enko.define('uix/behaviors/iframe', enko.classify({
 
 			extend: Behavior,
 
@@ -114,7 +114,7 @@ enko.inject(['UI/Behavior'],
 				},
 
 				ignoreDrag: function () {
-					this.body.ignore(['mousemove', 'mouseup']); // to-do: remove all listeners
+					this.body.ignore(['mousemove', 'mouseup']); // to-do: try attaching the listener to the document object instead so it handles mouseup outside of the viewport
 				},
 
 				scrollUp: function (scroller, scrollContent) {

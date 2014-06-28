@@ -1,8 +1,8 @@
-// Behavior.js
+// behavior.js
 
 
 
-enko.define('UI/Behavior', enko.classify({
+enko.define('uix/behavior', enko.classify({
 
 	initialize: function (node) {
 		this.node = node;

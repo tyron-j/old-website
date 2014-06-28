@@ -1,11 +1,11 @@
-// Inner3.js
+// inner3.js
 
-enko.inject(['Test/Outer3'],
-	function (Outer3) {
-		enko.define('Test/Nested/Inner3', {
+enko.inject(['test/outer3'],
+	function (outer3) {
+		enko.define('test/nested/inner3', {
 			
 			inner3method: function () {
-				Outer3.outer3method();
+				outer3.outer3method();
 			}
 
 		});

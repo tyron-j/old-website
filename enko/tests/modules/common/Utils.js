@@ -1,20 +1,20 @@
-// test for Utils.js
+// test for utils.js
 
 
 
-enko.inject(['Utils', 'UnitTest'],
-	function (Utils, UnitTest) {
+enko.inject(['utils', 'unittest'],
+	function (utils, UnitTest) {
 		
-		var UT = new UnitTest('Utils'),
+		var ut = new UnitTest('utils'),
 
 			// shortcuts
-			assertTrue = UT.get('assertTrue'),
-			assertFalse = UT.get('assertFalse'),
-			assertEquals = UT.get('assertEquals'),
-			assertSame = UT.get('assertSame');
+			assertTrue = ut.get('assertTrue'),
+			assertFalse = ut.get('assertFalse'),
+			assertEquals = ut.get('assertEquals'),
+			assertSame = ut.get('assertSame');
 
 		// tests
-		UT.runTests({
+		ut.runTests({
 
 			consolidate: function () {
 				var obj1 = {
@@ -35,7 +35,7 @@ enko.inject(['Utils', 'UnitTest'],
 					obj,
 					objStr;
 
-				obj = Utils.consolidate([obj1, obj2]);
+				obj = utils.consolidate([obj1, obj2]);
 
 				assertSame(obj, obj1);
 				assertEquals(obj, {
@@ -44,7 +44,7 @@ enko.inject(['Utils', 'UnitTest'],
 					key3: 'val3'
 				});
 
-				obj = Utils.consolidate([{}, obj2, obj3], true);
+				obj = utils.consolidate([{}, obj2, obj3], true);
 				objStr = JSON.stringify(obj2);
 
 				assertEquals(obj, {
@@ -59,75 +59,75 @@ enko.inject(['Utils', 'UnitTest'],
 			},
 
 			isArray: function () {
-				assertTrue(Utils.isArray([]));
-				assertFalse(Utils.isArray(function(){}));
-				assertFalse(Utils.isArray({}));
-				assertFalse(Utils.isArray(/test/));
-				assertFalse(Utils.isArray(true));
-				assertFalse(Utils.isArray(0));
-				assertFalse(Utils.isArray('test'));
+				assertTrue(utils.isArray([]));
+				assertFalse(utils.isArray(function(){}));
+				assertFalse(utils.isArray({}));
+				assertFalse(utils.isArray(/test/));
+				assertFalse(utils.isArray(true));
+				assertFalse(utils.isArray(0));
+				assertFalse(utils.isArray('test'));
 			},
 
 			isFunction: function () {
-				assertFalse(Utils.isFunction([]));
-				assertTrue(Utils.isFunction(function(){}));
-				assertFalse(Utils.isFunction({}));
-				assertFalse(Utils.isFunction(/test/));
-				assertFalse(Utils.isFunction(true));
-				assertFalse(Utils.isFunction(0));
-				assertFalse(Utils.isFunction('test'));
+				assertFalse(utils.isFunction([]));
+				assertTrue(utils.isFunction(function(){}));
+				assertFalse(utils.isFunction({}));
+				assertFalse(utils.isFunction(/test/));
+				assertFalse(utils.isFunction(true));
+				assertFalse(utils.isFunction(0));
+				assertFalse(utils.isFunction('test'));
 			},
 
 			isObject: function () {
-				assertFalse(Utils.isObject([]));
-				assertFalse(Utils.isObject(function(){}));
-				assertTrue(Utils.isObject({}));
-				assertFalse(Utils.isObject(/test/));
-				assertFalse(Utils.isObject(true));
-				assertFalse(Utils.isObject(0));
-				assertFalse(Utils.isObject('test'));
+				assertFalse(utils.isObject([]));
+				assertFalse(utils.isObject(function(){}));
+				assertTrue(utils.isObject({}));
+				assertFalse(utils.isObject(/test/));
+				assertFalse(utils.isObject(true));
+				assertFalse(utils.isObject(0));
+				assertFalse(utils.isObject('test'));
 			},
 
 			isRegExp: function () {
-				assertFalse(Utils.isRegExp([]));
-				assertFalse(Utils.isRegExp(function(){}));
-				assertFalse(Utils.isRegExp({}));
-				assertTrue(Utils.isRegExp(/test/));
-				assertFalse(Utils.isRegExp(true));
-				assertFalse(Utils.isRegExp(0));
-				assertFalse(Utils.isRegExp('test'));
+				assertFalse(utils.isRegExp([]));
+				assertFalse(utils.isRegExp(function(){}));
+				assertFalse(utils.isRegExp({}));
+				assertTrue(utils.isRegExp(/test/));
+				assertFalse(utils.isRegExp(true));
+				assertFalse(utils.isRegExp(0));
+				assertFalse(utils.isRegExp('test'));
 			},
 
 			isBoolean: function () {
-				assertFalse(Utils.isBoolean([]));
-				assertFalse(Utils.isBoolean(function(){}));
-				assertFalse(Utils.isBoolean({}));
-				assertFalse(Utils.isBoolean(/test/));
-				assertTrue(Utils.isBoolean(true));
-				assertFalse(Utils.isBoolean(0));
-				assertFalse(Utils.isBoolean('test'));
+				assertFalse(utils.isBoolean([]));
+				assertFalse(utils.isBoolean(function(){}));
+				assertFalse(utils.isBoolean({}));
+				assertFalse(utils.isBoolean(/test/));
+				assertTrue(utils.isBoolean(true));
+				assertFalse(utils.isBoolean(0));
+				assertFalse(utils.isBoolean('test'));
 			},
 
 			isNumber: function () {
-				assertFalse(Utils.isNumber([]));
-				assertFalse(Utils.isNumber(function(){}));
-				assertFalse(Utils.isNumber({}));
-				assertFalse(Utils.isNumber(/test/));
-				assertFalse(Utils.isNumber(true));
-				assertTrue(Utils.isNumber(0));
-				assertFalse(Utils.isNumber(NaN));
-				assertFalse(Utils.isNumber(Infinity));
-				assertFalse(Utils.isNumber('test'));
+				assertFalse(utils.isNumber([]));
+				assertFalse(utils.isNumber(function(){}));
+				assertFalse(utils.isNumber({}));
+				assertFalse(utils.isNumber(/test/));
+				assertFalse(utils.isNumber(true));
+				assertTrue(utils.isNumber(0));
+				assertFalse(utils.isNumber(NaN));
+				assertFalse(utils.isNumber(Infinity));
+				assertFalse(utils.isNumber('test'));
 			},
 
 			isString: function () {
-				assertFalse(Utils.isString([]));
-				assertFalse(Utils.isString(function(){}));
-				assertFalse(Utils.isString({}));
-				assertFalse(Utils.isString(/test/));
-				assertFalse(Utils.isString(true));
-				assertFalse(Utils.isString(0));
-				assertTrue(Utils.isString('test'));
+				assertFalse(utils.isString([]));
+				assertFalse(utils.isString(function(){}));
+				assertFalse(utils.isString({}));
+				assertFalse(utils.isString(/test/));
+				assertFalse(utils.isString(true));
+				assertFalse(utils.isString(0));
+				assertTrue(utils.isString('test'));
 			}
 
 		});

@@ -1,9 +1,9 @@
-// SlideShow.js
+// slideshow.js
 
 
 
-enko.inject(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
-	function (Ajax, Task, Utils, Behavior) {
+enko.inject(['ajax', 'task', 'utils', 'uix/behavior'],
+	function (ajax, Task, utils, Behavior) {
 
 		var SlideShow = enko.classify({
 
@@ -30,7 +30,7 @@ enko.inject(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 					var task = new Task(),
 						that = this;
 
-					Ajax.get(url).onSuccess(function (res) { // to-do: add a fail condition
+					ajax.get(url).onSuccess(function (res) { // to-do: add a fail condition
 						var slides = res.match(/href\=\".+\"/g), // get the file names
 							ext; // pointer
 
@@ -40,13 +40,13 @@ enko.inject(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 							ext = slide.split('.');
 							ext = ext[ext.length - 1]; // get extension
 
-							return Utils.contains(SlideShow.imgTypes, ext); // make sure the file is an image
+							return utils.contains(SlideShow.imgTypes, ext); // make sure the file is an image
 						}).map(function (slide) {
 							var div = document.createElement('div');
 							
 							div.style.backgroundImage = 'url(' + url + '/' + slide + ')';
 
-							Utils.consolidate([div.style, that.dimensions], true);
+							utils.consolidate([div.style, that.dimensions], true);
 							div.classList.add('Slide'); // make sure default theme is being used
 
 							return div;
@@ -61,7 +61,7 @@ enko.inject(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 				appendSlides: function (slides) { // overwrite this method for different slide show types
 					var container = this.node.appendChild(document.createElement('div'));
 
-					Utils.consolidate([container.style, {
+					utils.consolidate([container.style, {
 						position: 'relative', // for transitions
 						width: this.dimensions.width * slides.length
 					}], true);
@@ -85,7 +85,7 @@ enko.inject(['Ajax', 'Task', 'Utils', 'UI/Behavior'],
 
 		});
 
-		enko.define('UI/SlideShow', SlideShow);
+		enko.define('uix/behaviors/slideshow', SlideShow);
 
 	}
 );

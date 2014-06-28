@@ -1,13 +1,13 @@
-// Outer1.js
+// outer1.js
 
-enko.inject(['Test/Outer2', 'Test/Nested/Inner1', 'Test/Nested/Inner2'],
-	function (Outer2, Inner1, Inner2) {
+enko.inject(['test/outer2', 'test/nested/inner1', 'test/nested/inner2'],
+	function (outer2, inner1, inner2) {
 
-		enko.define('Test/Outer1', {
+		enko.define('test/outer1', {
 
 		  outer1method: function () {
-		  	if (Inner1.inner1value === Inner2.inner2value) {
-		     	Outer2.outer2method();
+		  	if (inner1.inner1value === inner2.inner2value) {
+		     	outer2.outer2method();
 		     }
 		  }
 

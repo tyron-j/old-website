@@ -1,6 +1,6 @@
-// Outer3.js
+// outer3.js
 
-enko.define('Test/Outer3', {
+enko.define('test/outer3', {
 
 	outer3method: function () {
 		console.info("[define] successful");

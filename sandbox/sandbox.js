@@ -4,10 +4,10 @@
 
 var pubRes;
 
-enko.inject(['Ajax'],
-	function (Ajax) {
+enko.inject(['ajax'],
+	function (ajax) {
 
-		Ajax.get('images').onSuccess(function (res) {
+		ajax.get('images').onSuccess(function (res) {
 			pubRes = res;
 		});
 

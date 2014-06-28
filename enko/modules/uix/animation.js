@@ -1,10 +1,10 @@
-// Animation.js
+// animation.js
 
 
 
-enko.define('UI/Animation', {
+enko.define('uix/animation', {
 
-	Linear: {
+	linear: {
 		up: function(progress){
 			return progress;
 		},
@@ -13,7 +13,7 @@ enko.define('UI/Animation', {
 		}
 	},
 
-	Circle: {
+	arc: {
 		one: function(progress){
 			return Math.sin(Math.acos(progress));
 		},
