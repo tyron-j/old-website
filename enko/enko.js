@@ -73,9 +73,9 @@
 	/* structure:
 		{
 			'module1': [ // array of injectors that require module1
-				moduleLoader1, // each injector includes an array and has an 'update' callback for when a required module is defined
-				moduleLoader2,
-				moduleLoader3
+				injector1, // each injector includes an array and has an 'update' callback for when a required module is defined
+				injector2,
+				injector3
 			],
 			'module2': [
 				...
@@ -95,7 +95,7 @@
 				// specifications
 			});
 
-			enko.define('SomeClass', SomeClass);
+			enko.define('someclass', SomeClass);
 		*/
 		classify: function (options) {
 			var newClass = options.initialize,
@@ -164,13 +164,13 @@
 			);
 		*/
 		inject: function (modules, callback) {
-			var moduleLoader = new Injector(modules.length, callback);
+			var injector = new Injector(modules.length, callback);
 
 			modules.forEach(function (module) { // modules are passed in as strings
-				moduleLoader.append(module); // add the string for now, replace the string with the actual object later
+				injector.append(module); // add the string for now, replace the string with the actual object later
 
 				if (module in defined) {
-					moduleLoader.update(module, defined[module]);
+					injector.update(module, defined[module]);
 				} else {
 					if (!(module in dependents)) {
 						dependents[module] = [];
@@ -182,7 +182,7 @@
 						}
 					}
 
-					dependents[module].push(moduleLoader);
+					dependents[module].push(injector);
 				}
 			});
 		},
@@ -190,8 +190,8 @@
 		define: function (module, moduleObj) {
 			defined[module] = moduleObj;
 
-			dependents[module].forEach(function (moduleLoader) {
-				moduleLoader.update(module, moduleObj);
+			dependents[module].forEach(function (injector) {
+				injector.update(module, moduleObj);
 			});
 
 			delete dependents[module];
