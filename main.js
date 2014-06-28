@@ -1,4 +1,4 @@
-Root.import([],
+enko.inject([],
 	function () {
 
 		//

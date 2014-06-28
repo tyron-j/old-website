@@ -4,7 +4,7 @@
 
 var pubRes;
 
-Root.import(['Ajax'],
+enko.inject(['Ajax'],
 	function (Ajax) {
 
 		Ajax.get('images').onSuccess(function (res) {
