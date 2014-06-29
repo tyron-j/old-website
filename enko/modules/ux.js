@@ -13,7 +13,7 @@ enko.inject(['utils'],
 					behavior;
 
 				utils.walkTree(function (element) {
-					behavior = element.getAttribute('enko-behavior');
+					behavior = element.getAttribute('ek-behavior');
 
 					if (behavior) {
 						behavior = 'ux/behaviors/' + behavior; // consider applying this method
@@ -37,7 +37,7 @@ enko.inject(['utils'],
 							moduleName = injectArray.shift();
 
 							manifestQueue[moduleName].forEach(function (element) {
-								options = element.getAttribute('enko-options');
+								options = element.getAttribute('ek-options');
 
 								if (options) { // needs testing
 									options = JSON.parse(options);
