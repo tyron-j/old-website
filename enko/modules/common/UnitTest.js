@@ -3,6 +3,8 @@
 
 
 (function () {
+	var utContainer = document.getElementById('ut-container'), // GUI; to-do: consider creating the elements here
+		utSuccessful = document.getElementById('ut-successful');
 
 	var UnitTest = enko.classify({
 		
@@ -72,21 +74,74 @@
 			},
 
 			runTests: function (tests) {
-				var successful = true;
+				var successful = true,
+					currentTest; // GUI
 
 				try {
-					for (test in tests) {
+					for (var test in tests) {
 						this.testee = test;
+						currentTest = tests[test]; // GUI
 						this.passedTests = 0; // reset passed tests
+
 						tests[test]();
 					}
 				} catch (e) {
-					console.error(e.message);
 					successful = false;
+
+					console.error(e.message);
+					this.parseTest(currentTest); // GUI
 				}
 
 				if (successful) {
 					console.info(UnitTest.prefix + ' [' + this.module + "] successful");
+				}
+			},
+
+			parseTest: function (test) { // GUI
+				if (utContainer) {
+					var utHeader = document.createElement('div'),
+						utContent = document.createElement('div'),
+						testStr = test.toString(),
+						tabsLength = testStr.match(/\n\t+/)[0].match(/\t/g).length,
+						tabsRegExp = '\\n',
+
+						that = this,
+						counter = 0;
+
+					utHeader.classList.add('ut-header');
+					utContent.classList.add('ut-content');
+					
+					if (utSuccessful.parentElement) {
+						utSuccessful.parentElement.removeChild(utSuccessful);
+					}
+
+					for (var i = 0; i < tabsLength; i++) {
+						tabsRegExp += '\\t';
+					}
+
+					tabsRegExp = new RegExp(tabsRegExp, 'g');
+
+					testStr = testStr.replace(/assert\w+\(.+\;/g, function (match) {
+						if (counter === that.passedTests) {
+							counter = null;
+
+							return '<span style = \'color: red;\'>' + match + '</span>';
+						}
+
+						if (counter !== null) {
+							counter++;
+
+							return '<span style = \'color: limegreen;\'>' + match + '</span>';
+						}
+
+						return match;
+					});
+
+					utHeader.innerHTML = "<span style = 'color: red;'>unit test failed:</span> " + this.module + "." + this.testee;
+					utContent.innerHTML = testStr.replace(/\t+}$/, '}').replace(tabsRegExp, '\n&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;').replace(/\n/g, '<br>');
+
+					utContainer.appendChild(utHeader);
+					utContainer.appendChild(utContent);
 				}
 			}
 		},
