@@ -16,13 +16,14 @@ enko.inject(['ux/animation', 'ux/behavior'],
 					perspective = options && options.perspective || Rotator.perspective,
 					axis = options && options.axis || Rotator.axis,
 					max = options && options.max || Rotator.max,
+					parent = node.parentElement, // to-do: remove this later
 					from,
 
 					that = this;
 
-				node.parentElement.style.webkitPerspective = perspective;
+				parent.style.webkitPerspective = perspective;
 
-				(new Behavior(node.parentElement)).handle({ // to-do: change this later
+				(new Behavior(parent)).handle({ // to-do: change this later
 					mouseover: function () {
 						from = rotation;
 
