@@ -12,7 +12,7 @@ enko.inject(['ux/animation', 'ux/behavior'],
 			initialize: function (node, options) {
 				Behavior.call(this, node);
 
-				var opa = 1,
+				var opacity = 1,
 					max = 1,
 					from,
 
@@ -20,25 +20,25 @@ enko.inject(['ux/animation', 'ux/behavior'],
 
 				this.handle({
 					mouseover: function () {
-						from = opa;
+						from = opacity;
 
 						that.animate({
 							ease: animation.arc.three,
 							tick: function (ordinate) {
-								opa = from * ordinate;
-								node.style.opacity = opa;
+								opacity = from * ordinate;
+								node.style.opacity = opacity;
 							},
 							duration: 300
 						});
 					},
 					mouseout: function () {
-						from = opa;
+						from = opacity;
 
 						that.animate({
 							ease: animation.arc.two,
 							tick: function (ordinate) {
-								opa = from + (max - from) * ordinate;
-								node.style.opacity = opa;
+								opacity = from + (max - from) * ordinate;
+								node.style.opacity = opacity;
 							},
 							duration: 300
 						});

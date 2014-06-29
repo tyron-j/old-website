@@ -1,0 +1,28 @@
+// classes.less
+
+
+
+@import 'unity.less';
+
+.left-column, .right-column {
+	width: 20%;
+	height: 100%;
+}
+
+.left-column {
+	.linearGradient(@darkerGray, @darkGray);
+
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: -1;
+}
+
+.right-column {
+	.linearGradient(@darkGray, @darkerGray);
+
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	z-index: -1;
+}

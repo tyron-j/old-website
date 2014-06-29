@@ -1,0 +1,64 @@
+<!-- index.html -->
+
+
+
+<html>
+	<head>
+		<link rel = 'stylesheet/less' type = 'text/css' href = 'unity.less' />
+		<script type = 'text/javascript' src = '../../less/less-1.7.1.min.js'></script>
+	</head>
+	<body>
+		<div class = 'left-column'>
+		</div>
+		<div class = 'behavior-container'>
+			<div class = 'behavior-block-wrapper'>
+				<div class = 'behavior-block' ek-behavior = 'liftable'>
+				</div>
+			</div>
+			<div class = 'behavior-title'>
+				Liftable
+			</div>
+		</div>
+		<div class = 'behavior-container'>
+			<div class = 'behavior-block-wrapper'>
+				test
+			</div>
+			<div class = 'behavior-block-wrapper'>
+				<div class = 'behavior-block' ek-behavior = 'overlay'>
+				</div>
+			</div>
+			<div class = 'behavior-title'>
+				Overlay
+			</div>
+		</div>
+		<div class = 'right-column'>
+		</div>
+		<div class = 'behavior-container'>
+			<div class = 'behavior-block-wrapper'>
+				<div class = 'behavior-block' ek-behavior = 'scalable'>
+				</div>
+			</div>
+			<div class = 'behavior-title'>
+				Scalable
+			</div>
+		</div>
+		<div class = 'behavior-container'>
+			<div class = 'behavior-block-wrapper'>
+				<div class = 'behavior-block' ek-behavior = 'rotator' ek-options = '{ "axis": "Y" }'>
+				</div>
+			</div>
+			<div class = 'behavior-title'>
+				Rotator
+			</div>
+		</div>
+	</body>
+	<script type = 'text/javascript' src = '../../enko.js'></script>
+	<script type = 'text/javascript'>
+		enko.inject(['ux'],
+			function (ux) {
+				ux.manifest();
+				console.log("[ux] behaviors have been initialized");
+			}
+		);
+	</script>
+</html>

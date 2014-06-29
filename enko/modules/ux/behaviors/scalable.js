@@ -1,56 +1,56 @@
-// liftable.js
+// scalable.js
 
 
 
 enko.inject(['ux/animation', 'ux/behavior'],
 	function (animation, Behavior) {
 
-		var Liftable = enko.classify({
-			
+		var Scalable = enko.classify({
+
 			extend: Behavior,
 
 			initialize: function (node, options) {
 				Behavior.call(this, node);
 
-				var position = 0,
-					max = options && options.max || Liftable.max,
+				var size = 0,
+					max = options && options.max || Scalable.max,
 					from,
 
 					that = this;
 
 				this.handle({
 					mouseover: function () {
-						from = position;
+						from = size;
 
 						that.animate({
 							ease: animation.arc.two,
 							tick: function (ordinate) {
-								position = from + (max - from) * ordinate;
-								node.style.bottom = position + 'px';
+								size = from + (max - from) * ordinate;
+								node.style.webkitTransform = 'scale(' + (1 + size) + ', ' + (1 + size) + ')';
 							}
-						});
+						})
 					},
 					mouseout: function () {
-						from = position;
+						from = size;
 
 						that.animate({
 							ease: animation.arc.three,
 							tick: function (ordinate) {
-								position = from * ordinate;
-								node.style.bottom = position + 'px';
+								size = from * ordinate;
+								node.style.webkitTransform = 'scale(' + (1 + size) + ', ' + (1 + size) + ')';
 							}
-						});
+						})
 					}
-				});
+				})
 			},
 
 			statics: {
-				max: 25
+				max: 0.1
 			}
 
 		});
 
-		enko.define('ux/behaviors/liftable', Liftable);
+		enko.define('ux/behaviors/scalable', Scalable);
 
 	}
-)
+);
