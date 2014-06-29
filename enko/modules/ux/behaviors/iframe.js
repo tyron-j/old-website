@@ -2,10 +2,10 @@
 
 // to-do: make and test changes
 
-enko.inject(['uix/behavior'],
+enko.inject(['ux/behavior'],
 	function (Behavior) {
 
-		enko.define('uix/behaviors/iframe', enko.classify({
+		enko.define('ux/behaviors/iframe', enko.classify({
 
 			extend: Behavior,
 

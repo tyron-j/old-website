@@ -1,11 +1,11 @@
-// uix.js
+// ux.js
 
 
 
 enko.inject(['utils'],
 	function (utils) {
 
-		enko.define('uix', {
+		enko.define('ux', {
 
 			manifest: function () {
 				var manifestQueue = {},
@@ -16,7 +16,7 @@ enko.inject(['utils'],
 					behavior = element.getAttribute('enko-behavior');
 
 					if (behavior) {
-						behavior = 'uix/behaviors/' + behavior; // consider applying this method
+						behavior = 'ux/behaviors/' + behavior; // consider applying this method
 						if (!(behavior in manifestQueue)) {
 							manifestQueue[behavior] = [];
 							injectArray.push(behavior);

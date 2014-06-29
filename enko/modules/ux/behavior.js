@@ -2,7 +2,7 @@
 
 // to-do: inject utils and use the type checkers
 
-enko.define('uix/behavior', enko.classify({
+enko.define('ux/behavior', enko.classify({
 
 	initialize: function (node) {
 		this.node = node;

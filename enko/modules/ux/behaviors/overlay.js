@@ -2,10 +2,10 @@
 
 
 
-enko.inject(['uix/animation', 'uix/behavior'],
+enko.inject(['ux/animation', 'ux/behavior'],
 	function (animation, Behavior) {
 
-		enko.define('uix/behaviors/overlay', enko.classify({
+		enko.define('ux/behaviors/overlay', enko.classify({
 
 			extend: Behavior,
 

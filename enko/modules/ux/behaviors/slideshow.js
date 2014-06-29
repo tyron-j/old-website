@@ -2,7 +2,7 @@
 
 
 
-enko.inject(['ajax', 'task', 'utils', 'uix/behavior'],
+enko.inject(['ajax', 'task', 'utils', 'ux/behavior'],
 	function (ajax, Task, utils, Behavior) {
 
 		var SlideShow = enko.classify({
@@ -85,7 +85,7 @@ enko.inject(['ajax', 'task', 'utils', 'uix/behavior'],
 
 		});
 
-		enko.define('uix/behaviors/slideshow', SlideShow);
+		enko.define('ux/behaviors/slideshow', SlideShow);
 
 	}
 );

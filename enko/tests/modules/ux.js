@@ -1,11 +1,11 @@
-// test for uix.js
+// test for ux.js
 
 
 
-enko.inject(['uix', 'unittest'],
-	function (uix, UnitTest) {
+enko.inject(['ux', 'unittest'],
+	function (ux, UnitTest) {
 		
-		var ut = new UnitTest('uix'),
+		var ut = new UnitTest('ux'),
 
 			// shortcuts
 			assertTrue = ut.get('assertTrue'),
@@ -17,7 +17,7 @@ enko.inject(['uix', 'unittest'],
 		ut.runTests({
 
 			manifest: function () {
-				uix.manifest();
+				ux.manifest();
 			}
 
 		});

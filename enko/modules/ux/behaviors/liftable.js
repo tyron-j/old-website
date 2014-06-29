@@ -2,7 +2,7 @@
 
 
 
-enko.inject(['uix/animation', 'uix/behavior'],
+enko.inject(['ux/animation', 'ux/behavior'],
 	function (animation, Behavior) {
 
 		var Liftable = enko.classify({
@@ -50,7 +50,7 @@ enko.inject(['uix/animation', 'uix/behavior'],
 
 		});
 
-		enko.define('uix/behaviors/liftable', Liftable);
+		enko.define('ux/behaviors/liftable', Liftable);
 
 	}
 )
