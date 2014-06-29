@@ -4,7 +4,7 @@
 
 (function () {
 
-	function getStatus (xhr) {
+	function getStatus(xhr) {
 		if (xhr.readyState === 4) {
 			if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
 				return 'successful'; // consider changing these tokens to numbers
@@ -16,7 +16,7 @@
 		}
 	}
 
-	function handle (xhr, token, callback) { // needs testing
+	function handle(xhr, token, callback) { // needs testing
 		var status = getStatus(xhr);
 
 		if (status === 'pending') {

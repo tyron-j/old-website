@@ -38,7 +38,7 @@
 
 	// utilities:
 
-	function appendScript (url) {
+	function appendScript(url) {
 		var script = document.createElement('script');
 
 		script.setAttribute('type', 'text/javascript');
@@ -49,7 +49,7 @@
 		document.head.appendChild(script);
 	}
 
-	function organize (arr) { // sort and remove duplicates in an array
+	function organize(arr) { // sort and remove duplicates in an array
 		arr.sort();
 
 		for (var i = 0, l = arr.length, o, p, n; i < l; i++) {

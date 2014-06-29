@@ -4,11 +4,11 @@
 
 (function () {
 
-	function toStr (obj) {
+	function toStr(obj) {
 		return Object.prototype.toString.call(obj);
 	}
 
-	function walkTree (root, callback) { // consider using a TreeWalker
+	function walkTree(root, callback) { // consider using a TreeWalker
 		if (!callback) { // root parameter is optional
 			callback = root;
 			root = document.body;

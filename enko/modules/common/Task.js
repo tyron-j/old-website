@@ -5,7 +5,7 @@
 enko.inject(['utils'],
 	function (utils) {
 
-		function execute (handlers, result) {
+		function execute(handlers, result) {
 			handlers.forEach(function (handler) {
 				handler(result);
 			});

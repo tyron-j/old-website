@@ -25,7 +25,7 @@ enko.define('ux/behavior', enko.classify({
 				start,
 				now;
 
-			function draw (time) {
+			function draw(time) {
 				start = start || time;
 				now = time;
 				progress = (now - start) / duration;

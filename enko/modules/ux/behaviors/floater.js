@@ -1,43 +1,43 @@
-// liftable.js
+// floater.js
 
 
 
 enko.inject(['ux/animation', 'ux/behavior'],
 	function (animation, Behavior) {
 
-		var Liftable = enko.classify({
+		var Floater = enko.classify({
 			
 			extend: Behavior,
 
 			initialize: function (node, options) {
 				Behavior.call(this, node);
 
-				var position = 0,
-					max = options && options.max || Liftable.max,
+				var altitude = 0,
+					max = options && options.max || Floater.max,
 					from,
 
 					that = this;
 
 				this.handle({
 					mouseover: function () {
-						from = position;
+						from = altitude;
 
 						that.animate({
 							ease: animation.arc.two,
 							tick: function (ordinate) {
-								position = from + (max - from) * ordinate;
-								node.style.bottom = position + 'px';
+								altitude = from + (max - from) * ordinate;
+								node.style.bottom = altitude + 'px';
 							}
 						});
 					},
 					mouseout: function () {
-						from = position;
+						from = altitude;
 
 						that.animate({
 							ease: animation.arc.three,
 							tick: function (ordinate) {
-								position = from * ordinate;
-								node.style.bottom = position + 'px';
+								altitude = from * ordinate;
+								node.style.bottom = altitude + 'px';
 							}
 						});
 					}
@@ -50,7 +50,7 @@ enko.inject(['ux/animation', 'ux/behavior'],
 
 		});
 
-		enko.define('ux/behaviors/liftable', Liftable);
+		enko.define('ux/behaviors/floater', Floater);
 
 	}
 )
