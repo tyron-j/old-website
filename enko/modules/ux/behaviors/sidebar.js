@@ -1,6 +1,6 @@
 // sidebar.js
 
-
+// to-do: find the total offsetTop of each element; also, deal with window resize... because the offsetTop's will change
 
 enko.inject(['ux/behavior', 'utils'],
 	function (Behavior, utils) {
@@ -12,8 +12,11 @@ enko.inject(['ux/behavior', 'utils'],
 			initialize: function (node, options) {
 				var header = document.createElement('div'),
 					items = {},
+					ranges = [],
 					name,
-					id;
+					id,
+
+					that = this;
 
 				Behavior.call(node);
 
@@ -29,9 +32,11 @@ enko.inject(['ux/behavior', 'utils'],
 
 					if (name && id) {
 						items[name] = '#' + id; // for the href links later
-						console.log(name);
+						ranges.push(element.offsetTop);
 					}
 				});
+
+				ranges.push(Infinity);
 
 				var link,
 					indicator = document.createElement('div');
@@ -45,13 +50,28 @@ enko.inject(['ux/behavior', 'utils'],
 					link.classList.add('SideBarItem');
 					link.setAttribute('href', items[item]);
 					node.appendChild(link);
-
-					// link.insertBefore(indicator, link.firstElementChild);
 				}
 
-				document.addEventListener('scroll', function (evt) {
-					console.log(window.pageYOffset);
+				items = node.getElementsByClassName('SideBarItem');
+
+				this.setIndicator(indicator, items, ranges);
+
+				document.addEventListener('scroll', function () {
+					that.setIndicator(indicator, items, ranges);
 				});
+			},
+
+			methods: {
+				setIndicator: function (indicator, items, ranges) {
+					var pageYOffset = window.pageYOffset;
+
+					ranges.some(function (boundary, idx, arr) {
+						if (pageYOffset >= boundary && pageYOffset < arr[idx + 1]) {
+							items[idx].insertBefore(indicator, items[idx].firstElementChild); // to-do: find a cleaner way of doing this
+							return true;
+						}
+					});
+				}
 			},
 
 			statics: {
