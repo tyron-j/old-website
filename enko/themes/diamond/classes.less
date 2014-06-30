@@ -26,3 +26,21 @@
 	right: 0px;
 	z-index: -1;
 }
+
+.SideBar {
+	.faint-black;
+	
+	& > .SideBarHeader {
+		background-color: @teal;
+		margin: 10px 0px 10px 0px;
+	}
+
+	& > .SideBarItem {
+		&:hover {
+			background-color: @teal;
+		}
+		& > .SideBarItemIndicator {
+			background-color: @teal;
+		}
+	}
+}

@@ -14,6 +14,8 @@ enko.inject(['ajax', 'task', 'utils', 'ux/behavior'],
 
 				Behavior.call(this, node);
 
+				node.classList.add('SlideShow');
+
 				this.dimensions = {
 					width: node.offsetWidth,
 					height: node.offsetHeight
@@ -78,9 +80,7 @@ enko.inject(['ajax', 'task', 'utils', 'ux/behavior'],
 			},
 
 			statics: {
-
 				imgTypes: ['bmp', 'jpg', 'png']
-
 			}
 
 		});

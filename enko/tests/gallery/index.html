@@ -1,0 +1,39 @@
+<!-- index.html -->
+
+
+
+<html>
+	<head>
+		<link rel = 'stylesheet/less' type = 'text/css' href = 'unity.less' />
+		<script type = 'text/javascript' src = '../../less/less-1.7.1.min.js'></script>
+	</head>
+	<body>
+		<div class = 'left-column'>
+		</div>
+
+		<div class = 'behavior-container' name = 'Slide Show' id = 'slideshow'>
+			<div class = 'behavior-title'>
+				Slide Show
+			</div>
+		</div>
+		<div class = 'behavior-container' name = 'IFrame' id = 'iframe'>
+			<div class = 'behavior-title'>
+				IFrame
+			</div>
+		</div>
+
+		<div ek-behavior = 'sidebar' ek-options = '{ "title": "Gallery" }'>
+		</div>
+
+		<div class = 'right-column'>
+		</div>
+	</body>
+	<script type = 'text/javascript' src = '../../enko.js'></script>
+	<script type = 'text/javascript'>
+		enko.inject(['ux'],
+			function (ux) {
+				ux.manifest();
+			}
+		);
+	</script>
+</html>

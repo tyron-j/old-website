@@ -46,3 +46,43 @@
 		position: relative;
 	}
 }
+
+// SideBar:
+
+.SideBar {
+	width: @sideBarWidth;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	right: 0px; // to-do: make this configurable
+
+	& > a {
+		display: block;
+	}
+	& > .SideBarHeader, .SideBarItem {
+		position: relative;
+		// display: inline-block;
+		box-sizing: border-box;
+		padding-left: @sideBarTextPadding;
+	}
+	& > .SideBarHeader {
+		width: @sideBarHeaderWidth;
+		height: @sideBarHeaderHeight;
+		line-height: @sideBarHeaderHeight;
+		font-size: @sideBarHeaderFontSize;
+	}
+	& > .SideBarItem {
+		width: @sideBarItemWidth;
+		height: @sideBarItemHeight;
+		line-height: @sideBarItemHeight;
+		font-size: @sideBarItemFontSize;
+
+		& > .SideBarItemIndicator {
+			width: @sideBarItemIndicatorWidth;
+			height: @sideBarItemIndicatorHeight;
+			position: absolute;
+			top: 0px;
+			right: 0px;
+		}
+	}
+}
