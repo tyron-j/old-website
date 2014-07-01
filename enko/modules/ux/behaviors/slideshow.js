@@ -16,6 +16,11 @@ enko.inject(['ajax', 'task', 'utils', 'ux/behavior'],
 
 				Behavior.call(this, node);
 
+				node.style.width = options.width + 'px';
+				node.style.height = options.height + 'px';
+				node.style.marginLeft = -options.width / 2;
+				node.style.marginTop = -options.height / 2;
+				
 				node.classList.add('SlideShow');
 
 				this.dimensions = {
@@ -23,7 +28,7 @@ enko.inject(['ajax', 'task', 'utils', 'ux/behavior'],
 					height: options.height || node.offsetHeight
 				};
 
-				this.getSlides(options.src).onSuccess(function (slides) { // to-do: configure options properly
+				this.getSlides(options.src).onSuccess(function (slides) { // to-do: change this src business
 					that.appendSlides(slides);
 				});
 			},

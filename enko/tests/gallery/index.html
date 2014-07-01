@@ -12,11 +12,27 @@
 		</div>
 
 		<div class = 'behavior-container' name = 'Slide Show' id = 'slideshow'>
+			<div ek-behavior = 'slideshow' ek-options = '{
+				"src": "images",
+				"width": 750,
+				"height": 500
+			}'>
+			</div>
 			<div class = 'behavior-title'>
 				Slide Show
 			</div>
 		</div>
+
 		<div class = 'behavior-container' name = 'IFrame' id = 'iframe'>
+			<div ek-behavior = 'iframe' ek-options = '{
+				"width": 750,
+				"height": 500,
+				"src": "data/iframe.txt",
+				"scrollBarColor": "rgba(255, 255, 255, 0.25)",
+				"scrollWindowColor": "rgba(0, 0, 0, 0.25)",
+				"scrollerColor": "rgb(50, 150, 150)"
+			}'>
+			</div>
 			<div class = 'behavior-title'>
 				IFrame
 			</div>

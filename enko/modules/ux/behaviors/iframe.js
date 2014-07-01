@@ -2,8 +2,8 @@
 
 // to-do: make and test changes
 
-enko.inject(['ux/behavior'],
-	function (Behavior) {
+enko.inject(['ajax', 'task', 'ux/behavior'],
+	function (ajax, Task, Behavior) {
 
 		enko.define('ux/behaviors/iframe', enko.classify({
 
@@ -20,6 +20,8 @@ enko.inject(['ux/behavior'],
 
 					that = this;
 
+				options = options || {};
+
 				// initialize styles
 				node.classList.add('IFrame');
 				scrollBar.classList.add('ScrollBar');
@@ -27,14 +29,23 @@ enko.inject(['ux/behavior'],
 				scrollWindow.classList.add('ScrollWindow');
 				scrollContent.classList.add('ScrollContent');
 
-				// test purposes
-				scrollBar.classList.add('FaintWhite');
-				scroller.classList.add('Teal');
+				node.style.width = options.width; // to-do: implement dom and dom.setInCenter
+				node.style.height = options.height;
+				node.style.marginLeft = -options.width / 2;
+				node.style.marginTop = -options.height / 2;
+				scrollWindow.style.backgroundColor = options.scrollWindowColor;
+				scrollBar.style.backgroundColor = options.scrollBarColor;
+				scroller.style.backgroundColor = options.scrollerColor;
 
 				// initialize settings
 				this.scrollerMax = scrollBar.offsetHeight - scroller.offsetHeight;
-				this.scrollContentMax = scrollContent.offsetHeight - scrollWindow.offsetHeight;
-				this.body = new Behavior(document.body);
+				this.doc = new Behavior(document);
+
+				// get content
+				this.getContent(options.src).onSuccess(function (content) { // to-do: allow hard-coded content
+					scrollContent.innerHTML = content;
+					that.scrollContentMax = scrollContent.offsetHeight - scrollWindow.offsetHeight;
+				});
 
 				// event handlers
 
@@ -56,7 +67,7 @@ enko.inject(['ux/behavior'],
 						that.currentTop = parseInt(scroller.style.top) || 0;
 						that.initialY = evt.clientY;
 
-						that.body.handle({
+						that.doc.handle({
 							mousemove: function (evt) {
 								that.handleDrag(evt, scroller, scrollContent);
 							},
@@ -80,6 +91,16 @@ enko.inject(['ux/behavior'],
 
 			methods: {
 
+				getContent: function (url) {
+					var task = new Task();
+
+					ajax.get(url).onSuccess(function (res) { // to-do: handle fail
+						task.resolve(res.replace(/\n/g, '<br>'));
+					});
+
+					return task;
+				},
+
 				setAbsoluteTop: function (scrollBar) {
 					var absoluteTop = 0;
 
@@ -102,7 +123,7 @@ enko.inject(['ux/behavior'],
 				reposition: function (scroller, scrollContent) {
 					var newPosition = parseInt(scroller.style.top);
 
-					scrollContent.style.bottom = (newPosition / this.scrollerMax) * this.scrollerContentMax + 'px';
+					scrollContent.style.bottom = (newPosition / this.scrollerMax) * this.scrollContentMax + 'px';
 				},
 
 				handleDrag: function (evt, scroller, scrollContent) {
@@ -114,7 +135,7 @@ enko.inject(['ux/behavior'],
 				},
 
 				ignoreDrag: function () {
-					this.body.ignore(['mousemove', 'mouseup']); // to-do: try attaching the listener to the document object instead so it handles mouseup outside of the viewport
+					this.doc.ignore(['mousemove', 'mouseup']); // to-do: try attaching the listener to the document object instead so it handles mouseup outside of the viewport
 				},
 
 				scrollUp: function (scroller, scrollContent) {
