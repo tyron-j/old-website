@@ -1,6 +1,6 @@
 // sidebar.js
 
-// to-do: find the total offsetTop of each element
+// to-do: find the total offsetTop of each element; get the common parent's offsetTop and add it to the rest
 
 enko.inject(['ux/behavior', 'utils'],
 	function (Behavior, utils) {
