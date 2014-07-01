@@ -12,13 +12,15 @@ enko.inject(['ajax', 'task', 'utils', 'ux/behavior'],
 			initialize: function (node, options) {
 				var that = this;
 
+				options = options || {};
+
 				Behavior.call(this, node);
 
 				node.classList.add('SlideShow');
 
 				this.dimensions = {
-					width: node.offsetWidth,
-					height: node.offsetHeight
+					width: options.width || node.offsetWidth,
+					height: options.height || node.offsetHeight
 				};
 
 				this.getSlides(options.src).onSuccess(function (slides) { // to-do: configure options properly
