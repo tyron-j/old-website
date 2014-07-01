@@ -1,6 +1,6 @@
 // sidebar.js
 
-// to-do: find the total offsetTop of each element; also, deal with window resize... because the offsetTop's will change
+// to-do: find the total offsetTop of each element
 
 enko.inject(['ux/behavior', 'utils'],
 	function (Behavior, utils) {
@@ -11,8 +11,9 @@ enko.inject(['ux/behavior', 'utils'],
 
 			initialize: function (node, options) {
 				var header = document.createElement('div'),
-					items = {},
+					elements = [],
 					ranges = [],
+					items = {},
 					name,
 					id,
 
@@ -26,12 +27,14 @@ enko.inject(['ux/behavior', 'utils'],
 
 				header.innerHTML = options && options.title || SideBar.title;
 
-				utils.walkTree(function (element) {
+				utils.walkTree(function (element) { // to-do: get the root element from options
 					name = element.getAttribute('name');
 					id = element.id;
 
 					if (name && id) {
 						items[name] = '#' + id; // for the href links later
+
+						elements.push(element);
 						ranges.push(element.offsetTop);
 					}
 				});
@@ -59,9 +62,14 @@ enko.inject(['ux/behavior', 'utils'],
 				document.addEventListener('scroll', function () {
 					that.setIndicator(indicator, items, ranges);
 				});
+
+				window.addEventListener('resize', function () {
+					that.reset(elements, ranges);
+				});
 			},
 
 			methods: {
+
 				setIndicator: function (indicator, items, ranges) {
 					var pageYOffset = window.pageYOffset;
 
@@ -71,7 +79,14 @@ enko.inject(['ux/behavior', 'utils'],
 							return true;
 						}
 					});
+				},
+
+				reset: function (elements, ranges) {
+					elements.forEach(function (element, idx) {
+						ranges[idx] = element.offsetTop;
+					});
 				}
+
 			},
 
 			statics: {
