@@ -2,15 +2,15 @@
 
 
 
-enko.inject(['ux/animation', 'ux/behavior'],
-	function (animation, Behavior) {
+enko.inject(['ui/animation', 'ui/widget'],
+	function (animation, Widget) {
 
 		var Scalable = enko.classify({
 
-			extend: Behavior,
+			extend: Widget,
 
 			initialize: function (node, options) {
-				Behavior.call(this, node);
+				Widget.call(this, node);
 
 				var size = 0,
 					max = options && options.max || Scalable.max,
@@ -50,7 +50,7 @@ enko.inject(['ux/animation', 'ux/behavior'],
 
 		});
 
-		enko.define('ux/behaviors/scalable', Scalable);
+		enko.define('ui/widgets/scalable', Scalable);
 
 	}
 );

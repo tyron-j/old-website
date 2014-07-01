@@ -2,12 +2,12 @@
 
 // to-do: find the total offsetTop of each element; get the common parent's offsetTop and add it to the rest
 
-enko.inject(['ux/behavior', 'utils'],
-	function (Behavior, utils) {
+enko.inject(['ui/widget', 'utils'],
+	function (Widget, utils) {
 
 		var SideBar = enko.classify({
 
-			extend: Behavior,
+			extend: Widget,
 
 			initialize: function (node, options) {
 				var header = document.createElement('div'),
@@ -19,7 +19,7 @@ enko.inject(['ux/behavior', 'utils'],
 
 					that = this;
 
-				Behavior.call(node);
+				Widget.call(node);
 
 				node.classList.add('SideBar'); // to-do: change how classes are added
 				header.classList.add('SideBarHeader');
@@ -95,7 +95,7 @@ enko.inject(['ux/behavior', 'utils'],
 
 		});
 
-		enko.define('ux/behaviors/sidebar', SideBar);
+		enko.define('ui/widgets/sidebar', SideBar);
 
 	}
 );

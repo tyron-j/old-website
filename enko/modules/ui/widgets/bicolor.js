@@ -2,15 +2,15 @@
 
 // to-do: change text color as well
 
-enko.inject(['ux/animation', 'ux/behavior'],
-	function (animation, Behavior) {
+enko.inject(['ui/animation', 'ui/widget'],
+	function (animation, Widget) {
 
 		var Bicolor = enko.classify({
 			
-			extend: Behavior,
+			extend: Widget,
 
 			initialize: function (node, options) {
-				Behavior.call(this, node);
+				Widget.call(this, node);
 
 				var primary = options && options.primary || Bicolor.primary, // array
 					secondary = options && options.secondary || Bicolor.secondary, // array
@@ -59,7 +59,7 @@ enko.inject(['ux/animation', 'ux/behavior'],
 
 		});
 
-		enko.define('ux/behaviors/bicolor', Bicolor);
+		enko.define('ui/widgets/bicolor', Bicolor);
 
 	}
 )

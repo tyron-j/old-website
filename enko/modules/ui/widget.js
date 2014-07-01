@@ -1,11 +1,11 @@
-// behavior.js
+// widget.js
 
 // to-do: implement unit tests
 
 enko.inject(['utils'],
 	function (utils) {
 
-		enko.define('ux/behavior', enko.classify({
+		enko.define('ui/widget', enko.classify({
 
 			initialize: function (node) {
 				this.node = node;

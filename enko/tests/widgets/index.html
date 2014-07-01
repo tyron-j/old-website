@@ -1,0 +1,75 @@
+<!-- index.html -->
+
+
+
+<html>
+	<head>
+		<link rel = 'stylesheet/less' type = 'text/css' href = 'unity.less' />
+		<script type = 'text/javascript' src = '../../less/less-1.7.1.min.js'></script>
+	</head>
+	<body>
+		<div class = 'left-column'>
+		</div>
+
+		<div class = 'widget-container'>
+			<div class = 'widget-block-wrapper'>
+				<div class = 'widget-block' ek-widget = 'floater'>
+				</div>
+			</div>
+			<div class = 'widget-title'>
+				Floater
+			</div>
+		</div>
+		<div class = 'widget-container'>
+			<div class = 'widget-block-wrapper'>
+				test
+			</div>
+			<div class = 'widget-block-wrapper'>
+				<div class = 'widget-block' ek-widget = 'overlay'>
+				</div>
+			</div>
+			<div class = 'widget-title'>
+				Overlay
+			</div>
+		</div>
+		<div class = 'widget-container'>
+			<div class = 'widget-block-wrapper'>
+				<div class = 'widget-block' ek-widget = 'rotator' ek-options = '{ "axis": "Y" }'>
+				</div>
+			</div>
+			<div class = 'widget-title'>
+				Rotator
+			</div>
+		</div>
+		<div class = 'widget-container'>
+			<div class = 'widget-block-wrapper'>
+				<div class = 'widget-block' ek-widget = 'scalable'>
+				</div>
+			</div>
+			<div class = 'widget-title'>
+				Scalable
+			</div>
+		</div>
+		<div class = 'widget-container'>
+			<div class = 'widget-block-wrapper'>
+				<div class = 'widget-block' ek-widget = 'bicolor' ek-options = '{ "primary": [50, 150, 150] }'>
+				</div>
+			</div>
+			<div class = 'widget-title'>
+				Bicolor
+			</div>
+		</div>
+		
+		<div class = 'right-column'>
+		</div>
+	</body>
+	<script type = 'text/javascript' src = '../../enko.js'></script>
+	<script type = 'text/javascript'>
+		enko.inject(['ui'],
+			function (ui) {
+				ui.manifest();
+				console.log("[ui] widgets have been initialized");
+			}
+		);
+	</script>
+</html>

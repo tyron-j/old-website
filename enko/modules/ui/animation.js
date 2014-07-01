@@ -2,7 +2,7 @@
 
 
 
-enko.define('ux/animation', {
+enko.define('ui/animation', {
 
 	linear: {
 		up: function(progress){

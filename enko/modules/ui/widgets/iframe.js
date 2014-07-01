@@ -2,15 +2,15 @@
 
 // to-do: make and test changes
 
-enko.inject(['ajax', 'task', 'ux/behavior'],
-	function (ajax, Task, Behavior) {
+enko.inject(['ajax', 'task', 'ui/widget'],
+	function (ajax, Task, Widget) {
 
-		enko.define('ux/behaviors/iframe', enko.classify({
+		enko.define('ui/widgets/iframe', enko.classify({
 
-			extend: Behavior,
+			extend: Widget,
 
 			initialize: function (node, options) {
-				Behavior.call(this, node);
+				Widget.call(this, node);
 
 				// create essential elements
 				var scrollBar = node.appendChild(document.createElement('div')),
@@ -39,7 +39,7 @@ enko.inject(['ajax', 'task', 'ux/behavior'],
 
 				// initialize settings
 				this.scrollerMax = scrollBar.offsetHeight - scroller.offsetHeight;
-				this.doc = new Behavior(document);
+				this.doc = new Widget(document);
 
 				// get content
 				this.getContent(options.src).onSuccess(function (content) { // to-do: allow hard-coded content
@@ -49,7 +49,7 @@ enko.inject(['ajax', 'task', 'ux/behavior'],
 
 				// event handlers
 
-				(new Behavior(scrollBar)).handle({
+				(new Widget(scrollBar)).handle({
 					mousedown: function (evt) {
 						if (scrollBar === evt.target) {
 							that.currentTop = parseInt(scroller.style.top) || 0;
@@ -60,7 +60,7 @@ enko.inject(['ajax', 'task', 'ux/behavior'],
 					}
 				});
 
-				(new Behavior(scroller)).handle({
+				(new Widget(scroller)).handle({
 					mousedown: function (evt) {
 						evt.preventDefault(); // to-do: check if this is necessary, and why
 
@@ -78,7 +78,7 @@ enko.inject(['ajax', 'task', 'ux/behavior'],
 					}
 				});
 
-				(new Behavior(scrollWindow)).handle({
+				(new Widget(scrollWindow)).handle({
 					mousewheel: function (evt) {
 						evt.preventDefault(); // prevent default scrolling
 

@@ -11,20 +11,20 @@
 		<div class = 'left-column'>
 		</div>
 
-		<div class = 'behavior-container' name = 'Slide Show' id = 'slideshow'>
-			<div ek-behavior = 'slideshow' ek-options = '{
+		<div class = 'widget-container' name = 'Slide Show' id = 'slideshow'>
+			<div ek-widget = 'slideshow' ek-options = '{
 				"src": "images",
 				"width": 750,
 				"height": 500
 			}'>
 			</div>
-			<div class = 'behavior-title'>
+			<div class = 'widget-title'>
 				Slide Show
 			</div>
 		</div>
 
-		<div class = 'behavior-container' name = 'IFrame' id = 'iframe'>
-			<div ek-behavior = 'iframe' ek-options = '{
+		<div class = 'widget-container' name = 'IFrame' id = 'iframe'>
+			<div ek-widget = 'iframe' ek-options = '{
 				"width": 750,
 				"height": 500,
 				"src": "data/iframe.txt",
@@ -33,12 +33,12 @@
 				"scrollerColor": "rgb(50, 150, 150)"
 			}'>
 			</div>
-			<div class = 'behavior-title'>
+			<div class = 'widget-title'>
 				IFrame
 			</div>
 		</div>
 
-		<div ek-behavior = 'sidebar' ek-options = '{ "title": "Gallery" }'>
+		<div ek-widget = 'sidebar' ek-options = '{ "title": "Gallery" }'>
 		</div>
 
 		<div class = 'right-column'>
@@ -46,9 +46,9 @@
 	</body>
 	<script type = 'text/javascript' src = '../../enko.js'></script>
 	<script type = 'text/javascript'>
-		enko.inject(['ux'],
-			function (ux) {
-				ux.manifest();
+		enko.inject(['ui'],
+			function (ui) {
+				ui.manifest();
 			}
 		);
 	</script>

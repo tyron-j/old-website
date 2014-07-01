@@ -2,19 +2,19 @@
 
 
 
-enko.inject(['ajax', 'task', 'utils', 'ux/behavior'],
-	function (ajax, Task, utils, Behavior) {
+enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
+	function (ajax, Task, utils, Widget) {
 
 		var SlideShow = enko.classify({
 
-			extend: Behavior,
+			extend: Widget,
 
 			initialize: function (node, options) {
 				var that = this;
 
 				options = options || {};
 
-				Behavior.call(this, node);
+				Widget.call(this, node);
 
 				node.style.width = options.width + 'px';
 				node.style.height = options.height + 'px';
@@ -92,7 +92,7 @@ enko.inject(['ajax', 'task', 'utils', 'ux/behavior'],
 
 		});
 
-		enko.define('ux/behaviors/slideshow', SlideShow);
+		enko.define('ui/widgets/slideshow', SlideShow);
 
 	}
 );

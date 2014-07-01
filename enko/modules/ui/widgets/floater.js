@@ -2,15 +2,15 @@
 
 
 
-enko.inject(['ux/animation', 'ux/behavior'],
-	function (animation, Behavior) {
+enko.inject(['ui/animation', 'ui/widget'],
+	function (animation, Widget) {
 
 		var Floater = enko.classify({
 			
-			extend: Behavior,
+			extend: Widget,
 
 			initialize: function (node, options) {
-				Behavior.call(this, node);
+				Widget.call(this, node);
 
 				var altitude = 0,
 					max = options && options.max || Floater.max,
@@ -50,7 +50,7 @@ enko.inject(['ux/animation', 'ux/behavior'],
 
 		});
 
-		enko.define('ux/behaviors/floater', Floater);
+		enko.define('ui/widgets/floater', Floater);
 
 	}
 )

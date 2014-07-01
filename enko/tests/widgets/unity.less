@@ -4,7 +4,7 @@
 
 @import '../../themes/diamond/unity.less';
 
-.behavior-container {
+.widget-container {
 	display: inline-block;
 	width: 20%;
 	padding-bottom: 20%; // hack for making height the same as width
@@ -13,12 +13,12 @@
 	text-align: center;
 	box-shadow: inset 0 0 1px white;
 
-	& > .behavior-block-wrapper {
+	& > .widget-block-wrapper {
 		.setInCenter(100px, 100px);
 
 		line-height: 100px;
 
-		& > .behavior-block {
+		& > .widget-block {
 			.fitToParent();
 
 			background-color: @teal;
@@ -26,7 +26,7 @@
 			cursor: pointer;
 		}
 	}
-	& > .behavior-title {
+	& > .widget-title {
 		.faint-black;
 
 		width: 100%;

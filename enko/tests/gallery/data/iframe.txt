@@ -1,4 +1,4 @@
-Hello, this is the demo for the IFrame Behavior.
+Hello, this is the demo for the IFrame widget.
 This text has been fetched via AJAX.
 To fill up some space, here is a poem:
 

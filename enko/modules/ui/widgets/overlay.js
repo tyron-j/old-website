@@ -2,15 +2,15 @@
 
 
 
-enko.inject(['ux/animation', 'ux/behavior'],
-	function (animation, Behavior) {
+enko.inject(['ui/animation', 'ui/widget'],
+	function (animation, Widget) {
 
-		enko.define('ux/behaviors/overlay', enko.classify({
+		enko.define('ui/widgets/overlay', enko.classify({
 
-			extend: Behavior,
+			extend: Widget,
 
 			initialize: function (node, options) {
-				Behavior.call(this, node);
+				Widget.call(this, node);
 
 				var opacity = 1,
 					max = 1,

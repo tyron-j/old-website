@@ -1,28 +1,28 @@
-// ux.js
+// ui.js
 
 
 
 enko.inject(['utils'],
 	function (utils) {
 
-		enko.define('ux', {
+		enko.define('ui', {
 
 			manifest: function () {
 				var manifestQueue = {},
 					injectArray = [],
-					behavior;
+					widget;
 
 				utils.walkTree(function (element) {
-					behavior = element.getAttribute('ek-behavior');
+					widget = element.getAttribute('ek-widget');
 
-					if (behavior) {
-						behavior = 'ux/behaviors/' + behavior; // consider applying this method
-						if (!(behavior in manifestQueue)) {
-							manifestQueue[behavior] = [];
-							injectArray.push(behavior);
+					if (widget) {
+						widget = 'ui/widgets/' + widget; // consider applying this method
+						if (!(widget in manifestQueue)) {
+							manifestQueue[widget] = [];
+							injectArray.push(widget);
 						}
 
-						manifestQueue[behavior].push(element);
+						manifestQueue[widget].push(element);
 					}
 				});
 

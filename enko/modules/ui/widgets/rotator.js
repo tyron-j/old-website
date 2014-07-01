@@ -2,15 +2,15 @@
 
 
 
-enko.inject(['ux/animation', 'ux/behavior'],
-	function (animation, Behavior) {
+enko.inject(['ui/animation', 'ui/widget'],
+	function (animation, Widget) {
 
 		var Rotator = enko.classify({
 			
-			extend: Behavior,
+			extend: Widget,
 
 			initialize: function (node, options) {
-				Behavior.call(this, node);
+				Widget.call(this, node);
 
 				var rotation = 0,
 					perspective = options && options.perspective || Rotator.perspective,
@@ -23,7 +23,7 @@ enko.inject(['ux/animation', 'ux/behavior'],
 
 				parent.style.webkitPerspective = perspective;
 
-				(new Behavior(parent)).handle({ // to-do: change this later
+				(new Widget(parent)).handle({ // to-do: change this later
 					mouseover: function () {
 						from = rotation;
 
@@ -57,7 +57,7 @@ enko.inject(['ux/animation', 'ux/behavior'],
 
 		});
 
-		enko.define('ux/behaviors/rotator', Rotator);
+		enko.define('ui/widgets/rotator', Rotator);
 
 	}
 )
