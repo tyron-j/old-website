@@ -153,6 +153,8 @@
 				organize(newClass.statics);
 			}
 
+			newClass.prototype.class = newClass;
+
 			return newClass;
 		},
 

@@ -7,8 +7,10 @@ enko.inject(['utils'],
 
 		enko.define('ui/widget', enko.classify({
 
-			initialize: function (node) {
+			initialize: function (node, options) {
 				this.node = node;
+
+				utils.merge([options, this.class.options]);
 			},
 
 			methods : {
@@ -113,6 +115,14 @@ enko.inject(['utils'],
 
 				insertAfter: function (newElement, reference) {
 					this.node.insertBefore(newElement, reference.nextSibling);
+				},
+
+				stylize: function (styles) { // needs testing
+					var nodeStyles = this.node.style;
+
+					for (var style in styles) {
+						nodeStyles[style] = styles[style];
+					}
 				},
 
 				trigger: function (evtType) { // needs testing

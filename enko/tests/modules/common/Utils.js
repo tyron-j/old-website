@@ -16,14 +16,15 @@ enko.inject(['utils', 'unittest'],
 		// tests
 		ut.runTests({
 
-			consolidate: function () {
+			merge: function () {
 				var obj1 = {
-						key1: 'val1'
+						key1: 'val1',
+						key2: 'val2',
+						key3: 'val3'
 					},
 					obj2 = {
 						key1: '_val1',
-						key2: 'val2',
-						key3: 'val3'
+						key3: '_val3'
 					},
 					obj3 = {
 						key1: 'val1',
@@ -35,27 +36,80 @@ enko.inject(['utils', 'unittest'],
 					obj,
 					objStr;
 
-				obj = utils.consolidate([obj1, obj2]);
+				obj = utils.merge([obj1, obj2]);
 
 				assertSame(obj, obj1);
 				assertEquals(obj, {
-					key1: 'val1',
+					key1: '_val1',
 					key2: 'val2',
-					key3: 'val3'
+					key3: '_val3'
 				});
 
-				obj = utils.consolidate([{}, obj2, obj3], true);
+				obj = utils.merge([{}, obj2, obj3]);
 				objStr = JSON.stringify(obj2);
 
 				assertEquals(obj, {
 					key1: 'val1',
 					key2: '_val2',
-					key3: 'val3',
+					key3: '_val3',
 					key4: [1, 2, 3, {
 						key1: 'val1'
 					}]
 				});
 				assertSame(objStr, JSON.stringify(obj2));
+
+				// recursive
+
+				var obj4 = {
+						key1: 'val1',
+						key2: 'val2',
+						key3: 'val3',
+						inner1: {
+							key1: 'val1',
+							key2: 'val2',
+							key3: 'val3',
+							inner2: {
+								key1: 'val1',
+								key2: 'val2',
+								key3: 'val3'
+							}
+						}
+					},
+					obj5 = {
+						key1: '_val1',
+						inner1: {
+							key2: '_val2',
+							inner2: {
+								key3: '_val3',
+								inner3: {
+									key1: 'val1'
+								}
+							}
+						}
+					};
+
+				obj = utils.merge([obj4, obj5], true);
+
+				assertSame(obj, obj4);
+				console.log(JSON.stringify(obj4, null, 4));
+				assertEquals(obj4, {
+					key1: '_val1',
+					key2: 'val2',
+					key3: 'val3',
+					inner1: {
+						key1: 'val1',
+						key2: '_val2',
+						key3: 'val3',
+						inner2: {
+							key1: 'val1',
+							key2: 'val2',
+							key3: '_val3',
+							inner3: {
+								key1: 'val1'
+							}
+						}
+					}
+				});
 			},
 
 			isElement: function () {

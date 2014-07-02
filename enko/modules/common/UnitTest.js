@@ -1,6 +1,6 @@
 // unittest.js
 
-
+// to-do: show the actual tested value in the GUI
 
 (function () {
 	var utContainer = document.getElementById('ut-container'), // GUI; to-do: consider creating the elements here
@@ -121,7 +121,7 @@
 
 					tabsRegExp = new RegExp(tabsRegExp, 'g');
 
-					testStr = testStr.replace(/assert\w+\(.+\;/g, function (match) {
+					testStr = testStr.replace(/assert[^\;]+\;/g, function (match) {
 						if (counter === that.passedTests) {
 							counter = null;
 

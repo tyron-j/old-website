@@ -19,7 +19,7 @@ enko.inject(['ui/widget', 'utils'],
 
 					that = this;
 
-				Widget.call(node);
+				Widget.call(this, node, options);
 
 				node.classList.add('SideBar'); // to-do: change how classes are added
 				header.classList.add('SideBarHeader');

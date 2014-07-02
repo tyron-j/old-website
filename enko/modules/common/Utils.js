@@ -4,6 +4,26 @@
 
 (function () {
 
+	function merge(objects, recursive) { // needs testing
+		var merged = objects.shift();
+
+		objects.forEach(function (obj) {
+			for (var key in obj) {
+				if (recursive && isObject(merged[key])) {
+					merge([merged[key], obj[key]], true);
+				} else {
+					merged[key] = obj[key];
+				}
+			}
+		});
+
+		return merged;
+	}
+
+	function isObject(unknown) {
+		return toStr(unknown) === '[object Object]';
+	}
+
 	function toStr(obj) {
 		return Object.prototype.toString.call(obj);
 	}
@@ -23,27 +43,7 @@
 
 	enko.define('utils', {
 
-		consolidate: function (objects, overwrite) { // to-do: consider making overwrite true by default
-			var obj1 = objects[0];
-
-			for (var i = 1, len = objects.length, obj2; i < len; i++) {
-				obj2 = objects[i];
-
-				if (overwrite) {
-					for (var key in obj2) {
-						obj1[key] = obj2[key];
-					}
-				} else {
-					for (var key in obj2) {
-						if (!(key in obj1)) {
-							obj1[key] = obj2[key];
-						}
-					}
-				}
-			}
-
-			return obj1;
-		},
+		merge: merge,
 
 		contains: function (arr, item) { // needs testing
 			return arr.indexOf(item) >= 0;
@@ -65,9 +65,7 @@
 			return toStr(unknown) === '[object Function]';
 		},
 
-		isObject: function (unknown) {
-			return toStr(unknown) === '[object Object]';
-		},
+		isObject: isObject,
 
 		isRegExp: function (unknown) {
 			return toStr(unknown) === '[object RegExp]';

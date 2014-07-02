@@ -55,7 +55,7 @@ enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
 							
 							div.style.backgroundImage = 'url(' + url + '/' + slide + ')';
 
-							utils.consolidate([div.style, that.dimensions], true);
+							utils.merge([div.style, that.dimensions]);
 							div.classList.add('Slide'); // make sure default theme is being used
 
 							return div;
@@ -70,10 +70,10 @@ enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
 				appendSlides: function (slides) { // overwrite this method for different slide show types
 					var container = this.node.appendChild(document.createElement('div'));
 
-					utils.consolidate([container.style, {
+					utils.merge([container.style, {
 						position: 'relative', // for transitions
 						width: this.dimensions.width * slides.length
-					}], true);
+					}]);
 
 					slides.forEach(function (slide) {
 						container.appendChild(slide);

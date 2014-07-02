@@ -43,7 +43,7 @@ enko.inject(['utils'],
 									options = JSON.parse(options);
 								}
 
-								new module(element, options);
+								new module(element, options || {});
 							});
 
 							delete manifestQueue[moduleName];
