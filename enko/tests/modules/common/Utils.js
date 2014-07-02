@@ -91,7 +91,6 @@ enko.inject(['utils', 'unittest'],
 				obj = utils.merge([obj4, obj5], true);
 
 				assertSame(obj, obj4);
-				console.log(JSON.stringify(obj4, null, 4));
 				assertEquals(obj4, {
 					key1: '_val1',
 					key2: 'val2',

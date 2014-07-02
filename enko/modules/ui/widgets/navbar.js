@@ -12,7 +12,7 @@ enko.inject(['ui/widget', 'ui/widgets/floater', 'ui/dom'],
 			initialize: function (node, options) {
 				Widget.call(this, node, options);
 
-				var navContent = document.createElement('div');
+				var navContent = dom.create('div');
 
 				// styles
 				node.classList.add('NavBar');

@@ -7,6 +7,10 @@ enko.inject(['utils', 'ui/widget'],
 
 		enko.define('ui/dom', {
 
+			create: function (type) {
+				return document.createElement(type);
+			},
+
 			wrap: function (node) { // wraps the node as a widget to allow the usage of widget methods
 				return new Widget(node);
 			},

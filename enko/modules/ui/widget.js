@@ -10,7 +10,9 @@ enko.inject(['utils'],
 			initialize: function (node, options) {
 				this.node = node;
 
-				utils.merge([options, this.class.options]);
+				// utils.merge([{}, this.class.options, options], true); // needs testing
+				// this.addClass(options.cssClass);
+				// this.stylize(options.cssStyle); // needs testing
 			},
 
 			methods : {
@@ -115,6 +117,10 @@ enko.inject(['utils'],
 
 				insertAfter: function (newElement, reference) {
 					this.node.insertBefore(newElement, reference.nextSibling);
+				},
+
+				addClass: function (className) {
+					this.node.classList.add(className);
 				},
 
 				stylize: function (styles) { // needs testing

@@ -4,7 +4,7 @@
 
 (function () {
 
-	function merge(objects, recursive) { // needs testing
+	function merge(objects, recursive) { // to-do: add an overwrite parameter before the recursive parameter
 		var merged = objects.shift();
 
 		objects.forEach(function (obj) {
