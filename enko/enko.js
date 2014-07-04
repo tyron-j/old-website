@@ -3,6 +3,7 @@
 
 
 (function () {
+	'use strict';
 
 	// setup:
 
@@ -68,7 +69,9 @@
 
 	// enko:
 
-	var dependents, defined, modulesPath, commonPath;
+	var extending, dependents, defined, modulesPath, commonPath;
+
+	extending = false; // flag for extending a class
 
 	/* structure:
 		{
@@ -88,7 +91,7 @@
 	modulesPath = enkoPath.replace(/enko\.js$/i, 'modules/');
 	commonPath = modulesPath + 'common/';
 
-	enko = Object.freeze({
+	window.enko = Object.freeze({
 
 		/* usage:
 			var SomeClass = enko.classify({
@@ -98,24 +101,30 @@
 			enko.define('someclass', SomeClass);
 		*/
 		classify: function (options) {
-			var newClass = options.initialize,
-				superClass = options.extend,
+			var SuperClass = options.extend,
+				initialize = options.initialize || SuperClass,
 				methods = options.methods,
-				statics = options.statics;
+				statics = options.statics,
 
-			if (superClass) {
-				if (!newClass) {
-					newClass = function () {
-						superClass.apply(this, arguments);
-					}
+				NewClass;
+
+			if (!initialize) {
+				throw new Error("initialize is required");
+			}
+
+			NewClass = function () {
+				if (!extending) {
+					initialize.apply(this, arguments);
 				}
+			}
 
-				var newPrototype = newClass.prototype,
-					superPrototype = superClass.prototype;
+			if (SuperClass) {
+				var superPrototype = SuperClass.prototype,
+					newPrototype;
 
-				for (var prop in superPrototype) {
-					newPrototype[prop] = superPrototype[prop] // inherit properties
-				}
+				extending = true;
+				newPrototype = NewClass.prototype = new SuperClass();
+				extending = false;
 
 				if (methods) {
 					for (var method in methods) {
@@ -123,39 +132,35 @@
 					}
 				}
 
-				superClass.statics.forEach(function (staticMember) {
-					newClass[staticMember] = superClass[staticMember];
+				SuperClass.statics.forEach(function (staticMember) {
+					NewClass[staticMember] = SuperClass[staticMember];
 				});
 
 				if (statics) {
-					newClass.statics = superClass.statics.slice();
+					NewClass.statics = SuperClass.statics.slice();
 				} else {
-					newClass.statics = superClass.statics;
+					NewClass.statics = SuperClass.statics;
 				}
-			} else { // if no superClass
-				if (!newClass) {
-					throw new Error('initialize is required');
-				}
-
+			} else { // if no SuperClass
 				if (methods) {
-					newClass.prototype = methods;
+					NewClass.prototype = methods;
 				}
 
-				newClass.statics = [];
+				NewClass.statics = [];
 			}
+			
+			NewClass.prototype.constructor = NewClass; // set the constructor to what it should be
 			
 			if (statics) {
 				for (var staticMember in statics) {
-					newClass[staticMember] = statics[staticMember];
-					newClass.statics.push(staticMember);
+					NewClass[staticMember] = statics[staticMember];
+					NewClass.statics.push(staticMember);
 				}
 
-				organize(newClass.statics);
+				organize(NewClass.statics);
 			}
 
-			newClass.prototype.class = newClass;
-
-			return newClass;
+			return NewClass;
 		},
 
 		/* usage:

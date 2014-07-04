@@ -107,6 +107,15 @@ enko.inject(['unittest'],
 				var grandChildInstance = new GrandChildClass();
 
 				assertSame(grandChildInstance.setValue("testing grandChildInstance"), "testing grandChildInstance testSuffix");
+
+				// check inheritance
+
+				assertTrue(grandChildInstance instanceof GrandChildClass
+					&& grandChildInstance instanceof ChildClass
+					&& grandChildInstance instanceof TestClass);
+				assertTrue(childInstance instanceof ChildClass
+					&& childInstance instanceof TestClass);
+				assertTrue(testInstance instanceof TestClass);
 			},
 
 			inject: function () {
