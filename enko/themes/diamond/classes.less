@@ -27,6 +27,14 @@
 	z-index: -1;
 }
 
+// Widget:
+
+.Widget {
+	.boxShadow(15px);
+}
+
+// SideBar:
+
 .SideBar {
 	.faint-black;
 	
@@ -46,5 +54,19 @@
 		& > .SideBarItemIndicator {
 			background-color: @teal;
 		}
+	}
+}
+
+// NavBar:
+
+.NavBar {
+	.boxShadow(); // no boxShadow
+
+	& > .NavContent {
+		.boxShadow(15px);
+
+		.faint-black;
+
+		border-bottom: 5px solid @teal;
 	}
 }

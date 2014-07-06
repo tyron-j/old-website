@@ -16,6 +16,70 @@ enko.inject(['utils', 'unittest'],
 		// tests
 		ut.runTests({
 
+			occupy: function () {
+				var obj1 = {
+						key1: 'val1',
+						key3: 'val3'
+					},
+					obj2 = {
+						key1: '_val1',
+						key2: '_val2',
+						key3: '_val3'
+					},
+					obj;
+
+				obj = utils.occupy([obj1, obj2]);
+
+				assertSame(obj, obj1);
+				assertEquals(obj1, {
+					key1: 'val1',
+					key2: '_val2',
+					key3: 'val3'
+				});
+
+				// recursive
+
+				var obj3 = {
+						key1: 'val1',
+						key2: 'val2',
+						inner1: {
+							key1: 'val1',
+							key3: 'val3'
+						},
+						inner2: {
+							key1: 'val1'
+						}
+					},
+					obj4 = {
+						key1: '_val1',
+						key2: '_val2',
+						key3: '_val3',
+						inner1: {
+							key1: '_val1',
+							key2: '_val2',
+							key3: '_val3'
+						},
+						inner2: [1, 2, 3]
+					};
+
+				obj = utils.occupy([obj3, obj4], true);
+
+				assertSame(obj, obj3);
+				assertEquals(obj3, {
+					key1: 'val1',
+					key2: 'val2',
+					key3: '_val3',
+					inner1: {
+						key1: 'val1',
+						key2: '_val2',
+						key3: 'val3'
+					},
+					inner2: {
+						key1: 'val1'
+					}
+				});
+			},
+
 			merge: function () {
 				var obj1 = {
 						key1: 'val1',
@@ -71,7 +135,10 @@ enko.inject(['utils', 'unittest'],
 							inner2: {
 								key1: 'val1',
 								key2: 'val2',
-								key3: 'val3'
+								key3: 'val3',
+								inner3: {
+									key1: 'val1'
+								}
 							}
 						}
 					},
@@ -81,9 +148,7 @@ enko.inject(['utils', 'unittest'],
 							key2: '_val2',
 							inner2: {
 								key3: '_val3',
-								inner3: {
-									key1: 'val1'
-								}
+								inner3: [1, 2, 3]
 							}
 						}
 					};
@@ -103,9 +168,7 @@ enko.inject(['utils', 'unittest'],
 							key1: 'val1',
 							key2: 'val2',
 							key3: '_val3',
-							inner3: {
-								key1: 'val1'
-							}
+							inner3: [1, 2, 3]
 						}
 					}
 				});
@@ -120,6 +183,7 @@ enko.inject(['utils', 'unittest'],
 				assertFalse(utils.isElement(true));
 				assertFalse(utils.isElement(0));
 				assertFalse(utils.isElement('test'));
+				assertFalse(utils.isElement(undefined));
 			},
 
 			isArray: function () {
@@ -131,6 +195,7 @@ enko.inject(['utils', 'unittest'],
 				assertFalse(utils.isArray(true));
 				assertFalse(utils.isArray(0));
 				assertFalse(utils.isArray('test'));
+				assertFalse(utils.isArray(undefined));
 			},
 
 			isFunction: function () {
@@ -142,6 +207,7 @@ enko.inject(['utils', 'unittest'],
 				assertFalse(utils.isFunction(true));
 				assertFalse(utils.isFunction(0));
 				assertFalse(utils.isFunction('test'));
+				assertFalse(utils.isFunction(undefined));
 			},
 
 			isObject: function () {
@@ -153,6 +219,7 @@ enko.inject(['utils', 'unittest'],
 				assertFalse(utils.isObject(true));
 				assertFalse(utils.isObject(0));
 				assertFalse(utils.isObject('test'));
+				assertFalse(utils.isObject(undefined));
 			},
 
 			isRegExp: function () {
@@ -164,6 +231,7 @@ enko.inject(['utils', 'unittest'],
 				assertFalse(utils.isRegExp(true));
 				assertFalse(utils.isRegExp(0));
 				assertFalse(utils.isRegExp('test'));
+				assertFalse(utils.isRegExp(undefined));
 			},
 
 			isBoolean: function () {
@@ -175,6 +243,7 @@ enko.inject(['utils', 'unittest'],
 				assertTrue(utils.isBoolean(true));
 				assertFalse(utils.isBoolean(0));
 				assertFalse(utils.isBoolean('test'));
+				assertFalse(utils.isBoolean(undefined));
 			},
 
 			isNumber: function () {
@@ -188,6 +257,7 @@ enko.inject(['utils', 'unittest'],
 				assertFalse(utils.isNumber(NaN));
 				assertFalse(utils.isNumber(Infinity));
 				assertFalse(utils.isNumber('test'));
+				assertFalse(utils.isNumber(undefined));
 			},
 
 			isString: function () {
@@ -199,6 +269,19 @@ enko.inject(['utils', 'unittest'],
 				assertFalse(utils.isString(true));
 				assertFalse(utils.isString(0));
 				assertTrue(utils.isString('test'));
+				assertFalse(utils.isString(undefined));
+			},
+
+			isUndefined: function () {
+				assertFalse(utils.isUndefined(document.createElement('div')));
+				assertFalse(utils.isUndefined([]));
+				assertFalse(utils.isUndefined(function(){}));
+				assertFalse(utils.isUndefined({}));
+				assertFalse(utils.isUndefined(/test/));
+				assertFalse(utils.isUndefined(true));
+				assertFalse(utils.isUndefined(0));
+				assertFalse(utils.isUndefined('test'));
+				assertTrue(utils.isUndefined(undefined));
 			}
 
 		});

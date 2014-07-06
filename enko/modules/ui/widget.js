@@ -10,7 +10,7 @@ enko.inject(['utils'],
 			initialize: function (node, options) {
 				this.node = node;
 
-				// utils.merge([{}, this.constructor.options, options], true); // needs testing
+				utils.occupy([options, this.constructor.options], true); // needs testing
 				// this.addClass(options.cssClass);
 				// this.stylize(options.cssStyle); // needs testing
 			},

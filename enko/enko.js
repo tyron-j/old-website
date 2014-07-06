@@ -109,7 +109,7 @@
 				NewClass;
 
 			if (!initialize) {
-				throw new Error("initialize is required");
+				throw "[enko] initialize is required"; // needs testing
 			}
 
 			NewClass = function () {
@@ -212,26 +212,42 @@
 			this.completed = 0;
 			this.total = total;
 			this.callback = callback;
-			this.moduleArr = [];
+			this.dependencies = [];
 		},
 
 		methods: {
 
 			append: function (module) {
-				this.moduleArr.push(module);
+				this.dependencies.push(module);
 			},
 
 			update: function (module, moduleObj) {
-				this.moduleArr[this.moduleArr.indexOf(module)] = moduleObj; // replacing string with actual object
+				this.dependencies[this.dependencies.indexOf(module)] = moduleObj; // replacing string with actual object
 				this.completed++;
 
 				if (this.completed === this.total) {
-					this.callback.apply(this.callback, this.moduleArr); // to-do: figure out the ideal context
+					this.callback.apply(this.callback, this.dependencies); // to-do: figure out the ideal context
 				}
 			}
 
 		}
 
 	});
+
+	// debug:
+
+	if (debug) {
+		setTimeout(function () {
+			if (Object.keys(dependents).length) {
+				var errorMsg = "[enko] the following modules have not been defined:\n";
+
+				for (var module in dependents) {
+					errorMsg += "\n" + module;
+				}
+
+				console.error(errorMsg);
+			}
+		}, 500);
+	}
 
 })();

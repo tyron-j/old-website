@@ -4,9 +4,17 @@
 
 @import 'unity.less';
 
+// Widget:
+
+.Widget {
+	// styles for all widgets
+}
+
 // IFrame:
 
 .IFrame {
+	.Widget;
+	
 	.setInCenter(@slideShowWidth, @slideShowHeight); // to-do: remove this later
 
 	& > .ScrollWindow {
@@ -38,6 +46,8 @@
 // SlideShow:
 
 .SlideShow {
+	.Widget;
+	
 	.setInCenter(@slideShowWidth, @slideShowHeight); // to-do: remove this later
 
 	overflow: hidden;
@@ -55,6 +65,8 @@
 // SideBar:
 
 .SideBar {
+	.Widget;
+	
 	width: @sideBarWidth;
 	height: 100%;
 	position: fixed;
@@ -89,5 +101,19 @@
 			top: 0px;
 			right: 0px;
 		}
+	}
+}
+
+// NavBar:
+
+.NavBar {
+	.Widget;
+	
+	position: fixed;
+
+	& > .NavContent {
+		position: relative;
+		width: 100%;
+		height: 100%;
 	}
 }

@@ -7,6 +7,6 @@
 		"user": true,
 		"utils": true
 	},
-	"debug": false,
+	"debug": true,
 	"theme": "default"
 }
