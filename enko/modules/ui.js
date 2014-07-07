@@ -15,6 +15,8 @@ enko.inject(['utils'],
 				utils.walkTree(function (element) {
 					widget = element.getAttribute('ek-widget');
 
+					element.removeAttribute('ek-widget'); // for readability; consider removing
+
 					if (widget) {
 						widget = 'ui/widgets/' + widget; // consider applying this method
 						if (!(widget in manifestQueue)) {
@@ -38,6 +40,8 @@ enko.inject(['utils'],
 
 							manifestQueue[moduleName].forEach(function (element) {
 								options = element.getAttribute('ek-options');
+
+								element.removeAttribute('ek-options'); // for readability; consider removing
 
 								if (options) { // needs testing
 									options = JSON.parse(options);

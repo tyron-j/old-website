@@ -33,25 +33,62 @@
 	.boxShadow(15px);
 }
 
+// SlideShow:
+
+.SlideShow {
+	& > .Buttons {
+		.faintBlack(0.75);
+
+		cursor: pointer;
+
+		& > .LeftButton, .RightButton {
+			position: relative;
+			display: inline-block;
+			width: 50%;
+			height: 100%;
+
+			&:hover {
+				.faintWhite(0.75);
+			}
+			& > .ArrowIcon {
+				box-sizing: border-box;
+
+				.setInCenter(10px, 16px); // to-do: figure out why it has to be 16px
+			}
+		}
+
+		& > .LeftButton {
+			& > .ArrowIcon {
+				.arrowLeft(10px, @teal);
+			}
+		}
+		& > .RightButton {
+			& > .ArrowIcon {
+				.arrowRight(10px, @teal);
+			}
+		}
+	}
+}
+
 // IFrame:
 
 .IFrame {
 	& > .ScrollBar {
-		.faint-white;
+		.faintWhite();
 
 		& > .Scroller {
 			background-color: @teal;
 		}
 	}
 	& > .ScrollWindow {
-		.faint-black;
+		.faintBlack();
 	}
 }
 
 // SideBar:
 
 .SideBar {
-	.faint-black;
+	.faintBlack();
 	
 	& > .SideBarHeader {
 		background-color: @teal;
@@ -80,7 +117,7 @@
 	& > .NavContent {
 		.boxShadow(15px);
 
-		.faint-black;
+		.faintBlack();
 
 		border-bottom: 5px solid @teal;
 	}

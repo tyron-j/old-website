@@ -10,10 +10,10 @@ enko.inject(['ui/animation', 'ui/widget'],
 			extend: Widget,
 
 			initialize: function (node, options) {
-				Widget.call(this, node);
+				Widget.call(this, node, options);
 
-				var primary = options && options.primary || Bicolor.primary, // array
-					secondary = options && options.secondary || Bicolor.secondary, // array
+				var primary = options.primary, // array
+					secondary = options.secondary, // array
 					color = primary.slice(),
 					from,
 					to,
@@ -53,8 +53,10 @@ enko.inject(['ui/animation', 'ui/widget'],
 			},
 
 			statics: {
-				primary: [0, 0, 0],
-				secondary: [255, 255, 255]
+				options: {
+					primary: [0, 0, 0],
+					secondary: [255, 255, 255]
+				}
 			}
 
 		});

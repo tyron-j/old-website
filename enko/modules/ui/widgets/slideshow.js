@@ -2,8 +2,9 @@
 
 
 
-enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
-	function (ajax, Task, utils, Widget) {
+enko.inject(['ajax', 'task', 'utils', 'ui/dom', 'ui/widget', 'ui/widgets/floater'],
+	function (ajax, Task, utils, dom, Widget, Floater) {
+		'use strict';
 
 		var SlideShow = enko.classify({
 
@@ -26,9 +27,52 @@ enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
 				this.getSlides(options.src).onSuccess(function (slides) { // to-do: change this src business
 					that.appendSlides(slides);
 				});
+
+				this.createButtons(options.buttonOptions);
 			},
 
 			methods: {
+
+				createButtons: function (buttonOptions) {
+					var buttons = dom.create('div'),
+						leftButton,
+						rightButton,
+						leftArrow,
+						rightArrow,
+						that;
+
+					// buttons
+					leftButton = buttons.appendChild(dom.create('div'));
+					rightButton = buttons.appendChild(dom.create('div'));
+					leftButton.classList.add('LeftButton');
+					rightButton.classList.add('RightButton');
+
+					// arrows
+					leftArrow = leftButton.appendChild(dom.create('div'));
+					rightArrow = rightButton.appendChild(dom.create('div'));
+					leftArrow.classList.add('ArrowIcon');
+					rightArrow.classList.add('ArrowIcon');
+
+					this.node.appendChild(buttons);
+
+					buttons = new Floater(buttons, buttonOptions);
+
+					buttons.stylize({
+						marginLeft: -buttons.node.offsetWidth / 2, // to-do: implement Widget.prototype.width?
+						marginBottom: -buttons.node.offsetHeight
+					});
+
+					// event handlers
+					this.handle('mouseover', function (evt) {
+						evt.stopPropagation(); // to-do: see if this is necessary
+						buttons.trigger('mouseover');
+					});
+
+					this.handle('mouseout', function (evt) {
+						evt.stopPropagation();
+						buttons.trigger('mouseout');
+					});
+				},
 
 				getSlides: function (url) {
 					var task = new Task(),
@@ -46,7 +90,7 @@ enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
 
 							return utils.contains(SlideShow.imgTypes, ext); // make sure the file is an image
 						}).map(function (slide) {
-							var div = document.createElement('div');
+							var div = dom.create('div');
 							
 							div.style.backgroundImage = 'url(' + url + '/' + slide + ')';
 
@@ -63,7 +107,7 @@ enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
 				},
 
 				appendSlides: function (slides) { // overwrite this method for different slide show types
-					var container = this.node.appendChild(document.createElement('div'));
+					var container = this.node.appendChild(dom.create('div'));
 
 					utils.merge([container.style, {
 						position: 'relative', // for transitions
@@ -88,6 +132,13 @@ enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
 					style: { // to-do: set defaults through less?
 						width: 1000,
 						height: 625
+					},
+					buttonOptions: {
+						class: 'Buttons',
+						style: {
+							width: 150,
+							height: 50
+						}
 					}
 				}
 			}

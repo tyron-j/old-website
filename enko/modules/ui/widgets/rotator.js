@@ -10,12 +10,12 @@ enko.inject(['ui/animation', 'ui/widget'],
 			extend: Widget,
 
 			initialize: function (node, options) {
-				Widget.call(this, node);
+				Widget.call(this, node, options);
 
 				var rotation = 0,
-					perspective = options && options.perspective || Rotator.perspective,
-					axis = options && options.axis || Rotator.axis,
-					max = options && options.max || Rotator.max,
+					perspective = options.perspective,
+					axis = options.axis,
+					max = options.max,
 					parent = node.parentElement, // to-do: remove this later
 					from,
 
@@ -50,9 +50,11 @@ enko.inject(['ui/animation', 'ui/widget'],
 			},
 
 			statics: {
-				perspective: 500,
-				axis: 'X',
-				max: 360
+				options: {
+					perspective: 500,
+					axis: 'X',
+					max: 360
+				}
 			}
 
 		});

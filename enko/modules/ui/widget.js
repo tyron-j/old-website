@@ -11,9 +11,9 @@ enko.inject(['utils'],
 				this.node = node;
 
 				if (options) {
-					utils.occupy([options, this.constructor.options], true); // needs testing
-					this.addClass(options.class);
-					this.stylize(options.style); // needs testing
+					utils.occupy([options, this.constructor.options], true);
+					options.class && this.addClass(options.class); // to-do: change how this is done
+					options.style && this.stylize(options.style);
 				}
 			},
 

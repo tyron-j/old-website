@@ -10,10 +10,10 @@ enko.inject(['ui/animation', 'ui/widget'],
 			extend: Widget,
 
 			initialize: function (node, options) {
-				Widget.call(this, node);
+				Widget.call(this, node, options);
 
 				var altitude = 0,
-					max = options && options.max || Floater.max,
+					max = options.max,
 					from,
 
 					that = this;
@@ -45,7 +45,9 @@ enko.inject(['ui/animation', 'ui/widget'],
 			},
 
 			statics: {
-				max: 25
+				options: {
+					max: 25
+				}
 			}
 
 		});

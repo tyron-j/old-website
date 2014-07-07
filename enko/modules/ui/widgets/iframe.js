@@ -41,43 +41,37 @@ enko.inject(['ajax', 'task', 'ui/dom', 'ui/widget'],
 				});
 
 				// event handlers
-				(new Widget(scrollBar)).handle({
-					mousedown: function (evt) {
-						if (scrollBar === evt.target) {
-							that.currentTop = parseInt(scroller.style.top) || 0;
+				scrollBar.addEventListener('mousedown', function (evt) {
+					if (scrollBar === evt.target) {
+						that.currentTop = parseInt(scroller.style.top) || 0;
 
-							that.setAbsoluteTop(scrollBar); // to-do: can this be called just once?
-							that.moveScroller(evt, scrollBar, scroller, scrollContent);
+						that.setAbsoluteTop(scrollBar); // to-do: can this be called just once?
+						that.moveScroller(evt, scrollBar, scroller, scrollContent);
+					}
+				});
+
+				scroller.addEventListener('mousedown', function (evt) {
+					evt.preventDefault(); // to-do: check if this is necessary, and why
+
+					that.currentTop = parseInt(scroller.style.top) || 0;
+					that.initialY = evt.clientY;
+
+					that.doc.handle({
+						mousemove: function (evt) {
+							that.handleDrag(evt, scroller, scrollContent);
+						},
+						mouseup: function () {
+							that.ignoreDrag();
 						}
-					}
+					});
 				});
 
-				(new Widget(scroller)).handle({
-					mousedown: function (evt) {
-						evt.preventDefault(); // to-do: check if this is necessary, and why
+				scrollWindow.addEventListener('mousewheel', function (evt) {
+					evt.preventDefault(); // prevent default scrolling
 
-						that.currentTop = parseInt(scroller.style.top) || 0;
-						that.initialY = evt.clientY;
+					that.currentTop = parseInt(scroller.style.top) || 0;
 
-						that.doc.handle({
-							mousemove: function (evt) {
-								that.handleDrag(evt, scroller, scrollContent);
-							},
-							mouseup: function () {
-								that.ignoreDrag();
-							}
-						});
-					}
-				});
-
-				(new Widget(scrollWindow)).handle({
-					mousewheel: function (evt) {
-						evt.preventDefault(); // prevent default scrolling
-
-						that.currentTop = parseInt(scroller.style.top) || 0;
-
-						evt.wheelDelta > 0 ? that.scrollUp(scroller, scrollContent) : that.scrollDown(scroller, scrollContent);
-					}
+					evt.wheelDelta > 0 ? that.scrollUp(scroller, scrollContent) : that.scrollDown(scroller, scrollContent);
 				});
 			},
 

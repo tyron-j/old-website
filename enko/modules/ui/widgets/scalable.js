@@ -10,10 +10,10 @@ enko.inject(['ui/animation', 'ui/widget'],
 			extend: Widget,
 
 			initialize: function (node, options) {
-				Widget.call(this, node);
+				Widget.call(this, node, options);
 
 				var size = 0,
-					max = options && options.max || Scalable.max,
+					max = options.max,
 					from,
 
 					that = this;
@@ -45,7 +45,9 @@ enko.inject(['ui/animation', 'ui/widget'],
 			},
 
 			statics: {
-				max: 0.1
+				options: {
+					max: 0.1
+				}
 			}
 
 		});
