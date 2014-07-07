@@ -14,21 +14,19 @@ enko.inject(['ui/widget', 'ui/widgets/floater', 'ui/dom'],
 
 				var navContent = dom.create('div');
 
-				// CSS classes
-				node.classList.add('NavBar');
+				// content class
 				navContent.classList.add('NavContent');
 
-				node.style.width = options.width;
-				node.style.height = options.height;
-				node.style.left = '50%';
+				// styles
 				node.style.marginLeft = -node.offsetWidth / 2;
-				node.style.zIndex = 1;
-				navContent.style.marginTop = -options.height;
+				navContent.style.marginTop = -node.offsetHeight;
 
 				// add content
 				node.appendChild(navContent);
+
+				// instantiate Floater
 				navContent = new Floater(navContent, {
-					max: -options.height
+					max: -node.offsetHeight
 				});
 
 				// event handlers
@@ -48,8 +46,11 @@ enko.inject(['ui/widget', 'ui/widgets/floater', 'ui/dom'],
 
 			statics: {
 				options: {
-					width: 750,
-					height: 50
+					class: 'NavBar',
+					style: {
+						width: 750,
+						height: 50
+					}
 				}
 			}
 

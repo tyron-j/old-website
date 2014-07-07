@@ -2,15 +2,17 @@
 
 // to-do: find the total offsetTop of each element; get the common parent's offsetTop and add it to the rest
 
-enko.inject(['ui/widget', 'utils'],
-	function (Widget, utils) {
+enko.inject(['ui/dom', 'ui/widget', 'utils'],
+	function (dom, Widget, utils) {
 
 		var SideBar = enko.classify({
 
 			extend: Widget,
 
 			initialize: function (node, options) {
-				var header = document.createElement('div'),
+				Widget.call(this, node, options);
+
+				var header = dom.create('div'),
 					elements = [],
 					ranges = [],
 					items = {},
@@ -19,13 +21,11 @@ enko.inject(['ui/widget', 'utils'],
 
 					that = this;
 
-				Widget.call(this, node, options);
-
-				node.classList.add('SideBar'); // to-do: change how classes are added
+				// header
 				header.classList.add('SideBarHeader');
 				node.appendChild(header);
 
-				header.innerHTML = options && options.title || SideBar.title;
+				header.innerHTML = options.title || SideBar.title;
 
 				utils.walkTree(function (element) { // to-do: get the root element from options
 					name = element.getAttribute('name');
@@ -42,12 +42,13 @@ enko.inject(['ui/widget', 'utils'],
 				ranges.push(Infinity);
 
 				var link,
-					indicator = document.createElement('div');
+					indicator = dom.create('div');
 
 				indicator.classList.add('SideBarItemIndicator');
 
+				// items
 				for (var item in items) {
-					link = document.createElement('a');
+					link = dom.create('a');
 					link.innerHTML = item;
 
 					link.classList.add('SideBarItem');
@@ -90,7 +91,13 @@ enko.inject(['ui/widget', 'utils'],
 			},
 
 			statics: {
-				title: 'Nameless'
+				title: 'Nameless',
+				options: {
+					class: 'SideBar',
+					style: {
+						width: 250
+					}
+				}
 			}
 
 		});

@@ -33,6 +33,21 @@
 	.boxShadow(15px);
 }
 
+// IFrame:
+
+.IFrame {
+	& > .ScrollBar {
+		.faint-white;
+
+		& > .Scroller {
+			background-color: @teal;
+		}
+	}
+	& > .ScrollWindow {
+		.faint-black;
+	}
+}
+
 // SideBar:
 
 .SideBar {

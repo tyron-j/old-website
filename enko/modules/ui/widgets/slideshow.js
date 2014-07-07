@@ -10,22 +10,17 @@ enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
 			extend: Widget,
 
 			initialize: function (node, options) {
+				Widget.call(this, node, options);
+
 				var that = this;
 
-				options = options || {};
-
-				Widget.call(this, node);
-
-				node.style.width = options.width + 'px';
-				node.style.height = options.height + 'px';
-				node.style.marginLeft = -options.width / 2;
-				node.style.marginTop = -options.height / 2;
-				
-				node.classList.add('SlideShow');
+				// styles
+				node.style.marginLeft = -node.offsetWidth / 2;
+				node.style.marginTop = -node.offsetHeight / 2;
 
 				this.dimensions = {
-					width: options.width || node.offsetWidth,
-					height: options.height || node.offsetHeight
+					width: node.offsetWidth,
+					height: node.offsetHeight
 				};
 
 				this.getSlides(options.src).onSuccess(function (slides) { // to-do: change this src business
@@ -87,7 +82,14 @@ enko.inject(['ajax', 'task', 'utils', 'ui/widget'],
 			},
 
 			statics: {
-				imgTypes: ['bmp', 'jpg', 'png']
+				imgTypes: ['bmp', 'jpg', 'png'],
+				options: {
+					class: 'SlideShow',
+					style: { // to-do: set defaults through less?
+						width: 1000,
+						height: 625
+					}
+				}
 			}
 
 		});

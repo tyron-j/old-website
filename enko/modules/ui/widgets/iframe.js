@@ -2,42 +2,35 @@
 
 // to-do: make and test changes
 
-enko.inject(['ajax', 'task', 'ui/widget'],
-	function (ajax, Task, Widget) {
+enko.inject(['ajax', 'task', 'ui/dom', 'ui/widget'],
+	function (ajax, Task, dom, Widget) {
 
 		enko.define('ui/widgets/iframe', enko.classify({
 
 			extend: Widget,
 
 			initialize: function (node, options) {
-				Widget.call(this, node);
+				Widget.call(this, node, options);
 
-				// create essential elements
-				var scrollBar = node.appendChild(document.createElement('div')),
-					scroller = scrollBar.appendChild(document.createElement('div')),
-					scrollWindow = node.appendChild(document.createElement('div')),
-					scrollContent = scrollWindow.appendChild(document.createElement('div')),
+				// components
+				var scrollBar = node.appendChild(dom.create('div')),
+					scroller = scrollBar.appendChild(dom.create('div')),
+					scrollWindow = node.appendChild(dom.create('div')),
+					scrollContent = scrollWindow.appendChild(dom.create('div')),
 
 					that = this;
 
-				options = options || {};
-
-				// initialize styles
-				node.classList.add('IFrame');
+				// classes
 				scrollBar.classList.add('ScrollBar');
 				scroller.classList.add('Scroller');
 				scrollWindow.classList.add('ScrollWindow');
 				scrollContent.classList.add('ScrollContent');
 
-				node.style.width = options.width; // to-do: implement dom and dom.setInCenter
-				node.style.height = options.height;
-				node.style.marginLeft = -options.width / 2;
-				node.style.marginTop = -options.height / 2;
-				scrollWindow.style.backgroundColor = options.scrollWindowColor;
-				scrollBar.style.backgroundColor = options.scrollBarColor;
-				scroller.style.backgroundColor = options.scrollerColor;
+				// styles
+				node.style.marginLeft = -node.offsetWidth / 2; // to-do: implement dom.setInCenter
+				node.style.marginTop = -node.offsetHeight / 2;
 
-				// initialize settings
+				// settings
 				this.scrollerMax = scrollBar.offsetHeight - scroller.offsetHeight;
 				this.doc = new Widget(document);
 
@@ -48,7 +41,6 @@ enko.inject(['ajax', 'task', 'ui/widget'],
 				});
 
 				// event handlers
-
 				(new Widget(scrollBar)).handle({
 					mousedown: function (evt) {
 						if (scrollBar === evt.target) {
@@ -150,6 +142,16 @@ enko.inject(['ajax', 'task', 'ui/widget'],
 					this.reposition(scroller, scrollContent);
 				}
 
+			},
+
+			statics: {
+				options: {
+					class: 'IFrame',
+					style: {
+						width: 1000,
+						height: 625
+					}
+				}
 			}
 
 		}));

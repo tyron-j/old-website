@@ -10,9 +10,11 @@ enko.inject(['utils'],
 			initialize: function (node, options) {
 				this.node = node;
 
-				utils.occupy([options, this.constructor.options], true); // needs testing
-				// this.addClass(options.cssClass);
-				// this.stylize(options.cssStyle); // needs testing
+				if (options) {
+					utils.occupy([options, this.constructor.options], true); // needs testing
+					this.addClass(options.class);
+					this.stylize(options.style); // needs testing
+				}
 			},
 
 			methods : {
