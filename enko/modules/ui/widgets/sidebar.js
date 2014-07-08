@@ -4,6 +4,7 @@
 
 enko.inject(['ui/dom', 'ui/widget', 'utils'],
 	function (dom, Widget, utils) {
+		'use strict';
 
 		var SideBar = enko.classify({
 
@@ -12,7 +13,9 @@ enko.inject(['ui/dom', 'ui/widget', 'utils'],
 			initialize: function (node, options) {
 				Widget.call(this, node, options);
 
-				var header = dom.create('div'),
+				var header = node.appendChild(dom.create('div', {
+						class: 'SideBarHeader'
+					})),
 					elements = [],
 					ranges = [],
 					items = {},
@@ -21,11 +24,8 @@ enko.inject(['ui/dom', 'ui/widget', 'utils'],
 
 					that = this;
 
-				// header
-				header.classList.add('SideBarHeader');
-				node.appendChild(header);
-
-				header.innerHTML = options.title || SideBar.title;
+				// title
+				header.innerHTML = options.title;
 
 				utils.walkTree(function (element) { // to-do: get the root element from options
 					name = element.getAttribute('name');
@@ -42,18 +42,20 @@ enko.inject(['ui/dom', 'ui/widget', 'utils'],
 				ranges.push(Infinity);
 
 				var link,
-					indicator = dom.create('div');
-
-				indicator.classList.add('SideBarItemIndicator');
+					indicator = dom.create('div', {
+						class: 'SideBarItemIndicator'
+					});
 
 				// items
 				for (var item in items) {
-					link = dom.create('a');
-					link.innerHTML = item;
+					link = node.appendChild(dom.create('a', {
+						class: 'SideBarItem',
+						attributes: {
+							href: items[item]
+						}
+					}));
 
-					link.classList.add('SideBarItem');
-					link.setAttribute('href', items[item]);
-					node.appendChild(link);
+					link.innerHTML = item;
 				}
 
 				items = node.getElementsByClassName('SideBarItem');
@@ -91,8 +93,8 @@ enko.inject(['ui/dom', 'ui/widget', 'utils'],
 			},
 
 			statics: {
-				title: 'Nameless',
 				options: {
+					title: 'Nameless',
 					class: 'SideBar',
 					style: {
 						width: 250

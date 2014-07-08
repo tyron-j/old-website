@@ -4,6 +4,9 @@
 
 enko.inject(['utils'],
 	function (utils) {
+		'use strict';
+
+		var element, hash; // pointers
 
 		enko.define('ui/widget', enko.classify({
 
@@ -12,12 +15,13 @@ enko.inject(['utils'],
 
 				if (options) {
 					utils.occupy([options, this.constructor.options], true);
-					options.class && this.addClass(options.class); // to-do: change how this is done
-					options.style && this.stylize(options.style);
+					this.configure(options);
 				}
 			},
 
 			methods : {
+
+				// animation:
 
 				animate: function (options) { // to-do: create a fallback in case requestAnimationFrame is not available
 					cancelAnimationFrame(this.animation);
@@ -31,6 +35,7 @@ enko.inject(['utils'],
 						tick = options.tick,
 						that = this,
 
+						progress,
 						start,
 						now;
 
@@ -58,6 +63,8 @@ enko.inject(['utils'],
 
 					that.animation = requestAnimationFrame(draw);
 				},
+
+				// events:
 
 				handle: function (evt, callback, useCapture) {
 					var callbackName;
@@ -117,12 +124,45 @@ enko.inject(['utils'],
 					}
 				},
 
-				insertAfter: function (newElement, reference) {
-					this.node.insertBefore(newElement, reference.nextSibling);
+				trigger: function (evtType) { // needs testing
+					var evt = new Event(evtType);
+
+					this.node.dispatchEvent(evt);
 				},
+
+				// dom manipulation:
 
 				addClass: function (className) {
 					this.node.classList.add(className);
+				},
+
+				configure: function (options) {
+					if (options) {
+						element = this.node;
+
+						hash = options.attributes;
+
+						for (var a in hash) {
+							element.setAttribute(a, hash[a]);
+						}
+
+						hash = options.style;
+
+						for (var s in hash) {
+							element.style[s] = hash[s];
+						}
+
+						options.class && element.classList.add(options.class);
+					}
+				},
+
+				destroy: function () {
+					this.node.parentNode.removeChild(this.node);
+					// this = null; // needs testing
+				},
+
+				insertAfter: function (newElement, reference) {
+					this.node.insertBefore(newElement, reference.nextSibling);
 				},
 
 				stylize: function (styles) { // needs testing
@@ -131,17 +171,6 @@ enko.inject(['utils'],
 					for (var style in styles) {
 						nodeStyles[style] = styles[style];
 					}
-				},
-
-				trigger: function (evtType) { // needs testing
-					var evt = new Event(evtType);
-
-					this.node.dispatchEvent(evt);
-				},
-
-				destroy: function () {
-					this.node.parentNode.removeChild(this.node);
-					// this = null; // needs testing
 				}
 				
 			}

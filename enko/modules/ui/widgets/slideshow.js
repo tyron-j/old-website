@@ -23,10 +23,9 @@ enko.inject(['ajax', 'task', 'utils', 'ui/animation', 'ui/dom', 'ui/widget', 'ui
 				this.lastSlide = 1; // change this after getting the slides
 				this.transitioning = false;
 
-				this.dimensions = {
-					width: node.offsetWidth,
-					height: node.offsetHeight
-				};
+				// dimensions
+				this.width = node.offsetWidth;
+				this.height = node.offsetHeight;
 
 				this.getSlides(options.src).onSuccess(function (slides) { // to-do: change this src business
 					that.lastSlide = slides.length;
@@ -40,7 +39,7 @@ enko.inject(['ajax', 'task', 'utils', 'ui/animation', 'ui/dom', 'ui/widget', 'ui
 			methods: {
 
 				createButtons: function (buttonOptions) {
-					var buttons = dom.create('div'),
+					var buttons = this.node.appendChild(dom.create('div')),
 						leftButton,
 						rightButton,
 						leftArrow,
@@ -49,18 +48,20 @@ enko.inject(['ajax', 'task', 'utils', 'ui/animation', 'ui/dom', 'ui/widget', 'ui
 						that = this;
 
 					// buttons
-					leftButton = buttons.appendChild(dom.create('div'));
-					rightButton = buttons.appendChild(dom.create('div'));
-					leftButton.classList.add('LeftButton');
-					rightButton.classList.add('RightButton');
+					leftButton = buttons.appendChild(dom.create('div', {
+						class: 'LeftButton'
+					}));
+					rightButton = buttons.appendChild(dom.create('div', {
+						class: 'RightButton'
+					}));
 
 					// arrows
-					leftArrow = leftButton.appendChild(dom.create('div'));
-					rightArrow = rightButton.appendChild(dom.create('div'));
-					leftArrow.classList.add('ArrowIcon');
-					rightArrow.classList.add('ArrowIcon');
-
-					this.node.appendChild(buttons);
+					leftArrow = leftButton.appendChild(dom.create('div', {
+						class: 'ArrowIcon'
+					}));
+					rightArrow = rightButton.appendChild(dom.create('div', {
+						class: 'ArrowIcon'
+					}));
 
 					buttons = new Floater(buttons, buttonOptions);
 
@@ -70,14 +71,15 @@ enko.inject(['ajax', 'task', 'utils', 'ui/animation', 'ui/dom', 'ui/widget', 'ui
 					});
 
 					// event handlers
-					this.handle('mouseover', function (evt) {
-						evt.stopPropagation(); // to-do: see if this is necessary
-						buttons.trigger('mouseover');
-					});
-
-					this.handle('mouseout', function (evt) {
-						evt.stopPropagation();
-						buttons.trigger('mouseout');
+					this.handle({
+						mouseover: function (evt) {
+							evt.stopPropagation(); // to-do: see if this is necessary
+							buttons.trigger('mouseover');
+						},
+						mouseout: function (evt) {
+							evt.stopPropagation();
+							buttons.trigger('mouseout');
+						}
 					});
 
 					leftButton.addEventListener('click', function () {
@@ -105,12 +107,14 @@ enko.inject(['ajax', 'task', 'utils', 'ui/animation', 'ui/dom', 'ui/widget', 'ui
 
 							return utils.contains(SlideShow.imgTypes, ext); // make sure the file is an image
 						}).map(function (slide) {
-							var div = dom.create('div');
-							
-							div.style.backgroundImage = 'url(' + url + '/' + slide + ')';
-
-							utils.merge([div.style, that.dimensions]);
-							div.classList.add('Slide'); // make sure default theme is being used
+							var div = dom.create('div', {
+								class: 'Slide',
+								style: {
+									backgroundImage: 'url(' + url + '/' + slide + ')',
+									width: that.width,
+									height: that.height
+								}
+							});
 
 							return div;
 						});
@@ -122,12 +126,12 @@ enko.inject(['ajax', 'task', 'utils', 'ui/animation', 'ui/dom', 'ui/widget', 'ui
 				},
 
 				appendSlides: function (slides) { // overwrite this method for different slide show types
-					var container = this.container = this.node.appendChild(dom.create('div'));
-
-					utils.merge([container.style, {
-						position: 'relative', // for transitions
-						width: this.dimensions.width * slides.length
-					}]);
+					var container = this.container = this.node.appendChild(dom.create('div', {
+						style: {
+							position: 'relative',
+							width: this.width * slides.length
+						}
+					}));
 
 					slides.forEach(function (slide) {
 						container.appendChild(slide);
@@ -145,7 +149,7 @@ enko.inject(['ajax', 'task', 'utils', 'ui/animation', 'ui/dom', 'ui/widget', 'ui
 						this.transitioning = true;
 
 						if (direction < 0 && this.currentSlide > 1) { // left
-							nextPosition = currentPosition + this.dimensions.width;
+							nextPosition = currentPosition + this.width;
 
 							this.currentSlide--;
 
@@ -160,7 +164,7 @@ enko.inject(['ajax', 'task', 'utils', 'ui/animation', 'ui/dom', 'ui/widget', 'ui
 								}
 							});
 						} else if (direction > 0 && this.currentSlide < this.lastSlide) { // right
-							nextPosition = currentPosition - this.dimensions.width;
+							nextPosition = currentPosition - this.width;
 
 							this.currentSlide++;
 

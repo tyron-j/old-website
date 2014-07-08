@@ -12,17 +12,15 @@ enko.inject(['ui/widget', 'ui/widgets/floater', 'ui/dom'],
 			initialize: function (node, options) {
 				Widget.call(this, node, options);
 
-				var navContent = dom.create('div');
-
-				// content class
-				navContent.classList.add('NavContent');
+				var navContent = node.appendChild(dom.create('div', {
+					class: 'NavContent',
+					style: {
+						marginTop: -node.offsetHeight
+					}
+				}));
 
 				// styles
 				node.style.marginLeft = -node.offsetWidth / 2;
-				navContent.style.marginTop = -node.offsetHeight;
-
-				// add content
-				node.appendChild(navContent);
 
 				// instantiate Floater
 				navContent = new Floater(navContent, {

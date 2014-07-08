@@ -4,6 +4,7 @@
 
 enko.inject(['utils', 'unittest'],
 	function (utils, UnitTest) {
+		'use strict';
 		
 		var ut = new UnitTest('utils'),
 
@@ -97,8 +98,7 @@ enko.inject(['utils', 'unittest'],
 							key1: 'val1'
 						}]
 					},
-					obj,
-					objStr;
+					obj;
 
 				obj = utils.merge([obj1, obj2]);
 
@@ -110,7 +110,6 @@ enko.inject(['utils', 'unittest'],
 				});
 
 				obj = utils.merge([{}, obj2, obj3]);
-				objStr = JSON.stringify(obj2);
 
 				assertEquals(obj, {
 					key1: 'val1',
@@ -120,7 +119,6 @@ enko.inject(['utils', 'unittest'],
 						key1: 'val1'
 					}]
 				});
-				assertSame(objStr, JSON.stringify(obj2));
 
 				// recursive
 
