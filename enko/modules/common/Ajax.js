@@ -1,6 +1,6 @@
 // ajax.js
 
-
+// to-do: implement ajax.delete
 
 (function () {
 
@@ -24,7 +24,7 @@
 				status = getStatus(xhr);
 
 				if (status === token || (token === 'whatever' && status !== 'pending')) { // needs testing
-					callback(xhr.responseText);
+					callback(xhr.responseText); // to-do: consider passing in the xhr object instead
 				}
 			});
 		} else if (status === token || token === 'whatever') {
@@ -43,9 +43,9 @@
 			}
 
 			xhr.open(type, url, async);
-			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); // to-do: make this configurable
 
-			if (data) {
+			if (data) { // to-do: change how this is done
 				for (var key in data) {
 					query += key + '=' + data[key] + '&';
 				}

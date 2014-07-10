@@ -6,7 +6,7 @@ enko.inject(['utils'],
 	function (utils) {
 		'use strict';
 
-		var element, hash; // pointers
+		var element, hash; // to-do: move these inside the function scope
 
 		enko.define('ui/widget', enko.classify({
 
