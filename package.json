@@ -1,0 +1,23 @@
+{
+	"name": "tyron-j-website",
+	"description": "A personal website by Tyron Jung",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"express": "~4.9.x"
+	},
+	"engines": {
+		"node": "0.10.x"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tyron-j/website"
+	},
+	"keywords": [
+		"tyron",
+		"jung",
+		"website"
+	]
+}
