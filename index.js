@@ -11,7 +11,7 @@ mongoose.connection.on('connected', function () {
 });
 
 // connect to database
-if (JSON.parse(process.env.LOCAL_HOST)) {
+if (process.env.LOCAL_HOST && JSON.parse(process.env.LOCAL_HOST)) {
 	console.log("Connecting to database as master");
 	mongoose.connect(process.env.MONGOLAB_URI.replace('<dbuser>:<dbpassword>', process.env.MASTER_LOGIN));
 } else {
