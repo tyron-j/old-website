@@ -1,13 +1,14 @@
 var express = require('express'),
 	mongoose = require('mongoose'),
+	colors = require('colors/safe'),
 
 	app = express();
 
 // database connection callbacks
 mongoose.connection.on('connected', function () {
-	console.log("Successfully connected to database");
+	console.log(colors.green("Successfully connected to database"));
 }).on('error', function (err) {
-	console.error("Failed to connect to database: " + err.errmsg);
+	console.error(colors.red("Failed to connect to database: " + err.errmsg));
 });
 
 // connect to database
@@ -29,5 +30,5 @@ app.get('/', function (req, res) {
 
 // start app
 app.listen(app.get('port'), function () {
-	console.log("Running at localhost:" + app.get('port'));
+	console.log(colors.green("Running at localhost:" + app.get('port')));
 });
