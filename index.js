@@ -1,59 +1,25 @@
 // to-do: abstract color logging logic
 
-var fs = require('fs'),
-	express = require('express'),
+var express = require('express'),
 	mongoose = require('mongoose'),
-	colors = require('colors/safe'),
 
-	app = express(),
-	Schema = mongoose.Schema;
+	signal = require('./utils/signal'),
+
+	app = express();
 
 // database connection callbacks
 mongoose.connection.on('connected', function () {
-	console.log(colors.green("Successfully connected to database"));
+	signal.success("Successfully connected to database");
 }).on('error', function (err) {
-	console.error(colors.red("Failed to connect to database: " + err.errmsg));
+	signal.error("Failed to connect to database: " + err.errmsg);
 });
-
-// testing image storage
-/*var schema = new Schema({
-	img: {
-		data: Buffer,
-		contentType: String
-	}
-});
-
-var A = mongoose.model('A', schema);
-
-mongoose.connection.on('open', function () {
-	console.log(colors.green("Successfully opened database"));
-
-	A.remove(function (err) { // why remove? check what omitting this does; probably empties collection each time
-		if (err) {
-			throw err;
-		}
-
-		console.log("Removed old docs");
-
-		var a = new A;
-		a.img.data = fs.readFileSync('/img/test.jpg');
-		a.img.contentType = 'image/jpg';
-		a.save(function (err, a) {
-			if (err) {
-				throw err;
-			}
-
-			console.log("Saved image to database");
-		});
-	})
-});*/
 
 // connect to database
 if (process.env.LOCAL_HOST && JSON.parse(process.env.LOCAL_HOST)) {
-	console.log(colors.yellow("Connecting to database as master"));
+	signal.progress("Connecting to database as master");
 	mongoose.connect(process.env.MONGOLAB_URI.replace('<dbuser>:<dbpassword>', process.env.MASTER_LOGIN));
 } else {
-	console.log(colors.yellow("Connecting to database as guest"));
+	signal.progress("Connecting to database as guest");
 	mongoose.connect(process.env.MONGOLAB_URI.replace('<dbuser>:<dbpassword>', process.env.GUEST_LOGIN));
 }
 
@@ -67,16 +33,20 @@ app.get('/', function (req, res) {
 
 // start app
 app.listen(app.get('port'), function () {
-	console.log(colors.green("Running at localhost:" + app.get('port')));
+	signal.success("Running at localhost:" + app.get('port'));
 });
 
 // app closing logic
 (function (closeApp) { // immediate function
 	process.on('SIGINT', closeApp); // for localhost
-	process.on('beforeExit', closeApp); // for heroku cloud server; check logs to see if this works
+	process.on('SIGTERM', closeApp); // for heroku cloud server; check logs to see if this works
 })(function () { // callback
-	mongoose.connection.close(function () {
-		console.log(colors.green("Disconnected from database"));
+	if (mongoose.connection.readyState === 1) { // if connected
+		mongoose.connection.close(function () {
+			signal.success("Disconnected from database");
+			process.exit();
+		});
+	} else {
 		process.exit();
-	});
+	}
 });
