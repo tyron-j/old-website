@@ -1,5 +1,3 @@
-// to-do: abstract color logging logic
-
 var express = require('express'),
 	mongoose = require('mongoose'),
 
