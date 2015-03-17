@@ -2,6 +2,7 @@ var express = require('express'),
 	db = require('./utils/db'),
 	signal = require('./utils/signal'),
 
+	// temporary db login logic
 	isLocalHost = process.env.LOCAL_HOST && JSON.parse(process.env.LOCAL_HOST),
 	dbLogin = isLocalHost ? process.env.MASTER_LOGIN : process.env.GUEST_LOGIN,
 	dbUri = process.env.MONGOLAB_URI.replace('<dbuser>:<dbpassword>', dbLogin),
@@ -9,8 +10,10 @@ var express = require('express'),
 	app = express();
 
 // configure app
-app.use(express.static(__dirname + '/public'));
+
 app.set('port', (process.env.PORT || 9000));
+
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
 	res.send("Tyron Jung's Node.js Website!");
