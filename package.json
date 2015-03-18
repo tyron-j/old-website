@@ -1,9 +1,9 @@
 {
 	"name": "tyron-j-website",
 	"description": "A personal website by Tyron Jung",
-	"main": "index.js",
+	"main": "server.js",
 	"scripts": {
-		"start": "node index.js"
+		"start": "node server.js"
 	},
 	"dependencies": {
 		"colors": "~1.0.x",

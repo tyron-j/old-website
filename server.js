@@ -1,6 +1,6 @@
 var express = require('express'),
 	db = require('./utils/db'),
-	routes = require('./routes'),
+	routes = require('./app/routes'),
 	signal = require('./utils/signal'),
 
 	// temporary db login logic
@@ -12,7 +12,7 @@ var express = require('express'),
 
 // configure app
 app.set('view engine', 'jade');
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/app/views');
 app.set('port', (process.env.PORT || 9000));
 
 app.use(express.static(__dirname + '/public'));
