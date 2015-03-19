@@ -3,7 +3,6 @@ var express = require('express'),
 
 	api = require('./app/routes/api'),
 	db = require('./app/utils/db'),
-	models = require('./app/models'),
 	routes = require('./app/routes'),
 	signal = require('./app/utils/signal'),
 
