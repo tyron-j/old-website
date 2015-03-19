@@ -1,7 +1,11 @@
+// load modules
 var express = require('express'),
-	db = require('./utils/db'),
+
+	api = require('./app/routes/api'),
+	db = require('./app/utils/db'),
+	models = require('./app/models'),
 	routes = require('./app/routes'),
-	signal = require('./utils/signal'),
+	signal = require('./app/utils/signal'),
 
 	// temporary db login logic
 	isLocalHost = process.env.LOCAL_HOST && JSON.parse(process.env.LOCAL_HOST),
@@ -15,10 +19,21 @@ app.set('view engine', 'jade');
 app.set('views', __dirname + '/app/views');
 app.set('port', (process.env.PORT || 9000));
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public')); // app client runs in /public directory
 
-app.get('/', routes.getIndex(isLocalHost));
+// routes
+app.get('/', routes.index(isLocalHost));
 app.get('/partials/:partial', routes.partials);
+
+// middleware
+app.use(function (req, res, next) {
+	// to-do: only allow api usage when req header is valid; use environment variable
+	signal.progress("Received a " + req.method + " request"); // remove this later
+	next();
+});
+
+// api
+app.get('/api/image/', api.getImage);
 
 // start app
 app.listen(app.get('port'), function () {

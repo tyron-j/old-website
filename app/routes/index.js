@@ -1,5 +1,5 @@
 module.exports = {
-	getIndex: function (isLocalHost) {
+	index: function (isLocalHost) {
 		return function (req, res) {
 			res.render('index', { isLocalHost: isLocalHost });
 		};
