@@ -1,6 +1,8 @@
 module.exports = {
-	index: function (req, res) {
-		res.render('index');
+	getIndex: function (isLocalHost) {
+		return function (req, res) {
+			res.render('index', { isLocalHost: isLocalHost });
+		};
 	},
 	partials: function (req, res) {
 		// parameter may change; adjust accordingly

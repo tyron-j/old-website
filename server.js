@@ -17,7 +17,7 @@ app.set('port', (process.env.PORT || 9000));
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', routes.index);
+app.get('/', routes.getIndex(isLocalHost));
 app.get('/partials/:partial', routes.partials);
 
 // start app

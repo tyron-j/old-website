@@ -1,4 +1,6 @@
-doctype html
-html(lang='en')
-	body
-		div This is served through jade
+//- the isLocalHost variable is passed in through the router's getIndex method
+
+extends layout
+
+block body
+	div Hello World!
