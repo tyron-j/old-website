@@ -25,7 +25,7 @@ app.get('/', routes.index(isLocalHost));
 app.get('/partials/:partial', routes.partials);
 
 // middleware
-app.use(function (req, res, next) {
+app.use(function (req, res, next) { // to-do: change to post?
 	// to-do: only allow api usage when req header is valid; use environment variable
 	signal.progress("Received a " + req.method + " request"); // remove this later
 	next();
