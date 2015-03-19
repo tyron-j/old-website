@@ -1,5 +1,7 @@
-node_modules
+build
 examples
-img
+images
+node_modules
 
+build.bat
 local.bat
