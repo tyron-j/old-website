@@ -1,2 +1,10 @@
-div login page
-a(href="/") back
+form(action='/api/login', method='post')
+	div
+		label username:
+		input(type='text', name='username')
+	div
+		label password:
+		input(type='password', name='password')
+	div
+		input(type='submit', value='login')
+a(href='/') back

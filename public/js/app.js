@@ -12,9 +12,11 @@ define([
 		$routeProvider.when('/login', {
 			templateUrl: 'partials/login',
 			controller: 'LoginCtrl'
-		})/*.otherwise({
-			redirectTo: '/login'
-		})*/;
+		}).when('/success', {
+			templateUrl: 'partials/success'
+		}).when('/fail', {
+			templateUrl: 'partials/fail'
+		});
 
 		$locationProvider.html5Mode(true);
 	});
