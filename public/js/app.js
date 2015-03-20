@@ -13,7 +13,7 @@ define([
 			templateUrl: 'partials/login',
 			controller: 'LoginCtrl'
 		})/*.otherwise({
-			redirectTo: '/views/login' // redirect to login?
+			redirectTo: '/login'
 		})*/;
 
 		$locationProvider.html5Mode(true);
