@@ -20,19 +20,18 @@ app.set('port', (process.env.PORT || 9000));
 
 app.use(express.static(__dirname + '/public')); // app client runs in /public directory
 
-// routes
-app.get('/', routes.index(isLocalHost));
-app.get('/partials/:partial', routes.partials);
-
 // middleware
-app.use(function (req, res, next) { // to-do: change to post?
+app.use(function (req, res, next) {
 	// to-do: only allow api usage when req header is valid; use environment variable
-	signal.progress("Received a " + req.method + " request"); // remove this later
 	next();
 });
 
 // api
 app.get('/api/image/', api.getImage);
+
+// routes
+app.get('/partials/:partial', routes.partials);
+app.get('*', routes.index(isLocalHost)); // solves angular page refresh issue; must be the last route
 
 // start app
 app.listen(app.get('port'), function () {
