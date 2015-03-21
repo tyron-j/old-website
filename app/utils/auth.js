@@ -3,20 +3,20 @@
 var passport      = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function (masterLogin, successRedirect, failureRedirect) {
-	var masterUsername;
-	var masterPassword;
+module.exports = function (correctLogin, successRedirect, failureRedirect) {
+	var correctUsername;
+	var correctPassword;
 
-	masterLogin    = masterLogin.split(':');
-	masterUsername = masterLogin[0];
-	masterPassword = masterLogin[1];
+	correctLogin    = correctLogin.split(':');
+	correctUsername = correctLogin[0];
+	correctPassword = correctLogin[1];
 
 	passport.use(new LocalStrategy(function (username, password, done) {
-		if (username !== masterUsername) {
+		if (username !== correctUsername) {
 			return done(null, false, { message: "Incorrect username" });
 		}
 
-		if (password !== masterPassword) {
+		if (password !== correctPassword) {
 			return done(null, false, { message: "Incorrect password" });
 		}
 

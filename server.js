@@ -3,8 +3,8 @@
 // dependencies ============================================================= //
 
 var express    = require('express');
-var session    = require('express-session');
 var bodyParser = require('body-parser');
+var session    = require('express-session');
 var passport   = require('passport');
 
 var auth   = require('./app/utils/auth');
@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
 
 app.get('/api/image', api.getImage);
 
-app.post('/api/login', auth(process.env.MASTER_LOGIN, '/success', '/fail'));
+app.post('/api/login', auth(dbLogin, '/success', '/fail'));
 
 // routes =================================================================== //
 
