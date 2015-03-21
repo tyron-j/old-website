@@ -1,3 +1,5 @@
+// routes
+
 module.exports = {
 	// called for everything other than api
 	// ex. /login will load the index, which then calls '/partials/login'

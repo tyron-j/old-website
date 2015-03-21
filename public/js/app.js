@@ -1,3 +1,5 @@
+// app
+
 define([
 	'angular',
 	'angular-route',

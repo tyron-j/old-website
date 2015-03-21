@@ -1,3 +1,5 @@
+// signal
+
 var colors = require('colors/safe');
 
 module.exports = {

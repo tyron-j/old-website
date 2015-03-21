@@ -1,3 +1,5 @@
+// all controllers
+
 define([
 	'angular',
 	'./loginctrl'

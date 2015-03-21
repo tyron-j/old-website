@@ -1,3 +1,5 @@
+// configuration
+
 require.config({
 	baseUrl: '/js', // validate this later
 	paths: {

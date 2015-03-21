@@ -1,3 +1,5 @@
+// login controller
+
 define(function () {
 	'use strict';
 

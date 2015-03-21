@@ -1,5 +1,7 @@
-var models = require('../models'),
-	signal = require('../utils/signal');
+// api
+
+var models = require('../models');
+var signal = require('../utils/signal');
 
 module.exports = {
 	getImage: function (req, res) {
