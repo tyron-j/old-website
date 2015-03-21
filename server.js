@@ -4,11 +4,7 @@
 
 var express    = require('express');
 var bodyParser = require('body-parser');
-var session    = require('express-session');
-var passport   = require('passport');
 
-var auth   = require('./app/utils/auth');
-var config = require('./app/utils/config');
 var db     = require('./app/utils/db');
 var signal = require('./app/utils/signal');
 
@@ -31,9 +27,6 @@ app.set('port', (process.env.PORT || 9000));
 app.use(express.static(__dirname + '/public')); // client runs in /public
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session(config.session));
-app.use(passport.initialize());
-app.use(passport.session());
 
 // middleware =============================================================== //
 
@@ -45,8 +38,6 @@ app.use(function (req, res, next) {
 // api ====================================================================== //
 
 app.get('/api/image', api.getImage);
-
-app.post('/api/login', auth(dbLogin, '/success', '/fail'));
 
 // routes =================================================================== //
 
