@@ -8,7 +8,12 @@ module.exports = {
 			res.render('index', { isLocalHost: isLocalHost });
 		};
 	},
+
+	// putting a / in front of partial locations causes a crash
 	partials: function (req, res, next) {
 		res.render('partials/' + req.params.partial);
+	},
+	masterPartials: function (req, res, next) {
+		res.render('partials/master/' + req.params.partial);
 	}
 };

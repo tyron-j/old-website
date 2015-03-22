@@ -14,7 +14,7 @@ module.exports = {
 		};
 	},
 
-	getUser: function (req, res) {
+	getUser: function (req, res, next) {
 		var name = req.query.name.toLowerCase().split(' ');
 
 		models.User.findOne({
@@ -31,11 +31,11 @@ module.exports = {
 		});
 	},
 
-	postUser: function (req, res) {
+	postUser: function (req, res, next) {
 		//
 	},
 
-	getArtwork: function (req, res) { // to-do: update this function
+	getArtwork: function (req, res, next) { // to-do: update this function
 		models.Artwork.find({}, function (err, artworks) {
 			if (artworks.length) {
 				res.contentType(artworks[0].image.contentType);
@@ -44,7 +44,7 @@ module.exports = {
 		});
 	},
 
-	postArtwork: function (req, res) {
+	postArtwork: function (req, res, next) {
 		//
 	}
 };

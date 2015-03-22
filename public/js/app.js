@@ -4,13 +4,14 @@ define([
 	'angular',
 	'angular-route',
 	'controllers/all'
-], function (ng, ngRoute, controllers) {
+], function (ng) { // only need the first argument
 	'use strict';
 
 	var app = ng.module('tyronApp', [
 		'ngRoute',
 		'allControllers'
 	]).config(function ($routeProvider, $locationProvider) { // minification errors?
+		// public routes
 		$routeProvider.when('/login', {
 			templateUrl: '/partials/login',
 			controller: 'LoginCtrl'
@@ -18,7 +19,15 @@ define([
 			templateUrl: '/partials/hello'
 		}).when('/unauthorized', {
 			templateUrl: '/partials/unauthorized'
-		}).otherwise({
+		});
+
+		// master routes
+		$routeProvider.when('/master/upload', {
+			templateUrl: '/partials/master/upload'
+		});
+
+		// otherwise
+		$routeProvider.otherwise({
 			redirectTo: '/login'
 		});
 
