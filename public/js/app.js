@@ -12,12 +12,14 @@ define([
 		'allControllers'
 	]).config(function ($routeProvider, $locationProvider) { // minification errors?
 		$routeProvider.when('/login', {
-			templateUrl: 'partials/login',
+			templateUrl: '/partials/login',
 			controller: 'LoginCtrl'
-		}).when('/success', {
-			templateUrl: 'partials/success'
-		}).when('/fail', {
-			templateUrl: 'partials/fail'
+		}).when('/hello', {
+			templateUrl: '/partials/hello'
+		}).when('/unauthorized', {
+			templateUrl: '/partials/unauthorized'
+		}).otherwise({
+			redirectTo: '/login'
 		});
 
 		$locationProvider.html5Mode(true);

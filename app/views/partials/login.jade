@@ -1,12 +1,8 @@
 //- login
 
-form(action='/api/login', method='post')
+form(action='/api/user', method='get')
 	div
-		label username:
-		input(type='text', name='username')
+		label Who are you?
 	div
-		label password:
-		input(type='password', name='password')
-	div
-		input(type='submit', value='login')
-a(href='/') back
+		input(type='text', name='name')
+		input(type='submit', value='Enter')

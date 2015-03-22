@@ -37,7 +37,13 @@ app.use(function (req, res, next) {
 
 // api ====================================================================== //
 
-app.get('/api/image', api.getImage);
+// only unprotected api
+app.get('/api/user', api.getUser);
+
+// temporary middleware to protect api
+app.use('/api/*', api.authenticate(isLocalHost));
+
+app.get('/api/artwork', api.getArtwork);
 
 // routes =================================================================== //
 

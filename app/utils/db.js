@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var signal   = require('./signal');
 
 mongoose.connection.on('connecting', function () {
-	// signal.progress("Connecting to database as: " + mongoose.connection.user);
+	signal.progress("Connecting to database as: " + mongoose.connection.user);
 }).on('connected', function () {
 	signal.success("Connected to database");
 }).on('disconnecting', function () {
