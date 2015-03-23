@@ -45,6 +45,7 @@ module.exports = {
 	},
 
 	postArtwork: function (req, res, next) {
-		//
+		// looks like a module such as formidable or multiparty are required
+		// for multipart forms
 	}
 };

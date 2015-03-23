@@ -45,6 +45,7 @@ app.use('/api/*', api.authenticate(isLocalHost));
 app.use('*/master/*', api.authenticate(isLocalHost)); // also protects partials
 
 app.get('/api/artwork', api.getArtwork);
+app.post('/api/artwork', api.postArtwork);
 
 // routes =================================================================== //
 
