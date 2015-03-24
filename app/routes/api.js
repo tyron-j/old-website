@@ -1,5 +1,8 @@
 // api
 
+var formidable = require('formidable');
+var util       = require('util'); // remove later?
+
 var models = require('../models');
 var signal = require('../utils/signal');
 
@@ -44,8 +47,39 @@ module.exports = {
 		});
 	},
 
-	postArtwork: function (req, res, next) {
-		// looks like a module such as formidable or multiparty are required
-		// for multipart forms
+	postArtwork: function (uploadDir) {
+		return function (req, res, next) { // currently only works for localhost
+			var form = new formidable.IncomingForm();
+
+			console.log("Parsing form");
+
+			form.uploadDir      = uploadDir;
+			form.keepExtensions = true;
+			form.multiples      = true;
+
+			form.on('fileBegin', function (name, file) {
+				var filePath = file.path.split('\\');
+
+				filePath.pop(); // remove the hideous name assigned by formidable
+				filePath.push(file.name); // keep original file name
+
+				file.path = filePath.join('\\');
+			});
+
+			form.parse(req, function (err, fields, files) {
+				if (err) {
+					// to-do: handle error gracefully
+				}
+
+				console.log("Parsing done");
+
+				res.send(util.inspect({
+					fields: fields,
+					files: util.inspect(files)
+				}));
+			});
+
+			// to-do: delete images stored in temp directory
+		}
 	}
 };

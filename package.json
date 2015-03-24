@@ -10,6 +10,7 @@
 		"colors": "~1.0.x",
 		"express": "~4.12.x",
 		"express-session": "~1.10.x",
+		"formidable": "~1.0.x",
 		"jade": "~1.9.x",
 		"mongoose": "~3.8.x",
 		"passport": "~0.2.x",
