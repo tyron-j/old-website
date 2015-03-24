@@ -4,6 +4,7 @@
 
 var express    = require('express');
 var bodyParser = require('body-parser');
+var fs         = require('fs');
 
 var db     = require('./app/utils/db');
 var signal = require('./app/utils/signal');
@@ -78,3 +79,23 @@ app.listen(app.get('port'), function () {
 		process.exit();
 	}
 });
+
+// cleanup ================================================================== //
+
+if (isLocalHost) {
+	var tempDir = __dirname + '/app/temp/';
+
+	fs.readdir(tempDir, function (err, files) {
+		if (err) {
+			// to-do: handle error gracefully
+		}
+
+		files.forEach(function (file) {
+			fs.unlink(tempDir + file, function (err) {
+				if (err) {
+					// to-do: handle error gracefully
+				}
+			});
+		});
+	});
+}

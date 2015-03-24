@@ -2,6 +2,7 @@ build
 examples
 images
 node_modules
+temp
 
 build.bat
 local.bat
