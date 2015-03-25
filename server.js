@@ -90,12 +90,14 @@ if (isLocalHost) {
 			// to-do: handle error gracefully
 		}
 
-		files.forEach(function (file) {
-			fs.unlink(tempDir + file, function (err) {
-				if (err) {
-					// to-do: handle error gracefully
-				}
+		if (files.length) {
+			files.forEach(function (file) {
+				fs.unlink(tempDir + file, function (err) {
+					if (err) {
+						// to-do: handle error gracefully
+					}
+				});
 			});
-		});
+		}
 	});
 }

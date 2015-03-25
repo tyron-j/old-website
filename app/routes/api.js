@@ -1,6 +1,7 @@
 // api
 
 var formidable = require('formidable');
+var fs         = require('fs');
 var util       = require('util'); // remove later?
 
 var models = require('../models');
@@ -49,9 +50,9 @@ module.exports = {
 
 	postArtwork: function (uploadDir) {
 		return function (req, res, next) { // currently only works for localhost
-			var form = new formidable.IncomingForm();
-
-			console.log("Parsing form");
+			var form  = new formidable.IncomingForm();
+			var count = 0; // count of uploaded artworks
+			var artwork;
 
 			form.uploadDir      = uploadDir;
 			form.keepExtensions = true;
@@ -68,18 +69,47 @@ module.exports = {
 
 			form.parse(req, function (err, fields, files) {
 				if (err) {
-					// to-do: handle error gracefully
+					signal.error("Failed to parse form");
+					throw err; // to-do: handle error gracefully
 				}
 
-				console.log("Parsing done");
+				// important: artworks is the name of the file input tag
+				files.artworks.forEach(function (file) {
+					var fileName      = file.name.split('.')[0];
+					var fileExtension = file.name.split('.')[1];
 
-				res.send(util.inspect({
-					fields: fields,
-					files: util.inspect(files)
-				}));
+					fs.readFile(file.path, function (err, data) {
+						if (err) {
+							signal.error("Failed to read " + file.path);
+							throw err; // to-do: handle error gracefully
+						}
+
+						artwork = new models.Artwork({
+							image: {
+								name: fileName,
+								data: data,
+								contentType: 'image/' + fileExtension
+							}
+						});
+
+						artwork.save(function (err, aw) {
+							if (err) {
+								signal.error("Failed to save " + file.name + " to database");
+								throw err; // to-do: handle error gracefully
+							}
+
+							signal.success("Saved " + file.name + " to database");
+							count++;
+
+							if (count === files.artworks.length) {
+								res.redirect('/success'); // to-do: change redirect
+							}
+						});
+
+						fs.unlink(file.path); // delete artwork in temp directory
+					});
+				});
 			});
-
-			// to-do: delete images stored in temp directory
 		}
 	}
 };
