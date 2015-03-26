@@ -36,7 +36,24 @@ module.exports = {
 	},
 
 	postUser: function (req, res, next) {
-		//
+		// req.body seems to work only with post requests
+		var name = req.body.name.toLowerCase().split(' ');
+		var user = new models.User({
+			name: {
+				first: name[0],
+				last: name[1]
+			}
+		});
+
+		user.save(function (err, u) {
+			if (err) {
+				signal.error("Failed to save " + name.join(' ') + " to database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			signal.success("Saved " + name.join(' ') + " to database");
+			res.redirect('/success'); // to-do: change redirect
+		});
 	},
 
 	getArtwork: function (req, res, next) { // to-do: update this function
@@ -92,7 +109,7 @@ module.exports = {
 							}
 						});
 
-						artwork.save(function (err, aw) {
+						artwork.save(function (err, a) {
 							if (err) {
 								signal.error("Failed to save " + file.name + " to database");
 								throw err; // to-do: handle error gracefully

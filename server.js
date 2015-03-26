@@ -45,6 +45,7 @@ app.get('/api/user', api.getUser);
 app.use('/api/*', api.authenticate(isLocalHost));
 app.use('*/master/*', api.authenticate(isLocalHost)); // also protects partials
 
+app.post('/api/user', api.postUser);
 app.get('/api/artwork', api.getArtwork);
 app.post('/api/artwork', api.postArtwork(__dirname + '/app/temp'));
 
