@@ -26,7 +26,7 @@ module.exports = {
 				first: name[0],
 				last: name[1]
 			}
-		}, function (err, user) {
+		}, function (err, user) { // to-do: change redirects
 			if (err || !user) {
 				res.redirect('/unauthorized');
 			} else {
@@ -88,6 +88,11 @@ module.exports = {
 				if (err) {
 					signal.error("Failed to parse form");
 					throw err; // to-do: handle error gracefully
+				}
+
+				if (!(files.artworks instanceof Array)) {
+					// convert to array for iterative logic below
+					files.artworks = [ files.artworks ];
 				}
 
 				// important: artworks is the name of the file input tag
