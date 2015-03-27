@@ -1,1 +1,3 @@
-img(ng-repeat='artwork in artworks', ng-src='http://tyronjung.com/api/artwork/{{artwork.title}}')
+//- to-do: change url to http://tyronjung.com/api/artwork/{{artwork.title}}
+//- after moving image fetching api to unprotected api
+img(ng-repeat='artwork in artworks', ng-src='http://localhost:9000/api/artwork/{{artwork.title}}')
