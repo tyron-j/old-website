@@ -38,16 +38,16 @@ app.use(function (req, res, next) {
 
 // api ====================================================================== //
 
-// only unprotected api
+// unprotected api
 app.get('/api/user', api.getUser);
+app.get('/api/artwork', api.getArtwork); // fetch titles
+app.get('/api/artwork/:title', api.getArtwork); // fetch actual artwork
 
 // temporary middleware to protect api and master views
 app.use('/api/*', api.authenticate(isLocalHost));
 app.use('*/master/*', api.authenticate(isLocalHost)); // also protects partials
 
 app.post('/api/user', api.postUser);
-app.get('/api/artwork', api.getArtwork); // fetch titles
-app.get('/api/artwork/:title', api.getArtwork); // fetch actual artwork
 app.post('/api/artwork', api.postArtwork(__dirname + '/app/temp'));
 
 // routes =================================================================== //
