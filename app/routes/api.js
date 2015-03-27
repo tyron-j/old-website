@@ -57,12 +57,20 @@ module.exports = {
 	},
 
 	getArtwork: function (req, res, next) { // to-do: update this function
-		models.Artwork.find({}, function (err, artworks) {
-			if (artworks.length) {
-				res.contentType(artworks[0].image.contentType);
-				res.send(artworks[0].image.data);
-			}
-		});
+		if (req.params.title) { // fetch by unique title
+			models.Artwork.findOne({
+				title: req.params.title
+			}, function (err, artwork) {
+				res.contentType(artwork.image.contentType);
+				res.send(artwork.image.data);
+			});
+		} else { // fetch all names
+			models.Artwork.find({}, 'title', function (err, artworks) {
+				if (artworks.length) {
+					res.send(artworks); // to-do: use map to get rid of _id key
+				}
+			});
+		}
 	},
 
 	postArtwork: function (uploadDir) {
@@ -107,7 +115,7 @@ module.exports = {
 						}
 
 						artwork = new models.Artwork({
-							name: fileName,
+							title: fileName,
 							image: {
 								data: data,
 								contentType: 'image/' + fileExtension
