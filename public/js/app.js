@@ -15,6 +15,9 @@ define([
 		$routeProvider.when('/login', {
 			templateUrl: '/partials/login',
 			controller: 'LoginCtrl'
+		}).when({
+			templateUrl: '/partials/gallery',
+			controller: 'GalleryCtrl'
 		}).when('/hello', {
 			templateUrl: '/partials/hello'
 		}).when('/unauthorized', {

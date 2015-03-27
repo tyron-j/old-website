@@ -107,8 +107,8 @@ module.exports = {
 						}
 
 						artwork = new models.Artwork({
+							name: fileName,
 							image: {
-								name: fileName,
 								data: data,
 								contentType: 'image/' + fileExtension
 							}
