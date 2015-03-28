@@ -13,6 +13,7 @@ module.exports = {
 	partials: function (req, res, next) {
 		res.render('partials/' + req.params.partial);
 	},
+	
 	masterPartials: function (req, res, next) {
 		res.render('partials/master/' + req.params.partial);
 	}

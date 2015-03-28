@@ -1,21 +1,22 @@
 //- upload
 
-form(action='/api/artwork', method='post', enctype='multipart/form-data')
-	div
-		label Upload artworks
+div(class='centered')
+	form(action='/api/artwork', method='post', enctype='multipart/form-data')
+		div
+			label Upload artworks
+		br
+		div
+			input(type='file', name='artworks', multiple)
+		br
+		div
+			input(type='submit', value='Upload')
 	br
-	div
-		input(type='file', name='artworks', multiple)
-	br
-	div
-		input(type='submit', value='Upload')
-br
-form(action='/api/user', method='post')
-	div
-		label Upload user
-	br
-	div
-		input(type='text', name='name')
-	br
-	div
-		input(type='submit', value='Upload')
+	form(action='/api/user', method='post')
+		div
+			label Upload user
+		br
+		div
+			input(type='text', name='name')
+		br
+		div
+			input(type='submit', value='Upload')

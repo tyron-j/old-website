@@ -15,7 +15,7 @@ define([
 		$routeProvider.when('/login', {
 			templateUrl: '/partials/login',
 			controller: 'LoginCtrl'
-		}).when('/gallery', {
+		}).when('/gallery', { // currently localhost only
 			templateUrl: '/partials/gallery',
 			controller: 'GalleryCtrl'
 		}).when('/hello', {

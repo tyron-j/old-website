@@ -1,11 +1,12 @@
 //- login
 
-form(action='/api/user', method='get')
-	div
-		label Who are you?
-	br
-	div
-		input(type='text', name='name')
-	br
-	div
-		input(type='submit', value='Enter')
+div(class='centered')
+	form(action='/api/user', method='get')
+		div
+			label Who are you?
+		br
+		div
+			input(type='text', name='name')
+		br
+		div
+			input(type='submit', value='Enter')
