@@ -50,6 +50,8 @@ app.post('/api/user', api.postUser);
 app.get('/api/artwork', api.getArtwork); // fetch titles
 app.get('/api/artwork/:title', api.getArtwork); // fetch actual artwork
 app.post('/api/artwork', api.postArtwork(__dirname + '/app/temp'));
+app.get('/api/blog', api.getBlog);
+app.post('/api/blog', api.postBlog);
 
 // routes =================================================================== //
 

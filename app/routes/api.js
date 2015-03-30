@@ -141,5 +141,13 @@ module.exports = {
 				});
 			});
 		}
+	},
+
+	getBlog: function (req, res, next) {
+		//
+	},
+
+	postBlog: function (req, res, next) {
+		//
 	}
 };
