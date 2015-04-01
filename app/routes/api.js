@@ -60,13 +60,13 @@ module.exports = {
 		if (req.params.title) { // fetch by unique title
 			models.Artwork.findOne({
 				title: req.params.title
-			}, function (err, artwork) {
+			}, function (err, artwork) { // to-do: handle no matches
 				res.contentType(artwork.image.contentType);
 				res.send(artwork.image.data);
 			});
 		} else { // fetch all names
 			models.Artwork.find({}, 'title', function (err, artworks) {
-				if (artworks.length) {
+				if (artworks.length) { // to-do: handle no matches
 					res.send(artworks); // to-do: use map to get rid of _id key
 				}
 			});
@@ -144,7 +144,19 @@ module.exports = {
 	},
 
 	getBlog: function (req, res, next) {
-		//
+		if (req.params.title) {
+			models.Blog.findOne({
+				title: req.params.title
+			}, function (err, blog) { // to-do: handle no matches
+				res.send(blog.content);
+			});
+		} else {
+			models.Blog.find({}, 'title', function (err, blogs) {
+				if (blogs.length) { // to-do: handle no matches
+					res.send(blogs);
+				}
+			});
+		}
 	},
 
 	postBlog: function (req, res, next) {
