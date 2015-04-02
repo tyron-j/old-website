@@ -160,6 +160,6 @@ module.exports = {
 	},
 
 	postBlog: function (req, res, next) {
-		//
+		res.send(req.body);
 	}
 };

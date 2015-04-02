@@ -29,6 +29,8 @@ define([
 		// master routes
 		$routeProvider.when('/master/upload', {
 			templateUrl: '/partials/master/upload'
+		}).when('/master/blog', {
+			templateUrl: '/partials/master/blog'
 		});
 
 		// otherwise
