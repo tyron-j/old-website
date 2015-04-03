@@ -160,6 +160,19 @@ module.exports = {
 	},
 
 	postBlog: function (req, res, next) {
-		res.send(req.body);
+		var blog = new models.Blog({
+			title: req.body.title,
+			content: req.body.content
+		});
+
+		blog.save(function (err, b) {
+			if (err) {
+				signal.error("Failed to save " + req.body.title + " to database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			signal.success("Saved " + req.body.title + " to database");
+			res.redirect('/success'); // to-do: change redirect
+		});
 	}
 };
