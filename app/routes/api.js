@@ -18,7 +18,6 @@ module.exports = {
 		};
 	},
 
-	// handle Dan Ryan's name
 	getUser: function (req, res, next) {
 		var name = req.query.name.toLowerCase().split(' ');
 
