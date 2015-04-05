@@ -7,8 +7,9 @@ define([
 	'./galleryctrl',
 	'./blogctrl',
 
+	'./master/galleryctrl',
 	'./master/blogctrl'
-], function (ng, LoginCtrl, GalleryCtrl, BlogCtrl, MasterBlogCtrl) {
+], function (ng, LoginCtrl, GalleryCtrl, BlogCtrl, MasterGalleryCtrl, MasterBlogCtrl) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
@@ -17,5 +18,6 @@ define([
 		.controller('GalleryCtrl', GalleryCtrl)
 		.controller('BlogCtrl', BlogCtrl)
 		
+		.controller('MasterGalleryCtrl', MasterGalleryCtrl)
 		.controller('MasterBlogCtrl', MasterBlogCtrl);
 });

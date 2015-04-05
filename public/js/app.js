@@ -32,6 +32,9 @@ define([
 		// master routes
 		$routeProvider.when('/master/upload', {
 			templateUrl: '/partials/master/upload'
+		}).when('/master/gallery', {
+			templateUrl: '/partials/master/gallery',
+			controller: 'MasterGalleryCtrl'
 		}).when('/master/blog', {
 			templateUrl: '/partials/master/blog',
 			controller: 'MasterBlogCtrl'
