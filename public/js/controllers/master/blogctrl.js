@@ -1,4 +1,4 @@
-// login controller
+// master blog controller
 
 define(function () {
 	'use strict';

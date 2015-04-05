@@ -18,6 +18,9 @@ define([
 		}).when('/gallery', { // currently localhost only
 			templateUrl: '/partials/gallery',
 			controller: 'GalleryCtrl'
+		}).when('/blog', {
+			templateUrl: '/partials/blog',
+			controller: 'BlogCtrl'
 		}).when('/hello', {
 			templateUrl: '/partials/hello'
 		}).when('/unauthorized', {
@@ -30,7 +33,8 @@ define([
 		$routeProvider.when('/master/upload', {
 			templateUrl: '/partials/master/upload'
 		}).when('/master/blog', {
-			templateUrl: '/partials/master/blog'
+			templateUrl: '/partials/master/blog',
+			controller: 'MasterBlogCtrl'
 		});
 
 		// otherwise

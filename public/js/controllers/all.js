@@ -2,13 +2,20 @@
 
 define([
 	'angular',
+
 	'./loginctrl',
-	'./galleryctrl'
-], function (ng, LoginCtrl, GalleryCtrl) {
+	'./galleryctrl',
+	'./blogctrl',
+
+	'./master/blogctrl'
+], function (ng, LoginCtrl, GalleryCtrl, BlogCtrl, MasterBlogCtrl) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
 	return ng.module('allControllers', [])
 		.controller('LoginCtrl', LoginCtrl)
-		.controller('GalleryCtrl', GalleryCtrl);
+		.controller('GalleryCtrl', GalleryCtrl)
+		.controller('BlogCtrl', BlogCtrl)
+		
+		.controller('MasterBlogCtrl', MasterBlogCtrl);
 });

@@ -1,4 +1,4 @@
-// gallery controller
+// blog controller
 
 define(function () {
 	'use strict';
@@ -8,8 +8,8 @@ define(function () {
 		'$scope',
 		
 		function ($http, $scope) {
-			$http.get('/api/artwork').success(function (artworks) {
-				$scope.artworks = artworks;
+			$http.get('/api/blog').success(function (blogs) {
+				$scope.blogs = blogs;
 			});
 		}
 	];
