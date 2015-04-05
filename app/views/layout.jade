@@ -9,11 +9,11 @@ html
 		if isLocalHost
 			//-less
 			script less = { async: true, logLevel: 0 } // disables less log
-			link(rel='stylesheet/less', type='text/css', href='less/test.less')
+			link(rel='stylesheet/less', type='text/css', href='less/all.less')
 			script(src='js/lib/less.min.js')
 		else
 			//-css
-			link(rel='stylesheet', type='text/css', href='css/test.css')
+			link(rel='stylesheet', type='text/css', href='css/all.css')
 
 	body
 		block body
