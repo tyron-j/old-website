@@ -1,0 +1,118 @@
+// default mixins
+
+@import 'all.less';
+
+.arrow-down (@size, @color) {
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-top: @size solid @color;
+}
+
+.arrow-left (@size, @color) {
+	border-top: @size solid transparent;
+	border-bottom: @size solid transparent;
+	border-right: @size solid @color;
+}
+
+.arrow-right (@size, @color) {
+	border-top: @size solid transparent;
+	border-bottom: @size solid transparent;
+	border-left: @size solid @color;
+}
+
+.arrow-up (@size, @color) {
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-bottom: @size solid @color;
+}
+
+.border-radius (@radius) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.box-shadow (@blur: 0px, @color: black) {
+    -webkit-box-shadow: 0 0 @blur 0 @color;
+    -moz-box-shadow: 0 0 @blur 0 @color;
+    box-shadow: 0 0 @blur 0 @color;
+}
+
+.center (@width, @height: @width) {
+	left: 50%;
+	top: 50%;
+	margin-left: -(@width / 2);
+	margin-top: -(@height / 2);
+	position: absolute;
+}
+
+.center-text (@line-height) {
+	text-align: center;
+	vertical-align: middle;
+	line-height: @line-height;
+}
+
+.fit-to-parent () {
+	width: 100%;
+	height: 100%;
+}
+
+.format-background () {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.linear-gradient (@first-color, @second-color) {
+	background: -webkit-linear-gradient(left, @first-color, @second-color);
+	background: -moz-linear-gradient(right, @first-color, @second-color);
+	background: -o-linear-gradient(right, @first-color, @second-color);
+	background: linear-gradient(to right, @first-color, @second-color);
+}
+
+.reflect(@height, @length: 50%, @opacity: 0.25){ // not standardized across browsers yet
+	-webkit-box-reflect: below @height -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255, 255, 255, @opacity)));
+}
+
+.rotate (@rotation) {
+	-webkit-transform: rotate(@rotation);
+	-moz-transform: rotate(@rotation);
+	-ms-transform: rotate(@rotation);
+	-o-transform: rotate(@rotation);
+	transform: rotate(@rotation);
+}
+
+.set-dimensions (@width, @height: @width) {
+	width: @width;
+	height: @height;
+}
+
+.set-font (@size, @color) {
+	color: @color;
+	font-family: @stdfont;
+	font-size: @size;
+}
+
+.set-in-center (@width, @height: @width) {
+	.set-dimensions(@width, @height);
+	.center(@width, @height);
+}
+
+.stack-left () {
+	position: relative; // is this still necessary?
+	display: inline-block; // needs testing
+}
+
+.stack-right () {
+	position: relative;
+	float: right;
+}
+
+.unselectable () {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
