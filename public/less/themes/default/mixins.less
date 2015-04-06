@@ -40,6 +40,12 @@
     box-shadow: 0 0 @blur 0 @color;
 }
 
+.box-sizing (@value) {
+    -webkit-box-sizing: @value;
+    -moz-box-sizing: @value;
+    box-sizing: @value;
+}
+
 .center (@width, @height: @width) {
 	left: 50%;
 	top: 50%;
