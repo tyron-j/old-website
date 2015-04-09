@@ -1,5 +1,7 @@
 //- blog
 
-div(class='centered')
-	div(ng-repeat='blog in blogs').
+div(class='left side-bar')
+	div(class='side-bar-header').
+		Blogs
+	div(class='side-bar-item' ng-repeat='blog in blogs').
 		{{blog.title}}

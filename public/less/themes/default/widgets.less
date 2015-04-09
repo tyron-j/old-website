@@ -64,6 +64,7 @@
 .side-bar {
 	.widget;
 	
+	width: @side-bar-width;
 	height: 100%;
 	position: fixed;
 	top: 0px;
@@ -82,23 +83,21 @@
 
 	& > .side-bar-header, .side-bar-item {
 		position: relative;
-		// display: inline-block;
-		box-sizing: border-box;
-		// padding-left: @side-bar-text-padding;
+		padding-left: @side-bar-text-padding;
 	}
 
 	& > .side-bar-header {
-		// width: @side-bar-header-width;
-		// height: @side-bar-header-height;
-		// line-height: @side-bar-header-height;
-		// font-size: @side-bar-header-font-size;
+		width: @side-bar-header-width;
+		height: @side-bar-header-height;
+		line-height: @side-bar-header-height;
+		font-size: @side-bar-header-font-size;
 	}
 
 	& > .side-bar-item {
-		// width: @side-bar-item-width;
-		// height: @side-bar-item-height;
-		// line-height: @side-bar-item-height;
-		// font-size: @side-bar-item-font-size;
+		width: @side-bar-item-width;
+		height: @side-bar-item-height;
+		line-height: @side-bar-item-height;
+		font-size: @side-bar-item-font-size;
 
 		& > .side-bar-item-indicator {
 			// width: @side-bar-item-indicator-width;
