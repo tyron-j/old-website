@@ -52,6 +52,7 @@
 		display: inline-block;
 		position: relative;
 	}
+
 	& .buttons {
 		position: absolute;
 		left: 50%;
@@ -66,23 +67,33 @@
 	height: 100%;
 	position: fixed;
 	top: 0px;
-	right: 0px; // to-do: make this configurable
+
+	&.left {
+		left: 0px;
+	}
+
+	&.right {
+		right: 0px;
+	}
 
 	& > a {
 		display: block;
 	}
+
 	& > .side-bar-header, .side-bar-item {
 		position: relative;
 		// display: inline-block;
 		box-sizing: border-box;
 		// padding-left: @side-bar-text-padding;
 	}
+
 	& > .side-bar-header {
 		// width: @side-bar-header-width;
 		// height: @side-bar-header-height;
 		// line-height: @side-bar-header-height;
 		// font-size: @side-bar-header-font-size;
 	}
+
 	& > .side-bar-item {
 		// width: @side-bar-item-width;
 		// height: @side-bar-item-height;
