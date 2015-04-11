@@ -7,13 +7,19 @@ html
 		base(href='/')
 
 		if isLocalHost
-			//-less
+			//- less
 			script less = { async: true, logLevel: 0 } // disables less log
+			link(rel='stylesheet/less', type='text/css', href='less/fonts/all.less')
 			link(rel='stylesheet/less', type='text/css', href='less/all.less')
 			script(src='js/lib/less.min.js')
 		else
-			//-css
+			//- css
 			link(rel='stylesheet', type='text/css', href='css/all.css')
+
+			//- fonts
+			link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Lato')
+			link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Open+Sans')
+			link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Ubuntu')
 
 	body
 		block body
