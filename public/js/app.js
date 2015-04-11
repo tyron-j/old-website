@@ -18,7 +18,7 @@ define([
 		}).when('/gallery', { // currently localhost only
 			templateUrl: '/partials/gallery',
 			controller: 'GalleryCtrl'
-		}).when('/blog', {
+		}).when('/blog', { // currently localhost only
 			templateUrl: '/partials/blog',
 			controller: 'BlogCtrl'
 		}).when('/hello', {
