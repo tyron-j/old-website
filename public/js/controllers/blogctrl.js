@@ -9,8 +9,7 @@ define(function () {
 		
 		function ($http, $scope) {
 			$http.get('/api/blog').success(function (blogs) {
-				// $scope.blogs = blogs;
-				console.log(blogs);
+				$scope.blogs = blogs;
 			});
 		}
 	];
