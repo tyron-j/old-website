@@ -5,6 +5,7 @@ extends layout
 
 block view
 	div(ng-controller='MainCtrl')
+		//- to-do: remove isLocalHost condition
 		if isLocalHost
 			//- to-do: consider changing where the nav bar is added
 			div(class='nav-bar')

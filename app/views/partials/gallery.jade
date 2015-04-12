@@ -1,6 +1,6 @@
 //- gallery
 
-//- to-do: change url to http://tyronjung.com/api/artwork/{{artwork.title}}
+//- to-do: change url to http://tyronjung.com/api/artwork/{{ artwork.title }}
 //- after moving image fetching api to unprotected api
 div(class='artwork', ng-repeat='artwork in artworks')
 	img(ng-src='http://localhost:9000/api/artwork/{{ artwork.title }}')
