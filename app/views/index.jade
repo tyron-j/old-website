@@ -4,7 +4,8 @@
 extends layout
 
 block view
-	div(ng-controller='MainCtrl')
+	//- to-do: consider using ng-cloak for each individual element for progressive rendering
+	div(ng-controller='MainCtrl' ng-cloak)
 		//- to-do: remove isLocalHost condition
 		if isLocalHost
 			//- to-do: consider changing where the nav bar is added

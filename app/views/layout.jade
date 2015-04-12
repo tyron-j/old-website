@@ -6,6 +6,9 @@ html
 		meta(charset='utf8')
 		base(href='/')
 
+		//- cloaks ugly angular notation
+		link(rel='stylesheet', type='text/css', href='css/cloak.css')
+
 		if isLocalHost
 			//- less
 			script less = { async: true, logLevel: 0 } // disables less log
