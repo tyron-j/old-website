@@ -9,8 +9,14 @@ define(function () {
 		
 		function ($http, $scope) {
 			$http.get('/api/blog').success(function (blogs) {
-				$scope.blogs = blogs;
-				$scope.sideBarLoaded = true;
+				$scope.sideBar.inUse   = true;
+				$scope.sideBar.title   = 'Blogs';
+				$scope.sideBar.itemKey = 'title';
+				$scope.sideBar.items   = blogs;
+			});
+
+			$scope.$on('$locationChangeStart', function (evt, next, current) {
+				$scope.sideBar.inUse = false;
 			});
 		}
 	];

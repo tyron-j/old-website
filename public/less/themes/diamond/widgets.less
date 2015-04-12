@@ -6,6 +6,16 @@
 	background-color: @wet-asphalt;
 }
 
+.nav-bar {
+	margin-left: -@nav-bar-item-width * 2 / 2; // to-do: set this dynamically
+
+	& > .nav-bar-item {
+		&:hover {
+			color: @turquoise;
+		}
+	}
+}
+
 .side-bar {
 	& > .side-bar-header {
 		background-color: @green-sea;
@@ -26,8 +36,16 @@
 			left: -@side-bar-width;
 
 			&.ng-enter-active {
-				opacity: 1;
-				left: 0px;
+				left: 0;
+			}
+		}
+
+		&.ng-leave {
+			transition: 0.5s, ease-out, all;
+			left: 0;
+
+			&.ng-leave-active {
+				left: -@side-bar-width;
 			}
 		}
 	}

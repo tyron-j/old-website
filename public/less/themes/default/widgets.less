@@ -56,7 +56,7 @@
 	& .buttons {
 		position: absolute;
 		left: 50%;
-		bottom: 0px;
+		bottom: 0;
 		z-index: 1;
 	}
 }
@@ -67,14 +67,14 @@
 	width: @side-bar-width;
 	height: 100%;
 	position: fixed;
-	top: 0px;
+	top: 0;
 
 	&.left {
-		left: 0px;
+		left: 0;
 	}
 
 	&.right {
-		right: 0px;
+		right: 0;
 	}
 
 	& > a {
@@ -103,8 +103,8 @@
 			// width: @side-bar-item-indicator-width;
 			// height: @side-bar-item-indicator-height;
 			position: absolute;
-			top: 0px;
-			right: 0px;
+			top: 0;
+			right: 0;
 		}
 	}
 }
@@ -116,9 +116,12 @@
 	position: fixed;
 	z-index: 1;
 
-	& > .nav-content {
-		position: relative;
-		width: 100%;
-		height: 100%;
+	& > a.nav-bar-item {
+		width: @nav-bar-item-width;
+		height: @nav-bar-item-height;
+		line-height: @nav-bar-item-height;
+		text-align: center;
+		display: inline-block;
+		font-size: @nav-bar-item-font-size;
 	}
 }
