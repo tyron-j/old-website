@@ -10,6 +10,7 @@ define(function () {
 		function ($http, $scope) {
 			$http.get('/api/blog').success(function (blogs) {
 				$scope.blogs = blogs;
+				$scope.sideBarLoaded = true;
 			});
 		}
 	];

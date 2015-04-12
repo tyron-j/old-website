@@ -2,12 +2,14 @@
 
 define([
 	'angular',
+	'angular-animate',
 	'angular-route',
 	'controllers/all'
 ], function (ng) { // only need the first argument
 	'use strict';
 
 	var app = ng.module('tyronApp', [
+		'ngAnimate',
 		'ngRoute',
 		'allControllers'
 	]).config(function ($routeProvider, $locationProvider) { // minification errors?

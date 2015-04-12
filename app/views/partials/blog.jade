@@ -1,6 +1,6 @@
 //- blog
 
-div(class='left side-bar')
+div(class='left side-bar slider' ng-if='sideBarLoaded')
 	div(class='side-bar-header').
 		Blogs
 	div(class='side-bar-item' ng-repeat='blog in blogs').

@@ -19,4 +19,16 @@
 			color: @turquoise;
 		}
 	}
+
+	&.slider {
+		&.ng-enter {
+			transition: 0.5s, ease-out, all;
+			left: -@side-bar-width;
+
+			&.ng-enter-active {
+				opacity: 1;
+				left: 0px;
+			}
+		}
+	}
 }
