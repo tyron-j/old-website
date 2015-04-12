@@ -1,0 +1,31 @@
+// diamond classes
+
+.centered {
+	.set-in-center(250px);
+	font-size: 16px;
+}
+
+.column { // currently unused
+	width: 20%; // to-do: consider using a fixed value and setting min-width on body
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	z-index: -1;
+
+	&.left {
+		left: 0px;
+		.linear-gradient(@midnight-blue, @wet-asphalt);
+	}
+
+	&.right {
+		right: 0px;
+		.linear-gradient(@wet-asphalt, @midnight-blue);
+	}
+}
+
+.artwork {
+	img {
+		display: block;
+		margin: auto;
+	}
+}
