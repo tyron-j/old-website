@@ -21,19 +21,7 @@ html
 			link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Open+Sans')
 			link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Ubuntu')
 
-	body(ng-controller='MainCtrl')
-		//- to-do: consider changing where the nav bar is added
-		div(class='nav-bar')
-			a(class='nav-bar-item' href='blog') Blog
-			a(class='nav-bar-item' href='gallery') Gallery
-
-		div(class='left side-bar slider' ng-if='sideBar.inUse')
-			div(class='side-bar-header').
-				{{ sideBar.title }}
-			//- to-do: change item[sideBar.itemKey] to just item.title and make that the use case?
-			div(class='side-bar-item' ng-repeat='item in sideBar.items').
-				{{ item[sideBar.itemKey] }}
-
+	body
 		block view
 
 		//- js
