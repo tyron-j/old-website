@@ -10,6 +10,7 @@ define(function () {
 		function ($http, $scope) {
 			// "global" objects that can be manipulated by any controller
 			$scope.navBar = {
+				inUse: false,
 				items: [{
 					title: 'Login',
 					href: 'login'

@@ -1,10 +1,5 @@
 // diamond classes
 
-.centered {
-	.set-in-center(250px);
-	font-size: @std-font-size;
-}
-
 .artwork {
 	img {
 		display: block;
@@ -12,8 +7,49 @@
 	}
 }
 
+.centered {
+	.set-in-center(250px);
+	font-size: @std-font-size;
+}
+
 .blog { // to-do: clean up style
 	.widget; // to-do: this is not a widget
 
 	.set-in-center(1000px, 800px);
+}
+
+.nav-bar-container { // nav bar wrapper
+	left: 50%;
+	position: fixed;
+	z-index: 1;
+	width: @nav-bar-item-width * 3; // to-do: just set a fixed width/height on nav-bar
+	height: @nav-bar-item-height;
+	margin-left: -@nav-bar-item-width * 3 / 2; // to-do: set this dynamically
+
+	& > .nav-bar {
+		left: 0;
+		position: relative;
+		z-index: 0;
+		margin-left: 0;
+
+		&.slider {
+			&.ng-enter {
+				transition: 0.5s, ease-out, all;
+				top: -@nav-bar-item-height;
+
+				&.ng-enter-active {
+					top: 0;
+				}
+			}
+
+			&.ng-leave {
+				transition: 0.5s, ease-out, all;
+				top: 0;
+
+				&.ng-leave-active {
+					top: -@side-bar-width;
+				}
+			}
+		}
+	}
 }
