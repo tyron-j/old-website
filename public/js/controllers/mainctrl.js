@@ -8,7 +8,20 @@ define(function () {
 		'$scope',
 		
 		function ($http, $scope) {
-			// "global" object that can be manipulated by any controller
+			// "global" objects that can be manipulated by any controller
+			$scope.navBar = {
+				items: [{
+					title: 'Login',
+					href: 'login'
+				}, {
+					title: 'Blog',
+					href: 'blog'
+				}, {
+					title: 'Gallery',
+					href: 'gallery'
+				}]
+			};
+
 			$scope.sideBar = {
 				inUse: false
 			};

@@ -10,9 +10,8 @@ block view
 		if isLocalHost
 			//- to-do: consider changing where the nav bar is added
 			div(class='nav-bar')
-				a(class='nav-bar-item' href='login') Login
-				a(class='nav-bar-item' href='blog') Blog
-				a(class='nav-bar-item' href='gallery') Gallery
+				a(class='nav-bar-item' ng-repeat='item in navBar.items' ng-href='{{ item.href }}').
+					{{ item.title }}
 
 			div(class='left side-bar slider' ng-if='sideBar.inUse')
 				div(class='side-bar-header').
