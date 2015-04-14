@@ -6,61 +6,6 @@
 	// styles for all widgets
 }
 
-.i-frame {
-	.widget;
-	
-	// .set-in-center(@slide-show-width, @slide-show-height);
-
-	& > .scroll-window {
-		height: 100%;
-		overflow: hidden;
-
-		& > .scroll-content { // refer to legacy code for text content styling
-			position: relative;
-			width: 100%;
-			text-align: left;
-			// box-sizing: border-box; // box-sizing is applied to all elements
-			padding: 20px;
-		}
-	}
-	
-	& > .scroll-bar {
-		float: right;
-		// width: @scroll-bar-width;
-		height: 100%;
-
-		& > .scroller {
-			position: relative;
-			width: 100%;
-			// height: @scroller-height;
-		}
-	}
-}
-
-.slide-show {
-	.widget;
-	
-	// .set-in-center(@slide-show-width, @slide-show-height);
-
-	overflow: hidden;
-
-	& .slide {
-		background-color: black;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
-		display: inline-block;
-		position: relative;
-	}
-
-	& .buttons {
-		position: absolute;
-		left: 50%;
-		bottom: 0;
-		z-index: 1;
-	}
-}
-
 .side-bar {
 	.widget;
 	
@@ -83,8 +28,8 @@
 	}
 
 	& > .side-bar-header, .side-bar-item {
-		position: relative;
 		padding-left: @side-bar-text-padding;
+		position: relative;
 	}
 
 	& > .side-bar-header {
@@ -113,6 +58,8 @@
 .nav-bar {
 	.widget;
 	
+	width: @nav-bar-width;
+	height: @nav-bar-height;
 	left: 50%;
 	position: fixed;
 	z-index: 1;
@@ -121,8 +68,8 @@
 		width: @nav-bar-item-width;
 		height: @nav-bar-item-height;
 		line-height: @nav-bar-item-height;
+		font-size: @nav-bar-item-font-size;
 		text-align: center;
 		display: inline-block;
-		font-size: @nav-bar-item-font-size;
 	}
 }

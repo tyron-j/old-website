@@ -19,23 +19,23 @@
 }
 
 .nav-bar-container { // nav bar wrapper
+	width: @nav-bar-width;
+	height: @nav-bar-height;
+	margin-left: -@nav-bar-width / 2;
 	left: 50%;
 	position: fixed;
 	z-index: 1;
-	width: @nav-bar-item-width * 3; // to-do: just set a fixed width/height on nav-bar
-	height: @nav-bar-item-height;
-	margin-left: -@nav-bar-item-width * 3 / 2; // to-do: set this dynamically
 
 	& > .nav-bar {
-		left: 0;
-		position: relative;
-		z-index: 0;
 		margin-left: 0;
+		left: 0;
+		position: absolute;
+		z-index: 0;
 
 		&.slider {
 			&.ng-enter {
 				transition: 0.5s, ease-out, all;
-				top: -@nav-bar-item-height;
+				top: -@nav-bar-height;
 
 				&.ng-enter-active {
 					top: 0;
@@ -47,7 +47,7 @@
 				top: 0;
 
 				&.ng-leave-active {
-					top: -@side-bar-width;
+					top: -@nav-bar-height;
 				}
 			}
 		}

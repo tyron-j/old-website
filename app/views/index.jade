@@ -12,6 +12,8 @@ block view
 			div(class='nav-bar-container',
 				ng-mouseover='navBar.inUse = true',
 				ng-mouseleave='navBar.inUse = false')
+				//- to-do: ng-if is causing multiple instances of nav bar to be created
+				//- find another way to show/hide the nav bar
 				div(class='nav-bar slider', ng-if='navBar.inUse')
 					a(class='nav-bar-item', ng-repeat='item in navBar.items', ng-href='{{ item.href }}').
 						{{ item.title }}
