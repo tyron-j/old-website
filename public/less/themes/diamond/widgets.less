@@ -16,7 +16,7 @@
 	}
 }
 
-.side-bar {
+.side-bar { // to-do: change the animation to one similar to that of nav bar; stop using ngAnimate
 	& > .side-bar-header {
 		background-color: @green-sea;
 		margin-bottom: 20px;
@@ -32,7 +32,7 @@
 
 	&.slider {
 		&.ng-enter {
-			transition: 0.5s, ease-out, all;
+			transition: all 0.5s ease-out;
 			left: -@side-bar-width;
 
 			&.ng-enter-active {
@@ -41,7 +41,7 @@
 		}
 
 		&.ng-leave {
-			transition: 0.5s, ease-out, all;
+			transition: all 0.5s ease-out;
 			left: 0;
 
 			&.ng-leave-active {

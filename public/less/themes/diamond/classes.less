@@ -32,24 +32,18 @@
 		position: absolute;
 		z-index: 0;
 
-		&.slider {
-			&.ng-enter {
-				transition: 0.5s, ease-out, all;
-				top: -@nav-bar-height;
+		&.hidden {
+			transition: all 0.5s ease-out;
+			margin-top: -@nav-bar-height;
+			
+			.box-shadow(0);
+		}
 
-				&.ng-enter-active {
-					top: 0;
-				}
-			}
+		&.shown {
+			transition: all 0.5s ease-out;
+			margin-top: 0;
 
-			&.ng-leave {
-				transition: 0.5s, ease-out, all;
-				top: 0;
-
-				&.ng-leave-active {
-					top: -@nav-bar-height;
-				}
-			}
+			.box-shadow(15px);
 		}
 	}
 }
