@@ -33,14 +33,15 @@
 		z-index: 0;
 
 		&.hidden {
-			transition: all 0.5s ease-out;
+			// to-do: create @std-transition
+			transition: all 0.25s ease-out;
 			margin-top: -@nav-bar-height;
-			
+
 			.box-shadow(0);
 		}
 
 		&.shown {
-			transition: all 0.5s ease-out;
+			transition: all 0.25s ease-out;
 			margin-top: 0;
 
 			.box-shadow(15px);
