@@ -1,52 +1,56 @@
 // diamond widgets
 
 .widget {
-	.box-shadow(15px);
+	.box-shadow(@std-box-shadow);
 
 	background-color: @wet-asphalt;
 }
 
 .nav-bar {
-	margin-left: -@nav-bar-width / 2;
+	& > .nav-bar-content { // animated nav bar
+		&.shown {
+			transition: @std-transition;
+			margin-top: 0;
 
-	& > .nav-bar-item {
-		&:hover {
-			color: @turquoise;
+			.box-shadow(@std-box-shadow);
+		}
+
+		&.hidden {
+			transition: @std-transition;
+			margin-top: -@nav-bar-height;
+
+			.box-shadow(0);
+		}
+
+		& > .nav-bar-item {
+			&:hover {
+				color: @turquoise;
+			}
 		}
 	}
 }
 
 .side-bar { // to-do: change the animation to one similar to that of nav bar; stop using ngAnimate
+	&.shown {
+		transition: @std-transition;
+		left: 0; // to-do: create use case for right side-bar
+
+		.box-shadow(@std-box-shadow);
+	}
+
+	&.hidden {
+		transition: @std-transition;
+		left: -@side-bar-width; // to-do: create use case for right side-bar
+
+		.box-shadow(0);
+	}
+
 	& > .side-bar-header {
 		background-color: @green-sea;
 		margin-bottom: 20px;
 	}
 
-	& > .side-bar-item {
-		cursor: pointer;
-
-		&:hover {
-			color: @turquoise;
-		}
-	}
-
-	&.slider {
-		&.ng-enter {
-			transition: all 0.25s ease-out;
-			left: -@side-bar-width;
-
-			&.ng-enter-active {
-				left: 0;
-			}
-		}
-
-		&.ng-leave {
-			transition: all 0.25s ease-out;
-			left: 0;
-
-			&.ng-leave-active {
-				left: -@side-bar-width;
-			}
-		}
+	& > .side-bar-item:hover {
+		color: @turquoise;
 	}
 }

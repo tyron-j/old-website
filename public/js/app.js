@@ -2,20 +2,20 @@
 
 define([
 	'angular',
-	'angular-animate',
+	'angular-animate', // to-do: consider removing ngAnimate
 	'angular-route',
 	'controllers/all'
 ], function (ng) { // only need the first argument
 	'use strict';
 
 	var app = ng.module('tyronApp', [
-		'ngAnimate',
+		'ngAnimate', // to-do: consider removing ngAnimate
 		'ngRoute',
 		'allControllers'
 	]).config([
 		'$routeProvider',
 		'$locationProvider',
-		
+
 		function ($routeProvider, $locationProvider) {
 			// public routes
 			$routeProvider.when('/login', {

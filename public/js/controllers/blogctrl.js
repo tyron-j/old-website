@@ -11,16 +11,14 @@ define(function () {
 			$http.get('/api/blog').success(function (blogs) {
 				$scope.sideBar.inUse   = true;
 				$scope.sideBar.title   = 'Blogs';
-				$scope.sideBar.itemKey = 'title';
 				$scope.sideBar.items   = blogs;
 			});
 
 			// destruction
 			$scope.$on('$locationChangeStart', function (evt, next, current) {
 				$scope.sideBar.inUse   = false;
-				$scope.sideBar.title   = '';
-				$scope.sideBar.itemKey = '';
-				$scope.sideBar.items   = [];
+				// $scope.sideBar.title   = '';
+				// $scope.sideBar.items   = [];
 			});
 		}
 	];

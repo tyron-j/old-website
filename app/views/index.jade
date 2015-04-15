@@ -8,22 +8,15 @@ block view
 	div(ng-controller='MainCtrl', ng-cloak)
 		//- to-do: remove isLocalHost condition
 		if isLocalHost
-			//- to-do: consider changing where the nav bar is added
-			div(class='nav-bar-container',
-				ng-mouseover='navBar.inUse = true',
-				ng-mouseleave='navBar.inUse = false')
-				//- to-do: ng-if is causing multiple instances of nav bar to be created
-				//- find another way to show/hide the nav bar
-				div(class='nav-bar',
-					ng-class='{ shown: navBar.inUse, hidden: !navBar.inUse }')
+			div(class='nav-bar', ng-mouseover='navBar.inUse = true', ng-mouseleave='navBar.inUse = false')
+				div(class='nav-bar-content', ng-class='{ shown: navBar.inUse, hidden: !navBar.inUse }')
 					a(class='nav-bar-item', ng-repeat='item in navBar.items', ng-href='{{ item.href }}').
 						{{ item.title }}
 
-			div(class='left side-bar slider', ng-if='sideBar.inUse')
+			div(class='left side-bar', ng-class='{ shown: sideBar.inUse, hidden: !sideBar.inUse }')
 				div(class='side-bar-header').
 					{{ sideBar.title }}
-				//- to-do: change item[sideBar.itemKey] to just item.title and make that the use case?
 				div(class='side-bar-item', ng-repeat='item in sideBar.items').
-					{{ item[sideBar.itemKey] }}
+					{{ item.title }}
 
 		div(ng-view)

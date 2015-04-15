@@ -44,32 +44,28 @@
 		height: @side-bar-item-height;
 		line-height: @side-bar-item-height;
 		font-size: @side-bar-item-font-size;
-
-		& > .side-bar-item-indicator {
-			// width: @side-bar-item-indicator-width;
-			// height: @side-bar-item-indicator-height;
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
+		cursor: pointer;
 	}
 }
 
 .nav-bar {
-	.widget;
-	
 	width: @nav-bar-width;
 	height: @nav-bar-height;
+	margin-left: -@nav-bar-width / 2;
 	left: 50%;
 	position: fixed;
 	z-index: 1;
 
-	& > a.nav-bar-item {
-		width: @nav-bar-item-width;
-		height: @nav-bar-item-height;
-		line-height: @nav-bar-item-height;
-		font-size: @nav-bar-item-font-size;
-		text-align: center;
-		display: inline-block;
+	& > .nav-bar-content {
+		.widget;
+
+		& > a.nav-bar-item {
+			width: @nav-bar-item-width;
+			height: @nav-bar-item-height;
+			line-height: @nav-bar-item-height;
+			font-size: @nav-bar-item-font-size;
+			text-align: center;
+			display: inline-block;
+		}
 	}
 }

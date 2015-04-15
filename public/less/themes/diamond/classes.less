@@ -17,34 +17,3 @@
 
 	.set-in-center(1000px, 800px);
 }
-
-.nav-bar-container { // nav bar wrapper
-	width: @nav-bar-width;
-	height: @nav-bar-height;
-	margin-left: -@nav-bar-width / 2;
-	left: 50%;
-	position: fixed;
-	z-index: 1;
-
-	& > .nav-bar {
-		margin-left: 0;
-		left: 0;
-		position: absolute;
-		z-index: 0;
-
-		&.hidden {
-			// to-do: create @std-transition
-			transition: all 0.25s ease-out;
-			margin-top: -@nav-bar-height;
-
-			.box-shadow(0);
-		}
-
-		&.shown {
-			transition: all 0.25s ease-out;
-			margin-top: 0;
-
-			.box-shadow(15px);
-		}
-	}
-}
