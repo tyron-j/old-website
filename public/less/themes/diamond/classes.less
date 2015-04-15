@@ -1,15 +1,30 @@
 // diamond classes
 
 .artwork {
-	img {
-		display: block;
+	width: 1000px;
+	height: 750px;
+	margin: auto;
+	position: relative; // holds absolute element within
+
+	margin-bottom: @std-margin; // to-do: temporary
+
+	&:last-child {
+		margin-bottom: 0; // to-do: temporary
+	}
+
+	& > img { // to-do: use a mix-in for this
+		max-width: 100%;
+		max-height: 100%;
+
+		// for centering
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+
+		position: absolute;
 		margin: auto;
 	}
-}
-
-.centered {
-	.set-in-center(250px);
-	font-size: @std-font-size;
 }
 
 .blog { // to-do: clean up style
@@ -20,4 +35,13 @@
 	.blog-content {
 		padding: @std-text-padding;
 	}
+}
+
+.centered {
+	.set-in-center(250px);
+	font-size: @std-font-size;
+}
+
+.gallery {
+	padding-top: @std-margin;
 }
