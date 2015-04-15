@@ -50,7 +50,9 @@
 		margin-bottom: 20px;
 	}
 
-	& > .side-bar-item:hover {
-		color: @turquoise;
+	& > .side-bar-item {
+		&:hover, &.selected {
+			color: @turquoise;
+		}
 	}
 }

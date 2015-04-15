@@ -16,7 +16,7 @@ block view
 			div(class='left side-bar', ng-class='{ shown: sideBar.inUse, hidden: !sideBar.inUse }')
 				div(class='side-bar-header').
 					{{ sideBar.title }}
-				div(class='side-bar-item', ng-repeat='item in sideBar.items').
+				div(class='side-bar-item', ng-repeat='item in sideBar.items', ng-class='{ selected: item === sideBar.selectedItem }', ng-click='sideBar.selectItem(item)').
 					{{ item.title }}
 
 		div(ng-view)
