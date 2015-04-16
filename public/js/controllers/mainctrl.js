@@ -29,8 +29,17 @@ define(function () {
 				}]
 			};
 
-			$scope.sideBar = {
-				inUse: false
+			$scope.sideBar = { // to-do: use a service to instantiate a side bar?
+				inUse: false,
+				selectItem: function (blog) { // this function varies based on the side bar's content
+					if (!blog.content) { // if not already fetched
+						$http.get('/api/blog/' + blog.title).success(function (blogContent) {
+							blog.content = blogContent;
+						});
+					}
+
+					this.selectedItem = blog;
+				}
 			};
 		}
 	];
