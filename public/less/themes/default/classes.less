@@ -1,7 +1,16 @@
 // default classes
 
 .blog {
-	.blog-content {
-		font-size: @std-font-size;
+	& > .blog-header {
+		width: @blog-header-width;
+		height: @blog-header-height;
+		font-size: @blog-header-font-size;
+		line-height: @blog-header-height;
+		padding-left: @blog-text-padding;
+	}
+
+	& > .blog-content {
+		font-size: @blog-content-font-size;
+		padding: @blog-text-padding;
 	}
 }
