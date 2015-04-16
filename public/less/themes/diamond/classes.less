@@ -12,18 +12,9 @@
 		margin-bottom: 0; // to-do: temporary
 	}
 
-	& > img { // to-do: use a mix-in for this
-		max-width: 100%;
-		max-height: 100%;
-
-		// for centering
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-
-		position: absolute;
-		margin: auto;
+	& > img {
+		.center();
+		.fit-to-parent();
 	}
 }
 
@@ -37,11 +28,11 @@
 	}
 }
 
+.gallery {
+	padding-top: @std-margin;
+}
+
 .centered { // to-do: remove
 	.set-in-center(250px);
 	font-size: @std-font-size;
-}
-
-.gallery {
-	padding-top: @std-margin;
 }
