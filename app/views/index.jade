@@ -8,15 +8,15 @@ block view
 	div(ng-controller='MainCtrl', ng-cloak)
 		//- to-do: remove isLocalHost condition
 		if isLocalHost
-			div(class='nav-bar', ng-mouseover='navBar.inUse = true', ng-mouseleave='navBar.inUse = false')
-				div(class='nav-bar-content', ng-class='{ shown: navBar.inUse, hidden: !navBar.inUse }')
-					a(class='nav-bar-item', ng-repeat='item in navBar.items', ng-href='{{ item.href }}').
-						{{ item.title }}
-
 			div(class='left side-bar', ng-class='{ shown: sideBar.inUse, hidden: !sideBar.inUse }')
 				div(class='side-bar-header').
 					{{ sideBar.title }}
 				div(class='side-bar-item', ng-repeat='item in sideBar.items', ng-class='{ selected: item === sideBar.selectedItem }', ng-click='sideBar.selectItem(item)').
 					{{ item.title }}
+
+			div(class='nav-bar', ng-mouseover='navBar.inUse = true', ng-mouseleave='navBar.inUse = false')
+				div(class='nav-bar-content', ng-class='{ shown: navBar.inUse, hidden: !navBar.inUse }')
+					a(class='nav-bar-item', ng-repeat='item in navBar.items', ng-href='{{ item.href }}').
+						{{ item.title }}
 
 		div(ng-view)
