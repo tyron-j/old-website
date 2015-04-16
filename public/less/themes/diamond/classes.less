@@ -1,8 +1,8 @@
 // diamond classes
 
 .artwork {
-	width: 1000px;
-	height: 750px;
+	width: @std-width;
+	height: @std-height;
 	margin: auto;
 	position: relative; // holds absolute element within
 
@@ -21,7 +21,7 @@
 .blog { // to-do: clean up style
 	.widget; // to-do: this is not a widget
 
-	.set-in-center(1000px, 750px);
+	.set-in-center(@std-width, @std-height);
 
 	& > .blog-header {
 		background-color: @green-sea;
