@@ -21,11 +21,14 @@ define(function () {
 					title: 'Gallery',
 					href: 'gallery'
 				}, {
-					title: 'Master Blog',
-					href: 'master/blog'
-				}, {
-					title: 'Master Gallery',
-					href: 'master/gallery'
+					title: 'Master',
+					subItems: [{
+						title: 'Blog',
+						href: 'master/blog'
+					}, {
+						title: 'Gallery',
+						href: 'master/gallery'
+					}]
 				}]
 			};
 

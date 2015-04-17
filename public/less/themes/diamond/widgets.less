@@ -30,8 +30,18 @@
 			.box-shadow(0);
 		}
 
-		& > .nav-bar-item:hover > a {
-			color: @turquoise;
+		& > .nav-bar-item {
+			&:hover > a {
+				color: @turquoise;
+			}
+
+			& > .nav-bar-expand { // nav bar sub items
+				background-color: @wet-asphalt;
+				
+				& > .nav-bar-sub-item:hover > a {
+					color: @turquoise;
+				}
+			}
 		}
 	}
 }
