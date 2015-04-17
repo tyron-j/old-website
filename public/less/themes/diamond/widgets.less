@@ -6,6 +6,14 @@
 	background-color: @wet-asphalt;
 }
 
+.button-bar {
+	float: right;
+
+	& > .icon:before {
+		cursor: pointer;
+	}
+}
+
 .nav-bar {
 	& > .nav-bar-content { // animated nav bar
 		&.shown {
@@ -48,6 +56,11 @@
 	& > .side-bar-header {
 		background-color: @green-sea;
 		margin-bottom: 20px;
+
+		& > .icon.icon-bars {
+			float: right;
+			font-size: @button-bar-font-size;
+		}
 	}
 
 	& > .side-bar-item {

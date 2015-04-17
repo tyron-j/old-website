@@ -6,6 +6,19 @@
 	// styles for all widgets
 }
 
+.button-bar {
+	display: inline-block;
+	font-size: @button-bar-font-size;
+
+	& > .icon { // to-do: no margin-left for first-child?
+		margin-left: @button-bar-icon-margin;
+
+		&:before {
+			cursor: pointer;
+		}
+	}
+}
+
 .side-bar {
 	.widget;
 	
@@ -29,6 +42,7 @@
 
 	& > .side-bar-header, .side-bar-item {
 		padding-left: @side-bar-text-padding;
+		padding-right: @side-bar-text-padding;
 		position: relative;
 	}
 
