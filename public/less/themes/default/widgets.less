@@ -73,13 +73,17 @@
 	& > .nav-bar-content {
 		.widget;
 
-		& > a.nav-bar-item {
+		& > .nav-bar-item {
 			width: @nav-bar-item-width;
 			height: @nav-bar-item-height;
 			line-height: @nav-bar-item-height;
 			font-size: @nav-bar-item-font-size;
-			text-align: center;
 			display: inline-block;
+			text-align: center;
+
+			& > a {
+				display: block;
+			}
 		}
 	}
 }
