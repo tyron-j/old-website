@@ -74,38 +74,30 @@
 		.widget;
 
 		& > .nav-bar-item {
-			width: @nav-bar-item-width;
-			height: @nav-bar-item-height;
-			line-height: @nav-bar-item-height;
-			font-size: @nav-bar-item-font-size;
-			cursor: pointer;
 			display: inline-block;
-			text-align: center;
+		}
 
-			& > a {
-				display: block; // fills up div and becomes clickable
-			}
+		& > .nav-bar-item {
+			&, & > .nav-bar-expand > .nav-bar-sub-item {
+				width: @nav-bar-item-width;
+				height: @nav-bar-item-height;
+				line-height: @nav-bar-item-height;
+				font-size: @nav-bar-item-font-size;
+				cursor: pointer;
+				text-align: center;
 
-			& > .nav-bar-expand { // nav bar sub items
-				display: none;
-			}
-
-			&:hover > .nav-bar-expand { // nav bar sub items
-				display: block;
-				position: absolute;
-
-				& > .nav-bar-sub-item {
-					width: @nav-bar-item-width;
-					height: @nav-bar-item-height;
-					line-height: @nav-bar-item-height;
-					font-size: @nav-bar-item-font-size;
-					cursor: pointer;
-					text-align: center;
-
-					& > a {
-						display: block;
-					}
+				& > a {
+					display: block; // fills up div and becomes clickable
 				}
+			}
+
+			& > .nav-bar-expand {
+				display: none; // hide expand
+				position: absolute;
+			}
+
+			&:hover > .nav-bar-expand {
+				display: block; // show expand
 			}
 		}
 	}

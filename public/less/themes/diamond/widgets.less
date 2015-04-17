@@ -31,16 +31,15 @@
 		}
 
 		& > .nav-bar-item {
-			&:hover > a {
+			&:hover > a, & > .nav-bar-expand > .nav-bar-sub-item:hover > a {
 				color: @turquoise;
 			}
 
-			& > .nav-bar-expand { // nav bar sub items
+			& > .nav-bar-expand {
 				background-color: @wet-asphalt;
-				
-				& > .nav-bar-sub-item:hover > a {
-					color: @turquoise;
-				}
+				z-index: -1;
+
+				.box-shadow(@std-box-shadow);
 			}
 		}
 	}
