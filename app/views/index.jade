@@ -20,6 +20,7 @@ block view
 					div(class='nav-bar-item', ng-repeat='item in navBar.items')
 						a(ng-href='{{ item.href }}')
 							| {{ item.title }}
+						//- sub items
 						div(class='nav-bar-expand', ng-if='item.subItems')
 							div(class='nav-bar-sub-item', ng-repeat='subItem in item.subItems')
 								a(ng-href='{{ subItem.href }}')
