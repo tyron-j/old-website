@@ -1,7 +1,7 @@
 //- blog
 
 div(class='blog')
-	div(class='blog-header').
-		{{ sideBar.selectedItem.title }}
-	div(class='blog-content').
-		{{ sideBar.selectedItem.content }}
+	div(class='blog-header')
+		| {{ sideBar.selectedItem.title }}
+	div(class='blog-content')
+		| {{ sideBar.selectedItem.content }}
