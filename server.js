@@ -59,6 +59,7 @@ app.post('/api/user', api.postUser);
 
 app.get('/partials/:partial', routes.partials);
 app.get('/partials/master/:partial', routes.masterPartials);
+app.get('/widgets/:widget', routes.widgets);
 
 // solves angular page refresh issue
 // redirects every other request to index
