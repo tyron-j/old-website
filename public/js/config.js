@@ -1,7 +1,7 @@
 // configuration
 
 require.config({
-	baseUrl: '/js', // validate this later
+	baseUrl: '/js',
 	paths: {
 		angular: '/js/lib/angular/angular.min',
 		'angular-animate': '/js/lib/angular/angular-animate.min',
