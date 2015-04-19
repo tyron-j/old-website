@@ -34,6 +34,8 @@ define(function () {
 
 			$scope.sideBar = { // to-do: use a service to instantiate a side bar?
 				inUse: false,
+
+				// to-do: use a service to set a variation of selectItem in each individual controller
 				selectItem: function (blog) { // this function varies based on the side bar's content
 					if (!blog.content) { // if not already fetched
 						$http.get('/api/blog/' + blog.title).success(function (blogContent) {
