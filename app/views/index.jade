@@ -9,7 +9,7 @@ block view
 		//- to-do: remove isLocalHost condition
 		if isLocalHost
 			//- to-do: use a prefix (ex. ng-) for directives
-			side-bar
-			nav-bar
+			side-bar(model='sideBar')
+			nav-bar(model='navBar')
 
 		div(ng-view)

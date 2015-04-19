@@ -5,7 +5,10 @@ define(function () {
 
 	return function () {
 		return {
-			templateUrl: '/widgets/navbar'
+			templateUrl: '/widgets/navbar',
+			scope: {
+				model: '='
+			}
 		}
 	};
 });
