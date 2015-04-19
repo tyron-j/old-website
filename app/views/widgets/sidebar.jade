@@ -1,8 +1,8 @@
 //- side bar
 
-div(class='left side-bar', ng-class='{ shown: model.inUse, hidden: !model.inUse }')
+div(class='left side-bar', ng-class='{ shown: uiModel.inUse, hidden: !uiModel.inUse }')
 	div(class='side-bar-header')
-		| {{ model.title }}
+		| {{ uiModel.title }}
 		div(class='icon icon-bars')
-	div(class='side-bar-item', ng-repeat='item in model.items', ng-class='{ selected: item === model.selectedItem }', ng-click='model.selectItem(item)')
+	div(class='side-bar-item', ng-repeat='item in uiModel.items', ng-class='{ selected: item === uiModel.selectedItem }', ng-click='uiModel.selectItem(item)')
 		| {{ item.title }}

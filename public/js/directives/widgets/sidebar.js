@@ -7,7 +7,7 @@ define(function () {
 		return {
 			templateUrl: '/widgets/sidebar',
 			scope: {
-				model: '='
+				uiModel: '='
 			}
 		}
 	};

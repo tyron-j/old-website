@@ -10,6 +10,6 @@ define([
 
 	// to-do: use [].slice.call(args)
 	return ng.module('allDirectives', [])
-		.directive('navBar', navBar)
-		.directive('sideBar', sideBar);
+		.directive('uiNavBar', navBar)
+		.directive('uiSideBar', sideBar);
 });

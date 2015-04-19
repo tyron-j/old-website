@@ -8,8 +8,7 @@ block view
 	div(ng-controller='MainCtrl', ng-cloak)
 		//- to-do: remove isLocalHost condition
 		if isLocalHost
-			//- to-do: use a prefix (ex. ng-) for directives
-			side-bar(model='sideBar')
-			nav-bar(model='navBar')
+			ui-side-bar(ui-model='sideBar')
+			ui-nav-bar(ui-model='navBar')
 
 		div(ng-view)
