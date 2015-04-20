@@ -1,16 +1,16 @@
 //- nav bar
 
 div(class='nav-bar',
-	ng-mouseover='uiModel.inUse = true',
-	ng-mouseleave='uiModel.inUse = false')
+	ng-mouseover='model.inUse = true',
+	ng-mouseleave='model.inUse = false')
 	div(class='nav-bar-content',
-		ng-class='{ shown: uiModel.inUse, hidden: !uiModel.inUse }')
+		ng-class='{ shown: model.inUse, hidden: !model.inUse }')
 		//- to-do: make this optional
 		div(class='nav-bar-beacon')
 			div(class='nav-bar-beacon-content')
 			div(class='nav-bar-beacon-shadow')
 		div(class='nav-bar-item',
-			ng-repeat='item in uiModel.items')
+			ng-repeat='item in model.items')
 			a(ng-href='{{ item.href }}')
 				| {{ item.title }}
 			//- sub items

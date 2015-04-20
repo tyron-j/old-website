@@ -7,7 +7,7 @@ define(function () {
 		return {
 			templateUrl: '/widgets/navbar',
 			scope: {
-				uiModel: '='
+				model: '=uiModel'
 			}
 		}
 	};
