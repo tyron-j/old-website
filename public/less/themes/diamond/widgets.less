@@ -21,6 +21,12 @@
 			margin-top: 0;
 
 			.box-shadow(@std-box-shadow);
+
+			& > .nav-bar-beacon > .nav-bar-beacon-shadow {
+				transition: @std-transition;
+
+				.box-shadow(@std-box-shadow);
+			}
 		}
 
 		&.hidden {
@@ -28,6 +34,12 @@
 			margin-top: -@nav-bar-height;
 
 			.box-shadow(0);
+
+			& > .nav-bar-beacon > .nav-bar-beacon-shadow {
+				transition: @std-transition;
+				
+				.box-shadow(0);
+			}
 		}
 
 		& > .nav-bar-beacon {
@@ -49,8 +61,6 @@
 
 			& > .nav-bar-beacon-shadow {
 				z-index: -1;
-
-				.box-shadow(@std-box-shadow);
 			}
 		}
 
