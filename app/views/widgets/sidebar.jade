@@ -1,9 +1,13 @@
 //- side bar
 
 //- to-do: make the left/right class configurable; also consider using ng-init
-div(class='left side-bar', ng-class='{ shown: uiModel.inUse, hidden: !uiModel.inUse }')
+div(class='left side-bar',
+	ng-class='{ shown: uiModel.inUse, hidden: !uiModel.inUse }')
 	div(class='side-bar-header')
 		| {{ uiModel.title }}
 		div(class='icon icon-bars')
-	div(class='side-bar-item', ng-repeat='item in uiModel.items', ng-class='{ selected: item === uiModel.selectedItem }', ng-click='uiModel.selectItem(item)')
+	div(class='side-bar-item',
+		ng-repeat='item in uiModel.items',
+		ng-class='{ selected: item === uiModel.selectedItem }',
+		ng-click='uiModel.selectItem(item)')
 		| {{ item.title }}
