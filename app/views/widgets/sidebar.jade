@@ -1,5 +1,6 @@
 //- side bar
 
+//- to-do: make the left/right class configurable; also consider using ng-init
 div(class='left side-bar', ng-class='{ shown: uiModel.inUse, hidden: !uiModel.inUse }')
 	div(class='side-bar-header')
 		| {{ uiModel.title }}
