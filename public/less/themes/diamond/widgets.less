@@ -30,6 +30,30 @@
 			.box-shadow(0);
 		}
 
+		& > .nav-bar-beacon {
+			left: 0;
+			right: 0;
+			margin: auto;
+
+			& > .nav-bar-beacon-content, & > .nav-bar-beacon-shadow {
+				position: absolute;
+				top: 50%;
+
+				.set-dimensions(100%);
+				.rotate(45deg);
+			}
+
+			& > .nav-bar-beacon-content {
+				background-color: @green-sea;
+			}
+
+			& > .nav-bar-beacon-shadow {
+				z-index: -1;
+
+				.box-shadow(@std-box-shadow);
+			}
+		}
+
 		& > .nav-bar-item {
 			&:hover > a, & > .nav-bar-expand > .nav-bar-sub-item:hover > a {
 				color: @turquoise;
@@ -45,7 +69,7 @@
 	}
 }
 
-.side-bar { // to-do: change the animation to one similar to that of nav bar; stop using ngAnimate
+.side-bar {
 	&.shown {
 		transition: @std-transition;
 		left: 0; // to-do: create use case for right side-bar
