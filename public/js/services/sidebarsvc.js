@@ -47,7 +47,7 @@ define(function () {
 
 					this.selectedItem = blog;
 				}
-			}
+			};
 		}
 	];
 });
