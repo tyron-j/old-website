@@ -23,17 +23,19 @@ define(function () {
 				}, {
 					title: 'Gallery',
 					href: 'gallery'
-				}, {
-					title: 'Master',
-					subItems: [{
-						title: 'Blog',
-						href: 'master/blog'
-					}, {
-						title: 'Gallery',
-						href: 'master/gallery'
-					}]
 				}]
 			};
+
+			$scope.isLocalHost && $scope.navBar.items.push({
+				title: 'Master',
+				subItems: [{
+					title: 'Blog',
+					href: 'master/blog'
+				}, {
+					title: 'Gallery',
+					href: 'master/gallery'
+				}]
+			});
 
 			$scope.sideBar = { // to-do: use a service to instantiate a side bar?
 				inUse: false,
