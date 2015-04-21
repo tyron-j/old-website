@@ -17,7 +17,7 @@ var isLocalHost = process.env.LOCAL_HOST && JSON.parse(process.env.LOCAL_HOST);
 var dbLogin     = isLocalHost ? process.env.MASTER_LOGIN : process.env.GUEST_LOGIN;
 var dbUri       = process.env.MONGOLAB_URI.replace('<dbuser>:<dbpassword>', dbLogin);
 
-var app = express();
+var app = module.exports = express();
 
 // configuration ============================================================ //
 
