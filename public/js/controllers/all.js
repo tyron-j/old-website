@@ -10,12 +10,14 @@ define([
 	'./blogctrl',
 
 	'./master/galleryctrl',
-	'./master/blogctrl'
+	'./master/blogctrl',
+
+	'services/all'
 ], function (ng, MainCtrl, LoginCtrl, GalleryCtrl, BlogCtrl, MasterGalleryCtrl, MasterBlogCtrl) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
-	return ng.module('allControllers', [])
+	return ng.module('allControllers', [ 'allServices' ])
 		.controller('MainCtrl', MainCtrl)
 
 		.controller('LoginCtrl', LoginCtrl)

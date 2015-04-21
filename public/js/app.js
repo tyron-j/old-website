@@ -5,8 +5,7 @@ define([
 	'angular-animate', // to-do: consider removing ngAnimate
 	'angular-route',
 	'controllers/all',
-	'directives/all',
-	'services/all'
+	'directives/all'
 ], function (ng) { // only need the first argument
 	'use strict';
 
@@ -14,8 +13,7 @@ define([
 		'ngAnimate', // to-do: consider removing ngAnimate
 		'ngRoute',
 		'allControllers',
-		'allDirectives',
-		'allServices'
+		'allDirectives'
 	]).config([
 		'$routeProvider',
 		'$locationProvider',
