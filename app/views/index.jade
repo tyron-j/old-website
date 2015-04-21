@@ -5,7 +5,8 @@ extends layout
 
 block view
 	//- to-do: consider using ng-cloak for each individual element for progressive rendering
-	div(ng-controller='MainCtrl', ng-cloak)
+	div(ng-controller='MainCtrl',
+		ng-cloak)
 		//- to-do: remove isLocalHost condition
 		if isLocalHost
 			ui-side-bar(ui-model='sideBar')

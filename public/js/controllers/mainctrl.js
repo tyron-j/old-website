@@ -5,9 +5,12 @@ define(function () {
 
 	return [
 		'$http',
+		'$location',
 		'$scope',
 		
-		function ($http, $scope) {
+		function ($http, $location, $scope) {
+			$scope.isLocalHost = $location.host() === 'localhost';
+
 			// "global" objects that can be manipulated by any controller
 			$scope.navBar = {
 				inUse: false,
