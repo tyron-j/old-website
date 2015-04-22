@@ -4,8 +4,9 @@ define(function () {
 	'use strict';
 
 	return [
-		// deps
-		function () { // use as factory... or service?
+		'$http',
+
+		function ($http) { // use as factory... or service?
 			return {
 				blogEditor: { // singleton
 					items: [{
