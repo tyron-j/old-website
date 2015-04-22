@@ -1,1 +1,6 @@
 //- button bar
+
+div(class='button-bar')
+	div(class='button-bar-item',
+		ng-repeat='item in model.items',
+		ng-class='"icon icon-" + item.icon')

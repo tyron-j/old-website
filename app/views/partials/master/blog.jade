@@ -3,9 +3,6 @@
 div(class='blog')
 	div(class='blog-header')
 		| {{ sideBar.selectedItem.title }}
-		div(class='button-bar')
-			div(class='icon icon-save')
-			div(class='icon icon-pencil')
-			div(class='icon icon-trash')
+		ui-button-bar(ui-model='buttonBar')
 	div(class='blog-content')
 		| {{ sideBar.selectedItem.content }}

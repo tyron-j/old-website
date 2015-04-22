@@ -6,10 +6,13 @@ define(function () {
 	return [
 		'$scope',
 
+		'buttonBarSvc',
 		'sideBarSvc',
 		
-		function ($scope, sideBarSvc) {
+		function ($scope, buttonBarSvc, sideBarSvc) {
 			sideBarSvc.blogMode($scope);
+
+			$scope.buttonBar = buttonBarSvc.blogEditor;
 		}
 	];
 });
