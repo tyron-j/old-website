@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
 app.get('/api/user', api.getUser);
 
 // temporary middleware to protect api and master views
-// app.use('/api/*', api.authenticate(isLocalHost));
+app.use('/api/*', api.authenticate(isLocalHost));
 app.use('*/master/*', api.authenticate(isLocalHost)); // also protects partials
 
 // protected api
