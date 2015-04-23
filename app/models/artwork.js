@@ -3,9 +3,19 @@
 var db = require('../utils/db');
 
 module.exports = db.model('Artwork', new db.Schema({
-	title: String,
+	title: {
+		type: String,
+		required: true
+	},
+
 	image: {
-		data: Buffer,
-		contentType: String
+		data: {
+			type: Buffer,
+			required: true
+		},
+		contentType: {
+			type: String,
+			required: true
+		}
 	}
 }));
