@@ -108,5 +108,18 @@
 		&:hover, &.selected {
 			color: @turquoise;
 		}
+
+		&.side-bar-new-item {
+			margin-bottom: 15px;
+			
+			&:hover > .side-bar-new-item-content {
+				border: 2px solid @green-sea;
+			}
+
+			& > .side-bar-new-item-content {
+				border: 2px solid white;
+				text-align: center;
+			}
+		}
 	}
 }
