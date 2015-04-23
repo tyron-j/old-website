@@ -10,10 +10,10 @@ div(class='left side-bar',
 		div(class='icon icon-bars')
 	//- new
 	div(class='side-bar-item side-bar-new-item',
-		ng-if='model.newItem.allowed',
-		ng-click='model.newItem.create()')
+		ng-if='model.createItemButton.inUse',
+		ng-click='model.createItem()')
 		div(class='side-bar-new-item-content')
-			| {{ model.newItem.title }}
+			| {{ model.createItemButton.title }}
 	//- items
 	div(class='side-bar-item',
 		ng-repeat='item in model.items',

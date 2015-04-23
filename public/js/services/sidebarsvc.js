@@ -14,10 +14,10 @@ define(function () {
 					title: '',
 					items: [],
 					selectItem: function () {},
-					newItem: {
-						allowed: false,
-						title: '',
-						create: function () {}
+					createItem: function () {},
+					createItemButton: {
+						inUse: false,
+						title: ''
 					}
 				},
 
@@ -31,10 +31,11 @@ define(function () {
 						sideBar.items      = blogs;
 						sideBar.selectItem = that.selectBlog;
 
+						// master blog
 						if ($location.path() === '/master/blog') {
-							sideBar.newItem.allowed = true;
-							sideBar.newItem.title   = 'New Blog';
-							sideBar.newItem.create  = that.createBlog;
+							sideBar.createItemButton.inUse = true;
+							sideBar.createItemButton.title = 'New Blog';
+							sideBar.createItem             = that.createBlog;
 						}
 
 						sideBar.selectItem(blogs[0]);
@@ -42,14 +43,15 @@ define(function () {
 
 					// to-do: make this an individual method
 					$scope.$on('$locationChangeStart', function (evt, next, current) {
-						sideBar.inUse             = false;
-						// sideBar.title          = '';
-						// sideBar.items          = [];
-						// sideBar.selectItem     = function () {};
-						sideBar.selectedItem      = null;
-						sideBar.newItem.allowed   = false;
-						// sideBar.newItem.title  = '';
-						// sideBar.newItem.create = function () {};
+						sideBar.inUse                     = false;
+						// sideBar.title                  = '';
+						// sideBar.items                  = [];
+						// sideBar.selectItem             = function () {};
+						sideBar.selectedItem              = null;
+
+						sideBar.createItemButton.inUse    = false;
+						// sideBar.createItemButton.title = '';
+						// sideBar.createItem             = function () {};
 					});
 				},
 
