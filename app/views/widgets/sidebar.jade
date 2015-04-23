@@ -3,10 +3,17 @@
 //- to-do: make the left/right class configurable; also consider using ng-init
 div(class='left side-bar',
 	ng-class='{ shown: model.inUse, hidden: !model.inUse }')
+	//- header
 	div(class='side-bar-header')
 		| {{ model.title }}
 		//- to-do: make this optional
 		div(class='icon icon-bars')
+	//- new
+	div(class='side-bar-item side-bar-new-item',
+		ng-if='model.newItem.allowed',
+		ng-click='model.newItem.create()')
+		| {{ model.newItem.title }}
+	//- items
 	div(class='side-bar-item',
 		ng-repeat='item in model.items',
 		ng-class='{ selected: item === model.selectedItem }',
