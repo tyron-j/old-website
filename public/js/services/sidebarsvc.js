@@ -56,7 +56,13 @@ define(function () {
 				},
 
 				createBlog: function () {
-					// to-do: push to sideBar.items and select the new blog
+					var newBlog = {
+						title: 'New Blog',
+						content: 'New Entry'
+					};
+
+					this.items.push(newBlog);
+					this.selectItem(newBlog);
 				},
 
 				selectBlog: function (blog) { // this function varies based on the side bar's content
