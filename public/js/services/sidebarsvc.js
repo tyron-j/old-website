@@ -25,7 +25,9 @@ define(function () {
 					var that    = this;
 					var sideBar = this.model;
 
-					$http.get('/api/blog').success(function (blogs) {
+					$http.get('/api/blog').success(function (res) {
+						var blogs = res.blogs;
+
 						sideBar.inUse      = true;
 						sideBar.title      = 'Blogs';
 						sideBar.items      = blogs;
@@ -61,7 +63,8 @@ define(function () {
 					var newBlog = {
 						title: 'New Blog',
 						content: 'New Entry',
-						creationDate: new Date()
+						creationDate: new Date(),
+						isNew: true
 					};
 
 					this.items.push(newBlog);
@@ -70,8 +73,9 @@ define(function () {
 
 				selectBlog: function (blog) { // this function varies based on the side bar's content
 					if (!blog.content) { // if not already fetched
-						$http.get('/api/blog/' + blog.title).success(function (blogContent) {
-							blog.content = blogContent;
+						$http.get('/api/blog/' + blog.title).success(function (res) {
+							blog.content      = res.content;
+							blog.creationDate = res.creationDate;
 						});
 					}
 

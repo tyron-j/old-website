@@ -66,8 +66,14 @@ module.exports = {
 			});
 		} else { // fetch all names
 			models.Artwork.find({}, 'title', function (err, artworks) {
-				if (artworks.length) { // to-do: handle no matches
-					res.send(artworks); // to-do: use map to get rid of _id key
+				if (artworks.length) {
+					res.send({
+						artworks: artworks
+					});
+				} else {
+					res.send({
+						artworks: []
+					});
 				}
 			});
 		}
@@ -147,37 +153,66 @@ module.exports = {
 		if (req.params.title) {
 			models.Blog.findOne({
 				title: req.params.title
-			}, function (err, blog) { // to-do: handle no matches
-				res.send(blog.content);
+			},
+			'content creationDate',
+			function (err, blog) { // to-do: handle no matches
+				res.send(blog);
 			});
 		} else {
 			models.Blog.find({}, 'title', function (err, blogs) {
 				if (blogs.length) {
-					res.send(blogs);
+					res.send({
+						blogs: blogs
+					});
 				} else {
-					res.send([]);
+					res.send({
+						blogs: []
+					});
 				}
 			});
 		}
 	},
 
 	postBlog: function (req, res, next) {
-		var blog = new models.Blog({
-			title: req.body.title,
-			content: req.body.content,
-			creationDate: req.body.creationDate
-		});
-
-		blog.save(function (err, b) {
-			if (err) {
-				signal.error("Failed to save " + req.body.title + " to database");
-				throw err; // to-do: handle error gracefully
-			}
-
-			signal.success("Saved " + req.body.title + " to database");
-			res.send({
-				msg: "Saved " + req.body.title + " to database"
+		if (req.body.isNew) {
+			var blog = new models.Blog({
+				title: req.body.title,
+				content: req.body.content,
+				creationDate: req.body.creationDate
 			});
-		});
+
+			blog.save(function (err, b) {
+				if (err) {
+					signal.error("Failed to save " + req.body.title + " to database");
+					throw err; // to-do: handle error gracefully
+				}
+
+				var successMsg = "Saved " + req.body.title + " to database";
+
+				signal.success(successMsg);
+				res.send({
+					msg: successMsg
+				});
+			});
+		} else {
+			models.Blog.findOneAndUpdate({
+				creationDate: req.body.creationDate // creationDate works as a unique identifier
+			}, {
+				title: req.body.title,
+				content: req.body.content
+			}, function (err, b) { // to-do: handle no matches
+				if (err) {
+					signal.error("Failed to update " + req.body.title + " in database");
+					throw err; // to-do: handle error gracefully
+				}
+
+				var successMsg = "Updated " + req.body.title + " in database";
+
+				signal.success(successMsg);
+				res.send({
+					msg: successMsg
+				});
+			});
+		}
 	}
 };

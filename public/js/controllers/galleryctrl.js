@@ -8,8 +8,8 @@ define(function () {
 		'$scope',
 		
 		function ($http, $scope) {
-			$http.get('/api/artwork').success(function (artworks) {
-				$scope.artworks = artworks;
+			$http.get('/api/artwork').success(function (res) {
+				$scope.artworks = res.artworks;
 			});
 		}
 	];

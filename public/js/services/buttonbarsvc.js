@@ -28,9 +28,12 @@ define(function () {
 						$http.post('/api/blog', {
 							title: blog.title,
 							content: blog.content,
-							creationDate: blog.creationDate
+							creationDate: blog.creationDate,
+							isNew: blog.isNew
 						}).success(function (res) {
 							console.log(res.msg);
+
+							blog.isNew = false;
 						});
 					}
 				}, {
@@ -67,7 +70,7 @@ define(function () {
 						blog.content         = blog.originalContent;
 						blog.originalTitle   = null;
 						blog.originalContent = null
-						
+
 						blogEditor.inEditMode      = false;
 						blogEditor.items[0].hidden = true;
 						this.hidden                = true;
