@@ -12,8 +12,9 @@
 	}
 
 	& > .blog-content {
-		height: calc(~'100% - '@blog-header-height);
 		overflow: auto;
+
+		.calc-height(~'100% - '@blog-header-height);
 
 		& > .blog-scroll-content {
 			font-size: @blog-content-font-size;

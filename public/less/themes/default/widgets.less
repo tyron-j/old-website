@@ -105,8 +105,9 @@
 	}
 
 	& > .side-bar-item-container {
-		height: calc(~'100% - '@side-bar-header-height);
 		overflow: auto;
+
+		.calc-height(~'100% - '@side-bar-header-height);
 		
 		& > .side-bar-item {
 			width: @side-bar-item-width;
