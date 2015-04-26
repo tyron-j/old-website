@@ -9,7 +9,7 @@ define(function () {
 		
 		function ($http, $scope) {
 			$http.get('/api/artwork').success(function (res) {
-				$scope.artworks = res.artworks;
+				$scope.artworks = res;
 			});
 		}
 	];

@@ -67,13 +67,9 @@ module.exports = {
 		} else { // fetch all names
 			models.Artwork.find({}, 'title', function (err, artworks) {
 				if (artworks.length) {
-					res.send({
-						artworks: artworks
-					});
+					res.send(artworks);
 				} else {
-					res.send({
-						artworks: []
-					});
+					res.send([]);
 				}
 			});
 		}
@@ -161,13 +157,9 @@ module.exports = {
 		} else {
 			models.Blog.find({}, 'title', function (err, blogs) {
 				if (blogs.length) {
-					res.send({
-						blogs: blogs
-					});
+					res.send(blogs);
 				} else {
-					res.send({
-						blogs: []
-					});
+					res.send([]);
 				}
 			});
 		}

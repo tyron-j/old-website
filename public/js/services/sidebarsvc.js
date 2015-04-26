@@ -26,7 +26,7 @@ define(function () {
 					var sideBar = this.model;
 
 					$http.get('/api/blog').success(function (res) {
-						var blogs = res.blogs;
+						var blogs = res;
 
 						sideBar.inUse      = true;
 						sideBar.title      = 'Blogs';
