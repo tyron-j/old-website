@@ -155,13 +155,17 @@ module.exports = {
 				res.send(blog);
 			});
 		} else {
-			models.Blog.find({}, 'title', function (err, blogs) {
-				if (blogs.length) {
-					res.send(blogs);
-				} else {
-					res.send([]);
-				}
-			});
+			models.Blog
+				.find({})
+				.sort('creationDate') // to-do: change this to -creationDate
+				.select('title')
+				.exec(function (err, blogs) {
+					if (blogs.length) {
+						res.send(blogs);
+					} else {
+						res.send([]);
+					}
+				});
 		}
 	},
 
