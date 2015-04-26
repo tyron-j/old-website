@@ -2,6 +2,7 @@
 
 div(class='button-bar')
 	div(class='button-bar-item icon icon-{{ item.icon }}',
+		title='{{ item.title }}'
 		ng-repeat='item in model.items',
-		ng-class='{ disabled: item.disabled }',
+		ng-class='{ disabled: item.disabled, shown: !item.hidden, hidden: item.hidden }',
 		ng-click='item.onClick()')

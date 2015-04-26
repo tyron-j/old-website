@@ -2,7 +2,11 @@
 
 div(class='blog')
 	div(class='blog-header')
-		| {{ sideBar.selectedItem.title }}
+		span(ng-if='!buttonBar.inEditMode')
+			| {{ sideBar.selectedItem.title }}
+		input(ng-if='buttonBar.inEditMode')
 		ui-button-bar(ui-model='buttonBar')
 	div(class='blog-content')
-		| {{ sideBar.selectedItem.content }}
+		span(ng-if='!buttonBar.inEditMode')
+			| {{ sideBar.selectedItem.content }}
+		textarea(ng-if='buttonBar.inEditMode')
