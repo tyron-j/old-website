@@ -8,15 +8,17 @@ div(class='left side-bar',
 		| {{ model.title }}
 		//- to-do: make this optional
 		div(class='icon icon-bars')
-	//- new
-	div(class='side-bar-item side-bar-new-item',
-		ng-if='model.createItemButton.inUse',
-		ng-click='model.createItem()')
-		div(class='side-bar-new-item-content')
-			| {{ model.createItemButton.title }}
-	//- items
-	div(class='side-bar-item',
-		ng-repeat='item in model.items',
-		ng-class='{ selected: item === model.selectedItem }',
-		ng-click='model.selectItem(item)')
-		| {{ item.title }}
+
+	div(class='side-bar-item-container')
+		//- new
+		div(class='side-bar-item side-bar-new-item',
+			ng-if='model.createItemButton.inUse',
+			ng-click='model.createItem()')
+			div(class='side-bar-new-item-content')
+				| {{ model.createItemButton.title }}
+		//- items
+		div(class='side-bar-item',
+			ng-repeat='item in model.items',
+			ng-class='{ selected: item === model.selectedItem }',
+			ng-click='model.selectItem(item)')
+			| {{ item.title }}

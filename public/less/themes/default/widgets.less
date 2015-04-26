@@ -91,7 +91,7 @@
 		display: block;
 	}
 
-	& > .side-bar-header, .side-bar-item {
+	& > .side-bar-header, & > .side-bar-item-container > .side-bar-item {
 		padding-left: @side-bar-text-padding;
 		padding-right: @side-bar-text-padding;
 		position: relative;
@@ -104,11 +104,15 @@
 		font-size: @side-bar-header-font-size;
 	}
 
-	& > .side-bar-item {
-		width: @side-bar-item-width;
-		height: @side-bar-item-height;
-		line-height: @side-bar-item-height;
-		font-size: @side-bar-item-font-size;
-		cursor: pointer;
+	& > .side-bar-item-container {
+		overflow: auto;
+		
+		& > .side-bar-item {
+			width: @side-bar-item-width;
+			height: @side-bar-item-height;
+			line-height: @side-bar-item-height;
+			font-size: @side-bar-item-font-size;
+			cursor: pointer;
+		}
 	}
 }

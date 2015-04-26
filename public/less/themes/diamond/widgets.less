@@ -100,7 +100,6 @@
 
 	& > .side-bar-header {
 		background-color: @green-sea;
-		margin-bottom: 20px;
 
 		& > .icon.icon-bars {
 			float: right;
@@ -108,21 +107,27 @@
 		}
 	}
 
-	& > .side-bar-item {
-		&:hover, &.selected {
-			color: @turquoise;
-		}
+	& > .side-bar-item-container {
+		height: calc(~"100% - "@side-bar-header-height);
+		padding-top: 20px;
+		padding-bottom: 20px;
 
-		&.side-bar-new-item {
-			margin-bottom: 15px;
-
-			&:hover > .side-bar-new-item-content {
-				border: 2px solid @green-sea;
+		& > .side-bar-item {
+			&:hover, &.selected {
+				color: @turquoise;
 			}
 
-			& > .side-bar-new-item-content {
-				border: 2px solid white;
-				text-align: center;
+			&.side-bar-new-item {
+				margin-bottom: 15px;
+
+				&:hover > .side-bar-new-item-content {
+					border: 2px solid @green-sea;
+				}
+
+				& > .side-bar-new-item-content {
+					border: 2px solid white;
+					text-align: center;
+				}
 			}
 		}
 	}
