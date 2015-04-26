@@ -10,6 +10,6 @@ div(class='blog')
 	div(class='blog-content')
 		span(ng-if='!buttonBar.inEditMode')
 			| {{ sideBar.selectedItem.content }}
-		textarea(rows='30',
+		textarea(rows='33',
 			ng-if='buttonBar.inEditMode',
 			ng-model='sideBar.selectedItem.content')

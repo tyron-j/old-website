@@ -20,6 +20,9 @@ define(function () {
 
 					onClick: function () {
 						var blog = sideBar.selectedItem;
+						
+						blog.originalTitle   = null;
+						blog.originalContent = null
 
 						blogEditor.inEditMode      = false;
 						blogEditor.items[3].hidden = true;
