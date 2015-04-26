@@ -115,6 +115,13 @@
 			line-height: @side-bar-item-height;
 			font-size: @side-bar-item-font-size;
 			cursor: pointer;
+
+			&:not(.side-bar-new-item) {
+				// for containing text
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
 		}
 	}
 }
