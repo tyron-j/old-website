@@ -12,8 +12,13 @@
 	}
 
 	& > .blog-content {
-		font-size: @blog-content-font-size;
-		padding: @blog-text-padding;
-		white-space: pre-wrap; // displays new lines correctly
+		height: calc(~'100% - '@blog-header-height);
+		overflow: auto;
+
+		& > .blog-scroll-content {
+			font-size: @blog-content-font-size;
+			padding: @blog-text-padding;
+			white-space: pre-wrap; // displays new lines correctly
+		}
 	}
 }
