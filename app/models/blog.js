@@ -11,5 +11,10 @@ module.exports = db.model('Blog', new db.Schema({
 	content: {
 		type: String,
 		required: true
+	},
+
+	creationDate: {
+		type: Date,
+		required: true
 	}
 }));

@@ -152,8 +152,10 @@ module.exports = {
 			});
 		} else {
 			models.Blog.find({}, 'title', function (err, blogs) {
-				if (blogs.length) { // to-do: handle no matches
+				if (blogs.length) {
 					res.send(blogs);
+				} else {
+					res.send([]);
 				}
 			});
 		}
@@ -162,7 +164,8 @@ module.exports = {
 	postBlog: function (req, res, next) {
 		var blog = new models.Blog({
 			title: req.body.title,
-			content: req.body.content
+			content: req.body.content,
+			creationDate: req.body.creationDate
 		});
 
 		blog.save(function (err, b) {
@@ -172,7 +175,9 @@ module.exports = {
 			}
 
 			signal.success("Saved " + req.body.title + " to database");
-			res.redirect('/success'); // to-do: change redirect
+			res.send({
+				msg: "Saved " + req.body.title + " to database"
+			});
 		});
 	}
 };

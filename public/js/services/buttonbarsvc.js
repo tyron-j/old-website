@@ -16,10 +16,22 @@ define(function () {
 				items: [{
 					title: 'Save',
 					icon: 'save',
-					hidden: false,
+					hidden: true,
 
 					onClick: function () {
 						var blog = sideBar.selectedItem;
+
+						blogEditor.inEditMode      = false;
+						blogEditor.items[3].hidden = true;
+						this.hidden                = true;
+
+						$http.post('/api/blog', {
+							title: blog.title,
+							content: blog.content,
+							creationDate: blog.creationDate
+						}).success(function (res) {
+							console.log(res.msg);
+						});
 					}
 				}, {
 					title: 'Edit',
@@ -29,7 +41,10 @@ define(function () {
 					onClick: function () {
 						var blog = sideBar.selectedItem;
 
+						blog.originalTitle         = blog.title;
+						blog.originalContent       = blog.content;
 						blogEditor.inEditMode      = true;
+						blogEditor.items[0].hidden = false;
 						blogEditor.items[3].hidden = false;
 					}
 				}, {
@@ -48,8 +63,14 @@ define(function () {
 					onClick: function () {
 						var blog = sideBar.selectedItem;
 
-						blogEditor.inEditMode = false;
-						this.hidden           = true;
+						blog.title           = blog.originalTitle;
+						blog.content         = blog.originalContent;
+						blog.originalTitle   = null;
+						blog.originalContent = null
+						
+						blogEditor.inEditMode      = false;
+						blogEditor.items[0].hidden = true;
+						this.hidden                = true;
 					}
 				}]
 			};

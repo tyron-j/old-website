@@ -5,11 +5,11 @@ div(class='blog')
 		span(ng-if='!buttonBar.inEditMode')
 			| {{ sideBar.selectedItem.title }}
 		input(ng-if='buttonBar.inEditMode',
-			value='{{ sideBar.selectedItem.title }}')
+			ng-model='sideBar.selectedItem.title')
 		ui-button-bar(ui-model='buttonBar')
 	div(class='blog-content')
 		span(ng-if='!buttonBar.inEditMode')
 			| {{ sideBar.selectedItem.content }}
 		textarea(rows='30',
-			ng-if='buttonBar.inEditMode')
-			| {{ sideBar.selectedItem.content }}
+			ng-if='buttonBar.inEditMode',
+			ng-model='sideBar.selectedItem.content')

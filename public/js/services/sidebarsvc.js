@@ -38,7 +38,9 @@ define(function () {
 							sideBar.createItem             = that.createBlog;
 						}
 
-						sideBar.selectItem(blogs[0]);
+						if (blogs.length) {
+							sideBar.selectItem(blogs[0]);
+						}
 					});
 
 					// to-do: make this an individual method
@@ -58,7 +60,8 @@ define(function () {
 				createBlog: function () {
 					var newBlog = {
 						title: 'New Blog',
-						content: 'New Entry'
+						content: 'New Entry',
+						creationDate: new Date()
 					};
 
 					this.items.push(newBlog);
