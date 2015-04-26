@@ -25,6 +25,24 @@
 
 	& > .blog-header {
 		background-color: @green-sea;
+
+		& > input {
+			width: 250px;
+			height: @blog-header-font-size + 15px;
+			font-family: @std-font-family;
+			font-size: @blog-header-font-size;
+
+			.center-vertically();
+		}
+	}
+
+	& > .blog-content {
+		& > textarea {
+			width: 100%;
+			font-family: @std-font-family;
+			font-size: @blog-content-font-size;
+			resize: none;
+		}
 	}
 }
 
