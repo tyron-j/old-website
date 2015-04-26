@@ -29,19 +29,27 @@
 		& > input {
 			width: 250px;
 			height: @blog-header-font-size + 15px;
+			border: none;
+			color: white;
 			font-family: @std-font-family;
 			font-size: @blog-header-font-size;
 
 			.center-vertically();
+			.faint(black);
 		}
 	}
 
 	& > .blog-content {
 		& > textarea {
 			width: 100%;
+			border: none;
+			color: white;
 			font-family: @std-font-family;
 			font-size: @blog-content-font-size;
+			padding: 0;
 			resize: none;
+
+			.faint(black);
 		}
 	}
 }
