@@ -6,15 +6,28 @@ define(function () {
 	return [
 		'$http',
 
-		function ($http) { // use as factory... or service?
+		'sideBarSvc',
+
+		function ($http, sideBarSvc) { // use as factory... or service?
+			var sideBar = sideBarSvc.model;
+
 			return {
 				blogEditor: { // singleton
-					items: [{
-						icon: 'save'
-					}, {
-						icon: 'pencil'
-					}, {
-						icon: 'trash'
+					items: [{ // save blog
+						icon: 'save',
+						onClick: function () {
+							var blog = sideBar.selectedItem;
+						}
+					}, { // edit blog
+						icon: 'pencil',
+						onClick: function () {
+							var blog = sideBar.selectedItem;
+						}
+					}, { // delete blog
+						icon: 'trash',
+						onClick: function () {
+							var blog = sideBar.selectedItem;
+						}
 					}]
 				}
 			};
