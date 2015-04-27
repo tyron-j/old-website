@@ -6,10 +6,13 @@ define(function () {
 	return [
 		'$http',
 
+		'modalDialogSvc',
 		'sideBarSvc',
 
-		function ($http, sideBarSvc) { // use as factory... or service?
-			var sideBar = sideBarSvc.model;
+		function ($http, modalDialogSvc, sideBarSvc) { // use as factory... or service?
+			var modalDialog = modalDialogSvc.model;
+			var sideBar     = sideBarSvc.model;
+			
 			var blogEditor = { // singleton
 				inEditMode: false,
 
