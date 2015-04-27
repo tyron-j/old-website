@@ -7,7 +7,15 @@ define(function () {
 		function () { // use as factory
 			return {
 				model: {
-					inUse: false
+					inUse: false,
+					title: 'Warning',
+					content: 'Test',
+					choice: 'binary',
+					buttons: [{
+						title: 'OK'
+					}, {
+						title: 'Cancel'
+					}]
 				}
 			};
 		}

@@ -37,9 +37,58 @@
 	}
 
 	& > .modal-dialog-msg {
-		background-color: white;
+		.widget;
 
 		.set-in-center(@modal-dialog-msg-width, @modal-dialog-msg-height);
+
+		& > .modal-dialog-msg-header, & > .modal-dialog-msg-content {
+			width: 100%;
+			font-size: @modal-dialog-msg-font-size;
+			padding: @modal-dialog-msg-text-padding;
+		}
+
+		& > .modal-dialog-msg-header {
+			height: @modal-dialog-msg-header-height;
+			line-height: @modal-dialog-msg-header-height - (@modal-dialog-msg-text-padding * 2);
+		}
+
+		& > .modal-dialog-msg-content {
+			height: @modal-dialog-msg-content-height;
+		}
+
+		& > .modal-dialog-msg-button-container {
+			height: @modal-dialog-msg-button-height;
+
+			& > .modal-dialog-msg-button {
+				height: 100%;
+				line-height: @modal-dialog-msg-button-height - (@modal-dialog-msg-button-padding * 2);
+				display: inline-block;
+				padding: @modal-dialog-msg-button-padding;
+				text-align: center;
+
+				&.binary {
+					width: 50%;
+
+					&:first-child {
+						padding-right: @modal-dialog-msg-button-padding / 2;
+					}
+
+					&:last-child {
+						padding-left: @modal-dialog-msg-button-padding / 2;
+					}
+				}
+
+				& > .modal-dialog-msg-button-content {
+					font-size: @modal-dialog-msg-font-size;
+					
+					.fill-up-parent();
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
+		}
 	}
 }
 

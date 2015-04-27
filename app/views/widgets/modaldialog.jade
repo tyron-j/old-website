@@ -3,3 +3,13 @@
 div(class='modal-dialog'
 	ng-class='{ shown: model.inUse, hidden: !model.inUse }')
 	div(class='modal-dialog-msg')
+		div(class='modal-dialog-msg-header')
+			| {{ model.title }}
+		div(class='modal-dialog-msg-content')
+			| {{ model.content }}
+		div(class='modal-dialog-msg-button-container')
+			div(class='modal-dialog-msg-button',
+				ng-class='model.choice',
+				ng-repeat='button in model.buttons')
+				div(class='modal-dialog-msg-button-content')
+					| {{ button.title }}

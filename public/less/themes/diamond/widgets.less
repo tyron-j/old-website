@@ -17,6 +17,26 @@
 	}
 }
 
+.modal-dialog {
+	& > .modal-dialog-msg {
+		& > .modal-dialog-msg-header {
+			background-color: @green-sea;
+		}
+
+		& > .modal-dialog-msg-button-container {
+			& > .modal-dialog-msg-button {
+				& > .modal-dialog-msg-button-content {
+					background-color: @green-sea;
+
+					&:hover {
+						background-color: @turquoise;
+					}
+				}
+			}
+		}
+	}
+}
+
 .nav-bar {
 	& > .nav-bar-content { // animated nav bar
 		&.shown {
