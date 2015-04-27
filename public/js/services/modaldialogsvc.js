@@ -6,7 +6,7 @@ define(function () {
 	return [
 		function () { // use as factory
 			return {
-				model: {
+				model: { // to-do: clean up the test properties
 					inUse: false,
 					title: 'Warning',
 					content: 'Test',
