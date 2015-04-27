@@ -18,6 +18,18 @@ define(function () {
 					createItemButton: {
 						inUse: false,
 						title: ''
+					},
+
+					close: function () {
+						this.inUse                     = false;
+						// this.title                  = '';
+						// this.items                  = [];
+						// this.selectItem             = function () {};
+						this.selectedItem              = null;
+
+						this.createItemButton.inUse    = false;
+						// this.createItemButton.title = '';
+						// this.createItem             = function () {};
 					}
 				},
 
@@ -45,17 +57,8 @@ define(function () {
 						}
 					});
 
-					// to-do: make this an individual method
 					$scope.$on('$locationChangeStart', function (evt, next, current) {
-						sideBar.inUse                     = false;
-						// sideBar.title                  = '';
-						// sideBar.items                  = [];
-						// sideBar.selectItem             = function () {};
-						sideBar.selectedItem              = null;
-
-						sideBar.createItemButton.inUse    = false;
-						// sideBar.createItemButton.title = '';
-						// sideBar.createItem             = function () {};
+						sideBar.close();
 					});
 				},
 

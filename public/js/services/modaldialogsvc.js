@@ -6,16 +6,20 @@ define(function () {
 	return [
 		function () { // use as factory
 			return {
-				model: { // to-do: clean up the test properties
+				model: {
 					inUse: false,
-					title: 'Warning',
-					content: 'Test',
-					choice: 'binary',
-					buttons: [{
-						title: 'OK'
-					}, {
-						title: 'Cancel'
-					}]
+					title: '',
+					content: '',
+					choice: '', // singular, binary, ternary (?)
+					buttons: [],
+
+					close: function () {
+						this.inUse = false;
+						this.title = '';
+						this.content = '';
+						this.choice = '';
+						this.buttons = [];
+					}
 				}
 			};
 		}
