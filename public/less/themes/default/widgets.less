@@ -25,6 +25,24 @@
 	}
 }
 
+.modal-dialog {
+	position: fixed;
+	z-index: 5; // to-do: too high?
+
+	.faint(black);
+	.fill-up-parent();
+
+	&.hidden {
+		display: none;
+	}
+
+	& > .modal-dialog-msg {
+		background-color: white;
+
+		.set-in-center(@modal-dialog-width, @modal-dialog-height);
+	}
+}
+
 .nav-bar {
 	width: @nav-bar-width;
 	height: @nav-bar-height;

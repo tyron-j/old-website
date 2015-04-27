@@ -7,14 +7,16 @@ define(function () {
 		'$http',
 		'$scope',
 
+		'modalDialogSvc',
 		'navBarSvc',
 		'sideBarSvc',
 		
-		function ($http, $scope, navBarSvc, sideBarSvc) {
+		function ($http, $scope, modalDialogSvc, navBarSvc, sideBarSvc) {
 			navBarSvc.globalMode();
 
-			$scope.navBar  = navBarSvc.model;
-			$scope.sideBar = sideBarSvc.model;
+			$scope.modalDialog = modalDialogSvc.model;
+			$scope.navBar      = navBarSvc.model;
+			$scope.sideBar     = sideBarSvc.model;
 		}
 	];
 });
