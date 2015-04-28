@@ -169,7 +169,7 @@ module.exports = {
 		}
 	},
 
-	postBlog: function (req, res, next) {
+	postBlog: function (req, res, next) { // to-do: separate creating and updating logic
 		if (req.body.isNew) {
 			var blog = new models.Blog({
 				title: req.body.title,
@@ -213,6 +213,17 @@ module.exports = {
 	},
 
 	deleteBlog: function (req, res, next) {
-		//
+		/*models.Blog.findOneAndRemove({
+			title: req.params.title
+		}, function (err, b) {
+			//
+		});*/
+
+		var successMsg = "Deleted " + req.params.title + " in database";
+
+		signal.success(successMsg);
+		res.send({
+			msg: successMsg
+		});
 	}
 };

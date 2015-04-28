@@ -71,7 +71,9 @@ define(function () {
 							buttons: [{
 								title: 'OK',
 								onClick: function () {
-									console.log("OK pressed");
+									$http.delete('/api/blog/' + blog.title).success(function (res) {
+										console.log(res.msg);
+									});
 								}
 							}, {
 								title: 'Cancel',
