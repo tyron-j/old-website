@@ -210,5 +210,9 @@ module.exports = {
 				});
 			});
 		}
+	},
+
+	deleteBlog: function (req, res, next) {
+		//
 	}
 };

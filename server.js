@@ -55,6 +55,8 @@ app.post('/api/artwork', api.postArtwork(__dirname + '/app/temp'));
 app.post('/api/blog', api.postBlog);
 app.post('/api/user', api.postUser);
 
+app.delete('/api/blog/:title', api.deleteBlog);
+
 // routes =================================================================== //
 
 app.get('/partials/:partial', routes.partials);
