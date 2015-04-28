@@ -169,47 +169,47 @@ module.exports = {
 		}
 	},
 
-	postBlog: function (req, res, next) { // to-do: separate creating and updating logic
-		if (req.body.isNew) {
-			var blog = new models.Blog({
-				title: req.body.title,
-				content: req.body.content,
-				creationDate: req.body.creationDate
+	postBlog: function (req, res, next) {
+		var blog = new models.Blog({
+			title: req.body.title,
+			content: req.body.content,
+			creationDate: req.body.creationDate
+		});
+
+		blog.save(function (err, b) {
+			if (err) {
+				signal.error("Failed to save " + req.body.title + " to database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			var successMsg = "Saved " + req.body.title + " to database";
+
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
 			});
+		});
+	},
 
-			blog.save(function (err, b) {
-				if (err) {
-					signal.error("Failed to save " + req.body.title + " to database");
-					throw err; // to-do: handle error gracefully
-				}
+	putBlog: function (req, res, next) {
+		models.Blog.findOneAndUpdate({
+			creationDate: req.body.creationDate // creationDate works as a unique identifier
+		}, {
+			title: req.body.title,
+			content: req.body.content
+		}, function (err, b) { // to-do: handle no matches
+			if (err) {
+				signal.error("Failed to update " + req.body.title + " in database");
+				throw err; // to-do: handle error gracefully
+			}
 
-				var successMsg = "Saved " + req.body.title + " to database";
+			var successMsg = "Updated " + req.body.title + " in database";
 
-				signal.success(successMsg);
-				res.send({
-					msg: successMsg
-				});
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
 			});
-		} else {
-			models.Blog.findOneAndUpdate({
-				creationDate: req.body.creationDate // creationDate works as a unique identifier
-			}, {
-				title: req.body.title,
-				content: req.body.content
-			}, function (err, b) { // to-do: handle no matches
-				if (err) {
-					signal.error("Failed to update " + req.body.title + " in database");
-					throw err; // to-do: handle error gracefully
-				}
-
-				var successMsg = "Updated " + req.body.title + " in database";
-
-				signal.success(successMsg);
-				res.send({
-					msg: successMsg
-				});
-			});
-		}
+		});
 	},
 
 	deleteBlog: function (req, res, next) {

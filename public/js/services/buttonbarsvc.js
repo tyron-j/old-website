@@ -32,16 +32,25 @@ define(function () {
 						this.hidden                = true;
 
 						// to-do: check for duplicate title first
-						$http.post('/api/blog', {
-							title: blog.title,
-							content: blog.content,
-							creationDate: blog.creationDate,
-							isNew: blog.isNew
-						}).success(function (res) {
-							console.log(res.msg);
-
-							blog.isNew = false;
-						});
+						if (blog.isNew) {
+							$http.post('/api/blog', {
+								title: blog.title,
+								content: blog.content,
+								creationDate: blog.creationDate
+							}).success(function (res) {
+								console.log(res.msg);
+								
+								blog.isNew = false;
+							});
+						} else {
+							$http.put('/api/blog', {
+								title: blog.title,
+								content: blog.content,
+								creationDate: blog.creationDate
+							}).success(function (res) {
+								console.log(res.msg);
+							});
+						}
 					}
 				}, {
 					title: 'Edit',
