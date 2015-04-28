@@ -31,6 +31,7 @@ define(function () {
 						blogEditor.items[3].hidden = true;
 						this.hidden                = true;
 
+						// to-do: check for duplicate title first
 						$http.post('/api/blog', {
 							title: blog.title,
 							content: blog.content,
