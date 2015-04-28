@@ -6,7 +6,7 @@ define(function () {
 	return [
 		function () { // use as factory
 			return {
-				model: {
+				model: { // using a singleton since there will only be one instance of a modal dialog
 					inUse: false,
 					title: '',
 					content: '',

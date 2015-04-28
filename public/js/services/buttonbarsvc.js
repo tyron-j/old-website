@@ -12,8 +12,8 @@ define(function () {
 		function ($http, modalDialogSvc, sideBarSvc) { // use as factory... or service?
 			var modalDialog = modalDialogSvc.model;
 			var sideBar     = sideBarSvc.model;
-			
-			var blogEditor = { // singleton
+
+			var blogEditor = { // singleton; to-do: use an instance
 				inEditMode: false,
 
 				items: [{

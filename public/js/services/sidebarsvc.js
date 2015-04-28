@@ -20,6 +20,19 @@ define(function () {
 						title: ''
 					},
 
+					allowCreation: function (options) {
+						this.createItemButton.inUse = true;
+						this.createItemButton.title = options.title;
+						this.createItem             = options.createItem;
+					},
+
+					open: function (options) {
+						this.inUse      = true;
+						this.title      = options.title;
+						this.items      = options.items;
+						this.selectItem = options.selectItem;
+					},
+
 					close: function () {
 						this.inUse                     = false;
 						// this.title                  = '';
@@ -40,16 +53,18 @@ define(function () {
 					$http.get('/api/blog').success(function (res) {
 						var blogs = res;
 
-						sideBar.inUse      = true;
-						sideBar.title      = 'Blogs';
-						sideBar.items      = blogs;
-						sideBar.selectItem = that.selectBlog;
+						sideBar.open({
+							title: 'Blogs',
+							items: blogs,
+							selectItem: that.selectBlog
+						});
 
 						// master blog
 						if ($location.path() === '/master/blog') {
-							sideBar.createItemButton.inUse = true;
-							sideBar.createItemButton.title = 'New Blog';
-							sideBar.createItem             = that.createBlog;
+							sideBar.allowCreation({
+								title: 'New Blog',
+								createItem: that.createBlog
+							});
 						}
 
 						if (blogs.length) {
