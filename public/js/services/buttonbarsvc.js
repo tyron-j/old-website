@@ -75,7 +75,7 @@ define(function () {
 							}, {
 								title: 'Cancel',
 								onClick: function () {
-									console.log("Cancel pressed");
+									modalDialog.close();
 								}
 							}]
 						});
