@@ -11,5 +11,6 @@ div(class='modal-dialog'
 			div(class='modal-dialog-msg-button',
 				ng-class='model.choice',
 				ng-repeat='button in model.buttons')
-				div(class='modal-dialog-msg-button-content')
+				div(class='modal-dialog-msg-button-content'
+					ng-click='button.onClick()')
 					| {{ button.title }}

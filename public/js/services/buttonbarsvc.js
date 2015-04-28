@@ -23,7 +23,7 @@ define(function () {
 
 					onClick: function () {
 						var blog = sideBar.selectedItem;
-						
+
 						blog.originalTitle   = null;
 						blog.originalContent = null
 
@@ -63,6 +63,22 @@ define(function () {
 
 					onClick: function () {
 						var blog = sideBar.selectedItem;
+
+						modalDialog.open({
+							title: 'Confirmation',
+							content: "Are you sure you wish to delete this blog?",
+							buttons: [{
+								title: 'OK',
+								onClick: function () {
+									console.log("OK pressed");
+								}
+							}, {
+								title: 'Cancel',
+								onClick: function () {
+									console.log("Cancel pressed");
+								}
+							}]
+						});
 					}
 				}, {
 					title: 'Cancel',
