@@ -16,6 +16,33 @@ define(function () {
 			var blogEditor = { // singleton; to-do: use an instance
 				inEditMode: false,
 
+				enterEditMode: function () {
+					var blog = sideBar.selectedItem;
+
+					blog.originalTitle   = blog.title;
+					blog.originalContent = blog.content;
+
+					this.inEditMode      = true;
+					this.items[0].hidden = false;
+					this.items[3].hidden = false;
+				},
+
+				exitEditMode: function (resetBlog) {
+					var blog = sideBar.selectedItem;
+
+					if (resetBlog) {
+						blog.title   = blog.originalTitle;
+						blog.content = blog.originalContent;
+					}
+
+					blog.originalTitle   = null;
+					blog.originalContent = null;
+
+					this.inEditMode      = false;
+					this.items[0].hidden = true;
+					this.items[3].hidden = true;
+				},
+
 				items: [{
 					title: 'Save',
 					icon: 'save',
@@ -24,12 +51,7 @@ define(function () {
 					onClick: function () {
 						var blog = sideBar.selectedItem;
 
-						blog.originalTitle   = null;
-						blog.originalContent = null
-
-						blogEditor.inEditMode      = false;
-						blogEditor.items[3].hidden = true;
-						this.hidden                = true;
+						blogEditor.exitEditMode();
 
 						// to-do: check for duplicate title first
 						if (blog.isNew) {
@@ -39,7 +61,7 @@ define(function () {
 								creationDate: blog.creationDate
 							}).success(function (res) {
 								console.log(res.msg);
-								
+
 								blog.isNew = false;
 							});
 						} else {
@@ -58,13 +80,7 @@ define(function () {
 					hidden: false,
 
 					onClick: function () {
-						var blog = sideBar.selectedItem;
-
-						blog.originalTitle         = blog.title;
-						blog.originalContent       = blog.content;
-						blogEditor.inEditMode      = true;
-						blogEditor.items[0].hidden = false;
-						blogEditor.items[3].hidden = false;
+						blogEditor.enterEditMode();
 					}
 				}, {
 					title: 'Delete',
@@ -100,14 +116,7 @@ define(function () {
 					onClick: function () {
 						var blog = sideBar.selectedItem;
 
-						blog.title           = blog.originalTitle;
-						blog.content         = blog.originalContent;
-						blog.originalTitle   = null;
-						blog.originalContent = null
-
-						blogEditor.inEditMode      = false;
-						blogEditor.items[0].hidden = true;
-						this.hidden                = true;
+						blogEditor.exitEditMode(true);
 					}
 				}]
 			};
