@@ -50,6 +50,8 @@ define(function () {
 					var that    = this;
 					var sideBar = this.model;
 
+					var ignoreLocationChangeStart;
+
 					$http.get('/api/blog').success(function (res) {
 						var blogs = res;
 
@@ -72,8 +74,9 @@ define(function () {
 						}
 					});
 
-					$scope.$on('$locationChangeStart', function (evt, next, current) {
+					ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
 						sideBar.close();
+						ignoreLocationChangeStart();
 					});
 				},
 

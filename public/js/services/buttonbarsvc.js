@@ -13,116 +13,127 @@ define(function () {
 			var modalDialog = modalDialogSvc.model;
 			var sideBar     = sideBarSvc.model;
 
-			var blogEditor = { // singleton; to-do: use an instance
-				inEditMode: false,
+			return {
+				getBlogEditor: function ($scope) {
+					var ignoreLocationChangeStart;
 
-				enterEditMode: function () {
-					var blog = sideBar.selectedItem;
+					var blogEditor = { // singleton; to-do: use an instance
+						inEditMode: false,
 
-					blog.originalTitle   = blog.title;
-					blog.originalContent = blog.content;
+						enterEditMode: function () {
+							var blog = sideBar.selectedItem;
+							var that = this;
 
-					this.inEditMode      = true;
-					this.items[0].hidden = false;
-					this.items[3].hidden = false;
-				},
+							blog.originalTitle   = blog.title;
+							blog.originalContent = blog.content;
 
-				exitEditMode: function (resetBlog) {
-					var blog = sideBar.selectedItem;
+							this.inEditMode      = true;
+							this.items[0].hidden = false;
+							this.items[3].hidden = false;
 
-					if (resetBlog) {
-						blog.title   = blog.originalTitle;
-						blog.content = blog.originalContent;
-					}
-
-					blog.originalTitle   = null;
-					blog.originalContent = null;
-
-					this.inEditMode      = false;
-					this.items[0].hidden = true;
-					this.items[3].hidden = true;
-				},
-
-				items: [{
-					title: 'Save',
-					icon: 'save',
-					hidden: true,
-
-					onClick: function () {
-						var blog = sideBar.selectedItem;
-
-						blogEditor.exitEditMode();
-
-						// to-do: check for duplicate title first
-						if (blog.isNew) {
-							$http.post('/api/blog', {
-								title: blog.title,
-								content: blog.content,
-								creationDate: blog.creationDate
-							}).success(function (res) {
-								console.log(res.msg);
-
-								blog.isNew = false;
+							ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
+								that.exitEditMode(true);
 							});
-						} else {
-							$http.put('/api/blog', {
-								title: blog.title,
-								content: blog.content,
-								creationDate: blog.creationDate
-							}).success(function (res) {
-								console.log(res.msg);
-							});
-						}
-					}
-				}, {
-					title: 'Edit',
-					icon: 'pencil',
-					hidden: false,
+						},
 
-					onClick: function () {
-						blogEditor.enterEditMode();
-					}
-				}, {
-					title: 'Delete',
-					icon: 'trash',
-					hidden: false,
+						exitEditMode: function (resetBlog) {
+							var blog = sideBar.selectedItem;
 
-					onClick: function () {
-						var blog = sideBar.selectedItem;
+							if (resetBlog) {
+								blog.title   = blog.originalTitle;
+								blog.content = blog.originalContent;
+							}
 
-						modalDialog.open({
-							title: 'Confirmation',
-							content: "Are you sure you wish to delete this blog?",
-							buttons: [{
-								title: 'OK',
-								onClick: function () {
-									$http.delete('/api/blog/' + blog.title).success(function (res) {
+							blog.originalTitle   = null;
+							blog.originalContent = null;
+
+							this.inEditMode      = false;
+							this.items[0].hidden = true;
+							this.items[3].hidden = true;
+
+							ignoreLocationChangeStart();
+						},
+
+						items: [{
+							title: 'Save',
+							icon: 'save',
+							hidden: true,
+
+							onClick: function () {
+								var blog = sideBar.selectedItem;
+
+								blogEditor.exitEditMode();
+
+								// to-do: check for duplicate title first
+								if (blog.isNew) {
+									$http.post('/api/blog', {
+										title: blog.title,
+										content: blog.content,
+										creationDate: blog.creationDate
+									}).success(function (res) {
+										console.log(res.msg);
+
+										blog.isNew = false;
+									});
+								} else {
+									$http.put('/api/blog', {
+										title: blog.title,
+										content: blog.content,
+										creationDate: blog.creationDate
+									}).success(function (res) {
 										console.log(res.msg);
 									});
 								}
-							}, {
-								title: 'Cancel',
-								onClick: function () {
-									modalDialog.close();
-								}
-							}]
-						});
-					}
-				}, {
-					title: 'Cancel',
-					icon: 'close',
-					hidden: true,
+							}
+						}, {
+							title: 'Edit',
+							icon: 'pencil',
+							hidden: false,
 
-					onClick: function () {
-						var blog = sideBar.selectedItem;
+							onClick: function () {
+								blogEditor.enterEditMode();
+							}
+						}, {
+							title: 'Delete',
+							icon: 'trash',
+							hidden: false,
 
-						blogEditor.exitEditMode(true);
-					}
-				}]
-			};
+							onClick: function () {
+								var blog = sideBar.selectedItem;
 
-			return {
-				blogEditor: blogEditor
+								modalDialog.open({
+									title: 'Confirmation',
+									content: "Are you sure you wish to delete this blog?",
+									buttons: [{
+										title: 'OK',
+										onClick: function () {
+											$http.delete('/api/blog/' + blog.title).success(function (res) {
+												console.log(res.msg);
+											});
+										}
+									}, {
+										title: 'Cancel',
+										onClick: function () {
+											modalDialog.close();
+										}
+									}]
+								});
+							}
+						}, {
+							title: 'Cancel',
+							icon: 'close',
+							hidden: true,
+
+							onClick: function () {
+								var blog = sideBar.selectedItem;
+
+								blogEditor.exitEditMode(true);
+							}
+						}]
+					};
+
+					return blogEditor;
+				}
 			};
 		}
 	];

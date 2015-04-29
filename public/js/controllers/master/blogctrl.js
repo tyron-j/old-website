@@ -12,7 +12,7 @@ define(function () {
 		function ($scope, buttonBarSvc, sideBarSvc) {
 			sideBarSvc.blogMode($scope);
 
-			$scope.buttonBar = buttonBarSvc.blogEditor;
+			$scope.buttonBar = buttonBarSvc.getBlogEditor($scope);
 		}
 	];
 });
