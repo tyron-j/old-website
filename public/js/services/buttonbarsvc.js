@@ -16,6 +16,7 @@ define(function () {
 			return {
 				getBlogEditor: function ($scope) {
 					var ignoreLocationChangeStart;
+					var ignoreSideBarSelectionChange;
 
 					var blogEditor = { // singleton; to-do: use an instance
 						inEditMode: false,
@@ -32,12 +33,19 @@ define(function () {
 							this.items[3].hidden = false;
 
 							ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
-								that.exitEditMode(true);
+								that.exitEditMode(true); // to-do: change this in accordance with changes made to side bar deconstruction
+							});
+
+							// watch creationDate since it uniquely identifies blog
+							ignoreSideBarSelectionChange = $scope.$watch('sideBar.selectedItem.creationDate', function (newValue, oldValue) {
+								if (newValue !== oldValue) {
+									that.exitEditMode(true, blog);
+								}
 							});
 						},
 
-						exitEditMode: function (resetBlog) {
-							var blog = sideBar.selectedItem;
+						exitEditMode: function (resetBlog, currentBlog) {
+							var blog = currentBlog || sideBar.selectedItem;
 
 							if (resetBlog) {
 								blog.title   = blog.originalTitle;
@@ -51,7 +59,9 @@ define(function () {
 							this.items[0].hidden = true;
 							this.items[3].hidden = true;
 
+							// these have to be called every time the user exits edit mode
 							ignoreLocationChangeStart();
+							ignoreSideBarSelectionChange();
 						},
 
 						items: [{
