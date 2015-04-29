@@ -57,7 +57,9 @@ define([
 		}
 	]);
 
-	ng.bootstrap(document, ['tyronApp']);
+	ng.bootstrap(document, ['tyronApp'], {
+		strictDi: true
+	});
 
 	return app;
 });
