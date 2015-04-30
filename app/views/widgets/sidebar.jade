@@ -2,7 +2,7 @@
 
 //- to-do: make the left/right class configurable; also consider using ng-init
 div(class='left side-bar',
-	ng-class='{ shown: model.inUse, hidden: !model.inUse }')
+	ng-class='{ shown: model.inUse, hidden: !model.inUse, "preloader preloader-intersection": !model.items.length }')
 	//- header
 	div(class='side-bar-header')
 		| {{ model.title }}
