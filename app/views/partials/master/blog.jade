@@ -1,6 +1,7 @@
 //- master blog
 
-div(class='blog')
+div(class='blog',
+	ng-class='{ "preloader preloader-intersection": !sideBar.selectedItem.content }')
 	div(class='blog-header')
 		span(ng-if='!buttonBar.inEditMode')
 			| {{ sideBar.selectedItem.title }}

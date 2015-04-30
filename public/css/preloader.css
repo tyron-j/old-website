@@ -1,0 +1,9 @@
+.preloader {
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* to-do: add all the other preloaders for kicks */
+.preloader-intersection {
+	background-image: url('preloaders/intersection.gif');
+}
