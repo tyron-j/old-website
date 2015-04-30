@@ -70,28 +70,44 @@ define(function () {
 							hidden: true,
 
 							onClick: function () {
-								var blog = sideBar.selectedItem;
+								var blog       = sideBar.selectedItem;
+								var blogs      = sideBar.items;
+								var blogTitles = blogs.map(function (b) {
+									return b.title;
+								});
 
-								blogEditor.exitEditMode();
+								if (blogTitles.indexOf(blog.title) === blogTitles.lastIndexOf(blog.title)) { // unique title
+									blogEditor.exitEditMode();
 
-								// to-do: check for duplicate title first
-								if (blog.isNew) {
-									$http.post('/api/blog', {
-										title: blog.title,
-										content: blog.content,
-										creationDate: blog.creationDate
-									}).success(function (res) {
-										console.log(res.msg);
+									if (blog.isNew) {
+										$http.post('/api/blog', {
+											title: blog.title,
+											content: blog.content,
+											creationDate: blog.creationDate
+										}).success(function (res) {
+											console.log(res.msg);
 
-										blog.isNew = false;
-									});
-								} else {
-									$http.put('/api/blog', {
-										title: blog.title,
-										content: blog.content,
-										creationDate: blog.creationDate
-									}).success(function (res) {
-										console.log(res.msg);
+											blog.isNew = false;
+										});
+									} else {
+										$http.put('/api/blog', {
+											title: blog.title,
+											content: blog.content,
+											creationDate: blog.creationDate
+										}).success(function (res) {
+											console.log(res.msg);
+										});
+									}
+								} else { // duplicate title
+									modalDialog.open({
+										title: 'Invalid Action',
+										content: "A blog by the same title already exists",
+										buttons: [{
+											title: 'OK',
+											onClick: function () {
+												modalDialog.close();
+											}
+										}]
 									});
 								}
 							}
