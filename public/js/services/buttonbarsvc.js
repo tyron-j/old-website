@@ -109,7 +109,8 @@ define(function () {
 							hidden: false,
 
 							onClick: function () {
-								var blog = sideBar.selectedItem;
+								var blog  = sideBar.selectedItem;
+								var blogs = sideBar.items;
 
 								modalDialog.open({
 									title: 'Confirmation',
@@ -119,6 +120,9 @@ define(function () {
 										onClick: function () {
 											$http.delete('/api/blog/' + blog.title).success(function (res) {
 												console.log(res.msg);
+												blogs.splice(blogs.indexOf(blog), 1);
+												sideBar.selectItem(blogs[0]);
+												modalDialog.close();
 											});
 										}
 									}, {

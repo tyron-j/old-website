@@ -213,17 +213,20 @@ module.exports = {
 	},
 
 	deleteBlog: function (req, res, next) {
-		/*models.Blog.findOneAndRemove({
+		models.Blog.findOneAndRemove({
 			title: req.params.title
 		}, function (err, b) {
-			//
-		});*/
+			if (err) {
+				signal.error("Failed to delete " + req.params.title + " in database");
+				throw err; //to-do: handle error gracefully
+			}
 
-		var successMsg = "Deleted " + req.params.title + " in database";
+			var successMsg = "Deleted " + req.params.title + " in database";
 
-		signal.success(successMsg);
-		res.send({
-			msg: successMsg
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
+			});
 		});
 	}
 };
