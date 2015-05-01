@@ -15,30 +15,39 @@ define([
 		'allControllers',
 		'allDirectives'
 	]).config([
-		'$routeProvider',
 		'$locationProvider',
+		'$routeProvider',
 
-		function ($routeProvider, $locationProvider) {
+		function ($locationProvider, $routeProvider) {
 			// public routes
 			$routeProvider.when('/login', {
 				templateUrl: '/partials/login',
 				controller: 'LoginCtrl'
-			}).when('/gallery', { // currently localhost only
-				templateUrl: '/partials/gallery',
-				controller: 'GalleryCtrl'
+			}).when('/about', {
+				templateUrl: '/partials/about',
+				controller: 'AboutCtrl'
 			}).when('/blog', { // currently localhost only
 				templateUrl: '/partials/blog',
 				controller: 'BlogCtrl'
-			}).when('/hello', {
+			}).when('/gallery', { // currently localhost only
+				templateUrl: '/partials/gallery',
+				controller: 'GalleryCtrl'
+			}).when('/resume', {
+				templateUrl: '/partials/resume',
+				controller: 'ResumeCtrl'
+			});
+
+			// temporary routes
+			$routeProvider.when('/hello', {
 				templateUrl: '/partials/hello'
-			}).when('/unauthorized', {
-				templateUrl: '/partials/unauthorized'
 			}).when('/success', {
 				templateUrl: '/partials/success'
+			}).when('/unauthorized', {
+				templateUrl: '/partials/unauthorized'
 			});
 
 			// master routes
-			$routeProvider.when('/master/upload', {
+			$routeProvider.when('/master/upload', { // to-do: remove this
 				templateUrl: '/partials/master/upload'
 			}).when('/master/gallery', {
 				templateUrl: '/partials/master/gallery',
@@ -46,6 +55,15 @@ define([
 			}).when('/master/blog', {
 				templateUrl: '/partials/master/blog',
 				controller: 'MasterBlogCtrl'
+			});
+
+			// test routes
+			$routeProvider.when('/tests/ui', {
+				templateUrl: '/partials/tests/ui',
+				controller: 'UICtrl'
+			}).when('/tests/unit', {
+				templateUrl: '/partials/tests/unit',
+				controller: 'UnitCtrl'
 			});
 
 			// otherwise

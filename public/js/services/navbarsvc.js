@@ -24,14 +24,17 @@ define(function () {
 				},
 
 				publicLinks: [{
-					title: 'Login',
-					href: 'login'
+					title: 'About',
+					href: 'about'
 				}, {
 					title: 'Blog',
 					href: 'blog'
 				}, {
 					title: 'Gallery',
 					href: 'gallery'
+				}, {
+					title: 'Resume',
+					href: 'resume'
 				}],
 
 				masterLinks: [{
@@ -42,6 +45,15 @@ define(function () {
 					}, {
 						title: 'Gallery',
 						href: 'master/gallery'
+					}]
+				}, {
+					title: 'Tests',
+					subItems: [{
+						title: 'Unit',
+						href: 'tests/unit'
+					}, {
+						title: 'UI',
+						href: 'tests/ui'
 					}]
 				}]
 			};

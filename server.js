@@ -63,6 +63,7 @@ app.delete('/api/blog/:title', api.deleteBlog);
 
 app.get('/partials/:partial', routes.partials);
 app.get('/partials/master/:partial', routes.masterPartials);
+app.get('/partials/tests/:partial', routes.testsPartials);
 app.get('/widgets/:widget', routes.widgets);
 
 // solves angular page refresh issue

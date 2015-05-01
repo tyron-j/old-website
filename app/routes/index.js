@@ -18,6 +18,10 @@ module.exports = {
 		res.render('partials/master/' + req.params.partial);
 	},
 
+	testsPartials: function (req, res, next) {
+		res.render('partials/tests/' + req.params.partial);
+	},
+
 	widgets: function (req, res, next) {
 		res.render('widgets/' + req.params.widget);
 	}
