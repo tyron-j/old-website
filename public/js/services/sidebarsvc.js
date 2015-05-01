@@ -81,7 +81,6 @@ define(function () {
 				},
 
 				createBlog: function () {
-					// to-do: title must be unique
 					var newBlog = {
 						title: 'New Blog',
 						content: 'New Entry',
