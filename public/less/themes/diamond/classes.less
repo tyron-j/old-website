@@ -18,6 +18,25 @@
 	}
 }
 
+.artwork-browser {
+	.widget; // to-do: this is not a widget
+
+	.set-in-center(@horizontal-golden-width, @horizontal-golden-height);
+
+	& > .artwork-browser-content {
+		& > .artwork-browser-scroll-content {
+			& > .artwork-browser-thumbnail {
+				.faint(black);
+				border: 1px solid @wet-asphalt;
+			}
+		}
+	}
+
+	& > .artwork-browser-footer {
+		background-color: @green-sea;
+	}
+}
+
 .blog { // to-do: clean up style
 	.widget; // to-do: this is not a widget
 

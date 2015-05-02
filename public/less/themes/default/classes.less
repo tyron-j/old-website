@@ -1,5 +1,30 @@
 // default classes
 
+// to-do: clean up the unnecessary styles such as width: 100%
+.artwork-browser {
+	& > .artwork-browser-content {
+		width: 100%;
+		overflow: auto;
+		
+		.calc-height(~'100% - '@artwork-browser-footer-height);
+
+		& > .artwork-browser-scroll-content {
+			width: 100%;
+
+			& > .artwork-browser-thumbnail {
+				width: @artwork-browser-thumbnail-width;
+				display: inline-block;
+				padding-bottom: @artwork-browser-thumbnail-width; // hack for making the height same as width
+			}
+		}
+	}
+
+	& > .artwork-browser-footer {
+		width: 100%;
+		height: @artwork-browser-footer-height;
+	}
+}
+
 .blog {
 	& > .blog-header {
 		width: @blog-header-width;
