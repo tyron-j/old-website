@@ -72,6 +72,12 @@
 	position: absolute;
 }
 
+.contain-text() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .faint(@color: black, @opacity: 25%) {
 	background-color: @color; // fallback
 	background-color: fade(@color, @opacity);

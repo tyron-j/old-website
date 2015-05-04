@@ -19,6 +19,7 @@ define(function () {
 
 			// to-do: also allow selecting multiple artworks for multiple deletion
 			$scope.selectArtwork = function (artwork) {
+				// to-do: only execute logic if not in edit mode
 				$scope.selectedArtwork = artwork;
 			}
 		}
