@@ -8,7 +8,7 @@ div(class='artwork-browser')
 				ng-repeat='artwork in artworks')
 				div(class='artwork-browser-thumbnail-header',
 					ng-class='{ shown: artwork === selectedArtwork, hidden: artwork !== selectedArtwork }')
-					{{ artwork.title }}
+					| {{ artwork.title }}
 				//- to-do: change url to http://tyronjung.com/api/artwork/{{ artwork.title }}
 				//- after moving image fetching api to unprotected api
 				img(ng-src='http://localhost:9000/api/artwork/{{ artwork.title }}'
