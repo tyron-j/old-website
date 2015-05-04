@@ -11,6 +11,10 @@ define(function () {
 			$http.get('/api/artwork').success(function (res) {
 				$scope.artworks = res;
 			});
+
+			$scope.selectArtwork = function (artwork) {
+				$scope.selectedArtwork = artwork;
+			}
 		}
 	];
 });

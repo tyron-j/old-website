@@ -1,11 +1,19 @@
 //- master gallery
 
 div(class='artwork-browser')
-	div(class='artwork-browser-content')
+	div(class='artwork-browser-content'
+		ng-mouseleave='selectedArtwork = null')
 		div(class='artwork-browser-scroll-content')
 			div(class='artwork-browser-thumbnail'
 				ng-repeat='artwork in artworks')
+				div(class='artwork-browser-thumbnail-header',
+					ng-class='{ shown: artwork === selectedArtwork, hidden: artwork !== selectedArtwork }')
+					{{ artwork.title }}
 				//- to-do: change url to http://tyronjung.com/api/artwork/{{ artwork.title }}
 				//- after moving image fetching api to unprotected api
-				img(ng-src='http://localhost:9000/api/artwork/{{ artwork.title }}')
+				img(ng-src='http://localhost:9000/api/artwork/{{ artwork.title }}'
+					ng-mouseover='selectArtwork(artwork)')
+				div(class='artwork-browser-thumbnail-editor',
+					ng-class='{ shown: artwork === selectedArtwork, hidden: artwork !== selectedArtwork }')
 	div(class='artwork-browser-footer')
+		ui-button-bar(ui-model='buttonBar')

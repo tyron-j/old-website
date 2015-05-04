@@ -26,8 +26,41 @@
 	& > .artwork-browser-content {
 		& > .artwork-browser-scroll-content {
 			& > .artwork-browser-thumbnail {
-				.faint(black);
 				border: 1px solid @wet-asphalt;
+
+				& > .artwork-browser-thumbnail-header, & > .artwork-browser-thumbnail-editor {
+					.faint(black, 75%);
+				}
+
+				& > .artwork-browser-thumbnail-header {
+					&.shown {
+						transition: @std-transition;
+						margin-top: 0;
+					}
+
+					&.hidden {
+						transition: @std-transition;
+						margin-top: -@artwork-browser-thumbnail-header-height;
+					}
+
+					// initial state
+					margin-top: -@artwork-browser-thumbnail-header-height;
+				}
+
+				& > .artwork-browser-thumbnail-editor {
+					&.shown {
+						transition: @std-transition;
+						margin-bottom: 0;
+					}
+
+					&.hidden {
+						transition: @std-transition;
+						margin-bottom: -@artwork-browser-thumbnail-header-height;
+					}
+
+					// initial state
+					margin-bottom: -@artwork-browser-thumbnail-header-height;
+				}
 			}
 		}
 	}

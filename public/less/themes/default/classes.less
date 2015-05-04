@@ -18,11 +18,22 @@
 				padding-bottom: @artwork-browser-thumbnail-width; // hack for making the height same as width
 				position: relative; // holds absolute element within
 
+				& > .artwork-browser-thumbnail-header, & > .artwork-browser-thumbnail-editor {
+					width: 100%;
+					height: @artwork-browser-thumbnail-header-height;
+					position: absolute;
+					z-index: 1;
+				}
+
 				& > img {
 					width: 100%;
 					cursor: pointer;
 
 					.center();
+				}
+
+				& > .artwork-browser-thumbnail-editor {
+					bottom: 0;
 				}
 			}
 		}
@@ -31,6 +42,10 @@
 	& > .artwork-browser-footer {
 		width: 100%;
 		height: @artwork-browser-footer-height;
+
+		& > .button-bar {
+			//
+		}
 	}
 }
 

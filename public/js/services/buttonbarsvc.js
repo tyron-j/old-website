@@ -14,6 +14,14 @@ define(function () {
 			var sideBar     = sideBarSvc.model;
 
 			return {
+				getArtworkThumbnailEditor: function ($scope) {
+					//
+				},
+				
+				getArtworkBrowserEditor: function ($scope) {
+					//
+				},
+
 				getBlogEditor: function ($scope) {
 					var ignoreLocationChangeStart;
 					var ignoreSideBarSelectionChange;
