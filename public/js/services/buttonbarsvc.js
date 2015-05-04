@@ -15,11 +15,36 @@ define(function () {
 
 			return {
 				getArtworkThumbnailEditor: function ($scope) {
-					//
+					return {
+						items: [{
+							title: 'Edit',
+							icon: 'pencil',
+
+							onClick: function () {
+								console.log("Edit pressed!");
+							}
+						}, {
+							title: 'Expand',
+							icon: 'expand',
+
+							onClick: function () {
+								console.log("Expand pressed!");
+							}
+						}]
+					};
 				},
-				
+
 				getArtworkBrowserEditor: function ($scope) {
-					//
+					return {
+						items: [{
+							title: 'Upload',
+							icon: 'upload',
+
+							onClick: function () {
+								console.log("Upload pressed!");
+							}
+						}]
+					};
 				},
 
 				getBlogEditor: function ($scope) {

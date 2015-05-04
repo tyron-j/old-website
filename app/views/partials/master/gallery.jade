@@ -15,5 +15,6 @@ div(class='artwork-browser')
 					ng-mouseover='selectArtwork(artwork)')
 				div(class='artwork-browser-thumbnail-editor',
 					ng-class='{ shown: artwork === selectedArtwork, hidden: artwork !== selectedArtwork }')
+					ui-button-bar(ui-model='artworkThumbnailEditor')
 	div(class='artwork-browser-footer')
-		ui-button-bar(ui-model='buttonBar')
+		ui-button-bar(ui-model='artworkBrowserEditor')
