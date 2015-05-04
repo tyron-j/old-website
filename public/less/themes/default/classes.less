@@ -14,7 +14,16 @@
 			& > .artwork-browser-thumbnail {
 				width: @artwork-browser-thumbnail-width;
 				display: inline-block;
+				overflow: hidden;
 				padding-bottom: @artwork-browser-thumbnail-width; // hack for making the height same as width
+				position: relative; // holds absolute element within
+
+				& > img {
+					width: 100%;
+					cursor: pointer;
+
+					.center();
+				}
 			}
 		}
 	}
