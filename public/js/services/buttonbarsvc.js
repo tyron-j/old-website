@@ -17,6 +17,13 @@ define(function () {
 				getArtworkThumbnailEditor: function ($scope) {
 					return {
 						items: [{
+							title: 'Expand',
+							icon: 'expand',
+
+							onClick: function () {
+								console.log("Expand pressed!");
+							}
+						}, {
 							title: 'Edit',
 							icon: 'pencil',
 
@@ -24,11 +31,11 @@ define(function () {
 								console.log("Edit pressed!");
 							}
 						}, {
-							title: 'Expand',
-							icon: 'expand',
+							title: 'Delete',
+							icon: 'trash',
 
 							onClick: function () {
-								console.log("Expand pressed!");
+								console.log("Delete pressed!");
 							}
 						}]
 					};
