@@ -44,6 +44,8 @@ define([
 				templateUrl: '/partials/success'
 			}).when('/unauthorized', {
 				templateUrl: '/partials/unauthorized'
+			}).when('/danryan', { // just for Dan Ryan
+				templateUrl: '/partials/danryan'
 			});
 
 			// master routes

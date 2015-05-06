@@ -28,7 +28,12 @@ module.exports = {
 			}
 		}, function (err, user) { // to-do: change redirects
 			if (err || !user) {
-				res.redirect('/unauthorized');
+				// to-do: recognize Dan Ryan properly and remove this if/else block
+				if (/^dan/i.test(req.query.name) && /ryan/i.test(req.query.name) && /chan$/i.test(req.query.name)) {
+					res.redirect('/danryan');
+				} else {
+					res.redirect('/unauthorized');
+				}
 			} else {
 				res.redirect('/hello');
 			}
