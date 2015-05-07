@@ -17,10 +17,12 @@ define(function () {
 			$scope.artworkThumbnailEditor = buttonBarSvc.getArtworkThumbnailEditor($scope);
 			$scope.artworkBrowserEditor   = buttonBarSvc.getArtworkBrowserEditor($scope);
 
+			$scope.selectedArtworks = [];
+
 			// to-do: also allow selecting multiple artworks for multiple deletion
-			$scope.selectArtwork = function (artwork) {
+			$scope.inspectArtwork = function (artwork) {
 				// to-do: only execute logic if not in edit mode
-				$scope.selectedArtwork = artwork;
+				$scope.inspectedArtwork = artwork;
 			}
 		}
 	];

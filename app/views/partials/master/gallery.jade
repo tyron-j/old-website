@@ -2,19 +2,19 @@
 
 div(class='artwork-browser')
 	div(class='artwork-browser-content'
-		ng-mouseleave='selectedArtwork = null')
+		ng-mouseleave='inspectedArtwork = null')
 		div(class='artwork-browser-scroll-content')
 			div(class='artwork-browser-thumbnail'
 				ng-repeat='artwork in artworks')
 				div(class='artwork-browser-thumbnail-header',
-					ng-class='{ shown: artwork === selectedArtwork, hidden: artwork !== selectedArtwork }')
+					ng-class='{ shown: artwork === inspectedArtwork, hidden: artwork !== inspectedArtwork }')
 					| {{ artwork.title }}
 				//- to-do: change url to http://tyronjung.com/api/artwork/{{ artwork.title }}
 				//- after moving image fetching api to unprotected api
 				img(ng-src='http://localhost:9000/api/artwork/{{ artwork.title }}'
-					ng-mouseover='selectArtwork(artwork)')
+					ng-mouseover='inspectArtwork(artwork)')
 				div(class='artwork-browser-thumbnail-editor',
-					ng-class='{ shown: artwork === selectedArtwork, hidden: artwork !== selectedArtwork }')
+					ng-class='{ shown: artwork === inspectedArtwork, hidden: artwork !== inspectedArtwork }')
 					ui-button-bar(ui-model='artworkThumbnailEditor')
 	div(class='artwork-browser-footer')
 		ui-button-bar(ui-model='artworkBrowserEditor')
