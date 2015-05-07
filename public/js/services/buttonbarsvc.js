@@ -50,6 +50,13 @@ define(function () {
 							onClick: function () {
 								console.log("Upload pressed!");
 							}
+						}, {
+							title: 'Delete Selected',
+							icon: 'trash',
+
+							onClick: function () {
+								console.log("Deleting selected artworks!");
+							}
 						}]
 					};
 				},

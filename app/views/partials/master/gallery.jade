@@ -4,8 +4,10 @@ div(class='artwork-browser')
 	div(class='artwork-browser-content'
 		ng-mouseleave='inspectedArtwork = null')
 		div(class='artwork-browser-scroll-content')
-			div(class='artwork-browser-thumbnail'
-				ng-repeat='artwork in artworks')
+			div(class='artwork-browser-thumbnail',
+				ng-repeat='artwork in artworks',
+				ng-class='{ selected: artwork.selected }',
+				ng-click='toggleArtworkSelection(artwork)')
 				div(class='artwork-browser-thumbnail-header',
 					ng-class='{ shown: artwork === inspectedArtwork, hidden: artwork !== inspectedArtwork }')
 					| {{ artwork.title }}
