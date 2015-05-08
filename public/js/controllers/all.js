@@ -7,9 +7,11 @@ define([
 
 	'./loginctrl',
 
+	'./homectrl',
 	'./aboutctrl',
 	'./blogctrl',
 	'./galleryctrl',
+	'./novelctrl',
 	'./resumectrl',
 
 	'./master/galleryctrl',
@@ -19,7 +21,7 @@ define([
 	'./tests/unitctrl',
 
 	'services/all'
-], function (ng, MainCtrl, LoginCtrl, AboutCtrl, BlogCtrl, GalleryCtrl, ResumeCtrl, MasterGalleryCtrl, MasterBlogCtrl, UICtrl, UnitCtrl) {
+], function (ng, MainCtrl, LoginCtrl, HomeCtrl, AboutCtrl, BlogCtrl, GalleryCtrl, NovelCtrl, ResumeCtrl, MasterGalleryCtrl, MasterBlogCtrl, UICtrl, UnitCtrl) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
@@ -28,9 +30,11 @@ define([
 
 		.controller('LoginCtrl', LoginCtrl)
 
+		.controller('HomeCtrl', HomeCtrl)
 		.controller('AboutCtrl', AboutCtrl)
 		.controller('BlogCtrl', BlogCtrl)
 		.controller('GalleryCtrl', GalleryCtrl)
+		.controller('NovelCtrl', NovelCtrl)
 		.controller('ResumeCtrl', ResumeCtrl)
 		
 		.controller('MasterGalleryCtrl', MasterGalleryCtrl)

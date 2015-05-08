@@ -24,6 +24,9 @@ define(function () {
 				},
 
 				publicLinks: [{
+					title: 'Home',
+					href: 'home'
+				}, {
 					title: 'About',
 					href: 'about'
 				}, {
@@ -32,6 +35,9 @@ define(function () {
 				}, {
 					title: 'Gallery',
 					href: 'gallery'
+				}, {
+					title: 'Novel',
+					href: 'novel'
 				}, {
 					title: 'Resume',
 					href: 'resume'

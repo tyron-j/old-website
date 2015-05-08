@@ -23,6 +23,9 @@ define([
 			$routeProvider.when('/login', {
 				templateUrl: '/partials/login',
 				controller: 'LoginCtrl'
+			}).when('/home', {
+				templateUrl: '/partials/home',
+				controller: 'HomeCtrl'
 			}).when('/about', {
 				templateUrl: '/partials/about',
 				controller: 'AboutCtrl'
@@ -32,6 +35,9 @@ define([
 			}).when('/gallery', { // currently localhost only
 				templateUrl: '/partials/gallery',
 				controller: 'GalleryCtrl'
+			}).when('/novel', {
+				templateUrl: '/partials/novel',
+				controller: 'NovelCtrl'
 			}).when('/resume', {
 				templateUrl: '/partials/resume',
 				controller: 'ResumeCtrl'
