@@ -2,7 +2,7 @@
 
 var db = require('../utils/db');
 
-module.exports = db.model('Artwork', new db.Schema({
+module.exports = db.model('Artwork', new db.Schema({ // to-do: add creationDate
 	title: {
 		type: String,
 		required: true
