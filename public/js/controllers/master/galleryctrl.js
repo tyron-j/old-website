@@ -17,6 +17,8 @@ define(function () {
 			$scope.artworkThumbnailEditor = buttonBarSvc.getArtworkThumbnailEditor($scope);
 			$scope.artworkBrowserEditor   = buttonBarSvc.getArtworkBrowserEditor($scope);
 
+
+			// to-do: consider making artwork browser a widget and moving these methods to a service
 			$scope.inspectArtwork = function (artwork) {
 				// to-do: only execute logic if not in edit mode
 				$scope.inspectedArtwork = artwork;
