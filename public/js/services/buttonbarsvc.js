@@ -24,6 +24,7 @@ define(function () {
 
 							onClick: function () {
 								modalImage.open($scope.inspectedArtwork.title);
+								$scope.inspectedArtwork = null; // close thumbnail editor
 							}
 						}, {
 							title: 'Edit',
