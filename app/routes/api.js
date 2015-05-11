@@ -112,6 +112,8 @@ module.exports = {
 
 				// important: artworks is the name of the file input tag
 				files.artworks.forEach(function (file) {
+					// to-do: consider keeping extension in title and dealing with the title isolation in the front end
+					// this is because 'save image as...' will try to save the image without the extension
 					var fileName      = file.name.split('.')[0];
 					var fileExtension = file.name.split('.')[1];
 
