@@ -8,15 +8,16 @@ define(function () {
 		'$scope',
 
 		'buttonBarSvc',
+		'modalImageSvc',
 		
-		function ($http, $scope, buttonBarSvc) {
+		function ($http, $scope, buttonBarSvc, modalImageSvc) {
 			$http.get('/api/artwork').success(function (res) {
 				$scope.artworks = res;
 			});
 
 			$scope.artworkThumbnailEditor = buttonBarSvc.getArtworkThumbnailEditor($scope);
 			$scope.artworkBrowserEditor   = buttonBarSvc.getArtworkBrowserEditor($scope);
-
+			$scope.modalImage             = modalImageSvc.model;
 
 			// to-do: consider making artwork browser a widget and moving these methods to a service
 			$scope.inspectArtwork = function (artwork) {

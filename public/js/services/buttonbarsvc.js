@@ -7,10 +7,12 @@ define(function () {
 		'$http',
 
 		'modalDialogSvc',
+		'modalImageSvc',
 		'sideBarSvc',
 
-		function ($http, modalDialogSvc, sideBarSvc) { // use as factory... or service?
+		function ($http, modalDialogSvc, modalImageSvc, sideBarSvc) { // use as factory... or service?
 			var modalDialog = modalDialogSvc.model;
+			var modalImage  = modalImageSvc.model;
 			var sideBar     = sideBarSvc.model;
 
 			return {
@@ -21,7 +23,7 @@ define(function () {
 							icon: 'expand',
 
 							onClick: function () {
-								console.log("Expand pressed!");
+								modalImage.open($scope.inspectedArtwork.title);
 							}
 						}, {
 							title: 'Edit',

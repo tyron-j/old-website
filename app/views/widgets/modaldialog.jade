@@ -1,6 +1,6 @@
 //- modal dialog
 
-div(class='modal-dialog'
+div(class='modal-dialog',
 	ng-class='{ shown: model.inUse, hidden: !model.inUse }')
 	div(class='modal-dialog-msg')
 		div(class='modal-dialog-msg-header')
@@ -11,6 +11,6 @@ div(class='modal-dialog'
 			div(class='modal-dialog-msg-button',
 				ng-class='model.choice',
 				ng-repeat='button in model.buttons')
-				div(class='modal-dialog-msg-button-content'
+				div(class='modal-dialog-msg-button-content',
 					ng-click='button.onClick()')
 					| {{ button.title }}

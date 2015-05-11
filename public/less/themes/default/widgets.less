@@ -101,6 +101,26 @@
 	}
 }
 
+.modal-image {
+	// to-do: create a modal class that both modal-dialog and modal-image can extend from
+	cursor: pointer;
+	position: fixed;
+	z-index: 5; // to-do: too high?
+
+	.faint(black);
+	.fill-up-parent();
+
+	&.hidden {
+		display: none;
+	}
+
+	& > img {
+		.box-shadow(@std-box-shadow);
+		.center();
+		.fit-to-parent();
+	}
+}
+
 .nav-bar {
 	width: @nav-bar-width;
 	height: @nav-bar-height;
