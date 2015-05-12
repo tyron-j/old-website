@@ -47,6 +47,7 @@ define(function () {
 				getArtworkBrowserEditor: function ($scope) {
 					return {
 						items: [{
+							// to-do: make the actual input tag invisible and bind it to a custom button
 							title: 'Upload',
 							icon: 'upload',
 
