@@ -69,7 +69,7 @@ define(function () {
 					var ignoreLocationChangeStart;
 					var ignoreSideBarSelectionChange;
 
-					var blogEditor = { // singleton; to-do: use an instance
+					var blogEditor = { // singleton; to-do: consider using an instance
 						inEditMode: false,
 
 						enterEditMode: function () {
