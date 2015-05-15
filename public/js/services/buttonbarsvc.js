@@ -16,6 +16,7 @@ define(function () {
 			var sideBar     = sideBarSvc.model;
 
 			return {
+				// to-do: consider keeping the widget models as separate files and fetching them through require.js
 				getArtworkThumbnailEditor: function ($scope) {
 					return {
 						items: [{
