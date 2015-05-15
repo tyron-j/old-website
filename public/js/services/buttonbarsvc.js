@@ -56,6 +56,13 @@ define(function () {
 								console.log("Upload pressed!");
 							}
 						}, {
+							title: 'Select All',
+							icon: 'check-square-o',
+
+							onClick: function () {
+								console.log("Selecting all artworks!");
+							}
+						}, {
 							title: 'Delete Selected',
 							icon: 'trash',
 
