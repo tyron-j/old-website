@@ -57,10 +57,17 @@ define(function () {
 							}
 						}, {
 							title: 'Select All',
-							icon: 'check-square-o',
+							icon: 'check-circle',
 
 							onClick: function () {
 								console.log("Selecting all artworks!");
+							}
+						}, {
+							title: 'Unselect All',
+							icon: 'check-circle-o',
+
+							onClick: function () {
+								console.log("Unselecting all artworks!");
 							}
 						}, {
 							title: 'Delete Selected',
