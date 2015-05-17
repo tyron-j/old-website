@@ -70,6 +70,7 @@ define(function () {
 								console.log("Unselecting all artworks!");
 							}
 						}, {
+							// to-do: show the delete button only if there is a selected artwork
 							title: 'Delete Selected',
 							icon: 'trash',
 
