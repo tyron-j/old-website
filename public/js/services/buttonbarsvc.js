@@ -46,7 +46,7 @@ define(function () {
 				},
 
 				getArtworkBrowserEditor: function ($scope) {
-					// to-do: consider implementing collections
+					// to-do: consider implementing collections of artworks
 					return {
 						items: [{
 							// to-do: make the actual input tag invisible and bind it to a custom button
