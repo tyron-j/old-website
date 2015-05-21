@@ -64,6 +64,7 @@ define(function () {
 								console.log("Selecting all artworks!");
 							}
 						}, {
+							// to-do: consider removing this
 							title: 'Unselect All',
 							icon: 'check-circle-o',
 
