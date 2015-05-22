@@ -29,7 +29,7 @@
 	}
 }
 
-.modal-dialog {
+.modal {
 	position: fixed;
 	z-index: 5; // to-do: too high?
 
@@ -39,6 +39,10 @@
 	&.hidden {
 		display: none;
 	}
+}
+
+.modal-dialog {
+	.modal;
 
 	& > .modal-dialog-msg {
 		.widget;
@@ -102,17 +106,9 @@
 }
 
 .modal-image {
-	// to-do: create a modal class that both modal-dialog and modal-image can extend from
+	.modal;
+
 	cursor: pointer;
-	position: fixed;
-	z-index: 5; // to-do: too high?
-
-	.faint(black);
-	.fill-up-parent();
-
-	&.hidden {
-		display: none;
-	}
 
 	& > img {
 		.box-shadow(@std-box-shadow);
