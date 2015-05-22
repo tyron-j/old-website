@@ -52,6 +52,7 @@ define(function () {
 				},
 
 				getArtworkBrowserEditor: function ($scope) {
+					// to-do: consider using FileReader instead
 					var fileInput = document.getElementById('fileInput');
 
 					// to-do: execute this listener even if the user selects the same files
