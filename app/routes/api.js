@@ -141,7 +141,8 @@ module.exports = {
 							count++;
 
 							if (count === files.artworks.length) {
-								res.redirect('/success'); // to-do: change redirect to master gallery so the artworks become refreshed
+								// to-do: update front end without refreshing page
+								res.redirect('/master/gallery'); // refresh page
 							}
 						});
 

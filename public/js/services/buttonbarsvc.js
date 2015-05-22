@@ -53,7 +53,8 @@ define(function () {
 
 				getArtworkBrowserEditor: function ($scope) {
 					// to-do: consider using FileReader instead along with drag & drop logic
-					var fileInput = document.getElementById('fileInput');
+					var fileInput   = document.getElementById('fileInput');
+					var submitInput = document.getElementById('submitInput');
 
 					fileInput.addEventListener('change', function (evt) {
 						if (fileInput.files.length) {
@@ -69,7 +70,7 @@ define(function () {
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
-											//
+											triggerEvent(submitInput, 'click');
 										}
 									}, {
 										title: 'Cancel',
