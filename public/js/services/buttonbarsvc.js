@@ -61,15 +61,18 @@ define(function () {
 							icon: 'check-circle',
 
 							onClick: function () {
-								console.log("Selecting all artworks!");
+								$scope.artworks.forEach(function (artwork) {
+									artwork.selected = true;
+								});
 							}
 						}, {
-							// to-do: consider removing this
 							title: 'Unselect All',
 							icon: 'check-circle-o',
 
 							onClick: function () {
-								console.log("Unselecting all artworks!");
+								$scope.artworks.forEach(function (artwork) {
+									artwork.selected = false;
+								});
 							}
 						}, {
 							// to-do: show the delete button only if there is a selected artwork
