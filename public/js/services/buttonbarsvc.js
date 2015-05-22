@@ -55,7 +55,6 @@ define(function () {
 					// to-do: consider using FileReader instead along with drag & drop logic
 					var fileInput = document.getElementById('fileInput');
 
-					// to-do: execute this listener even if the user selects the same files
 					fileInput.addEventListener('change', function (evt) {
 						if (fileInput.files.length) {
 							var fileNames = [].slice.call(fileInput.files).map(function (file) {
@@ -76,6 +75,7 @@ define(function () {
 										title: 'Cancel',
 										onClick: function () {
 											modalDialog.close();
+											fileInput.value = ''; // reset field
 										}
 									}]
 								});
