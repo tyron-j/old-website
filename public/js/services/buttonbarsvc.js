@@ -65,7 +65,7 @@ define(function () {
 							// workaround for strange bug causing modal dialog to open only after mouseout is triggered on artwork browser
 							$timeout(function () {
 								modalDialog.open({
-									title: 'Upload Artworks',
+									title: 'Upload Confirmation',
 									content: fileNames.join('\n'),
 									buttons: [{
 										title: 'OK',
@@ -239,7 +239,7 @@ define(function () {
 								var blogs = sideBar.items;
 
 								modalDialog.open({
-									title: 'Confirmation',
+									title: 'Delete Confirmation',
 									content: "Are you sure you wish to delete this blog?",
 									buttons: [{
 										title: 'OK',
