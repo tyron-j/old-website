@@ -5,15 +5,21 @@ define(function () {
 
 	return [
 		'$http',
+		'$timeout',
 
 		'modalDialogSvc',
 		'modalImageSvc',
 		'sideBarSvc',
 
-		function ($http, modalDialogSvc, modalImageSvc, sideBarSvc) { // use as factory... or service?
+		function ($http, $timeout, modalDialogSvc, modalImageSvc, sideBarSvc) { // use as factory... or service?
 			var modalDialog = modalDialogSvc.model;
 			var modalImage  = modalImageSvc.model;
 			var sideBar     = sideBarSvc.model;
+
+			var triggerEvent = function (element, eventType) {
+				var evt = new Event(eventType);
+				element.dispatchEvent(evt);
+			};
 
 			return {
 				// to-do: consider keeping the widget models as separate files and fetching them through require.js
@@ -46,17 +52,20 @@ define(function () {
 				},
 
 				getArtworkBrowserEditor: function ($scope) {
-					// to-do: consider implementing collections of artworks
-					return {
-						items: [{
-							// to-do: make the actual input tag invisible and bind it to a custom button
-							title: 'Upload',
-							icon: 'upload',
+					var fileInput = document.getElementById('fileInput');
 
-							onClick: function () {
+					// to-do: execute this listener even if the user selects the same files
+					fileInput.addEventListener('change', function (evt) {
+						if (fileInput.files.length) {
+							var fileNames = [].slice.call(fileInput.files).map(function (file) {
+								return file.name;
+							});
+
+							// workaround for strange bug causing modal dialog to open only after mouseout is triggered on artwork browser
+							$timeout(function () {
 								modalDialog.open({
-									title: 'Upload Artwork',
-									content: "Please select the artworks that you would like to upload.",
+									title: 'Upload Artworks',
+									content: fileNames.join('\n'),
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
@@ -69,6 +78,19 @@ define(function () {
 										}
 									}]
 								});
+							});
+						}
+					});
+
+					// to-do: consider implementing collections of artworks
+					return {
+						items: [{
+							// to-do: make the actual input tag invisible and bind it to a custom button
+							title: 'Upload',
+							icon: 'upload',
+
+							onClick: function () {
+								triggerEvent(fileInput, 'click');
 							}
 						}, {
 							title: 'Select All',
