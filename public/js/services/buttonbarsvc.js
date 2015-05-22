@@ -52,7 +52,7 @@ define(function () {
 				},
 
 				getArtworkBrowserEditor: function ($scope) {
-					// to-do: consider using FileReader instead
+					// to-do: consider using FileReader instead along with drag & drop logic
 					var fileInput = document.getElementById('fileInput');
 
 					// to-do: execute this listener even if the user selects the same files
