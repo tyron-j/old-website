@@ -54,7 +54,21 @@ define(function () {
 							icon: 'upload',
 
 							onClick: function () {
-								console.log("Upload pressed!");
+								modalDialog.open({
+									title: 'Upload Artwork',
+									content: "Please select the artworks that you would like to upload.",
+									buttons: [{
+										title: 'OK',
+										onClick: function () {
+											//
+										}
+									}, {
+										title: 'Cancel',
+										onClick: function () {
+											modalDialog.close();
+										}
+									}]
+								});
 							}
 						}, {
 							title: 'Select All',
