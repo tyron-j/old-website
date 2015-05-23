@@ -45,7 +45,23 @@ define(function () {
 							icon: 'trash',
 
 							onClick: function () {
-								console.log("Delete pressed!");
+								var artworkBeingDeleted = $scope.inspectedArtwork;
+
+								modalDialog.open({
+									title: 'Delete Confirmation',
+									content: "Are you sure you want to delete " + artworkBeingDeleted.title + "?",
+									buttons: [{
+										title: 'OK',
+										onClick: function () {
+											console.log(artworkBeingDeleted);
+										}
+									}, {
+										title: 'Cancel',
+										onClick: function () {
+											modalDialog.close();
+										}
+									}]
+								});
 							}
 						}]
 					};
@@ -56,6 +72,7 @@ define(function () {
 					var fileInput   = document.getElementById('fileInput');
 					var submitInput = document.getElementById('submitInput');
 
+					// to-do: disallow uploading an artwork with a duplicate title in either of the uploaded or uploading lists
 					fileInput.addEventListener('change', function (evt) {
 						if (fileInput.files.length) {
 							var fileNames = [].slice.call(fileInput.files).map(function (file) {
@@ -240,7 +257,7 @@ define(function () {
 
 								modalDialog.open({
 									title: 'Delete Confirmation',
-									content: "Are you sure you wish to delete this blog?",
+									content: "Are you sure you wish to delete " + blog.title + "?",
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
