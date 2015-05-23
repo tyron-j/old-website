@@ -153,6 +153,14 @@ module.exports = {
 		}
 	},
 
+	putArtwork: function (req, res, next) {
+		//
+	},
+
+	deleteArtwork: function (req, res, next) {
+		//
+	},
+
 	getBlog: function (req, res, next) {
 		if (req.params.title) {
 			models.Blog.findOne({
