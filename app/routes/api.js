@@ -158,7 +158,21 @@ module.exports = {
 	},
 
 	deleteArtwork: function (req, res, next) {
-		//
+		models.Artwork.findOneAndRemove({
+			title: req.params.title
+		}, function (err, a) {
+			if (err) {
+				signal.error("Failed to delete " + req.params.title + " in database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			var successMsg = "Deleted " + req.params.title + " in database";
+
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
+			});
+		});
 	},
 
 	getBlog: function (req, res, next) {
@@ -234,7 +248,7 @@ module.exports = {
 		}, function (err, b) {
 			if (err) {
 				signal.error("Failed to delete " + req.params.title + " in database");
-				throw err; //to-do: handle error gracefully
+				throw err; // to-do: handle error gracefully
 			}
 
 			var successMsg = "Deleted " + req.params.title + " in database";
