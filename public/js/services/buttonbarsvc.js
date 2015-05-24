@@ -151,7 +151,19 @@ define(function () {
 										buttons: [{
 											title: 'OK',
 											onClick: function () {
-												//
+												var count = 0;
+
+												selectedArtworks.forEach(function (artwork) {
+													$http.delete('/api/artwork/' + artwork.title).success(function (res) {
+														console.log(res.msg);
+														artworks.splice(artworks.indexOf(artwork), 1);
+														count++;
+
+														if (count === selectedArtworks.length) {
+															modalDialog.close();
+														}
+													});
+												});
 											}
 										}, {
 											title: 'Cancel',
