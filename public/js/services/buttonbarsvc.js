@@ -45,6 +45,7 @@ define(function () {
 							icon: 'trash',
 
 							onClick: function () {
+								var artworks            = $scope.artworks;
 								var artworkBeingDeleted = $scope.inspectedArtwork;
 
 								modalDialog.open({
@@ -53,7 +54,11 @@ define(function () {
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
-											console.log(artworkBeingDeleted);
+											$http.delete('/api/artwork/' + artworkBeingDeleted.title).success(function (res) {
+												console.log(res.msg);
+												artworks.splice(artworks.indexOf(artworkBeingDeleted), 1);
+												modalDialog.close();
+											});
 										}
 									}, {
 										title: 'Cancel',
