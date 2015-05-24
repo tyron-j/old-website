@@ -26,7 +26,6 @@ define(function () {
 			};
 
 			$scope.toggleArtworkSelection = function (artwork) {
-				console.log("Toggling artwork selection!");
 				artwork.selected = !artwork.selected;
 			};
 

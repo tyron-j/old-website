@@ -140,7 +140,27 @@ define(function () {
 							icon: 'trash',
 
 							onClick: function () {
-								console.log("Deleting selected artworks!");
+								var artworks              = $scope.artworks;
+								var selectedArtworks      = artworks.filter(function (artwork) { return artwork.selected; });
+								var selectedArtworkTitles = selectedArtworks.map(function (artwork) { return artwork.title; });
+
+								if (selectedArtworks.length) {
+									modalDialog.open({
+										title: 'Delete Confirmation',
+										content: "Are you sure you want to delete the selected artworks?\n\n" + selectedArtworkTitles.join('\n'),
+										buttons: [{
+											title: 'OK',
+											onClick: function () {
+												//
+											}
+										}, {
+											title: 'Cancel',
+											onClick: function () {
+												modalDialog.close();
+											}
+										}]
+									});
+								}
 							}
 						}]
 					};
