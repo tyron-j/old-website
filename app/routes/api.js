@@ -73,7 +73,7 @@ module.exports = {
 			models.Artwork
 				.find({})
 				.sort('-creationDate')
-				.select('title')
+				.select('title') // to-do: send back creationDate as well for updating title
 				.exec(function (err, artworks) {
 					if (artworks.length) {
 						res.send(artworks);
