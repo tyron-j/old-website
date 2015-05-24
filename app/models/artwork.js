@@ -17,5 +17,10 @@ module.exports = db.model('Artwork', new db.Schema({ // to-do: add creationDate
 			type: String,
 			required: true
 		}
+	},
+
+	creationDate: {
+		type: Date,
+		required: true
 	}
 }));

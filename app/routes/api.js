@@ -69,14 +69,18 @@ module.exports = {
 				res.contentType(artwork.image.contentType);
 				res.send(artwork.image.data);
 			});
-		} else { // fetch all names
-			models.Artwork.find({}, 'title', function (err, artworks) {
-				if (artworks.length) {
-					res.send(artworks);
-				} else {
-					res.send([]);
-				}
-			});
+		} else { // fetch all titles
+			models.Artwork
+				.find({})
+				.sort('-creationDate')
+				.select('title')
+				.exec(function (err, artworks) {
+					if (artworks.length) {
+						res.send(artworks);
+					} else {
+						res.send([]);
+					}
+				});
 		}
 	},
 
@@ -112,9 +116,6 @@ module.exports = {
 
 				// important: artworks is the name of the file input tag
 				files.artworks.forEach(function (file) {
-					// to-do: consider keeping extension in title and dealing with the title isolation in the front end
-					// this is because 'save image as...' will try to save the image without the extension
-					var fileName      = file.name.split('.')[0];
 					var fileExtension = file.name.split('.')[1];
 
 					fs.readFile(file.path, function (err, data) {
@@ -124,11 +125,14 @@ module.exports = {
 						}
 
 						artwork = new models.Artwork({
-							title: fileName,
+							title: file.name,
 							image: {
 								data: data,
 								contentType: 'image/' + fileExtension
-							}
+							},
+							// creationDate will depend on the heroku server location timezone
+							// but this is purely for sorting purposes so it doesn't matter
+							creationDate: new Date()
 						});
 
 						artwork.save(function (err, a) {
