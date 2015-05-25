@@ -6,11 +6,15 @@ define(function () {
 	return [
 		'$http',
 		'$scope',
+
+		'modalImageSvc',
 		
-		function ($http, $scope) {
+		function ($http, $scope, modalImageSvc) {
 			$http.get('/api/artwork').success(function (res) {
 				$scope.artworks = res;
 			});
+
+			$scope.modalImage = modalImageSvc.model;
 		}
 	];
 });

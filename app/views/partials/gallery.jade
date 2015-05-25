@@ -1,7 +1,9 @@
 //- gallery
 
+ui-modal-image(ui-model='modalImage')
 div(class='gallery')
 	div(class='artwork', ng-repeat='artwork in artworks')
 		//- to-do: change url to http://tyronjung.com/api/artwork/{{ artwork.title }}
 		//- after moving image fetching api to unprotected api
-		img(ng-src='http://localhost:9000/api/artwork/{{ artwork.title }}')
+		img(ng-src='http://localhost:9000/api/artwork/{{ artwork.title }}',
+			ng-click='modalImage.open(artwork.title)')
