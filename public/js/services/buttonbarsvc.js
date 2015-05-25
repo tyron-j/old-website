@@ -88,7 +88,7 @@ define(function () {
 							$timeout(function () {
 								modalDialog.open({
 									title: 'Upload Confirmation',
-									content: fileNames.join('\n'),
+									content: "You are about to upload:\n\n" + fileNames.join('\n'),
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
