@@ -1,21 +1,16 @@
 // diamond classes
 
 .artwork {
-	width: @horizontal-golden-width;
-	height: @horizontal-golden-height;
-	margin: auto;
+	width: 100%;
+	height: 100%;
 	position: relative; // holds absolute element within
-
-	margin-bottom: @std-margin; // to-do: temporary
-
-	&:last-child {
-		margin-bottom: 0; // to-do: temporary
-	}
 
 	& > img {
 		.box-shadow(@std-box-shadow); // to-do: temporary
 		.center();
-		.fit-to-parent();
+
+		max-width: @horizontal-golden-width;
+		max-height: @horizontal-golden-height;
 	}
 }
 
