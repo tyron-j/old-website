@@ -15,6 +15,12 @@ define(function () {
 			});
 
 			$scope.modalImage = modalImageSvc.model;
+
+			// disregard scroll bar width
+			var gallery        = document.getElementsByClassName('gallery')[0];
+			var scrollBarWidth = gallery.offsetWidth - gallery.clientWidth;
+
+			gallery.style.paddingLeft = scrollBarWidth + 'px';
 		}
 	];
 });
