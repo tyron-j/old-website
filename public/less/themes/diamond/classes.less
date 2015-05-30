@@ -133,6 +133,35 @@
 	overflow-y: scroll; // always show scroll bar for scroll bar width calculation
 }
 
+.home-container {
+	.set-in-center(@horizontal-golden-width / 3);
+
+	& > .home-nav-panel, & > .home-news-panel {
+		.rotate(45deg);
+		.set-dimensions((@horizontal-golden-width / 3));
+
+		display: inline-block;
+		position: relative;
+	}
+
+	& > .home-news-panel {
+		background-color: @green-sea;
+		z-index: 1;
+	}
+
+	& > .home-nav-panel {
+		&.left {
+			background-color: @alizarin;
+			margin-left: (-@horizontal-golden-width / 3);
+		}
+
+		&.right {
+			background-color: @orange;
+			margin-right: (-@horizontal-golden-width / 3);
+		}
+	}
+}
+
 .centered { // to-do: remove
 	.set-in-center(250px);
 	
