@@ -133,9 +133,9 @@
 	overflow-y: scroll; // always show scroll bar for scroll bar width calculation
 }
 
-.home-container {
-	@home-panel-width: @horizontal-golden-width / 3;
+@home-panel-width: @horizontal-golden-width / 3;
 
+.home-container {
 	.set-in-center(@home-panel-width * sqrt(2) * 2, @home-panel-width);
 
 	& > .home-nav-panel, & > .home-news-panel {
@@ -161,6 +161,32 @@
 
 		&.right {
 			background-color: @orange;
+		}
+	}
+}
+
+.home-container-shadow {
+	.set-in-center(@home-panel-width * sqrt(2) * 2, @home-panel-width);
+
+	z-index: -1;
+
+	& > .home-nav-panel-shadow, & > .home-news-panel-shadow {
+		.box-shadow(@std-box-shadow);
+		.rotate(45deg);
+		.set-dimensions(@home-panel-width);
+
+		display: inline-block;
+		position: relative;
+	}
+
+	& > .home-news-panel-shadow {
+		margin-left: @home-panel-width * ((1 / sqrt(2)) - 1);
+		margin-right: @home-panel-width * ((1 / sqrt(2)) - 1);
+	}
+
+	& > .home-nav-panel-shadow {
+		&.left {
+			margin-left: (sqrt(2) - 1) * @home-panel-width / 2;
 		}
 	}
 }
