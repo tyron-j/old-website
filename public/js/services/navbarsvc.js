@@ -23,6 +23,7 @@ define(function () {
 					}
 				},
 
+				// to-do: use these for home nav panels as well
 				publicLinks: [{
 					title: 'Home',
 					href: 'home'
