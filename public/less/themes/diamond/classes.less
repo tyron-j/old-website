@@ -154,13 +154,12 @@
 	}
 
 	& > .home-nav-panel {
-		&.left {
-			background-color: @alizarin;
-			margin-left: (sqrt(2) - 1) * @home-panel-width / 2;
+		&.left, &.right {
+			background-color: @wet-asphalt;
 		}
-
-		&.right {
-			background-color: @orange;
+		
+		&.left {
+			margin-left: (sqrt(2) - 1) * @home-panel-width / 2;
 		}
 	}
 }
