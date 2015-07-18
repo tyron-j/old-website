@@ -161,6 +161,21 @@
 		&.left {
 			margin-left: (sqrt(2) - 1) * @home-panel-width / 2;
 		}
+
+		& > .home-nav-panel-link, & > .home-nav-panel-filler {
+			.set-dimensions(50%);
+
+			display: inline-block;
+			overflow: hidden;
+
+			& > .home-nav-panel-link-content {
+				.rotate(-45deg);
+				.set-dimensions(sqrt(2) * 100%);
+
+				margin-left: -(@home-panel-width / 4) * (sqrt(2) - 1);
+				margin-top: -(@home-panel-width / 4) * (sqrt(2) - 1);
+			}
+		}
 	}
 }
 
