@@ -151,6 +151,31 @@
 		z-index: 1;
 		margin-left: @home-panel-width * ((1 / sqrt(2)) - 1);
 		margin-right: @home-panel-width * ((1 / sqrt(2)) - 1);
+
+		& > .home-news-panel-content-container {
+			.center();
+
+			&.shown {
+				.set-dimensions(100%);
+
+				transition: @std-transition;
+			}
+
+			&.hidden {
+				.set-dimensions(0%);
+
+				transition-delay: @std-transition-delay;
+			}
+
+			& > a.home-news-panel-content { // to-do: change this to img
+				.rotate(-45deg);
+				.set-dimensions(sqrt(2) * @home-panel-width);
+
+				display: block;
+				margin-left: -(@home-panel-width / 2) * (sqrt(2) - 1);
+				margin-top: -(@home-panel-width / 2) * (sqrt(2) - 1);
+			}
+		}
 	}
 
 	& > .home-nav-panel {
