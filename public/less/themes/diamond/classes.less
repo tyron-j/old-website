@@ -168,12 +168,23 @@
 			display: inline-block;
 			overflow: hidden;
 
-			& > .home-nav-panel-link-content {
+			& > a.home-nav-panel-link-content {
 				.rotate(-45deg);
 				.set-dimensions(sqrt(2) * 100%);
 
+				display: block;
 				margin-left: -(@home-panel-width / 4) * (sqrt(2) - 1);
 				margin-top: -(@home-panel-width / 4) * (sqrt(2) - 1);
+
+				// font settings
+				color: white;
+				font-size: @std-home-font-size;
+				text-align: center;
+				line-height: sqrt(2) * @home-panel-width / 2;
+			}
+
+			&.home-nav-panel-link-edge {
+				background-color: @green-sea;
 			}
 		}
 	}

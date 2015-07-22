@@ -3,21 +3,33 @@
 div(class='home-container')
 	div(class='left home-nav-panel')
 		div(class='home-nav-panel-link')
-			div(class='home-nav-panel-link-content')
+			a(class='home-nav-panel-link-content',
+				ng-href='{{ homeLinks[0].href }}')
+				| {{ homeLinks[0].title }}
 		div(class='home-nav-panel-filler')
+		div(class='home-nav-panel-link home-nav-panel-link-edge')
+			a(class='home-nav-panel-link-content',
+				ng-href='{{ homeLinks[1].href }}')
+				| {{ homeLinks[1].title }}
 		div(class='home-nav-panel-link')
-			div(class='home-nav-panel-link-content')
-		div(class='home-nav-panel-link')
-			div(class='home-nav-panel-link-content')
+			a(class='home-nav-panel-link-content',
+				ng-href='{{ homeLinks[2].href }}')
+				| {{ homeLinks[2].title }}
 	div(class='home-news-panel')
 	div(class='right home-nav-panel')
 		div(class='home-nav-panel-link')
-			div(class='home-nav-panel-link-content')
-		div(class='home-nav-panel-link')
-			div(class='home-nav-panel-link-content')
+			a(class='home-nav-panel-link-content',
+				ng-href='{{ homeLinks[3].href }}')
+				| {{ homeLinks[3].title }}
+		div(class='home-nav-panel-link home-nav-panel-link-edge')
+			a(class='home-nav-panel-link-content',
+				ng-href='{{ homeLinks[4].href }}')
+				| {{ homeLinks[4].title }}
 		div(class='home-nav-panel-filler')
 		div(class='home-nav-panel-link')
-			div(class='home-nav-panel-link-content')
+			a(class='home-nav-panel-link-content',
+				ng-href='{{ homeLinks[5].href }}')
+				| {{ homeLinks[5].title }}
 div(class='home-container-shadow')
 	div(class='left home-nav-panel-shadow')
 	div(class='home-news-panel-shadow')
