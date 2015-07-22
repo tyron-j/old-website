@@ -155,6 +155,8 @@
 		& > .home-news-panel-content-container {
 			.center();
 
+			overflow: hidden;
+
 			&.shown {
 				.set-dimensions(100%);
 
@@ -174,6 +176,10 @@
 				display: block;
 				margin-left: -(@home-panel-width / 2) * (sqrt(2) - 1);
 				margin-top: -(@home-panel-width / 2) * (sqrt(2) - 1);
+
+				& > img {
+					width: 100%;
+				}
 			}
 		}
 	}

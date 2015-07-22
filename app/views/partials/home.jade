@@ -16,10 +16,14 @@ div(class='home-container')
 				ng-href='{{ homeLinks[2].href }}')
 				| {{ homeLinks[2].title }}
 	div(class='home-news-panel')
-		div(class='home-news-panel-content-container')
+		div(class='home-news-panel-content-container',
+			ng-class='{ shown: homeNews[0].shown, hidden: !homeNews[0].shown }')
 			a(class='home-news-panel-content')
-		div(class='home-news-panel-content-container')
+				img(ng-src='{{ homeNews[0].src }}')
+		div(class='home-news-panel-content-container hidden'
+			ng-class='{ shown: homeNews[1].shown, hidden: !homeNews[1].shown }')
 			a(class='home-news-panel-content')
+				img(ng-src='{{ homeNews[1].src }}')
 	div(class='right home-nav-panel')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
