@@ -17,6 +17,7 @@ div(class='home-container')
 				| {{ homeLinks[2].title }}
 	div(class='home-news-panel')
 		div(class='home-news-panel-content-container',
+			ng-style='{ "z-index": (homeNews[0].inFront ? 1 : 0) }',
 			ng-class='{ shown: homeNews[0].shown, hidden: !homeNews[0].shown }')
 			a(class='home-news-panel-content')
 				img(ng-src='{{ homeNews[0].src }}')
