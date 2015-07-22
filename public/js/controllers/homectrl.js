@@ -5,9 +5,9 @@ define(function () {
 
 	return [
 		'$scope',
-		'$timeout',
+		'$interval',
 		
-		function ($scope, $timeout) {
+		function ($scope, $interval) {
 			$scope.homeLinks = [{
 				title: 'About',
 				href: '/about'
@@ -36,21 +36,19 @@ define(function () {
 				src: 'https://data.archive.moe/board/a/image/1418/58/1418586274250.jpg'
 			}];
 
-			var timeoutPromise;
+			var intervalPromise;
 
 			var switchImage = function () {
 				$scope.homeNews[0].shown = !$scope.homeNews[0].shown;
 				$scope.homeNews[1].shown = !$scope.homeNews[1].shown;
-
-				timeoutPromise = $timeout(switchImage, 5000);
 			};
 
 			var ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
-				$timeout.cancel(timeoutPromise);
+				$interval.cancel(intervalPromise);
 				ignoreLocationChangeStart();
 			});
 
-			timeoutPromise = $timeout(switchImage, 5000);
+			intervalPromise = $interval(switchImage, 5000);
 		}
 	];
 });
