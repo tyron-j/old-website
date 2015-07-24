@@ -22,7 +22,7 @@ define(function () {
 				icon: 'linkedin',
 				title: 'LinkedIn'
 			}, {
-				src: 'jk',
+				src: 'facebook',
 				icon: 'facebook',
 				title: 'Facebook'
 			}, {
