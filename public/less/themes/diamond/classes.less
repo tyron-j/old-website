@@ -1,7 +1,79 @@
 // diamond classes
 
+@std-diamond-width: @horizontal-golden-width / 6;
+
 .about-container {
-	.set-in-center(@vertical-golden-width, @vertical-golden-height);
+	.set-in-center(@horizontal-golden-width, @horizontal-golden-height);
+
+	& > .about-external-link {
+		.set-dimensions(15%, 100%);
+
+		display: inline-block;
+	}
+
+	& > .about-content {
+		.set-dimensions(40%, 100%);
+
+		display: inline-block;
+
+		& > .about-card {
+			.set-in-center(2 * @std-diamond-width, (2 * @std-diamond-width * 1.6) + (@std-diamond-width / 2));
+
+			& > .about-card-diamond {
+				.set-dimensions(@std-diamond-width);
+				.rotate(45deg);
+
+				margin: auto;
+				overflow: hidden;
+				position: relative;
+				z-index: 1;
+
+				& > .about-card-diamond-content {
+					.set-dimensions(@std-diamond-width * sqrt(2));
+					.rotate(-45deg);
+
+					margin-left: -@std-diamond-width * (sqrt(2) - 1) / 2;
+					margin-top: -@std-diamond-width * (sqrt(2) - 1) / 2;
+					position: absolute; // this is required for some reason
+
+					& > img {
+						width: 100%;
+					}
+				}
+			}
+
+			& > .about-card-content {
+				.set-dimensions(100%, 2 * @std-diamond-width * 1.6);
+
+				background-color: @wet-asphalt;
+				margin-top: -@std-diamond-width / 2;
+				position: relative;
+			}
+		}
+
+		& > .about-card-shadow {
+			.set-in-center(2 * @std-diamond-width, (2 * @std-diamond-width * 1.6) + (@std-diamond-width / 2));
+
+			z-index: -1;
+
+			& > .about-card-diamond-shadow {
+				.box-shadow(@std-box-shadow);
+				.set-dimensions(@std-diamond-width);
+				.rotate(45deg);
+
+				margin: auto;
+				position: relative;
+			}
+
+			& > .about-card-content-shadow {
+				.box-shadow(@std-box-shadow);
+				.set-dimensions(100%, 2 * @std-diamond-width * 1.6);
+
+				margin-top: -@std-diamond-width / 2;
+				position: relative;
+			}
+		}
+	}
 }
 
 .artwork {
