@@ -48,6 +48,21 @@
 				background-color: @wet-asphalt;
 				margin-top: -@std-diamond-width / 2;
 				position: relative;
+
+				& > .about-card-scroll-content-container {
+					.calc-height(~'100% - '@std-diamond-width * sqrt(2) / 2);
+
+					margin-top: @std-diamond-width * sqrt(2) / 2;
+					overflow: auto;
+					position: absolute;
+					width: 100%;
+
+					& > .about-card-scroll-content {
+						font-size: @std-font-size;
+						padding: @std-text-padding;
+						white-space: pre-wrap;
+					}
+				}
 			}
 		}
 
