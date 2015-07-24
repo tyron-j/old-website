@@ -5,16 +5,42 @@
 .about-container {
 	.set-in-center(@horizontal-golden-width, @horizontal-golden-height);
 
-	& > .about-external-link {
+	& > .about-external-link-container {
 		.set-dimensions(15%, 100%);
 
 		display: inline-block;
+		position: relative;
+
+		& > .about-external-link {
+			.box-shadow(@std-box-shadow);
+			.set-in-center(100px);
+			.rotate(45deg);
+
+			overflow: hidden;
+
+			& > a.about-external-link-content {
+				.set-dimensions(100px * sqrt(2));
+				.rotate(-45deg);
+
+				background-color: @green-sea;
+				display: block;
+				font-size: 50px;
+				line-height: 100px * sqrt(2);
+				text-align: center;
+
+				// to-do: create a mix-in for this
+				margin-left: -100px * (sqrt(2) - 1) / 2;
+				margin-top: -100px * (sqrt(2) - 1) / 2;
+				position: absolute; // this is required for some reason
+			}
+		}
 	}
 
 	& > .about-content {
 		.set-dimensions(40%, 100%);
 
 		display: inline-block;
+		position: relative;
 
 		& > .about-card {
 			.set-in-center(2 * @std-diamond-width, (2 * @std-diamond-width * 1.6) + (@std-diamond-width / 2));

@@ -12,6 +12,24 @@ define(function () {
 			};
 
 			$scope.aboutText = 'Ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka.';
+
+			$scope.aboutExternalLinks = [{
+				src: 'https://github.com/tyron-j',
+				icon: 'github',
+				title: 'GitHub'
+			}, {
+				src: 'https://ca.linkedin.com/pub/tyron-jung/58/a57/246',
+				icon: 'linkedin',
+				title: 'LinkedIn'
+			}, {
+				src: 'jk',
+				icon: 'facebook',
+				title: 'Facebook'
+			}, {
+				src: 'mailto:tyronjung@hotmail.com',
+				icon: 'paper-plane',
+				title: 'Email'
+			}]
 		}
 	];
 });

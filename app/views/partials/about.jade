@@ -1,8 +1,18 @@
 //- about
 
 div(class='about-container')
-	div(class='about-external-link')
-	div(class='about-external-link')
+	div(class='about-external-link-container')
+		div(class='about-external-link')
+			a(class='about-external-link-content icon icon-{{ aboutExternalLinks[0].icon }}',
+				target='_blank',
+				ng-href='{{ aboutExternalLinks[0].src }}',
+				title='{{ aboutExternalLinks[0].title }}')
+	div(class='about-external-link-container')
+		div(class='about-external-link')
+			a(class='about-external-link-content icon icon-{{ aboutExternalLinks[1].icon }}',
+				target='_blank',
+				ng-href='{{ aboutExternalLinks[1].src }}',
+				title='{{ aboutExternalLinks[1].title }}')
 	div(class='about-content')
 		div(class='about-card')
 			div(class='about-card-diamond')
@@ -15,5 +25,15 @@ div(class='about-container')
 		div(class='about-card-shadow')
 			div(class='about-card-diamond-shadow')
 			div(class='about-card-content-shadow')
-	div(class='about-external-link')
-	div(class='about-external-link')
+	div(class='about-external-link-container')
+		div(class='about-external-link')
+			//- leaving out target attribute for this one
+			a(class='about-external-link-content icon icon-{{ aboutExternalLinks[2].icon }}',
+				ng-href='{{ aboutExternalLinks[2].src }}',
+				title='{{ aboutExternalLinks[2].title }}')
+	div(class='about-external-link-container')
+		div(class='about-external-link')
+			//- leaving out target attribute for this one as well
+			a(class='about-external-link-content icon icon-{{ aboutExternalLinks[3].icon }}',
+				ng-href='{{ aboutExternalLinks[3].src }}',
+				title='{{ aboutExternalLinks[3].title }}')

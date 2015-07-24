@@ -52,6 +52,8 @@ define([
 				templateUrl: '/partials/unauthorized'
 			}).when('/danryan', { // just for Dan Ryan
 				templateUrl: '/partials/danryan'
+			}).when('/jk', { // just for Facebook
+				templateUrl: '/partials/jk'
 			});
 
 			// master routes
