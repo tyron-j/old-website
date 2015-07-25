@@ -5,16 +5,25 @@ div(class='home-container')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
 				ng-href='{{ homeLinks[0].href }}')
-				| {{ homeLinks[0].title }}
+				div(class='home-nav-panel-link-inner-content')
+					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[0].icon }}')
+					div(class='home-nav-panel-link-title')
+						| {{ homeLinks[0].title }}
 		div(class='home-nav-panel-filler')
 		div(class='home-nav-panel-link home-nav-panel-link-edge')
 			a(class='home-nav-panel-link-content',
 				ng-href='{{ homeLinks[1].href }}')
-				| {{ homeLinks[1].title }}
+				div(class='home-nav-panel-link-inner-content')
+					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[1].icon }}')
+					div(class='home-nav-panel-link-title')
+						| {{ homeLinks[1].title }}
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
 				ng-href='{{ homeLinks[2].href }}')
-				| {{ homeLinks[2].title }}
+				div(class='home-nav-panel-link-inner-content')
+					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[2].icon }}')
+					div(class='home-nav-panel-link-title')
+						| {{ homeLinks[2].title }}
 	div(class='home-news-panel')
 		div(class='home-news-panel-content-container',
 			ng-style='{ "z-index": (homeNews[0].inFront ? 1 : 0) }',
@@ -29,16 +38,25 @@ div(class='home-container')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
 				ng-href='{{ homeLinks[3].href }}')
-				| {{ homeLinks[3].title }}
+				div(class='home-nav-panel-link-inner-content')
+					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[3].icon }}')
+					div(class='home-nav-panel-link-title')
+						| {{ homeLinks[3].title }}
 		div(class='home-nav-panel-link home-nav-panel-link-edge')
 			a(class='home-nav-panel-link-content',
 				ng-href='{{ homeLinks[4].href }}')
-				| {{ homeLinks[4].title }}
+				div(class='home-nav-panel-link-inner-content')
+					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[4].icon }}')
+					div(class='home-nav-panel-link-title')
+						| {{ homeLinks[4].title }}
 		div(class='home-nav-panel-filler')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
 				ng-href='{{ homeLinks[5].href }}')
-				| {{ homeLinks[5].title }}
+				div(class='home-nav-panel-link-inner-content')
+					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[5].icon }}')
+					div(class='home-nav-panel-link-title')
+						| {{ homeLinks[5].title }}
 div(class='home-container-shadow')
 	div(class='left home-nav-panel-shadow')
 	div(class='home-news-panel-shadow')

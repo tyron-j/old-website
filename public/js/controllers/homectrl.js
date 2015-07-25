@@ -11,22 +11,28 @@ define(function () {
 		function ($scope, $interval, $timeout) {
 			$scope.homeLinks = [{
 				title: 'About',
-				href: '/about'
+				href: '/about',
+				icon: 'at'
 			}, {
 				title: 'Blog',
-				href: '/blog'
+				href: '/blog',
+				icon: 'bold'
 			}, {
 				title: 'Gallery',
-				href: '/gallery'
+				href: '/gallery',
+				icon: 'eye'
 			}, {
 				title: 'Novel',
-				href: '/novel'
+				href: '/novel',
+				icon: 'bookmark-o'
 			}, {
 				title: 'Resume',
-				href: '/resume'
+				href: '/resume',
+				icon: 'code'
 			}, {
 				title: 'Special',
-				href: '/special'
+				href: '/special',
+				icon: 'envelope-o'
 			}];
 
 			$scope.homeNews = [{ // to-do: fetch these from db via http

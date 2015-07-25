@@ -321,16 +321,33 @@
 				.rotate(-45deg);
 				.set-dimensions(sqrt(2) * 100%);
 
+				color: white;
 				display: block;
 				margin-left: -(@home-panel-width / 4) * (sqrt(2) - 1);
 				margin-top: -(@home-panel-width / 4) * (sqrt(2) - 1);
+				position: relative; // holds absolute element within
 
-				// font settings
-				color: white;
-				font-family: 'Century Gothic';
-				font-size: @std-home-font-size;
-				text-align: center;
-				line-height: sqrt(2) * @home-panel-width / 2;
+				@home-nav-panel-link-icon-width: 50px;
+
+				& > .home-nav-panel-link-inner-content {
+					.set-in-center(@home-nav-panel-link-icon-width, @home-nav-panel-link-icon-width * 1.6);
+
+					& > .home-nav-panel-link-icon {
+						.set-dimensions(@home-nav-panel-link-icon-width);
+
+						font-size: @home-nav-panel-link-icon-width;
+						text-align: center;
+						line-height: @home-nav-panel-link-icon-width;
+					}
+
+					& > .home-nav-panel-link-title {
+						.set-dimensions(@home-nav-panel-link-icon-width, @home-nav-panel-link-icon-width * 0.6);
+
+						font-size: @std-font-size;
+						text-align: center;
+						line-height: @home-nav-panel-link-icon-width * 0.6;
+					}
+				}
 			}
 
 			&.home-nav-panel-link-edge {
