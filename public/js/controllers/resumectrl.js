@@ -11,7 +11,7 @@ define(function () {
 		function ($scope, buttonBarSvc) {
 			$scope.resumeHeader = 'Tyron Jung';
 			$scope.resumeContentHeaders = [{
-					icon: 'suitcase',
+					icon: 'bar-chart',
 					title: 'Employment History'
 				}, {
 					icon: 'lightbulb-o',

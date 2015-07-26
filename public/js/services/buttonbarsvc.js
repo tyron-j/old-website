@@ -331,11 +331,11 @@ define(function () {
 
 				resumeMenu: {
 					items: [{
-						title: 'Download',
-						icon: 'download',
+						title: 'PDF',
+						icon: 'print',
 
 						onClick: function () {
-							console.log("Downloading resume!");
+							console.log("Downloading PDF!");
 						}
 					}]
 				}
