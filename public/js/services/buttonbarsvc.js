@@ -327,6 +327,17 @@ define(function () {
 					};
 
 					return blogEditor;
+				},
+
+				resumeMenu: {
+					items: [{
+						title: 'Download',
+						icon: 'download',
+
+						onClick: function () {
+							console.log("Downloading resume!");
+						}
+					}]
 				}
 			};
 		}

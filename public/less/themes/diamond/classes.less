@@ -383,8 +383,76 @@
 	}
 }
 
+@resume-height: @horizontal-golden-height;
+@resume-header-height: 75px;
+@resume-content-width: 40%;
+@resume-content-header-font-size: 20px;
+@resume-content-header-icon-width: @resume-header-height;
+
 .resume-container {
-	.set-in-center(@horizontal-golden-width, @horizontal-golden-height);
+	.widget; // to-do: this is not a widget
+
+	.set-in-center(@horizontal-golden-width, @resume-height);
+
+	background-color: @wet-asphalt;
+
+	& > .resume-header {
+		.set-dimensions(100%, @resume-header-height);
+
+		background-color: @green-sea;
+		font-size: @std-header-font-size;
+		line-height: @resume-header-height;
+		padding-left: @std-text-padding;
+		padding-right: @std-text-padding;
+		position: relative;
+		text-align: center;
+
+		border-bottom: 5px solid @wet-asphalt;
+
+		& > ui-button-bar {
+			float: right;
+		}
+	}
+
+	& > .resume-content {
+		.set-dimensions(@resume-content-width, @resume-height - @resume-header-height);
+
+		display: inline-block;
+		overflow: auto;
+		position: relative;
+
+		border: 5px solid @green-sea;
+		border-right: none;
+
+		&:last-child {
+			width: 100% - 2 * @resume-content-width;
+			border-right: 5px solid @green-sea;
+		}
+
+		& > .resume-scroll-content {
+			white-space: pre-wrap;
+
+			& > .resume-content-header {
+				.set-dimensions(100%, @resume-header-height);
+
+				font-size: @resume-content-header-font-size;
+				line-height: @resume-header-height;
+				padding-left: @resume-content-header-icon-width + @std-text-padding;
+				position: relative;
+
+				& > .resume-content-header-icon {
+					.set-dimensions(@resume-content-header-icon-width);
+
+					background-color: @green-sea;
+					font-size: 25px;
+					left: 0;
+					line-height: @resume-header-height;
+					position: absolute;
+					text-align: center;
+				}
+			}
+		}
+	}
 }
 
 .centered { // to-do: remove

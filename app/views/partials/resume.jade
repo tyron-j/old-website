@@ -1,3 +1,21 @@
 //- resume
 
 div(class='resume-container')
+	div(class='resume-header')
+		| {{ resumeHeader }}
+		ui-button-bar(ui-model='buttonBar')
+	div(class='resume-content')
+		div(class='resume-scroll-content')
+			div(class='resume-content-header')
+				div(class='resume-content-header-icon icon icon-{{ resumeContentHeaders[0].icon }}')
+				| {{ resumeContentHeaders[0].title }}
+	div(class='resume-content')
+		div(class='resume-scroll-content')
+			div(class='resume-content-header')
+				div(class='resume-content-header-icon icon icon-{{ resumeContentHeaders[1].icon }}')
+				| {{ resumeContentHeaders[1].title }}
+	div(class='resume-content')
+		div(class='resume-scroll-content')
+			div(class='resume-content-header')
+				div(class='resume-content-header-icon icon icon-{{ resumeContentHeaders[2].icon }}')
+				| {{ resumeContentHeaders[2].title }}
