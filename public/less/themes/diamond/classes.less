@@ -388,6 +388,7 @@
 @resume-content-width: 40%;
 @resume-content-header-font-size: 20px;
 @resume-content-header-icon-width: @resume-header-height;
+@resume-border-width: 5px;
 
 .resume-container {
 	.widget; // to-do: this is not a widget
@@ -402,12 +403,11 @@
 		background-color: @green-sea;
 		font-size: @std-header-font-size;
 		line-height: @resume-header-height;
+		margin-bottom: @resume-border-width;
 		padding-left: @std-text-padding;
 		padding-right: @std-text-padding;
 		position: relative;
 		text-align: center;
-
-		border-bottom: 5px solid @wet-asphalt;
 
 		& > ui-button-bar {
 			float: right;
@@ -415,18 +415,18 @@
 	}
 
 	& > .resume-content {
-		.set-dimensions(@resume-content-width, @resume-height - @resume-header-height);
+		.set-dimensions(@resume-content-width, @resume-height - @resume-header-height - @resume-border-width);
 
 		display: inline-block;
 		overflow: auto;
 		position: relative;
 
-		border: 5px solid @green-sea;
+		border: @resume-border-width solid @green-sea;
 		border-right: none;
 
 		&:last-child {
 			width: 100% - 2 * @resume-content-width;
-			border-right: 5px solid @green-sea;
+			border-right: @resume-border-width solid @green-sea;
 		}
 
 		& > .resume-scroll-content {
