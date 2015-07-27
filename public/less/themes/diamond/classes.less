@@ -387,8 +387,9 @@
 @resume-header-height: 75px;
 @resume-content-width: 40%;
 @resume-content-header-font-size: 20px;
-@resume-content-header-icon-width: @resume-header-height;
+@resume-content-header-icon-width: 50px;
 @resume-border-width: 3px;
+@resume-content-body-header-height: 45px;
 
 .resume-container {
 	.widget; // to-do: this is not a widget
@@ -433,11 +434,11 @@
 			white-space: pre-wrap;
 
 			& > .resume-content-header {
-				.set-dimensions(100%, @resume-header-height);
+				.set-dimensions(100%, @resume-content-header-icon-width);
 
 				font-size: @resume-content-header-font-size;
-				line-height: @resume-header-height;
-				padding-left: @resume-content-header-icon-width + @std-text-padding;
+				line-height: @resume-content-header-icon-width;
+				padding-left: @resume-content-header-icon-width + @std-text-padding / 2;
 				position: relative;
 
 				& > .resume-content-header-icon {
@@ -446,9 +447,57 @@
 					background-color: @green-sea;
 					font-size: 25px;
 					left: 0;
-					line-height: @resume-header-height;
 					position: absolute;
 					text-align: center;
+				}
+			}
+
+			& > .resume-content-body {
+				font-size: @std-font-size;
+				margin-left: @resume-border-width;
+				margin-right: @resume-border-width;
+				margin-top: @resume-border-width;
+
+				& > .resume-content-body-header {
+					.set-dimensions(100%, @resume-content-body-header-height);
+
+					line-height: @resume-content-body-header-height;
+
+					& > .resume-content-body-header-left, & > .resume-content-body-header-right {
+						display: inline-block;
+						position: relative;
+						// background-color: @green-sea;
+						padding-left: @std-text-padding / 2;
+						padding-right: @std-text-padding / 2;
+					}
+
+					& > .resume-content-body-header-right {
+						float: right;
+					}
+				}
+
+				& > .resume-content-body-detail {
+					padding-left: @std-text-padding / 2;
+					padding-right: @std-text-padding / 2;
+					padding-top: @std-text-padding / 2;
+					position: relative;
+
+					&:last-child {
+						padding-bottom: @std-text-padding / 2;
+					}
+
+					& > .resume-content-body-detail-diamond {
+						.rotate(45deg);
+						.set-dimensions(10px);
+
+						background-color: @green-sea;
+						position: absolute;
+						top: 20px;
+					}
+
+					& > .resume-content-body-detail-text {
+						padding-left: 25px;
+					}
 				}
 			}
 		}

@@ -10,15 +10,53 @@ define(function () {
 		
 		function ($scope, buttonBarSvc) {
 			$scope.resumeHeader = 'Tyron Jung';
-			$scope.resumeContentHeaders = [{
-					icon: 'bar-chart',
-					title: 'Employment History'
+			$scope.resumeContent = [{ // to-do: temporary hard-coding
+					header: {
+						icon: 'bar-chart',
+						title: 'Employment History'
+					},
+					items: [{
+						title: 'Front End Developer',
+						company: 'Genesys',
+						duration: 'May - Aug 2014',
+						tasks: [
+							'Hello my name is Tyron Jung and this is my website. I am currently testing the new-line functionality of this segment.',
+							'B'
+						]
+					}, {
+						title: 'Software Developer',
+						company: 'Trapeze Group',
+						duration: 'Sep - Dec 2013',
+						tasks: [
+							'Another test'
+						]
+					}]
 				}, {
-					icon: 'lightbulb-o',
-					title: 'Work Outside of Work'
+					header: {
+						icon: 'lightbulb-o',
+						title: 'Work Outside of Work'
+					},
+					items: [{
+						title: 'Personal Website',
+						duration: 'Ongoing',
+						tasks: [
+							'A'
+						]
+					}, {
+						title: 'Genesys Hackathon',
+						duration: 'Jul 2014',
+						tasks: [
+							'B'
+						]
+					}]
 				}, {
-					icon: 'sitemap',
-					title: 'Skills'
+					header: {
+						icon: 'sitemap',
+						title: 'Skills'
+					},
+					items: [{
+						//
+					}]
 				}
 			];
 
