@@ -55,7 +55,29 @@ define(function () {
 						title: 'Skills'
 					},
 					items: [{
-						//
+						icon: 'html5',
+						title: 'HTML 5'
+					}, {
+						icon: 'css3',
+						title: 'CSS 3'
+					}, {
+						icon: 'git',
+						title: 'Git'
+					}, {
+						icon: '',
+						title: ''
+					}, {
+						icon: '',
+						title: ''
+					}, {
+						icon: '',
+						title: ''
+					}, {
+						icon: '',
+						title: ''
+					}, {
+						icon: '',
+						title: ''
 					}]
 				}
 			];

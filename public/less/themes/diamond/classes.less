@@ -390,6 +390,7 @@
 @resume-content-header-icon-width: 50px;
 @resume-border-width: 3px;
 @resume-content-body-header-height: 45px;
+@resume-content-grid-diamond-width: 50px;
 
 .resume-container {
 	.widget; // to-do: this is not a widget
@@ -497,6 +498,52 @@
 
 					& > .resume-content-body-detail-text {
 						padding-left: 25px;
+					}
+				}
+			}
+
+			& > .resume-content-grid {
+				width: @resume-content-grid-diamond-width * sqrt(2) * 2;
+				margin: auto;
+				margin-top: @std-text-padding / 2 + @resume-border-width;
+				padding: @resume-content-grid-diamond-width * (sqrt(2) - 1) / 2;
+
+				& > .resume-content-grid-diamond {
+					.rotate(45deg);
+					.set-dimensions(@resume-content-grid-diamond-width);
+
+					display: inline-block;
+					overflow: hidden;
+					position: relative;
+
+					&:nth-child(n + 2) {
+						margin-top: @resume-content-grid-diamond-width * (1 / sqrt(2) - 1);
+					}
+
+					&:nth-child(3n + 2) {
+						margin-left: @resume-content-grid-diamond-width * (sqrt(2) - 1);
+					}
+
+					&:nth-child(3n) {
+						& > .resume-content-grid-diamond-content {
+							background-color: @wet-asphalt;
+						}
+						margin-left: @resume-content-grid-diamond-width * (sqrt(2) / 2);
+					}
+
+					& > .resume-content-grid-diamond-content {
+						.set-dimensions(@resume-content-grid-diamond-width * sqrt(2));
+						.rotate(-45deg);
+
+						background-color: @green-sea;
+						margin-left: -@resume-content-grid-diamond-width * (sqrt(2) - 1) / 2;
+						margin-top: -@resume-content-grid-diamond-width * (sqrt(2) - 1) / 2;
+						position: absolute; // this is required for some reason
+
+						// font settings
+						font-size: 25px;
+						line-height: @resume-content-grid-diamond-width * sqrt(2);
+						text-align: center;
 					}
 				}
 			}
