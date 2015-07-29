@@ -10,7 +10,8 @@ define(function () {
 			return {
 				model: { // using a singleton since there will only be one instance of a nav bar
 					inUse: false,
-					items: []
+					items: [],
+					masterMode: false
 				},
 
 				globalMode: function () {
@@ -19,7 +20,8 @@ define(function () {
 					navBar.items = this.publicLinks;
 
 					if ($location.host() === 'localhost') {
-						navBar.items = navBar.items.concat(this.masterLinks);
+						navBar.items      = navBar.items.concat(this.masterLinks);
+						navBar.masterMode = true;
 					}
 				},
 

@@ -127,6 +127,17 @@
 	position: fixed;
 	z-index: 3; // higher than normal, lower than modal
 
+	&.master {
+		width: @master-nav-bar-width;
+		margin-left: -@master-nav-bar-width / 2;
+
+		& > .nav-bar-content > .nav-bar-item {
+			&, & > .nav-bar-expand > .nav-bar-sub-item {
+				width: @master-nav-bar-item-width;
+			}
+		}
+	}
+
 	& > .nav-bar-content {
 		.widget;
 
