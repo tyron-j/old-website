@@ -1,0 +1,5 @@
+//- background image
+
+div(class='bg-image',
+	ng-class='{ shown: model.inUse, hidden: !model.inUse }',
+	style='background-image: url("{{ model.url }}")')

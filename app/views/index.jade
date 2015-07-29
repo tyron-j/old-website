@@ -9,8 +9,9 @@ block view
 		ng-cloak)
 		//- to-do: remove isLocalHost condition
 		if isLocalHost
+			ui-bg-image(ui-model='bgImage')
 			ui-modal-dialog(ui-model='modalDialog')
-			ui-side-bar(ui-model='sideBar')
 			ui-nav-bar(ui-model='navBar')
+			ui-side-bar(ui-model='sideBar')
 		//- partial view
 		div(ng-view)

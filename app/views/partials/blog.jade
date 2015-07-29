@@ -1,6 +1,7 @@
 //- blog
 
-div(class='blog')
+div(class='blog',
+	ng-class='{ "preloader preloader-intersection": !sideBar.selectedItem.content }')
 	div(class='blog-header')
 		| {{ sideBar.selectedItem.title }}
 	div(class='blog-content')

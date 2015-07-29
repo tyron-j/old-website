@@ -3,16 +3,18 @@
 define([
 	'angular',
 
+	'./bgimagesvc',
 	'./buttonbarsvc',
 	'./modaldialogsvc',
 	'./modalimagesvc',
 	'./navbarsvc',
 	'./sidebarsvc'
-], function (ng, buttonBarSvc, modalDialogSvc, modalImageSvc, navBarSvc, sideBarSvc) {
+], function (ng, bgImageSvc, buttonBarSvc, modalDialogSvc, modalImageSvc, navBarSvc, sideBarSvc) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
 	return ng.module('allServices', [])
+		.factory('bgImageSvc', bgImageSvc)
 		.factory('buttonBarSvc', buttonBarSvc)
 		.factory('modalDialogSvc', modalDialogSvc)
 		.factory('modalImageSvc', modalImageSvc)
