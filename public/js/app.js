@@ -29,7 +29,7 @@ define([
 			}).when('/about', {
 				templateUrl: '/partials/about',
 				controller: 'AboutCtrl'
-			}).when('/blog', { // currently localhost only
+			}).when('/blog/:title?', { // currently localhost only
 				templateUrl: '/partials/blog',
 				controller: 'BlogCtrl'
 			}).when('/gallery', { // currently localhost only

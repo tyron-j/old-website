@@ -6,8 +6,9 @@ define(function () {
 	return [
 		'$http',
 		'$location',
+		'$routeParams',
 
-		function ($http, $location) { // use as factory
+		function ($http, $location, $routeParams) { // use as factory
 			return {
 				model: { // using a singleton since there will only be one instance of a side bar
 					inUse: false,
@@ -70,7 +71,15 @@ define(function () {
 						}
 
 						if (blogs.length) {
-							sideBar.selectItem(blogs[0]);
+							var blogTitles = blogs.map(function (b) {
+								return b.title;
+							});
+
+							if ($routeParams.title && !!~blogTitles.indexOf($routeParams.title)) {
+								sideBar.selectItem(blogs[blogTitles.indexOf($routeParams.title)]);
+							} else {
+								sideBar.selectItem(blogs[0]);
+							}
 						}
 					});
 
