@@ -23,6 +23,7 @@ div(class='image-browser')
 	div(class='image-browser-footer')
 		ui-button-bar(ui-model='imageBrowserEditor')
 	div(class='image-browser-form')
+		//- to-do: change the form action to reflect the selected category
 		form(action='/api/image/gallery', method='post', enctype='multipart/form-data')
 			input(type='file', name='images', id='fileInput', multiple)
 			input(type='submit', id='submitInput', value='upload')
