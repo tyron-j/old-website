@@ -1,7 +1,7 @@
 // models
 
 module.exports = {
-	Artwork: require('./artwork'),
+	Image: require('./image'),
 	Blog: require('./blog'),
 	User: require('./user')
 };

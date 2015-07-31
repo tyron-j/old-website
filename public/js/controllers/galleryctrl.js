@@ -10,8 +10,8 @@ define(function () {
 		'modalImageSvc',
 		
 		function ($http, $scope, modalImageSvc) {
-			$http.get('/api/artwork').success(function (res) {
-				$scope.artworks = res;
+			$http.get('/api/image').success(function (res) {
+				$scope.images = res;
 			});
 
 			$scope.modalImage = modalImageSvc.model;

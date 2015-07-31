@@ -3,7 +3,7 @@
 div(class='modal-image',
 	ng-class='{ shown: model.inUse, hidden: !model.inUse }',
 	ng-click='model.close()')
-	//- to-do: change url to http://tyronjung.com/api/artwork/{{ artwork.title }}
+	//- to-do: change url to http://tyronjung.com/api/image/{{ image.title }}
 	//- after moving image fetching api to unprotected api
-	img(ng-src='http://localhost:9000/api/artwork/{{ model.artworkTitle }}',
+	img(ng-src='http://localhost:9000/api/image/{{ model.imageTitle }}',
 		ng-if='model.inUse')

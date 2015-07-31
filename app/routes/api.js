@@ -61,22 +61,22 @@ module.exports = {
 		});
 	},
 
-	getArtwork: function (req, res, next) { // to-do: update this function
+	getImage: function (req, res, next) { // to-do: update this function
 		if (req.params.title) { // fetch by unique title
-			models.Artwork.findOne({
+			models.Image.findOne({
 				title: req.params.title
-			}, function (err, artwork) { // to-do: handle no matches
-				res.contentType(artwork.image.contentType);
-				res.send(artwork.image.data);
+			}, function (err, image) { // to-do: handle no matches
+				res.contentType(image.contentType);
+				res.send(image.data);
 			});
 		} else { // fetch all titles
-			models.Artwork
+			models.Image
 				.find({})
 				.sort('-creationDate')
 				.select('title') // to-do: send back creationDate as well for updating title
-				.exec(function (err, artworks) {
-					if (artworks.length) {
-						res.send(artworks);
+				.exec(function (err, images) {
+					if (images.length) {
+						res.send(images);
 					} else {
 						res.send([]);
 					}
@@ -84,11 +84,11 @@ module.exports = {
 		}
 	},
 
-	postArtwork: function (uploadDir) {
+	postImage: function (uploadDir) {
 		return function (req, res, next) { // currently only works for localhost
 			var form  = new formidable.IncomingForm();
-			var count = 0; // count of uploaded artworks
-			var artwork;
+			var count = 0; // count of uploaded images
+			var image;
 
 			form.uploadDir      = uploadDir;
 			form.keepExtensions = true;
@@ -109,13 +109,13 @@ module.exports = {
 					throw err; // to-do: handle error gracefully
 				}
 
-				if (!(files.artworks instanceof Array)) {
+				if (!(files.images instanceof Array)) {
 					// convert to array for iterative logic below
-					files.artworks = [ files.artworks ];
+					files.images = [ files.images ];
 				}
 
-				// important: artworks is the name of the file input tag
-				files.artworks.forEach(function (file) {
+				// important: images is the name of the file input tag
+				files.images.forEach(function (file) {
 					var fileExtension = file.name.split('.')[1];
 
 					fs.readFile(file.path, function (err, data) {
@@ -124,18 +124,17 @@ module.exports = {
 							throw err; // to-do: handle error gracefully
 						}
 
-						artwork = new models.Artwork({
+						image = new models.Image({
 							title: file.name,
-							image: {
-								data: data,
-								contentType: 'image/' + fileExtension
-							},
+							data: data,
+							contentType: 'image/' + fileExtension,
 							// creationDate will depend on the heroku server location timezone
 							// but this is purely for sorting purposes so it doesn't matter
-							creationDate: new Date()
+							creationDate: new Date(),
+							category: req.params.category
 						});
 
-						artwork.save(function (err, a) {
+						image.save(function (err, a) {
 							if (err) {
 								signal.error("Failed to save " + file.name + " to database");
 								throw err; // to-do: handle error gracefully
@@ -144,25 +143,25 @@ module.exports = {
 							signal.success("Saved " + file.name + " to database");
 							count++;
 
-							if (count === files.artworks.length) {
+							if (count === files.images.length) {
 								// to-do: update front end without refreshing page
 								res.redirect('/master/gallery'); // refresh page
 							}
 						});
 
-						fs.unlink(file.path); // delete artwork in temp directory
+						fs.unlink(file.path); // delete image in temp directory
 					});
 				});
 			});
 		}
 	},
 
-	putArtwork: function (req, res, next) {
+	putImage: function (req, res, next) {
 		//
 	},
 
-	deleteArtwork: function (req, res, next) {
-		models.Artwork.findOneAndRemove({
+	deleteImage: function (req, res, next) {
+		models.Image.findOneAndRemove({
 			title: req.params.title
 		}, function (err, a) {
 			if (err) {

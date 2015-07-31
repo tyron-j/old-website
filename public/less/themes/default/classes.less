@@ -2,28 +2,28 @@
 
 // to-do: clean up the unnecessary styles such as width: 100%
 // to-do: also place mix-ins above standard styles
-.artwork-browser {
-	& > .artwork-browser-content {
+.image-browser {
+	& > .image-browser-content {
 		width: 100%;
 		overflow: auto;
 		
-		.calc-height(~'100% - '@artwork-browser-footer-height);
+		.calc-height(~'100% - '@image-browser-footer-height);
 
-		& > .artwork-browser-scroll-content {
+		& > .image-browser-scroll-content {
 			width: 100%;
 
-			& > .artwork-browser-thumbnail {
-				width: @artwork-browser-thumbnail-width;
+			& > .image-browser-thumbnail {
+				width: @image-browser-thumbnail-width;
 				display: inline-block;
 				overflow: hidden;
-				padding-bottom: @artwork-browser-thumbnail-width; // hack for making the height same as width
+				padding-bottom: @image-browser-thumbnail-width; // hack for making the height same as width
 				position: relative; // holds absolute element within
 
-				& > .artwork-browser-thumbnail-header, & > .artwork-browser-thumbnail-editor {
+				& > .image-browser-thumbnail-header, & > .image-browser-thumbnail-editor {
 					width: 100%;
-					height: @artwork-browser-thumbnail-header-height;
-					line-height: @artwork-browser-footer-height;
-					font-size: @artwork-browser-thumbnail-header-font-size;
+					height: @image-browser-thumbnail-header-height;
+					line-height: @image-browser-footer-height;
+					font-size: @image-browser-thumbnail-header-font-size;
 					position: absolute;
 					text-align: center;
 					z-index: 1;
@@ -38,17 +38,17 @@
 					.center();
 				}
 
-				& > .artwork-browser-thumbnail-editor {
+				& > .image-browser-thumbnail-editor {
 					bottom: 0;
 				}
 			}
 		}
 	}
 
-	& > .artwork-browser-footer {
+	& > .image-browser-footer {
 		width: 100%;
-		height: @artwork-browser-footer-height;
-		line-height: @artwork-browser-footer-height;
+		height: @image-browser-footer-height;
+		line-height: @image-browser-footer-height;
 		text-align: center;
 	}
 }

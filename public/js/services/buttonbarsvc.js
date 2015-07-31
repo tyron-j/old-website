@@ -23,15 +23,15 @@ define(function () {
 
 			return {
 				// to-do: consider keeping the widget models as separate files and fetching them through require.js
-				getArtworkThumbnailEditor: function ($scope) {
+				getImageThumbnailEditor: function ($scope) {
 					return {
 						items: [{
 							title: 'Expand',
 							icon: 'expand',
 
 							onClick: function () {
-								modalImage.open($scope.inspectedArtwork.title);
-								$scope.inspectedArtwork = null; // close thumbnail editor
+								modalImage.open($scope.inspectedImage.title);
+								$scope.inspectedImage = null; // close thumbnail editor
 							}
 						}, {
 							title: 'Edit',
@@ -45,18 +45,18 @@ define(function () {
 							icon: 'trash',
 
 							onClick: function () {
-								var artworks            = $scope.artworks;
-								var artworkBeingDeleted = $scope.inspectedArtwork;
+								var images            = $scope.images;
+								var imageBeingDeleted = $scope.inspectedImage;
 
 								modalDialog.open({
 									title: 'Delete Confirmation',
-									content: "Are you sure you want to delete " + artworkBeingDeleted.title + "?",
+									content: "Are you sure you want to delete " + imageBeingDeleted.title + "?",
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
-											$http.delete('/api/artwork/' + artworkBeingDeleted.title).success(function (res) {
+											$http.delete('/api/image/' + imageBeingDeleted.title).success(function (res) {
 												console.log(res.msg);
-												artworks.splice(artworks.indexOf(artworkBeingDeleted), 1);
+												images.splice(images.indexOf(imageBeingDeleted), 1);
 												modalDialog.close();
 											});
 										}
@@ -72,19 +72,19 @@ define(function () {
 					};
 				},
 
-				getArtworkBrowserEditor: function ($scope) {
+				getImageBrowserEditor: function ($scope) {
 					// to-do: consider using FileReader instead along with drag & drop logic
 					var fileInput   = document.getElementById('fileInput');
 					var submitInput = document.getElementById('submitInput');
 
-					// to-do: disallow uploading an artwork with a duplicate title in either of the uploaded or uploading lists
+					// to-do: disallow uploading an image with a duplicate title in either of the uploaded or uploading lists
 					fileInput.addEventListener('change', function (evt) {
 						if (fileInput.files.length) {
 							var fileNames = [].slice.call(fileInput.files).map(function (file) {
 								return file.name;
 							});
 
-							// workaround for strange bug causing modal dialog to open only after mouseout is triggered on artwork browser
+							// workaround for strange bug causing modal dialog to open only after mouseout is triggered on image browser
 							$timeout(function () {
 								modalDialog.open({
 									title: 'Upload Confirmation',
@@ -106,7 +106,7 @@ define(function () {
 						}
 					});
 
-					// to-do: consider implementing collections of artworks
+					// to-do: consider implementing collections of images
 					return {
 						items: [{
 							// to-do: make the actual input tag invisible and bind it to a custom button
@@ -121,8 +121,8 @@ define(function () {
 							icon: 'check-circle',
 
 							onClick: function () {
-								$scope.artworks.forEach(function (artwork) {
-									artwork.selected = true;
+								$scope.images.forEach(function (image) {
+									image.selected = true;
 								});
 							}
 						}, {
@@ -130,36 +130,36 @@ define(function () {
 							icon: 'check-circle-o',
 
 							onClick: function () {
-								$scope.artworks.forEach(function (artwork) {
-									artwork.selected = false;
+								$scope.images.forEach(function (image) {
+									image.selected = false;
 								});
 							}
 						}, {
-							// to-do: show the delete button only if there is a selected artwork
+							// to-do: show the delete button only if there is a selected image
 							title: 'Delete Selected',
 							icon: 'trash',
 
 							onClick: function () {
-								var artworks              = $scope.artworks;
-								var selectedArtworks      = artworks.filter(function (artwork) { return artwork.selected; });
-								var selectedArtworkTitles = selectedArtworks.map(function (artwork) { return artwork.title; });
+								var images              = $scope.images;
+								var selectedImages      = images.filter(function (image) { return image.selected; });
+								var selectedImageTitles = selectedImages.map(function (image) { return image.title; });
 
-								if (selectedArtworks.length) {
+								if (selectedImages.length) {
 									modalDialog.open({
 										title: 'Delete Confirmation',
-										content: "Are you sure you want to delete the selected artworks?\n\n" + selectedArtworkTitles.join('\n'),
+										content: "Are you sure you want to delete the selected images?\n\n" + selectedImageTitles.join('\n'),
 										buttons: [{
 											title: 'OK',
 											onClick: function () {
 												var count = 0;
 
-												selectedArtworks.forEach(function (artwork) {
-													$http.delete('/api/artwork/' + artwork.title).success(function (res) {
+												selectedImages.forEach(function (image) {
+													$http.delete('/api/image/' + image.title).success(function (res) {
 														console.log(res.msg);
-														artworks.splice(artworks.indexOf(artwork), 1);
+														images.splice(images.indexOf(image), 1);
 														count++;
 
-														if (count === selectedArtworks.length) {
+														if (count === selectedImages.length) {
 															modalDialog.close();
 														}
 													});

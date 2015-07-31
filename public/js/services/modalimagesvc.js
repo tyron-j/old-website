@@ -8,16 +8,16 @@ define(function () {
 			return {
 				model: {
 					inUse: false,
-					artworkTitle: '',
+					imageTitle: '',
 
-					open: function (artworkTitle) {
+					open: function (imageTitle) {
 						this.inUse        = true;
-						this.artworkTitle = artworkTitle;
+						this.imageTitle = imageTitle;
 					},
 
 					close: function () {
 						this.inUse        = false;
-						this.artworkTitle = '';
+						this.imageTitle = '';
 					}
 				}
 			};

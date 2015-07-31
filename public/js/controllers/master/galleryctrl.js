@@ -11,27 +11,27 @@ define(function () {
 		'modalImageSvc',
 		
 		function ($http, $scope, buttonBarSvc, modalImageSvc) {
-			$http.get('/api/artwork').success(function (res) {
-				$scope.artworks = res;
+			$http.get('/api/image').success(function (res) {
+				$scope.images = res;
 			});
 
-			$scope.artworkThumbnailEditor = buttonBarSvc.getArtworkThumbnailEditor($scope);
-			$scope.artworkBrowserEditor   = buttonBarSvc.getArtworkBrowserEditor($scope);
+			$scope.imageThumbnailEditor = buttonBarSvc.getImageThumbnailEditor($scope);
+			$scope.imageBrowserEditor   = buttonBarSvc.getImageBrowserEditor($scope);
 			$scope.modalImage             = modalImageSvc.model;
 
-			// to-do: consider making artwork browser a widget and moving these methods to a service
-			$scope.inspectArtwork = function (artwork) {
+			// to-do: consider making image browser a widget and moving these methods to a service
+			$scope.inspectImage = function (image) {
 				// to-do: only execute logic if not in edit mode
-				$scope.inspectedArtwork = artwork;
+				$scope.inspectedImage = image;
 			};
 
-			$scope.toggleArtworkSelection = function (artwork) {
-				artwork.selected = !artwork.selected;
+			$scope.toggleImageSelection = function (image) {
+				image.selected = !image.selected;
 			};
 
-			$scope.getSelectedArtworks = function () {
-				return $scope.artworks.filter(function (artwork) {
-					return artwork.selected;
+			$scope.getSelectedImages = function () {
+				return $scope.images.filter(function (image) {
+					return image.selected;
 				});
 			};
 		}

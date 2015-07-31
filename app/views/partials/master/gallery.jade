@@ -1,28 +1,28 @@
 //- master gallery
 
 ui-modal-image(ui-model='modalImage')
-div(class='artwork-browser')
-	div(class='artwork-browser-content'
-		ng-mouseleave='inspectedArtwork = null')
-		div(class='artwork-browser-scroll-content')
-			div(class='artwork-browser-thumbnail',
-				ng-repeat='artwork in artworks',
-				ng-class='{ selected: artwork.selected }')
-				div(class='artwork-browser-thumbnail-header',
-					title='{{ artwork.title.split(".")[0] }}',
-					ng-class='{ shown: artwork === inspectedArtwork, hidden: artwork !== inspectedArtwork }')
-					| {{ artwork.title.split('.')[0] }}
-				//- to-do: change url to http://tyronjung.com/api/artwork/{{ artwork.title }}
+div(class='image-browser')
+	div(class='image-browser-content'
+		ng-mouseleave='inspectedImage = null')
+		div(class='image-browser-scroll-content')
+			div(class='image-browser-thumbnail',
+				ng-repeat='image in images',
+				ng-class='{ selected: image.selected }')
+				div(class='image-browser-thumbnail-header',
+					title='{{ image.title.split(".")[0] }}',
+					ng-class='{ shown: image === inspectedImage, hidden: image !== inspectedImage }')
+					| {{ image.title.split('.')[0] }}
+				//- to-do: change url to http://tyronjung.com/api/image/{{ image.title }}
 				//- after moving image fetching api to unprotected api
-				img(ng-src='http://localhost:9000/api/artwork/{{ artwork.title }}',
-					ng-mouseover='inspectArtwork(artwork)',
-					ng-click='toggleArtworkSelection(artwork)')
-				div(class='artwork-browser-thumbnail-editor',
-					ng-class='{ shown: artwork === inspectedArtwork, hidden: artwork !== inspectedArtwork }')
-					ui-button-bar(ui-model='artworkThumbnailEditor')
-	div(class='artwork-browser-footer')
-		ui-button-bar(ui-model='artworkBrowserEditor')
-	div(class='artwork-browser-form')
-		form(action='/api/artwork', method='post', enctype='multipart/form-data')
-			input(type='file', name='artworks', id='fileInput', multiple)
+				img(ng-src='http://localhost:9000/api/image/{{ image.title }}',
+					ng-mouseover='inspectImage(image)',
+					ng-click='toggleImageSelection(image)')
+				div(class='image-browser-thumbnail-editor',
+					ng-class='{ shown: image === inspectedImage, hidden: image !== inspectedImage }')
+					ui-button-bar(ui-model='imageThumbnailEditor')
+	div(class='image-browser-footer')
+		ui-button-bar(ui-model='imageBrowserEditor')
+	div(class='image-browser-form')
+		form(action='/api/image/gallery', method='post', enctype='multipart/form-data')
+			input(type='file', name='images', id='fileInput', multiple)
 			input(type='submit', id='submitInput', value='upload')
