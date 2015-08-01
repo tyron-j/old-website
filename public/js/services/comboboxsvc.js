@@ -30,6 +30,7 @@ define(function () {
 					'About',
 					'Blog',
 					'Gallery',
+					'Home',
 					'Novel'
 				], true, 2)
 			};
