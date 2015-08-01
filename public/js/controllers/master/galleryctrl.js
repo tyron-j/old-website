@@ -12,14 +12,16 @@ define(function () {
 		'modalImageSvc',
 		
 		function ($http, $scope, buttonBarSvc, comboBoxSvc, modalImageSvc) {
-			$http.get('/api/image/gallery').success(function (res) {
-				$scope.images = res;
-			});
-
 			$scope.imageThumbnailEditor = buttonBarSvc.getImageThumbnailEditor($scope);
 			$scope.imageBrowserEditor   = buttonBarSvc.getImageBrowserEditor($scope);
 			$scope.imageBrowserSelector = comboBoxSvc.imageBrowserSelector;
 			$scope.modalImage           = modalImageSvc.model;
+			$scope.targetCategory       = $scope.imageBrowserSelector.selectedItem.toLowerCase();
+			$scope.postAction           = '/api/image/' + $scope.targetCategory;
+
+			$http.get('/api/image/' + $scope.targetCategory).success(function (res) {
+				$scope.images = res;
+			});
 
 			// to-do: consider making image browser a widget and moving these methods to a service
 			$scope.inspectImage = function (image) {
@@ -36,6 +38,17 @@ define(function () {
 					return image.selected;
 				});
 			};
+
+			$scope.$watch('imageBrowserSelector.selectedItem', function (newVal, oldVal) {
+				if (newVal !== oldVal) {
+					$scope.targetCategory = newVal.toLowerCase();
+					$scope.postAction     = '/api/image/' + $scope.targetCategory;
+
+					$http.get('/api/image/' + $scope.targetCategory).success(function (res) {
+						$scope.images     = res;
+					});
+				}
+			});
 		}
 	];
 });

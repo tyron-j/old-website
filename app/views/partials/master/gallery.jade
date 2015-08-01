@@ -12,9 +12,9 @@ div(class='image-browser')
 					title='{{ image.title.split(".")[0] }}',
 					ng-class='{ shown: image === inspectedImage, hidden: image !== inspectedImage }')
 					| {{ image.title.split('.')[0] }}
-				//- to-do: change url to http://tyronjung.com/api/image/gallery/{{ image.title }}
+				//- to-do: change url to http://tyronjung.com/api/image/{{ image.category }}/{{ image.title }}
 				//- after moving image fetching api to unprotected api
-				img(ng-src='http://localhost:9000/api/image/gallery/{{ image.title }}',
+				img(ng-src='http://localhost:9000/api/image/{{ image.category }}/{{ image.title }}',
 					ng-mouseover='inspectImage(image)',
 					ng-click='toggleImageSelection(image)')
 				div(class='image-browser-thumbnail-editor',
@@ -25,6 +25,6 @@ div(class='image-browser')
 		ui-combo-box(ui-model='imageBrowserSelector')
 	div(class='image-browser-form')
 		//- to-do: change the form action to reflect the selected category
-		form(action='/api/image/gallery', method='post', enctype='multipart/form-data')
+		form(action='{{ postAction }}', method='post', enctype='multipart/form-data')
 			input(type='file', name='images', id='fileInput', multiple)
 			input(type='submit', id='submitInput', value='upload')

@@ -5,14 +5,14 @@ define(function () {
 
 	return [
 		function () { // use as factory
-			var ComboBox = function (items, upward) { // constructor
+			var ComboBox = function (items, upward, idx) { // constructor
 				if (!items.length) {
 					console.error("Empty array passed into combo box.");
 				}
 
 				this.inUse        = false;
 				this.items        = items;
-				this.selectedItem = items[0];
+				this.selectedItem = items[idx || 0];
 				this.upward       = upward;
 
 				this.toggleState = function() {
@@ -31,7 +31,7 @@ define(function () {
 					'Blog',
 					'Gallery',
 					'Novel'
-				], true)
+				], true, 2)
 			};
 		}
 	];
