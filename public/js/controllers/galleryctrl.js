@@ -16,6 +16,10 @@ define(function () {
 
 			$scope.modalImage = modalImageSvc.model;
 
+			$scope.handleImageLoad = function (evt, image) {
+				image.loaded = true; // client-exclusive property
+			};
+
 			// to-do: use custom ::-webkit-scrollbar styles
 			// disregarding scroll bar width
 			var gallery        = document.getElementsByClassName('gallery')[0];

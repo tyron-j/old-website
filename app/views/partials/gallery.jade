@@ -3,8 +3,11 @@
 //- to-do: fix the scrollbar image offset
 ui-modal-image(ui-model='modalImage')
 div(class='gallery')
-	div(class='image', ng-repeat='image in images')
+	div(class='image',
+		ng-class='{ "preloader preloader-intersection": !image.loaded }',
+		ng-repeat='image in images')
 		//- to-do: change url to http://tyronjung.com/api/image/gallery/{{ image.title }}
 		//- after moving image fetching api to unprotected api
 		img(ng-src='http://localhost:9000/api/image/gallery/{{ image.title }}',
-			ng-click='modalImage.open(image.title, image.category)')
+			ng-click='modalImage.open(image.title, image.category)',
+			ui-on-load='handleImageLoad(evt, image)')
