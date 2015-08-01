@@ -5,6 +5,7 @@ define(function () {
 
 	return function () {
 		return {
+			restrict: 'E',
 			templateUrl: '/widgets/modalimage',
 			scope: {
 				model: '=uiModel'

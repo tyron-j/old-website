@@ -7,7 +7,7 @@ div(class='image-browser')
 		div(class='image-browser-scroll-content')
 			div(class='image-browser-thumbnail',
 				ng-repeat='image in images',
-				ng-class='{ selected: image.selected }')
+				ng-class='{ selected: image.selected, "preloader preloader-intersection": !image.loaded }')
 				div(class='image-browser-thumbnail-header',
 					title='{{ image.title.split(".")[0] }}',
 					ng-class='{ shown: image === inspectedImage, hidden: image !== inspectedImage }')
@@ -16,7 +16,8 @@ div(class='image-browser')
 				//- after moving image fetching api to unprotected api
 				img(ng-src='http://localhost:9000/api/image/{{ image.category }}/{{ image.title }}',
 					ng-mouseover='inspectImage(image)',
-					ng-click='toggleImageSelection(image)')
+					ng-click='toggleImageSelection(image)',
+					ui-on-load='handleImageLoad(evt, image)')
 				div(class='image-browser-thumbnail-editor',
 					ng-class='{ shown: image === inspectedImage, hidden: image !== inspectedImage }')
 					ui-button-bar(ui-model='imageThumbnailEditor')

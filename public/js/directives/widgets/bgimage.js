@@ -5,6 +5,7 @@ define(function () {
 
 	return function () {
 		return {
+			restrict: 'E',
 			templateUrl: '/widgets/bgimage',
 			scope: {
 				model: '=uiModel'

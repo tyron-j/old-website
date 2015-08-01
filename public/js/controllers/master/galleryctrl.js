@@ -39,6 +39,10 @@ define(function () {
 				});
 			};
 
+			$scope.handleImageLoad = function (evt, image) {
+				image.loaded = true; // client-exclusive property
+			};
+
 			$scope.$watch('imageBrowserSelector.selectedItem', function (newVal, oldVal) {
 				if (newVal !== oldVal) {
 					$scope.targetCategory = newVal.toLowerCase();
