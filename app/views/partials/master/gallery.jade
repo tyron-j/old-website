@@ -22,6 +22,7 @@ div(class='image-browser')
 					ui-button-bar(ui-model='imageThumbnailEditor')
 	div(class='image-browser-footer')
 		ui-button-bar(ui-model='imageBrowserEditor')
+		ui-combo-box(ui-model='imageBrowserSelector')
 	div(class='image-browser-form')
 		//- to-do: change the form action to reflect the selected category
 		form(action='/api/image/gallery', method='post', enctype='multipart/form-data')

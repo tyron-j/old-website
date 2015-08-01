@@ -50,6 +50,12 @@
 		height: @image-browser-footer-height;
 		line-height: @image-browser-footer-height;
 		text-align: center;
+
+		& > ui-combo-box {
+			position: absolute;
+			right: (@image-browser-footer-height - @combo-box-height) / 2;
+			bottom: (@image-browser-footer-height - @combo-box-height) / 2;
+		}
 	}
 }
 
