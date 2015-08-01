@@ -25,6 +25,41 @@
 	}
 }
 
+.combo-box {
+	& > .combo-box-content {
+		& > .combo-box-selected-item {
+			background-color: @wet-asphalt;
+		}
+
+		& > .combo-box-item-container {
+			.box-shadow(@std-box-shadow);
+
+			background-color: @wet-asphalt;
+
+			&.shown {
+				transition: @std-transition;
+				opacity: 1;
+			}
+
+			&.hidden {
+				transition: @std-transition;
+				opacity: 0;
+				pointer-events: none;
+			}
+
+			& > .combo-box-item {
+				&:hover {
+					background-color: @green-sea;
+				}
+			}
+		}
+	}
+
+	& > .combo-box-switch {
+		background-color: @green-sea;
+	}
+}
+
 .modal-dialog {
 	& > .modal-dialog-msg {
 		& > .modal-dialog-msg-header {

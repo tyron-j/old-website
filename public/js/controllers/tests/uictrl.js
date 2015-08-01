@@ -5,9 +5,11 @@ define(function () {
 
 	return [
 		'$scope',
+
+		'comboBoxSvc',
 		
-		function ($scope) {
-			//
+		function ($scope, comboBoxSvc) {
+			$scope.comboBox = comboBoxSvc.imageBrowserSelector;
 		}
 	];
 });

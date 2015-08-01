@@ -39,6 +39,55 @@
 	}
 }
 
+.combo-box {
+	.widget;
+
+	.set-dimensions(@combo-box-width, @combo-box-height);
+
+	line-height: @combo-box-height;
+
+	&.upward > .combo-box-content > .combo-box-item-container {
+		bottom: @combo-box-height;
+	}
+
+	&.downward > .combo-box-content > .combo-box-item-container {
+		top: @combo-box-height;
+	}
+
+	& > .combo-box-content {
+		.set-dimensions(@combo-box-width - @combo-box-switch-width, 100%);
+
+		display: inline-block;
+		position: relative;
+
+		& > .combo-box-selected-item {
+			.fill-up-parent();
+
+			padding-left: @combo-box-text-padding;
+			position: absolute;
+		}
+
+		& > .combo-box-item-container {
+			position: absolute;
+
+			& > .combo-box-item {
+				.set-dimensions(@combo-box-width, @combo-box-height);
+
+				cursor: pointer;
+				padding-left: @combo-box-text-padding;
+			}
+		}
+	}
+
+	& > .combo-box-switch {
+		.set-dimensions(@combo-box-switch-width);
+
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+	}
+}
+
 .modal {
 	position: fixed;
 	z-index: 5; // to-do: too high?

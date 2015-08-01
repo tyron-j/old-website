@@ -1,1 +1,15 @@
 //- combo box
+
+div(class='combo-box',
+	ng-class='{ upward: model.upward, downward: !model.upward }')
+	div(class='combo-box-content')
+		div(class='combo-box-item-container',
+			ng-class='{ shown: model.inUse, hidden: !model.inUse }')
+			div(class='combo-box-item',
+				ng-repeat='item in model.items'
+				ng-click='model.selectItem(item)')
+				| {{ item }}
+		div(class='combo-box-selected-item')
+			| {{ model.selectedItem }}
+	div(class='combo-box-switch',
+		ng-click='model.toggleState()')
