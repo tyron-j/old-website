@@ -11,12 +11,12 @@ define(function () {
 					imageTitle: '',
 
 					open: function (imageTitle) {
-						this.inUse        = true;
+						this.inUse      = true;
 						this.imageTitle = imageTitle;
 					},
 
 					close: function () {
-						this.inUse        = false;
+						this.inUse      = false;
 						this.imageTitle = '';
 					}
 				}

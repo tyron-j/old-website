@@ -17,7 +17,7 @@ define(function () {
 
 			$scope.imageThumbnailEditor = buttonBarSvc.getImageThumbnailEditor($scope);
 			$scope.imageBrowserEditor   = buttonBarSvc.getImageBrowserEditor($scope);
-			$scope.modalImage             = modalImageSvc.model;
+			$scope.modalImage           = modalImageSvc.model;
 
 			// to-do: consider making image browser a widget and moving these methods to a service
 			$scope.inspectImage = function (image) {
