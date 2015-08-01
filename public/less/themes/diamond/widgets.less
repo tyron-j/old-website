@@ -35,10 +35,13 @@
 			.box-shadow(@std-box-shadow);
 
 			background-color: @wet-asphalt;
+			opacity: 0; // initial value
+			pointer-events: none; // initial value
 
 			&.shown {
 				transition: @std-transition;
 				opacity: 1;
+				pointer-events: auto;
 			}
 
 			&.hidden {
@@ -50,6 +53,14 @@
 			& > .combo-box-item {
 				&:hover {
 					background-color: @green-sea;
+
+					&.selected {
+						color: white;
+					}
+				}
+
+				&.selected {
+					color: @green-sea
 				}
 			}
 		}
