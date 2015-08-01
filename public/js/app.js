@@ -59,7 +59,7 @@ define([
 			// master routes
 			$routeProvider.when('/master/upload', { // to-do: remove this
 				templateUrl: '/partials/master/upload'
-			}).when('/master/gallery', {
+			}).when('/master/gallery/:category?', {
 				templateUrl: '/partials/master/gallery',
 				controller: 'MasterGalleryCtrl'
 			}).when('/master/blog', {

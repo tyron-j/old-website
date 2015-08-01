@@ -5,13 +5,23 @@ define(function () {
 
 	return [
 		'$http',
+		'$location',
+		'$routeParams',
 		'$scope',
 
 		'buttonBarSvc',
 		'comboBoxSvc',
 		'modalImageSvc',
 		
-		function ($http, $scope, buttonBarSvc, comboBoxSvc, modalImageSvc) {
+		function ($http, $location, $routeParams, $scope, buttonBarSvc, comboBoxSvc, modalImageSvc) {
+			var category = $routeParams.category && $routeParams.category.charAt(0).toUpperCase() + $routeParams.category.slice(1);
+
+			if (category && !!~comboBoxSvc.imageBrowserSelector.items.indexOf(category)) {
+				comboBoxSvc.imageBrowserSelector.selectedItem = category;
+			} else {
+				$location.path('master/gallery/' + comboBoxSvc.imageBrowserSelector.selectedItem.toLowerCase());
+			}
+
 			$scope.imageThumbnailEditor = buttonBarSvc.getImageThumbnailEditor($scope);
 			$scope.imageBrowserEditor   = buttonBarSvc.getImageBrowserEditor($scope);
 			$scope.imageBrowserSelector = comboBoxSvc.imageBrowserSelector;
@@ -55,6 +65,8 @@ define(function () {
 					$http.get('/api/image/' + $scope.targetCategory).success(function (res) {
 						$scope.images     = res;
 					});
+
+					$location.path('master/gallery/' + $scope.targetCategory);
 				}
 			});
 		}

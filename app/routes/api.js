@@ -150,7 +150,7 @@ module.exports = {
 
 							if (count === files.images.length) {
 								// to-do: update front end without refreshing page
-								res.redirect('/master/gallery'); // refresh page
+								res.redirect('/master/gallery/' + req.params.category); // refresh page
 							}
 						});
 
