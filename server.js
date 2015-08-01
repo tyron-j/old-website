@@ -46,8 +46,8 @@ app.use('/api/*', api.authenticate(isLocalHost));
 app.use('*/master/*', api.authenticate(isLocalHost)); // also protects partials
 
 // protected api
-app.get('/api/image', api.getImage); // fetch titles
-app.get('/api/image/:title', api.getImage); // fetch actual image
+app.get('/api/image/:category', api.getImage); // fetch titles
+app.get('/api/image/:category/:title', api.getImage); // fetch actual image
 app.get('/api/blog', api.getBlog); // fetch titles
 app.get('/api/blog/:title', api.getBlog); // fetch actual blog
 
@@ -58,7 +58,7 @@ app.post('/api/user', api.postUser);
 app.put('/api/image', api.putImage);
 app.put('/api/blog', api.putBlog);
 
-app.delete('/api/image/:title', api.deleteImage);
+app.delete('/api/image/:category/:title', api.deleteImage);
 app.delete('/api/blog/:title', api.deleteBlog);
 
 // routes =================================================================== //

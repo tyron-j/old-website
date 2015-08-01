@@ -12,7 +12,7 @@ define(function () {
 		'modalImageSvc',
 		
 		function ($http, $scope, buttonBarSvc, comboBoxSvc, modalImageSvc) {
-			$http.get('/api/image').success(function (res) {
+			$http.get('/api/image/gallery').success(function (res) {
 				$scope.images = res;
 			});
 

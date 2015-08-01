@@ -62,25 +62,30 @@ module.exports = {
 	},
 
 	getImage: function (req, res, next) { // to-do: update this function
-		if (req.params.title) { // fetch by unique title
-			models.Image.findOne({
-				title: req.params.title
-			}, function (err, image) { // to-do: handle no matches
-				res.contentType(image.contentType);
-				res.send(image.data);
-			});
-		} else { // fetch all titles
-			models.Image
-				.find({})
-				.sort('-creationDate')
-				.select('title') // to-do: send back creationDate as well for updating title
-				.exec(function (err, images) {
-					if (images.length) {
-						res.send(images);
-					} else {
-						res.send([]);
-					}
+		if (req.params.category) { // fetch by unique title
+			if (req.params.title) {
+				models.Image.findOne({
+					category: req.params.category,
+					title: req.params.title
+				}, function (err, image) { // to-do: handle no matches
+					res.contentType(image.contentType);
+					res.send(image.data);
 				});
+			} else { // fetch images by category
+				models.Image
+					.find({
+						category: req.params.category
+					})
+					.sort('-creationDate')
+					.select('title category') // to-do: send back creationDate as well for updating title
+					.exec(function (err, images) {
+						if (images.length) {
+							res.send(images);
+						} else {
+							res.send([]);
+						}
+					});
+			}
 		}
 	},
 
@@ -162,6 +167,7 @@ module.exports = {
 
 	deleteImage: function (req, res, next) {
 		models.Image.findOneAndRemove({
+			category: req.params.category,
 			title: req.params.title
 		}, function (err, a) {
 			if (err) {

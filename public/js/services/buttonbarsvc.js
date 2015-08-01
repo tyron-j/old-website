@@ -30,7 +30,7 @@ define(function () {
 							icon: 'expand',
 
 							onClick: function () {
-								modalImage.open($scope.inspectedImage.title);
+								modalImage.open($scope.inspectedImage.title, $scope.inspectedImage.category);
 								$scope.inspectedImage = null; // close thumbnail editor
 							}
 						}, {
@@ -54,7 +54,7 @@ define(function () {
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
-											$http.delete('/api/image/' + imageBeingDeleted.title).success(function (res) {
+											$http.delete('/api/image/' + imageBeingDeleted.category + '/' + imageBeingDeleted.title).success(function (res) {
 												console.log(res.msg);
 												images.splice(images.indexOf(imageBeingDeleted), 1);
 												modalDialog.close();
@@ -154,7 +154,7 @@ define(function () {
 												var count = 0;
 
 												selectedImages.forEach(function (image) {
-													$http.delete('/api/image/' + image.title).success(function (res) {
+													$http.delete('/api/image/' + image.category + '/' + image.title).success(function (res) {
 														console.log(res.msg);
 														images.splice(images.indexOf(image), 1);
 														count++;

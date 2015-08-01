@@ -10,14 +10,16 @@ define(function () {
 					inUse: false,
 					imageTitle: '',
 
-					open: function (imageTitle) {
-						this.inUse      = true;
-						this.imageTitle = imageTitle;
+					open: function (imageTitle, imageCategory) {
+						this.inUse         = true;
+						this.imageTitle    = imageTitle;
+						this.imageCategory = imageCategory;
 					},
 
 					close: function () {
-						this.inUse      = false;
-						this.imageTitle = '';
+						this.inUse         = false;
+						this.imageTitle    = '';
+						this.imageCategory = '';
 					}
 				}
 			};

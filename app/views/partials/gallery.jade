@@ -4,7 +4,7 @@
 ui-modal-image(ui-model='modalImage')
 div(class='gallery')
 	div(class='image', ng-repeat='image in images')
-		//- to-do: change url to http://tyronjung.com/api/image/{{ image.title }}
+		//- to-do: change url to http://tyronjung.com/api/image/gallery/{{ image.title }}
 		//- after moving image fetching api to unprotected api
-		img(ng-src='http://localhost:9000/api/image/{{ image.title }}',
-			ng-click='modalImage.open(image.title)')
+		img(ng-src='http://localhost:9000/api/image/gallery/{{ image.title }}',
+			ng-click='modalImage.open(image.title, image.category)')
