@@ -10,7 +10,7 @@ define([
 	'./widgets/modalimage',
 	'./widgets/navbar',
 	'./widgets/sidebar'
-], function (ng, bgImage, comboBox, buttonBar, modalDialog, modalImage, navBar, sideBar) {
+], function (ng, bgImage, buttonBar, comboBox, modalDialog, modalImage, navBar, sideBar) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
