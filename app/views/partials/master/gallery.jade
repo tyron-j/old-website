@@ -17,6 +17,7 @@ div(class='image-browser')
 				img(ng-src='http://localhost:9000/api/image/{{ image.category }}/{{ image.title }}',
 					ng-mouseover='inspectImage(image)',
 					ng-click='toggleImageSelection(image)',
+					ng-class='{ horizontal: image.horizontal, vertical: !image.horizontal }'
 					ui-on-load='handleImageLoad(evt, image)')
 				div(class='image-browser-thumbnail-editor',
 					ng-class='{ shown: image === inspectedImage, hidden: image !== inspectedImage }')

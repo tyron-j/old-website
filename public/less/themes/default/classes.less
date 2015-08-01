@@ -32,10 +32,17 @@
 				}
 
 				& > img {
-					width: 100%; // to-do: deal with horizontally wider images
 					cursor: pointer;
 
 					.center();
+
+					&.horizontal {
+						height: 100%;
+					}
+
+					&.vertical {
+						width: 100%;
+					}
 				}
 
 				& > .image-browser-thumbnail-editor {

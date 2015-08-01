@@ -40,7 +40,11 @@ define(function () {
 			};
 
 			$scope.handleImageLoad = function (evt, image) {
-				image.loaded = true; // client-exclusive property
+				var elem = evt.target;
+
+				// client-exclusive properties
+				image.loaded     = true;
+				image.horizontal = elem.naturalWidth >= elem.naturalHeight;
 			};
 
 			$scope.$watch('imageBrowserSelector.selectedItem', function (newVal, oldVal) {

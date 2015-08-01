@@ -4,15 +4,24 @@ define(function () {
 	'use strict';
 
 	return [
+		'$http',
 		'$scope',
 		
-		function ($scope) {
-			$scope.aboutPicture = {
-				src: 'https://38.media.tumblr.com/11120cce3ebd398acc5919b766b88340/tumblr_nkf2g1NHzx1timq39o1_500.gif'
+		function ($http, $scope) {
+			$scope.imageLoaded = false;
+
+			$scope.handleImageLoad = function (evt) {
+				$scope.imageLoaded = true;
 			};
 
-			$scope.aboutText = 'Ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka ka.';
+			$http.get('/api/image/about').success(function (res) {
+				$scope.aboutPicture = {
+					src: '/api/image/about/' + res[0].title
+				};
+			});
 
+			$scope.aboutText = '';
+			
 			$scope.aboutExternalLinks = [{
 				src: 'https://github.com/tyron-j',
 				icon: 'github',
