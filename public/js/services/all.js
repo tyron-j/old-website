@@ -8,9 +8,10 @@ define([
 	'./comboboxsvc',
 	'./modaldialogsvc',
 	'./modalimagesvc',
+	'./modalselectorsvc',
 	'./navbarsvc',
 	'./sidebarsvc'
-], function (ng, bgImageSvc, buttonBarSvc, comboBoxSvc, modalDialogSvc, modalImageSvc, navBarSvc, sideBarSvc) {
+], function (ng, bgImageSvc, buttonBarSvc, comboBoxSvc, modalDialogSvc, modalImageSvc, modalSelectorSvc, navBarSvc, sideBarSvc) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
@@ -20,6 +21,7 @@ define([
 		.factory('comboBoxSvc', comboBoxSvc)
 		.factory('modalDialogSvc', modalDialogSvc)
 		.factory('modalImageSvc', modalImageSvc)
+		.factory('modalSelectorSvc', modalSelectorSvc)
 		.factory('navBarSvc', navBarSvc)
 		.factory('sideBarSvc', sideBarSvc);
 });

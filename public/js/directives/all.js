@@ -10,9 +10,10 @@ define([
 	'./widgets/combobox',
 	'./widgets/modaldialog',
 	'./widgets/modalimage',
+	'./widgets/modalselector',
 	'./widgets/navbar',
 	'./widgets/sidebar'
-], function (ng, onLoad, bgImage, buttonBar, comboBox, modalDialog, modalImage, navBar, sideBar) {
+], function (ng, onLoad, bgImage, buttonBar, comboBox, modalDialog, modalImage, modalSelector, navBar, sideBar) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
@@ -24,6 +25,7 @@ define([
 		.directive('uiComboBox', comboBox)
 		.directive('uiModalDialog', modalDialog)
 		.directive('uiModalImage', modalImage)
+		.directive('uiModalSelector', modalSelector)
 		.directive('uiNavBar', navBar)
 		.directive('uiSideBar', sideBar);
 });

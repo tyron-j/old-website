@@ -197,8 +197,15 @@ module.exports = {
 				title: req.params.title
 			},
 			'content creationDate',
-			function (err, blog) { // to-do: handle no matches
-				res.send(blog);
+			function (err, blog) {
+				if (blog) {
+					res.send(blog);
+				} else {
+					var failMsg = "Could not find " + req.params.title;
+
+					signal.error(failMsg);
+					res.send(failMsg);
+				}
 			});
 		} else {
 			models.Blog
