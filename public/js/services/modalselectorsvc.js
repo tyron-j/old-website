@@ -7,16 +7,24 @@ define(function () {
 		function () { // use as factory
 			var model = {
 				inUse: false,
-				items: [ 1, 2, 3, 4, 5, 6, 7 ], // to-do: temporary
+				images: [],
 				buttons: [],
 
-				open: function (buttons) {
+				open: function (images, buttons) {
+					this.images  = images;
 					this.buttons = buttons;
 					this.inUse   = true;
 				},
 
 				close: function () {
 					this.inUse = false;
+				},
+
+				handleImageLoad: function (evt, image) {
+					var elem = evt.target;
+
+					image.loaded     = true;
+					image.horizontal = elem.naturalWidth >= elem.naturalHeight;
 				}
 			};
 

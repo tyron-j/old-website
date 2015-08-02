@@ -197,11 +197,25 @@
 			.modal-selector-scroll-content {
 				width: 100%;
 
-				& > .modal-selector-item {
-					width: @modal-selector-item-width;
+				& > .modal-selector-image {
+					width: @modal-selector-image-width;
+					cursor: pointer;
 					display: inline-block;
+					overflow: hidden;
 					position: relative;
-					padding-bottom: @modal-selector-item-width; // hack for making the height same as width
+					padding-bottom: @modal-selector-image-width; // hack for making the height same as width
+
+					& > img {
+						.overflow-center();
+
+						&.horizontal {
+							height: 100%;
+						}
+
+						&.vertical {
+							width: 100%;
+						}
+					}
 				}
 			}
 		}

@@ -4,26 +4,33 @@ define(function () {
 	'use strict';
 
 	return [
+		'$http',
 		'$scope',
 
 		'modalSelectorSvc',
 		
-		function ($scope, modalSelectorSvc) {
+		function ($http, $scope, modalSelectorSvc) {
 			var modalSelector = $scope.modalSelector = modalSelectorSvc.model;
 
 			$scope.openModalSelector = function () {
-				modalSelector.open([{
-					title: 'OK',
-					onClick: function () {
-						console.log("OK pressed!");
-					}
-				}, {
-					title: 'Cancel',
-					onClick: function () {
-						modalSelector.close();
-					}
-				}]);
-			}
+				console.log("Images not ready yet!");
+			};
+
+			$http.get('/api/image/blog').success(function (res) {
+				$scope.openModalSelector = function () {
+					modalSelector.open(res, [{
+						title: 'OK',
+						onClick: function () {
+							console.log("OK pressed!");
+						}
+					}, {
+						title: 'Cancel',
+						onClick: function () {
+							modalSelector.close();
+						}
+					}]);
+				}
+			});
 		}
 	];
 });

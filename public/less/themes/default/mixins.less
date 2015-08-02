@@ -65,20 +65,20 @@
 	line-height: @line-height;
 }
 
-.center-vertically() {
+.center-vertically () {
 	top: 0;
 	bottom: 0;
 	margin: auto;
 	position: absolute;
 }
 
-.contain-text() {
+.contain-text () {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-.faint(@color: black, @opacity: 25%) {
+.faint (@color: black, @opacity: 25%) {
 	background-color: @color; // fallback
 	background-color: fade(@color, @opacity);
 }
@@ -106,7 +106,16 @@
 	background: linear-gradient(to right, @first-color, @second-color);
 }
 
-.reflect(@height, @length: 50%, @opacity: 0.25){ // not standardized across browsers yet
+.overflow-center () {
+	left: -9000px;
+	right: -9000px;
+	top: -9000px;
+	bottom: -9000px;
+	margin: auto;
+	position: absolute;
+}
+
+.reflect (@height, @length: 50%, @opacity: 0.25){ // not standardized across browsers yet
 	-webkit-box-reflect: below @height -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255, 255, 255, @opacity)));
 }
 
