@@ -95,6 +95,31 @@
 	//
 }
 
+.modal-selector {
+	& > .modal-selector-content {
+		& > .modal-selector-scroll-window {
+			& > .modal-selector-scroll-content {
+				& > .modal-selector-item {
+					background-color: @green-sea;
+					border: 1px solid @wet-asphalt;
+				}
+			}
+		}
+
+		& > .modal-selector-footer {
+			background-color: @green-sea;
+
+			& > .modal-selector-button {
+				background-color: @wet-asphalt;
+
+				&:hover {
+					color: @green-sea;
+				}
+			}
+		}
+	}
+}
+
 .nav-bar {
 	& > .nav-bar-content { // animated nav bar
 		&.shown {

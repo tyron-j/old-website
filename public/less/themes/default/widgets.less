@@ -183,6 +183,47 @@
 
 .modal-selector {
 	.modal;
+
+	& > .modal-selector-content {
+		.widget;
+
+		.set-in-center(@modal-selector-width, @modal-selector-height);
+
+		& > .modal-selector-scroll-window {
+			.set-dimensions(100%, @modal-selector-height - @modal-selector-footer-height);
+
+			overflow: auto;
+
+			.modal-selector-scroll-content {
+				width: 100%;
+
+				& > .modal-selector-item {
+					width: @modal-selector-item-width;
+					display: inline-block;
+					position: relative;
+					padding-bottom: @modal-selector-item-width; // hack for making the height same as width
+				}
+			}
+		}
+
+		& > .modal-selector-footer {
+			.set-dimensions(100%, @modal-selector-footer-height);
+
+			& > .modal-selector-button {
+				.set-dimensions(@modal-selector-button-width, @modal-selector-button-height);
+
+				cursor: pointer;
+				display: inline-block;
+				float: right;
+				font-size: @modal-selector-font-size;
+				line-height: @modal-selector-button-height;
+				margin-right: @modal-selector-button-margin;
+				margin-top: (@modal-selector-footer-height - @modal-selector-button-height) / 2;
+				position: relative;
+				text-align: center;
+			}
+		}
+	}
 }
 
 .nav-bar {

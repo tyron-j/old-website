@@ -6,10 +6,24 @@ define(function () {
 	return [
 		'$scope',
 
-		'comboBoxSvc',
+		'modalSelectorSvc',
 		
-		function ($scope, comboBoxSvc) {
-			$scope.comboBox = comboBoxSvc.imageBrowserSelector;
+		function ($scope, modalSelectorSvc) {
+			var modalSelector = $scope.modalSelector = modalSelectorSvc.model;
+
+			$scope.openModalSelector = function () {
+				modalSelector.open([{
+					title: 'OK',
+					onClick: function () {
+						console.log("OK pressed!");
+					}
+				}, {
+					title: 'Cancel',
+					onClick: function () {
+						modalSelector.close();
+					}
+				}]);
+			}
 		}
 	];
 });

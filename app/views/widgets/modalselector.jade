@@ -1,3 +1,14 @@
 //- modal selector
 
-div(class='modal-selector')
+div(class='modal-selector',
+	ng-class='{ shown: model.inUse, hidden: !model.inUse }')
+	div(class='modal-selector-content')
+		div(class='modal-selector-scroll-window')
+			div(class='modal-selector-scroll-content')
+				div(class='modal-selector-item',
+					ng-repeat='item in model.items')
+		div(class='modal-selector-footer')
+			div(class='modal-selector-button',
+				ng-repeat='button in model.buttons',
+				ng-click='button.onClick()')
+				| {{ button.title }}
