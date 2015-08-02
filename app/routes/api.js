@@ -67,9 +67,16 @@ module.exports = {
 				models.Image.findOne({
 					category: req.params.category,
 					title: req.params.title
-				}, function (err, image) { // to-do: handle no matches
-					res.contentType(image.contentType);
-					res.send(image.data);
+				}, function (err, image) {
+					if (image) {
+						res.contentType(image.contentType);
+						res.send(image.data);
+					} else {
+						var failMsg = "Could not find " + req.params.category + "/" + req.params.title;
+
+						signal.error(failMsg);
+						res.send(failMsg);
+					}
 				});
 			} else { // fetch images by category
 				models.Image
