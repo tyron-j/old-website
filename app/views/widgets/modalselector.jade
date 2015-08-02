@@ -7,11 +7,12 @@ div(class='modal-selector',
 			div(class='modal-selector-scroll-content')
 				div(class='modal-selector-image',
 					ng-repeat='image in model.images',
-					ng-class='{ "preloader preloader-intersection": !image.loaded }')
+					ng-class='{ selected: model.selectedImage === image, "preloader preloader-intersection": !image.loaded }')
 					//- to-do: change url to http://tyronjung.com/api/image/{{ image.category }}/{{ image.title }}
 					//- after moving image fetching api to unprotected api
 					img(ng-src='http://localhost:9000/api/image/{{ image.category }}/{{ image.title }}',
 						ng-class='{ horizontal: image.horizontal, vertical: !image.horizontal }',
+						ng-click='model.selectImage(image)',
 						ui-on-load='model.handleImageLoad(evt, image)')
 		div(class='modal-selector-footer')
 			div(class='modal-selector-button',

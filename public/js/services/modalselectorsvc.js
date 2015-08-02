@@ -9,6 +9,7 @@ define(function () {
 				inUse: false,
 				images: [],
 				buttons: [],
+				selectedImage: null,
 
 				open: function (images, buttons) {
 					this.images  = images;
@@ -17,7 +18,10 @@ define(function () {
 				},
 
 				close: function () {
-					this.inUse = false;
+					this.inUse         = false;
+					this.images        = [];
+					this.buttons       = [];
+					this.selectedImage = null;
 				},
 
 				handleImageLoad: function (evt, image) {
@@ -25,6 +29,10 @@ define(function () {
 
 					image.loaded     = true;
 					image.horizontal = elem.naturalWidth >= elem.naturalHeight;
+				},
+
+				selectImage: function (image) {
+					model.selectedImage = image;
 				}
 			};
 
