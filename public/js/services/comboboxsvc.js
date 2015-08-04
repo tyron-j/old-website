@@ -13,7 +13,7 @@ define(function () {
 				this.inUse        = false;
 				this.items        = items;
 				this.selectedItem = items[idx || 0];
-				this.upward       = upward;
+				this.upward       = upward || false;
 
 				this.toggleState = function() {
 					this.inUse = !this.inUse;
@@ -32,7 +32,14 @@ define(function () {
 					'Gallery',
 					'Home',
 					'Novel'
-				], true, 2)
+				], true, 2),
+
+				blogCategorySelector: new ComboBox([
+					'Around the World',
+					'Off on a Tangent',
+					'Update',
+					'Wizard of JS'
+				])
 			};
 		}
 	];

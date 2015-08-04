@@ -229,6 +229,16 @@
 		& > ui-button-bar {
 			float: right;
 		}
+
+		& > ui-combo-box {
+			position: absolute;
+			right: -@combo-box-width - @combo-box-text-padding;
+			top: (@blog-header-height - @combo-box-height) / 2;
+
+			&.hidden {
+				display: none;
+			}
+		}
 	}
 
 	& > .blog-content > .blog-scroll-content {
