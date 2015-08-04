@@ -84,7 +84,7 @@ module.exports = {
 						category: req.params.category
 					})
 					.sort('-creationDate')
-					.select('title category') // to-do: send back creationDate as well for updating title
+					.select('category title') // to-do: send back creationDate as well for updating title
 					.exec(function (err, images) {
 						if (images.length) {
 							res.send(images);
@@ -137,13 +137,13 @@ module.exports = {
 						}
 
 						image = new models.Image({
+							category: req.params.category,
 							title: file.name,
-							data: data,
 							contentType: 'image/' + fileExtension,
+							data: data,
 							// creationDate will depend on the heroku server location timezone
 							// but this is purely for sorting purposes so it doesn't matter
-							creationDate: new Date(),
-							category: req.params.category
+							creationDate: new Date()
 						});
 
 						image.save(function (err, a) {
