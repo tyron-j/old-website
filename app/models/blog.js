@@ -5,7 +5,7 @@ var db = require('../utils/db');
 module.exports = db.model('Blog', new db.Schema({
 	category: {
 		type: String,
-		required: false // to-do: set to true
+		required: true
 	},
 
 	title: {
@@ -20,7 +20,7 @@ module.exports = db.model('Blog', new db.Schema({
 
 	bgImageTitle: {
 		type: String,
-		required: false // to-do: set to true
+		required: false // to-do: set to true?
 	},
 
 	creationDate: {

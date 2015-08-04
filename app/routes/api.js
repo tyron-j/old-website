@@ -196,7 +196,7 @@ module.exports = {
 			models.Blog.findOne({
 				title: req.params.title
 			},
-			'content creationDate',
+			'category content creationDate',
 			function (err, blog) {
 				if (blog) {
 					res.send(blog);
@@ -224,6 +224,7 @@ module.exports = {
 
 	postBlog: function (req, res, next) {
 		var blog = new models.Blog({
+			category: req.body.category,
 			title: req.body.title,
 			content: req.body.content,
 			creationDate: req.body.creationDate
@@ -248,6 +249,7 @@ module.exports = {
 		models.Blog.findOneAndUpdate({
 			creationDate: req.body.creationDate // creationDate works as a unique identifier
 		}, {
+			category: req.body.category,
 			title: req.body.title,
 			content: req.body.content
 		}, function (err, b) { // to-do: handle no matches

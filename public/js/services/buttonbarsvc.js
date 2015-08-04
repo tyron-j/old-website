@@ -186,8 +186,9 @@ define(function () {
 						inEditMode: false,
 
 						enterEditMode: function () {
-							var blog = sideBar.selectedItem;
-							var that = this;
+							var blog     = sideBar.selectedItem;
+							var comboBox = $scope.comboBox;
+							var that     = this;
 
 							blog.originalTitle   = blog.title;
 							blog.originalContent = blog.content;
@@ -197,6 +198,10 @@ define(function () {
 							this.items[1].hidden = false;
 							this.items[2].hidden = true;
 							this.items[4].hidden = false;
+
+							if (blog.category) {
+								comboBox.selectedItem = blog.category;
+							}
 
 							ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
 								that.exitEditMode(true); // to-do: change this in accordance with changes made to side bar deconstruction
@@ -244,11 +249,15 @@ define(function () {
 									return b.title;
 								});
 
+								var comboBox = $scope.comboBox;
+								var category = comboBox.selectedItem;
+
 								if (blogTitles.indexOf(blog.title) === blogTitles.lastIndexOf(blog.title)) { // unique title
 									blogEditor.exitEditMode();
 
 									if (blog.isNew) {
 										$http.post('/api/blog', {
+											category: category,
 											title: blog.title,
 											content: blog.content,
 											creationDate: blog.creationDate
@@ -259,6 +268,7 @@ define(function () {
 										});
 									} else {
 										$http.put('/api/blog', {
+											category: category,
 											title: blog.title,
 											content: blog.content,
 											creationDate: blog.creationDate
