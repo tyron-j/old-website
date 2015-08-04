@@ -194,7 +194,9 @@ define(function () {
 
 							this.inEditMode      = true;
 							this.items[0].hidden = false;
-							this.items[3].hidden = false;
+							this.items[1].hidden = false;
+							this.items[2].hidden = true;
+							this.items[4].hidden = false;
 
 							ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
 								that.exitEditMode(true); // to-do: change this in accordance with changes made to side bar deconstruction
@@ -221,7 +223,9 @@ define(function () {
 
 							this.inEditMode      = false;
 							this.items[0].hidden = true;
-							this.items[3].hidden = true;
+							this.items[1].hidden = true;
+							this.items[2].hidden = false;
+							this.items[4].hidden = true;
 
 							// these have to be called every time the user exits edit mode
 							ignoreLocationChangeStart();
@@ -274,6 +278,28 @@ define(function () {
 										}]
 									});
 								}
+							}
+						}, {
+							title: 'Background',
+							icon: 'picture-o',
+							hidden: true,
+
+							onClick: function () {
+								var modalSelector = $scope.modalSelector;
+
+								$http.get('/api/image/blog').success(function (res) {
+									modalSelector.open(res, [{
+										title: 'OK',
+										onClick: function () {
+											console.log("OK pressed!");
+										}
+									}, {
+										title: 'Cancel',
+										onClick: function () {
+											modalSelector.close();
+										}
+									}]);
+								});
 							}
 						}, {
 							title: 'Edit',
