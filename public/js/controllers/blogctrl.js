@@ -6,11 +6,9 @@ define(function () {
 	return [
 		'$scope',
 
-		'bgImageSvc',
 		'sideBarSvc',
 		
-		function ($scope, bgImageSvc, sideBarSvc) {
-			bgImageSvc.blogMode($scope);
+		function ($scope, sideBarSvc) {
 			sideBarSvc.blogMode($scope);
 		}
 	];

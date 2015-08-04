@@ -7,12 +7,14 @@ define(function () {
 		'$http',
 		'$timeout',
 
+		'bgImageSvc',
 		'modalDialogSvc',
 		'modalImageSvc',
 		'modalSelectorSvc',
 		'sideBarSvc',
 
-		function ($http, $timeout, modalDialogSvc, modalImageSvc, modalSelectorSvc, sideBarSvc) { // use as factory... or service?
+		function ($http, $timeout, bgImageSvc, modalDialogSvc, modalImageSvc, modalSelectorSvc, sideBarSvc) { // use as factory... or service?
+			var bgImage       = bgImageSvc.model;
 			var modalDialog   = modalDialogSvc.model;
 			var modalImage    = modalImageSvc.model;
 			var modalSelector = modalSelectorSvc.model;
@@ -307,6 +309,10 @@ define(function () {
 										onClick: function () {
 											if (modalSelector.selectedImage) {
 												blog.bgImageTitle = modalSelector.selectedImage.title;
+
+												bgImage.close();
+												bgImage.open('blog', blog.bgImageTitle);
+												modalSelector.close();
 											}
 										}
 									}, {

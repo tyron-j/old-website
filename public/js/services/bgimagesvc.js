@@ -8,18 +8,21 @@ define(function () {
 			return {
 				model: {
 					inUse: false,
-					url: '',
+					imageCategory: '',
+					imageTitle: '',
 
-					open: function (url) {
-						this.inUse = true;
-						this.url   = url;
+					open: function (imageCategory, imageTitle) {
+						this.inUse         = true;
+						this.imageCategory = imageCategory;
+						this.imageTitle    = imageTitle;
 					},
 
 					close: function () {
-						this.inUse = false;
-						this.url   = '';
+						this.inUse         = false;
+						this.imageCategory = '';
+						this.imageTitle    = '';
 					}
-				},
+				}/*,
 
 				blogMode: function ($scope) {
 					var bgImage = this.model;
@@ -31,7 +34,7 @@ define(function () {
 						bgImage.close();
 						ignoreLocationChangeStart();
 					});
-				}
+				}*/
 			};
 		}
 	];

@@ -8,7 +8,11 @@ define(function () {
 		'$location',
 		'$routeParams',
 
-		function ($http, $location, $routeParams) { // use as factory
+		'bgImageSvc',
+
+		function ($http, $location, $routeParams, bgImageSvc) { // use as factory
+			var bgImage = bgImageSvc.model;
+
 			return {
 				model: { // using a singleton since there will only be one instance of a side bar
 					inUse: false,
@@ -80,11 +84,16 @@ define(function () {
 							} else {
 								sideBar.selectItem(blogs[0]);
 							}
+
+							if (sideBar.selectedItem.bgImage) {
+								bgImage.open('blog', blog.bgImage);
+							}
 						}
 					});
 
 					ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
 						sideBar.close();
+						bgImage.close();
 						ignoreLocationChangeStart();
 					});
 				},
@@ -102,25 +111,30 @@ define(function () {
 				},
 
 				selectBlog: function (blog) { // this function varies based on the side bar's content
-					var splitPath = $location.path().split('/');
-					var firstPath = splitPath[1];
+					/*var splitPath = $location.path().split('/');
+					var firstPath = splitPath[1];*/
 
 					if (!blog.content) { // if not already fetched
 						$http.get('/api/blog/' + blog.title).success(function (res) {
 							blog.category     = res.category;
 							blog.content      = res.content;
 							blog.creationDate = res.creationDate;
+
+							if (blog.bgImageTitle) {
+								bgImage.open('blog', blog.bgImageTitle);
+							}
 						});
 					}
 
 					this.selectedItem = blog;
 
-					if (firstPath === 'master' && splitPath.length > 3 || firstPath === 'blog' && splitPath.length > 2) {
+					/*if (firstPath === 'master' && splitPath.length > 3 || firstPath === 'blog' && splitPath.length > 2) {
 						splitPath.pop();
 					}
 
 					splitPath.push(blog.title);
-					$location.path(splitPath.join('/'));
+					$location.path(splitPath.join('/'));*/
+					bgImage.close();
 				}
 			};
 		}

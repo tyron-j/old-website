@@ -1,5 +1,7 @@
 //- background image
 
+//- to-do: change url to http://tyronjung.com/api/image/{{ model.imageCategory }}/{{ model.imageTitle }}
+//- after moving image fetching api to unprotected api
 div(class='bg-image',
 	ng-class='{ shown: model.inUse, hidden: !model.inUse }',
-	style='background-image: url("{{ model.url }}")')
+	style='background-image: url("http://localhost:9000/api/image/{{ model.imageCategory }}/{{ model.imageTitle }}")')
