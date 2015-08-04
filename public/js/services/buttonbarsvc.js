@@ -9,12 +9,14 @@ define(function () {
 
 		'modalDialogSvc',
 		'modalImageSvc',
+		'modalSelectorSvc',
 		'sideBarSvc',
 
-		function ($http, $timeout, modalDialogSvc, modalImageSvc, sideBarSvc) { // use as factory... or service?
-			var modalDialog = modalDialogSvc.model;
-			var modalImage  = modalImageSvc.model;
-			var sideBar     = sideBarSvc.model;
+		function ($http, $timeout, modalDialogSvc, modalImageSvc, modalSelectorSvc, sideBarSvc) { // use as factory... or service?
+			var modalDialog   = modalDialogSvc.model;
+			var modalImage    = modalImageSvc.model;
+			var modalSelector = modalSelectorSvc.model;
+			var sideBar       = sideBarSvc.model;
 
 			var triggerEvent = function (element, eventType) {
 				var evt = new Event(eventType);
@@ -295,8 +297,6 @@ define(function () {
 							hidden: true,
 
 							onClick: function () {
-								var modalSelector = $scope.modalSelector;
-
 								$http.get('/api/image/blog').success(function (res) {
 									modalSelector.open(res, [{
 										title: 'OK',

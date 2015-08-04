@@ -10,7 +10,7 @@ define(function () {
 		'modalSelectorSvc',
 		
 		function ($http, $scope, modalSelectorSvc) {
-			var modalSelector = $scope.modalSelector = modalSelectorSvc.model;
+			var modalSelector = modalSelectorSvc.model;
 
 			$scope.openModalSelector = function () {
 				console.log("Images not ready yet!");
