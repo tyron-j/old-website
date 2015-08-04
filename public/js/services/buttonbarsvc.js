@@ -194,8 +194,9 @@ define(function () {
 							var comboBox = $scope.comboBox;
 							var that     = this;
 
-							blog.originalTitle   = blog.title;
-							blog.originalContent = blog.content;
+							blog.originalTitle        = blog.title;
+							blog.originalContent      = blog.content;
+							blog.originalBgImageTitle = blog.bgImageTitle;
 
 							this.inEditMode      = true;
 							this.items[0].hidden = false;
@@ -223,12 +224,14 @@ define(function () {
 							var blog = currentBlog || sideBar.selectedItem;
 
 							if (resetBlog) {
-								blog.title   = blog.originalTitle;
-								blog.content = blog.originalContent;
+								blog.title        = blog.originalTitle;
+								blog.content      = blog.originalContent;
+								blog.bgImageTitle = blog.originalBgImageTitle;
 							}
 
-							blog.originalTitle   = null;
-							blog.originalContent = null;
+							blog.originalTitle        = null;
+							blog.originalContent      = null;
+							blog.originalBgImageTitle = null;
 
 							this.inEditMode      = false;
 							this.items[0].hidden = true;
@@ -310,8 +313,6 @@ define(function () {
 											if (modalSelector.selectedImage) {
 												blog.bgImageTitle = modalSelector.selectedImage.title;
 
-												bgImage.close();
-												bgImage.open('blog', blog.bgImageTitle);
 												modalSelector.close();
 											}
 										}

@@ -55,6 +55,7 @@ define(function () {
 					var that    = this;
 					var sideBar = this.model;
 
+					var ignoreBgImageTitleChange;
 					var ignoreLocationChangeStart;
 
 					$http.get('/api/blog').success(function (res) {
@@ -79,21 +80,24 @@ define(function () {
 								return b.title;
 							});
 
+							bgImage.open('blog');
+
 							if ($routeParams.title && !!~blogTitles.indexOf($routeParams.title)) {
 								sideBar.selectItem(blogs[blogTitles.indexOf($routeParams.title)]);
 							} else {
 								sideBar.selectItem(blogs[0]);
 							}
-
-							if (sideBar.selectedItem.bgImage) {
-								bgImage.open('blog', blog.bgImage);
-							}
 						}
+					});
+
+					ignoreBgImageTitleChange = $scope.$watch('sideBar.selectedItem.bgImageTitle', function (newValue, oldValue) {
+						bgImage.imageTitle = newValue;
 					});
 
 					ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
 						sideBar.close();
 						bgImage.close();
+						ignoreBgImageTitleChange();
 						ignoreLocationChangeStart();
 					});
 				},
@@ -118,11 +122,8 @@ define(function () {
 						$http.get('/api/blog/' + blog.title).success(function (res) {
 							blog.category     = res.category;
 							blog.content      = res.content;
+							blog.bgImageTitle = res.bgImageTitle;
 							blog.creationDate = res.creationDate;
-
-							if (blog.bgImageTitle) {
-								bgImage.open('blog', blog.bgImageTitle);
-							}
 						});
 					}
 
@@ -134,7 +135,6 @@ define(function () {
 
 					splitPath.push(blog.title);
 					$location.path(splitPath.join('/'));*/
-					bgImage.close();
 				}
 			};
 		}

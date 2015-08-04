@@ -57,6 +57,7 @@ define(function () {
 				image.horizontal = elem.naturalWidth >= elem.naturalHeight;
 			};
 
+			// to-do: unwatch upon location change or something
 			$scope.$watch('imageBrowserSelector.selectedItem', function (newVal, oldVal) {
 				if (newVal !== oldVal) {
 					$scope.targetCategory = newVal.toLowerCase();

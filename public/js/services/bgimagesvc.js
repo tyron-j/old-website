@@ -13,8 +13,8 @@ define(function () {
 
 					open: function (imageCategory, imageTitle) {
 						this.inUse         = true;
-						this.imageCategory = imageCategory;
-						this.imageTitle    = imageTitle;
+						this.imageCategory = imageCategory || '';
+						this.imageTitle    = imageTitle || '';
 					},
 
 					close: function () {
@@ -22,19 +22,7 @@ define(function () {
 						this.imageCategory = '';
 						this.imageTitle    = '';
 					}
-				}/*,
-
-				blogMode: function ($scope) {
-					var bgImage = this.model;
-					var ignoreLocationChangeStart;
-
-					bgImage.open('http://abload.de/img/000132ynkst.png');
-					
-					ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
-						bgImage.close();
-						ignoreLocationChangeStart();
-					});
-				}*/
+				}
 			};
 		}
 	];
