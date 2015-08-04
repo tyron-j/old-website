@@ -115,9 +115,6 @@ define(function () {
 				},
 
 				selectBlog: function (blog) { // this function varies based on the side bar's content
-					/*var splitPath = $location.path().split('/');
-					var firstPath = splitPath[1];*/
-
 					if (!blog.content) { // if not already fetched
 						$http.get('/api/blog/' + blog.title).success(function (res) {
 							blog.category     = res.category;
@@ -128,13 +125,6 @@ define(function () {
 					}
 
 					this.selectedItem = blog;
-
-					/*if (firstPath === 'master' && splitPath.length > 3 || firstPath === 'blog' && splitPath.length > 2) {
-						splitPath.pop();
-					}
-
-					splitPath.push(blog.title);
-					$location.path(splitPath.join('/'));*/
 				}
 			};
 		}
