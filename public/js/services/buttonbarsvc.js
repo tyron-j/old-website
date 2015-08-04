@@ -206,7 +206,7 @@ define(function () {
 							}
 
 							ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
-								that.exitEditMode(true); // to-do: change this in accordance with changes made to side bar deconstruction
+								that.exitEditMode(true, blog); // to-do: change this in accordance with changes made to side bar deconstruction
 							});
 
 							// watch creationDate since it uniquely identifies blog
