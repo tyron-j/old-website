@@ -62,7 +62,7 @@ define([
 			}).when('/master/gallery/:category?', {
 				templateUrl: '/partials/master/gallery',
 				controller: 'MasterGalleryCtrl'
-			}).when('/master/blog', {
+			}).when('/master/blog/:title?', {
 				templateUrl: '/partials/master/blog',
 				controller: 'MasterBlogCtrl'
 			});

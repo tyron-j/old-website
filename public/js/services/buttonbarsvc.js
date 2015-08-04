@@ -262,6 +262,7 @@ define(function () {
 											category: category,
 											title: blog.title,
 											content: blog.content,
+											bgImageTitle: blog.bgImageTitle,
 											creationDate: blog.creationDate
 										}).success(function (res) {
 											console.log(res.msg);
@@ -273,6 +274,7 @@ define(function () {
 											category: category,
 											title: blog.title,
 											content: blog.content,
+											bgImageTitle: blog.bgImageTitle,
 											creationDate: blog.creationDate
 										}).success(function (res) {
 											console.log(res.msg);
@@ -297,11 +299,15 @@ define(function () {
 							hidden: true,
 
 							onClick: function () {
+								var blog = sideBar.selectedItem;
+
 								$http.get('/api/image/blog').success(function (res) {
 									modalSelector.open(res, [{
 										title: 'OK',
 										onClick: function () {
-											console.log("OK pressed!");
+											if (modalSelector.selectedImage) {
+												blog.bgImageTitle = modalSelector.selectedImage.title;
+											}
 										}
 									}, {
 										title: 'Cancel',

@@ -196,7 +196,7 @@ module.exports = {
 			models.Blog.findOne({
 				title: req.params.title
 			},
-			'category content creationDate',
+			'category content bgImageTitle creationDate',
 			function (err, blog) {
 				if (blog) {
 					res.send(blog);
@@ -227,6 +227,7 @@ module.exports = {
 			category: req.body.category,
 			title: req.body.title,
 			content: req.body.content,
+			bgImageTitle: req.body.bgImageTitle,
 			creationDate: req.body.creationDate
 		});
 
@@ -251,7 +252,8 @@ module.exports = {
 		}, {
 			category: req.body.category,
 			title: req.body.title,
-			content: req.body.content
+			content: req.body.content,
+			bgImageTitle: req.body.bgImageTitle
 		}, function (err, b) { // to-do: handle no matches
 			if (err) {
 				signal.error("Failed to update " + req.body.title + " in database");
