@@ -390,13 +390,19 @@ define(function () {
 				},
 
 				getNewsListItemAdder: function ($scope) {
+					var ContentButtonBar = this.NewsListContentEditor;
+
 					return {
 						items: [{
 							title: 'Add',
 							icon: 'plus',
 
 							onClick: function () {
-								console.log("Adding item!");
+								var newItem = {};
+
+								newItem.buttonBar = new ContentButtonBar($scope, newItem);
+
+								$scope.newsListItems.push(newItem);
 							}
 						}]
 					};

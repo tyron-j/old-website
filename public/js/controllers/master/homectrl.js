@@ -14,22 +14,11 @@ define(function () {
 
 			$scope.newsListHeader  = 'News List';
 			$scope.headerButtonBar = buttonBarSvc.getNewsListItemAdder($scope);
+			$scope.newsListItems   = [];
 
-			$scope.newsListItems = [{
-				//
-			}, {
-				//
-			}, {
-				//
-			}, {
-				//
-			}, {
-				//
-			}]
-
-			$scope.newsListItems.forEach(function (item) {
+			/*$scope.newsListItems.forEach(function (item) {
 				item.buttonBar = new ContentButtonBar($scope, item);
-			});
+			});*/
 		}
 	];
 });
