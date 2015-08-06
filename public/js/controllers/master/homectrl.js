@@ -28,7 +28,7 @@ define(function () {
 			}]
 
 			$scope.newsListItems.forEach(function (item) {
-				item.buttonBar = new ContentButtonBar(item);
+				item.buttonBar = new ContentButtonBar($scope, item);
 			});
 		}
 	];

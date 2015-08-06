@@ -402,7 +402,7 @@ define(function () {
 					};
 				},
 
-				NewsListContentEditor: function (newsListItem) { // constructor
+				NewsListContentEditor: function ($scope, newsListItem) { // constructor
 					var that = this;
 
 					this.enterEditMode = function () {
@@ -410,6 +410,14 @@ define(function () {
 						this.items[1].hidden = false;
 						this.items[2].hidden = true;
 						this.items[4].hidden = false;
+
+						newsListItem.inEditMode = true;
+
+						if ($scope.itemBeingEdited && $scope.itemBeingEdited !== newsListItem) { // only allow one item to be edited at a time
+							$scope.itemBeingEdited.buttonBar.exitEditMode();
+						}
+
+						$scope.itemBeingEdited = newsListItem;
 					};
 
 					this.exitEditMode = function () {
@@ -417,6 +425,8 @@ define(function () {
 						this.items[1].hidden = true;
 						this.items[2].hidden = false;
 						this.items[4].hidden = true;
+
+						newsListItem.inEditMode = false;
 					};
 
 					this.items = [{
