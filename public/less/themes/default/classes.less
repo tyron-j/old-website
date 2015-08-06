@@ -111,6 +111,21 @@
 				.set-dimensions(100%, @home-news-list-item-height);
 
 				margin-top: @home-news-list-item-margin;
+
+				& > .home-news-list-item-image {
+					.set-dimensions(@home-news-list-item-image-width, 100%);
+
+					overflow: hidden;
+					display: inline-block;
+				}
+
+				& > .home-news-list-item-content {
+					.calc-width(~'100% - '@home-news-list-item-image-width);
+
+					height: 100%;
+					display: inline-block;
+					padding: @home-news-list-item-content-padding;
+				}
 			}
 		}
 	}

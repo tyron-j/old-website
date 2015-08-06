@@ -44,6 +44,12 @@
     box-sizing: @value;
 }
 
+.calc-width (@expression) {
+	width: -webkit-calc(@expression);
+	width: -moz-calc(@expression);
+	width: calc(@expression);
+}
+
 .calc-height (@expression) {
 	height: -webkit-calc(@expression);
 	height: -moz-calc(@expression);
