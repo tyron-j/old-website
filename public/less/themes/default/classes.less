@@ -98,6 +98,7 @@
 		line-height: @home-news-list-header-height;
 		padding-left: @home-news-list-text-padding;
 		padding-right: @home-news-list-text-padding;
+		position: relative;
 	}
 
 	& > .home-news-list-content {
@@ -105,6 +106,7 @@
 
 		width: 100%;
 		overflow: auto;
+		position: relative; // holds absolute content within
 
 		& > .home-news-list-scroll-content {
 			& > .home-news-list-item {
@@ -124,7 +126,9 @@
 
 					height: 100%;
 					display: inline-block;
-					padding: @home-news-list-item-content-padding;
+					line-height: @home-news-list-item-height;
+					padding-left: @home-news-list-item-content-padding;
+					padding-right: @home-news-list-item-content-padding;
 				}
 			}
 		}

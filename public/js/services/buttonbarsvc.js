@@ -387,6 +387,77 @@ define(function () {
 							console.log("Downloading PDF!");
 						}
 					}]
+				},
+
+				getHomeNewsListItemAdder: function ($scope) {
+					return {
+						items: [{
+							title: 'Add',
+							icon: 'plus',
+
+							onClick: function () {
+								console.log("Adding item!");
+							}
+						}]
+					};
+				},
+
+				HomeNewsListContentEditor: function () { // constructor
+					var that = this;
+
+					this.enterEditMode = function () {
+						this.items[0].hidden = false;
+						this.items[1].hidden = false;
+						this.items[2].hidden = true;
+						this.items[4].hidden = false;
+					};
+
+					this.exitEditMode = function () {
+						this.items[0].hidden = true;
+						this.items[1].hidden = true;
+						this.items[2].hidden = false;
+						this.items[4].hidden = true;
+					};
+
+					this.items = [{
+						title: 'Save',
+						icon: 'save',
+						hidden: true,
+
+						onClick: function () {
+							//
+						}
+					}, {
+						title: 'Image',
+						icon: 'picture-o',
+						hidden: true,
+
+						onClick: function () {
+							//
+						}
+					}, {
+						title: 'Edit',
+						icon: 'pencil',
+
+						onClick: function () {
+							that.enterEditMode();
+						}
+					}, {
+						title: 'Delete',
+						icon: 'trash',
+
+						onClick: function () {
+							//
+						}
+					}, {
+						title: 'Cancel',
+						icon: 'close',
+						hidden: true,
+
+						onClick: function () {
+							that.exitEditMode();
+						}
+					}];
 				}
 			};
 		}
