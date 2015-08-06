@@ -11,5 +11,10 @@ module.exports = db.model('News', new db.Schema({
 	imageTitle: {
 		type: String,
 		required: true
+	},
+
+	creationDate: {
+		type: Date,
+		required: true
 	}
 }));

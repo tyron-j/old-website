@@ -9,6 +9,18 @@ define(function () {
 		
 		function ($http, $scope) {
 			$scope.homeNewsListHeader = 'Home News List';
+
+			$scope.homeNewsListItems = [{
+				//
+			}, {
+				//
+			}, {
+				//
+			}, {
+				//
+			}, {
+				//
+			}]
 		}
 	];
 });

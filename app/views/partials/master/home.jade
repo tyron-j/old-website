@@ -5,3 +5,5 @@ div(class='home-news-list')
 		| {{ homeNewsListHeader }}
 	div(class='home-news-list-content')
 		div(class='home-news-list-scroll-content')
+			div(class='home-news-list-item',
+				ng-repeat='item in homeNewsListItems')

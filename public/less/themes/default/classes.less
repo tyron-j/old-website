@@ -103,10 +103,15 @@
 	& > .home-news-list-content {
 		.calc-height(~'100% - '@home-news-list-header-height);
 
+		width: 100%;
 		overflow: auto;
 
 		& > .home-news-list-scroll-content {
-			//
+			& > .home-news-list-item {
+				.set-dimensions(100%, @home-news-list-item-height);
+
+				margin-top: @home-news-list-item-margin;
+			}
 		}
 	}
 }

@@ -315,6 +315,14 @@
 	& > .home-news-list-header {
 		background-color: @green-sea;
 	}
+
+	& > .home-news-list-content {
+		& > .home-news-list-scroll-content {
+			& > .home-news-list-item {
+				background-color: @green-sea;
+			}
+		}
+	}
 }
 
 .image {
@@ -403,15 +411,6 @@
 		display: none;
 	}
 }
-
-@resume-height: @horizontal-golden-height;
-@resume-header-height: 75px;
-@resume-content-width: 40%;
-@resume-content-header-font-size: 20px;
-@resume-content-header-icon-width: 50px;
-@resume-border-width: 3px;
-@resume-content-body-header-height: 45px;
-@resume-content-grid-diamond-width: 50px;
 
 .resume-container {
 	.widget; // to-do: this is not a widget
