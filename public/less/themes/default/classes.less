@@ -1,7 +1,6 @@
 // default classes
 
 // to-do: clean up the unnecessary styles such as width: 100%
-// to-do: also place mix-ins above standard styles
 
 .blog {
 	& > .blog-header {
@@ -15,9 +14,9 @@
 	}
 
 	& > .blog-content {
-		overflow: auto;
-
 		.calc-height(~'100% - '@blog-header-height);
+
+		overflow: auto;
 
 		& > .blog-scroll-content {
 			font-size: @blog-content-font-size;
@@ -29,10 +28,10 @@
 
 .image-browser {
 	& > .image-browser-content {
+		.calc-height(~'100% - '@image-browser-footer-height);
+
 		width: 100%;
 		overflow: auto;
-		
-		.calc-height(~'100% - '@image-browser-footer-height);
 
 		& > .image-browser-scroll-content {
 			width: 100%;
@@ -45,6 +44,8 @@
 				position: relative; // holds absolute element within
 
 				& > .image-browser-thumbnail-header, & > .image-browser-thumbnail-editor {
+					.contain-text();
+
 					width: 100%;
 					height: @image-browser-thumbnail-header-height;
 					line-height: @image-browser-footer-height;
@@ -52,14 +53,12 @@
 					position: absolute;
 					text-align: center;
 					z-index: 1;
-
-					.contain-text();
 				}
 
 				& > img {
-					cursor: pointer;
-
 					.overflow-center();
+
+					cursor: pointer;
 
 					&.horizontal {
 						height: 100%;
@@ -87,6 +86,27 @@
 			position: absolute;
 			right: (@image-browser-footer-height - @combo-box-height) / 2;
 			bottom: (@image-browser-footer-height - @combo-box-height) / 2;
+		}
+	}
+}
+
+.home-news-list {
+	& > .home-news-list-header {
+		.set-dimensions(100%, @home-news-list-header-height);
+
+		font-size: @home-news-list-header-font-size;
+		line-height: @home-news-list-header-height;
+		padding-left: @home-news-list-text-padding;
+		padding-right: @home-news-list-text-padding;
+	}
+
+	& > .home-news-list-content {
+		.calc-height(~'100% - '@home-news-list-header-height);
+
+		overflow: auto;
+
+		& > .home-news-list-scroll-content {
+			//
 		}
 	}
 }

@@ -8,7 +8,7 @@ define(function () {
 		'$scope',
 		
 		function ($http, $scope) {
-			//
+			$scope.homeNewsListHeader = 'Home News List';
 		}
 	];
 });
