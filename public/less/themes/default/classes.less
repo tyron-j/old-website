@@ -2,6 +2,31 @@
 
 // to-do: clean up the unnecessary styles such as width: 100%
 // to-do: also place mix-ins above standard styles
+
+.blog {
+	& > .blog-header {
+		width: @blog-header-width;
+		height: @blog-header-height;
+		font-size: @blog-header-font-size;
+		line-height: @blog-header-height;
+		padding-left: @blog-text-padding;
+		padding-right: @blog-text-padding;
+		position: relative; // holds absolute input tag in place
+	}
+
+	& > .blog-content {
+		overflow: auto;
+
+		.calc-height(~'100% - '@blog-header-height);
+
+		& > .blog-scroll-content {
+			font-size: @blog-content-font-size;
+			padding: @blog-text-padding;
+			white-space: pre-wrap; // displays new lines correctly
+		}
+	}
+}
+
 .image-browser {
 	& > .image-browser-content {
 		width: 100%;
@@ -62,30 +87,6 @@
 			position: absolute;
 			right: (@image-browser-footer-height - @combo-box-height) / 2;
 			bottom: (@image-browser-footer-height - @combo-box-height) / 2;
-		}
-	}
-}
-
-.blog {
-	& > .blog-header {
-		width: @blog-header-width;
-		height: @blog-header-height;
-		font-size: @blog-header-font-size;
-		line-height: @blog-header-height;
-		padding-left: @blog-text-padding;
-		padding-right: @blog-text-padding;
-		position: relative; // holds absolute input tag in place
-	}
-
-	& > .blog-content {
-		overflow: auto;
-
-		.calc-height(~'100% - '@blog-header-height);
-
-		& > .blog-scroll-content {
-			font-size: @blog-content-font-size;
-			padding: @blog-text-padding;
-			white-space: pre-wrap; // displays new lines correctly
 		}
 	}
 }
