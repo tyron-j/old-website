@@ -2,7 +2,7 @@
 
 var db = require('../utils/db');
 
-module.exports = db.model('Image', new db.Schema({ // to-do: add creationDate
+module.exports = db.model('Image', new db.Schema({
 	category: {
 		type: String,
 		required: true
