@@ -49,11 +49,20 @@ define(function () {
 				masterLinks: [{
 					title: 'Master',
 					subItems: [{
+						title: 'Home',
+						href: 'master/home'
+					}, {
+						title: 'About',
+						href: 'master/about'
+					}, {
 						title: 'Blog',
 						href: 'master/blog'
 					}, {
 						title: 'Gallery',
 						href: 'master/gallery'
+					}, {
+						title: 'Resume',
+						href: 'master/resume'
 					}]
 				}, {
 					title: 'Tests',

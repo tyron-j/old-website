@@ -62,12 +62,18 @@ define([
 			}).when('/master/home/', {
 				templateUrl: '/partials/master/home',
 				controller: 'MasterHomeCtrl'
+			}).when('/master/about/', {
+				templateUrl: '/partials/master/about',
+				controller: 'MasterAboutCtrl'
 			}).when('/master/blog/:title?', {
 				templateUrl: '/partials/master/blog',
 				controller: 'MasterBlogCtrl'
 			}).when('/master/gallery/:category?', {
 				templateUrl: '/partials/master/gallery',
 				controller: 'MasterGalleryCtrl'
+			}).when('/master/resume', {
+				templateUrl: '/partials/master/resume',
+				controller: 'MasterResumeCtrl'
 			});
 
 			// test routes
