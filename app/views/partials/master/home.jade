@@ -1,14 +1,14 @@
 //- master home
 
-div(class='home-news-list')
-	div(class='home-news-list-header')
-		| {{ homeNewsListHeader }}
+div(class='news-list')
+	div(class='news-list-header')
+		| {{ newsListHeader }}
 		ui-button-bar(ui-model='headerButtonBar')
-	div(class='home-news-list-content')
-		div(class='home-news-list-scroll-content')
-			div(class='home-news-list-item',
-				ng-repeat='item in homeNewsListItems')
-				div(class='home-news-list-item-image',
+	div(class='news-list-content')
+		div(class='news-list-scroll-content')
+			div(class='news-list-item',
+				ng-repeat='item in newsListItems')
+				div(class='news-list-item-image',
 					ng-class='{ "preloader preloader-intersection": true }')
-				div(class='home-news-list-item-content')
+				div(class='news-list-item-content')
 					ui-button-bar(ui-model='item.buttonBar')

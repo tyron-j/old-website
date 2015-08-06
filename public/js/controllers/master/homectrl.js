@@ -10,22 +10,26 @@ define(function () {
 		'buttonBarSvc',
 		
 		function ($http, $scope, buttonBarSvc) {
-			var ContentButtonBar = buttonBarSvc.HomeNewsListContentEditor;
+			var ContentButtonBar = buttonBarSvc.NewsListContentEditor;
 
-			$scope.homeNewsListHeader = 'Home News List';
-			$scope.headerButtonBar    = buttonBarSvc.getHomeNewsListItemAdder($scope);
+			$scope.newsListHeader  = 'News List';
+			$scope.headerButtonBar = buttonBarSvc.getNewsListItemAdder($scope);
 
-			$scope.homeNewsListItems = [{
-				buttonBar: new ContentButtonBar()
+			$scope.newsListItems = [{
+				//
 			}, {
-				buttonBar: new ContentButtonBar()
+				//
 			}, {
-				buttonBar: new ContentButtonBar()
+				//
 			}, {
-				buttonBar: new ContentButtonBar()
+				//
 			}, {
-				buttonBar: new ContentButtonBar()
+				//
 			}]
+
+			$scope.newsListItems.forEach(function (item) {
+				item.buttonBar = new ContentButtonBar(item);
+			});
 		}
 	];
 });

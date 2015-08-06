@@ -389,7 +389,7 @@ define(function () {
 					}]
 				},
 
-				getHomeNewsListItemAdder: function ($scope) {
+				getNewsListItemAdder: function ($scope) {
 					return {
 						items: [{
 							title: 'Add',
@@ -402,7 +402,7 @@ define(function () {
 					};
 				},
 
-				HomeNewsListContentEditor: function () { // constructor
+				NewsListContentEditor: function (newsListItem) { // constructor
 					var that = this;
 
 					this.enterEditMode = function () {
