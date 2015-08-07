@@ -331,6 +331,22 @@
 					& > ui-button-bar {
 						float: right;
 					}
+
+					& > .news-list-item-href {
+						& > input {
+							@news-list-item-href-input-height: @news-list-item-href-font-size + 5px;
+							
+							.faint(black);
+
+							width: 150px;
+							height: @news-list-item-href-input-height;
+							border: none;
+							color: white;
+							font-family: @std-font-family;
+							font-size: @news-list-item-href-font-size;
+							margin-top: (@news-list-item-height - @news-list-item-href-input-height) / 2;
+						}
+					}
 				}
 			}
 		}

@@ -398,7 +398,9 @@ define(function () {
 							icon: 'plus',
 
 							onClick: function () {
-								var newItem = {};
+								var newItem = {
+									href: 'blog/Test Blog'
+								};
 
 								newItem.buttonBar = new ContentButtonBar($scope, newItem);
 
