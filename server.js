@@ -46,23 +46,26 @@ app.use('/api/*', api.authenticate(isLocalHost));
 app.use('*/master/*', api.authenticate(isLocalHost)); // also protects partials
 
 // protected api
-app.get('/api/image/:category', api.getImage); // fetch titles
-app.get('/api/image/:category/:title', api.getImage); // fetch actual image
 app.get('/api/blog', api.getBlog); // fetch titles
 app.get('/api/blog/:title', api.getBlog); // fetch actual blog
+app.get('/api/experience', api.getExperience);
+app.get('/api/image/:category', api.getImage); // fetch titles
+app.get('/api/image/:category/:title', api.getImage); // fetch actual image
+app.get('/api/intro', api.getIntro);
 app.get('/api/news', api.getNews);
+app.get('/api/skill', api.getSkill);
 
-app.post('/api/image/:category', api.postImage(__dirname + '/app/temp'));
 app.post('/api/blog', api.postBlog);
-app.post('/api/user', api.postUser);
+app.post('/api/image/:category', api.postImage(__dirname + '/app/temp'));
 app.post('/api/news', api.postNews);
+app.post('/api/user', api.postUser);
 
-app.put('/api/image', api.putImage);
 app.put('/api/blog', api.putBlog);
+app.put('/api/image', api.putImage);
 app.put('/api/news', api.putNews);
 
-app.delete('/api/image/:category/:title', api.deleteImage);
 app.delete('/api/blog/:title', api.deleteBlog);
+app.delete('/api/image/:category/:title', api.deleteImage);
 app.delete('/api/news/:imageTitle', api.deleteNews);
 
 // routes =================================================================== //
