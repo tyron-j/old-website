@@ -19,6 +19,13 @@ define(function () {
 			/*$scope.newsListItems.forEach(function (item) {
 				item.buttonBar = new ContentButtonBar($scope, item);
 			});*/
+
+			$scope.handleImageLoad = function (evt, item) {
+				var elem = evt.target;
+
+				item.imageLoaded     = true;
+				item.imageHorizontal = elem.naturalWidth >= elem.naturalHeight;
+			}
 		}
 	];
 });

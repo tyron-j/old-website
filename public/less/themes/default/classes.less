@@ -119,6 +119,19 @@
 
 					overflow: hidden;
 					display: inline-block;
+					position: relative;
+
+					& > img {
+						.overflow-center();
+
+						&.horizontal {
+							height: 100%;
+						}
+
+						&.vertical {
+							width: 100%;
+						}
+					}
 				}
 
 				& > .news-list-item-content {

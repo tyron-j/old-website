@@ -399,7 +399,8 @@ define(function () {
 
 							onClick: function () {
 								var newItem = {
-									href: 'blog/Test Blog'
+									href: '',
+									imageTitle: ''
 								};
 
 								newItem.buttonBar = new ContentButtonBar($scope, newItem);
@@ -426,15 +427,26 @@ define(function () {
 						}
 
 						$scope.itemBeingEdited = newsListItem;
+
+						newsListItem.originalHref       = newsListItem.href;
+						newsListItem.originalImageTitle = newsListItem.imageTitle;
 					};
 
-					this.exitEditMode = function () {
+					this.exitEditMode = function (cancel) {
 						this.items[0].hidden = true;
 						this.items[1].hidden = true;
 						this.items[2].hidden = false;
 						this.items[4].hidden = true;
 
 						newsListItem.inEditMode = false;
+
+						if (cancel) {
+							newsListItem.href       = newsListItem.originalHref;
+							newsListItem.imageTitle = newsListItem.originalImageTitle;
+						}
+
+						newsListItem.originalHref       = null;
+						newsListItem.originalImageTitle = null;
 					};
 
 					this.items = [{
@@ -443,7 +455,7 @@ define(function () {
 						hidden: true,
 
 						onClick: function () {
-							//
+							that.exitEditMode();
 						}
 					}, {
 						title: 'Image',
@@ -451,7 +463,23 @@ define(function () {
 						hidden: true,
 
 						onClick: function () {
-							//
+							$http.get('/api/image/home').success(function (res) {
+								modalSelector.open(res, [{
+									title: 'OK',
+									onClick: function () {
+										if (modalSelector.selectedImage) {
+											newsListItem.imageTitle = modalSelector.selectedImage.title;
+
+											modalSelector.close();
+										}
+									}
+								}, {
+									title: 'Cancel',
+									onClick: function () {
+										modalSelector.close();
+									}
+								}]);
+							});
 						}
 					}, {
 						title: 'Edit',
@@ -473,7 +501,7 @@ define(function () {
 						hidden: true,
 
 						onClick: function () {
-							that.exitEditMode();
+							that.exitEditMode(true);
 						}
 					}];
 				}
