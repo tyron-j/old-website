@@ -14,15 +14,15 @@ define(function () {
 				this.items        = items;
 				this.selectedItem = items[idx || 0];
 				this.upward       = upward || false;
+			};
 
-				this.toggleState = function() {
-					this.inUse = !this.inUse;
-				};
+			ComboBox.prototype.toggleState = function() {
+				this.inUse = !this.inUse;
+			};
 
-				this.selectItem = function(item) {
-					this.selectedItem = item;
-					this.inUse = false;
-				};
+			ComboBox.prototype.selectItem = function(item) {
+				this.selectedItem = item;
+				this.inUse = false;
 			};
 
 			return {
