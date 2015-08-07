@@ -24,7 +24,8 @@ div(class='home-container')
 					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[2].icon }}')
 					div(class='home-nav-panel-link-title')
 						| {{ homeLinks[2].title }}
-	div(class='home-news-panel preloader preloader-intersection')
+	div(class='home-news-panel')
+		div(class='home-news-panel-preloader preloader preloader-intersection')
 		div(class='home-news-panel-content-container',
 			ng-style='{ "z-index": (homeNews[0].inFront ? 1 : 0) }',
 			ng-class='{ shown: homeNews[0].shown, hidden: !homeNews[0].shown }')

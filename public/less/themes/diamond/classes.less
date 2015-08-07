@@ -194,6 +194,15 @@
 		margin-left: @home-panel-width * ((1 / sqrt(2)) - 1);
 		margin-right: @home-panel-width * ((1 / sqrt(2)) - 1);
 
+		& > .home-news-panel-preloader {
+			.rotate(-45deg);
+			.set-dimensions(@home-panel-width * sqrt(2));
+
+			margin-left: -(@home-panel-width / 2) * (sqrt(2) - 1);
+			margin-top: -(@home-panel-width / 2) * (sqrt(2) - 1);
+			pointer-events: none;
+		}
+
 		& > .home-news-panel-content-container {
 			.center();
 
@@ -250,6 +259,10 @@
 				margin-left: -(@home-panel-width / 4) * (sqrt(2) - 1);
 				margin-top: -(@home-panel-width / 4) * (sqrt(2) - 1);
 				position: relative; // holds absolute element within
+
+				&:hover {
+					.text-shadow(@std-text-shadow, white);
+				}
 
 				@home-nav-panel-link-icon-width: 50px;
 

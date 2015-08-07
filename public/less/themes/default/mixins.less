@@ -159,6 +159,12 @@
 	float: right;
 }
 
+.text-shadow (@blur: 0, @color: black) {
+	-webkit-text-shadow: 0 0 @blur @color;
+	-moz-text-shadow: 0 0 @blur @color;
+	text-shadow: 0 0 @blur @color;
+}
+
 .unselectable () {
 	-webkit-user-select: none;
 	-moz-user-select: none;
