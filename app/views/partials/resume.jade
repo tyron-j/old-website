@@ -13,7 +13,7 @@ div(class='resume-container')
 				ng-repeat='item in resumeContent[0].items')
 				div(class='resume-content-body-header')
 					div(class='resume-content-body-header-left')
-						| {{ item.title }}, {{ item.company }}
+						| {{ item.title }}, <i>{{ item.company }}</i>
 					div(class='resume-content-body-header-right')
 						| {{ item.duration }}
 				div(class='resume-content-body-detail',
