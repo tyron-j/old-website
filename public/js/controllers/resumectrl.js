@@ -70,8 +70,8 @@ define(function () {
 						icon: 'css3',
 						title: 'CSS 3'
 					}, {
-						icon: '',
-						title: ''
+						icon: 'python',
+						title: 'Python'
 					}, {
 						icon: '',
 						title: ''
