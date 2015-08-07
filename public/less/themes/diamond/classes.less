@@ -33,6 +33,10 @@
 				margin-left: -100px * (sqrt(2) - 1) / 2;
 				margin-top: -100px * (sqrt(2) - 1) / 2;
 				position: absolute; // this is required for some reason
+
+				&:hover {
+					.text-shadow(@std-text-shadow, white);
+				}
 			}
 		}
 	}
@@ -254,7 +258,6 @@
 				.rotate(-45deg);
 				.set-dimensions(sqrt(2) * 100%);
 
-				color: white;
 				display: block;
 				margin-left: -(@home-panel-width / 4) * (sqrt(2) - 1);
 				margin-top: -(@home-panel-width / 4) * (sqrt(2) - 1);
