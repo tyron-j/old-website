@@ -24,16 +24,20 @@ div(class='home-container')
 					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[2].icon }}')
 					div(class='home-nav-panel-link-title')
 						| {{ homeLinks[2].title }}
-	div(class='home-news-panel')
+	div(class='home-news-panel preloader preloader-intersection')
 		div(class='home-news-panel-content-container',
 			ng-style='{ "z-index": (homeNews[0].inFront ? 1 : 0) }',
 			ng-class='{ shown: homeNews[0].shown, hidden: !homeNews[0].shown }')
-			a(class='home-news-panel-content')
-				img(ng-src='{{ homeNews[0].src }}')
+			a(class='home-news-panel-content',
+				ng-href='http://localhost:9000/{{ homeNews[0].href }}')
+				//- to-do: change fetch location host to tyronjung.com
+				img(ng-src='http://localhost:9000/api/image/home/{{ homeNews[0].imageTitle }}')
 		div(class='home-news-panel-content-container hidden'
 			ng-class='{ shown: homeNews[1].shown, hidden: !homeNews[1].shown }')
-			a(class='home-news-panel-content')
-				img(ng-src='{{ homeNews[1].src }}')
+			a(class='home-news-panel-content',
+				ng-href='http://localhost:9000/{{ homeNews[1].href }}')
+				//- to-do: change fetch location host to tyronjung.com
+				img(ng-src='http://localhost:9000/api/image/home/{{ homeNews[1].imageTitle }}')
 	div(class='right home-nav-panel')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',

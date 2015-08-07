@@ -4,11 +4,12 @@ define(function () {
 	'use strict';
 
 	return [
+		'$http',
 		'$scope',
 		'$interval',
 		'$timeout',
 		
-		function ($scope, $interval, $timeout) {
+		function ($http, $scope, $interval, $timeout) {
 			$scope.homeLinks = [{
 				title: 'About',
 				href: '/about',
@@ -35,35 +36,52 @@ define(function () {
 				icon: 'envelope-o'
 			}];
 
-			$scope.homeNews = [{ // to-do: fetch these from db via http
-				shown: true,
-				inFront: false, // needed for CSS shortcomings
-				src: 'http://i.imgur.com/jwD87Hu.jpg'
-			}, {
-				shown: false,
-				src: 'https://data.archive.moe/board/a/image/1418/58/1418586274250.jpg'
-			}];
+			$http.get('/api/news').success(function (res) {
+				$scope.homeNews = [{ // to-do: fetch these from db via http
+					shown: true,
+					inFront: false, // needed for CSS shortcomings
+					href: res[0].href,
+					imageTitle: res[0].imageTitle
+				}, {
+					shown: false,
+					href: res[1].href,
+					imageTitle: res[1].imageTitle
+				}];
 
-			var intervalPromise;
-			var timeoutPromise;
+				var homeNewsIdx = 1; // initial values
+				var resIdx      = 1; // initial values
+				var resLen      = res.length;
 
-			var switchPos = function () {
-				$scope.homeNews[0].inFront = !$scope.homeNews[0].inFront;
-			};
+				var intervalPromise;
+				var timeoutPromise;
 
-			var switchImg = function () {
-				$scope.homeNews[0].shown = !$scope.homeNews[0].shown;
-				$scope.homeNews[1].shown = !$scope.homeNews[1].shown;
-				timeoutPromise           = $timeout(switchPos, 2500);
-			};
+				var switchPos = function () { // assumes that there are at least 2 news items
+					homeNewsIdx ^= 1;
+					resIdx++;
 
-			var ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
-				$interval.cancel(intervalPromise);
-				$timeout.cancel(timeoutPromise);
-				ignoreLocationChangeStart();
+					if (resIdx >= resLen) {
+						resIdx = 0;
+					}
+					
+					$scope.homeNews[0].inFront              = !$scope.homeNews[0].inFront;
+					$scope.homeNews[homeNewsIdx].href       = res[resIdx].href;
+					$scope.homeNews[homeNewsIdx].imageTitle = res[resIdx].imageTitle;
+				};
+
+				var switchImg = function () {
+					$scope.homeNews[0].shown = !$scope.homeNews[0].shown;
+					$scope.homeNews[1].shown = !$scope.homeNews[1].shown;
+					timeoutPromise           = $timeout(switchPos, 2500);
+				};
+
+				var ignoreLocationChangeStart = $scope.$on('$locationChangeStart', function (evt, next, current) {
+					$interval.cancel(intervalPromise);
+					$timeout.cancel(timeoutPromise);
+					ignoreLocationChangeStart();
+				});
+
+				intervalPromise = $interval(switchImg, 5000);
 			});
-
-			intervalPromise = $interval(switchImg, 5000);
 		}
 	];
 });
