@@ -110,7 +110,7 @@ define(function () {
 						isNew: true
 					};
 
-					this.items.push(newBlog);
+					this.items.unshift(newBlog);
 					this.selectItem(newBlog);
 				},
 

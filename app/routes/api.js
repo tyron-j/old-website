@@ -210,7 +210,7 @@ module.exports = {
 		} else {
 			models.Blog
 				.find({})
-				.sort('creationDate') // to-do: change this to -creationDate
+				.sort('-creationDate')
 				.select('title')
 				.exec(function (err, blogs) {
 					if (blogs.length) {
@@ -279,6 +279,80 @@ module.exports = {
 			}
 
 			var successMsg = "Deleted " + req.params.title + " in database";
+
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
+			});
+		});
+	},
+
+	getNews: function (req, res, next) {
+		models.News
+			.find({})
+			.sort('-creationDate')
+			.exec(function (err, news) {
+				if (news.length) {
+					res.send(news);
+				} else {
+					res.send([]);
+				}
+			});
+	},
+
+	postNews: function (req, res, next) {
+		var news = new models.News({
+			href: req.body.href,
+			imageTitle: req.body.imageTitle,
+			creationDate: req.body.creationDate
+		});
+
+		news.save(function (err, n) {
+			if (err) {
+				signal.error("Failed to save news: " + req.body.href + " to database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			var successMsg = "Saved news: " + req.body.href + " to database";
+
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
+			});
+		});
+	},
+
+	putNews: function (req, res, next) {
+		models.News.findOneAndUpdate({
+			creationDate: req.body.creationDate // creationDate works as a unique identifier
+		}, {
+			href: req.body.href,
+			imageTitle: req.body.imageTitle
+		}, function (err, n) { // to-do: handle no matches
+			if (err) {
+				signal.error("Failed to update news: " + req.body.href + " in database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			var successMsg = "Updated news: " + req.body.href + " in database";
+
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
+			});
+		});
+	},
+
+	deleteNews: function (req, res, next) {
+		models.News.findOneAndRemove({
+			imageTitle: req.params.imageTitle // to-do: use a unique identifier
+		}, function (err, n) {
+			if (err) {
+				signal.error("Failed to delete news: " + req.params.imageTitle + " in database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			var successMsg = "Deleted news: " + req.params.imageTitle + " in database";
 
 			signal.success(successMsg);
 			res.send({

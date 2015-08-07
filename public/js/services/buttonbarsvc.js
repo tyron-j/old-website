@@ -347,12 +347,18 @@ define(function () {
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
-											$http.delete('/api/blog/' + blog.title).success(function (res) {
-												console.log(res.msg);
+											if (blog.isNew) {
 												blogs.splice(blogs.indexOf(blog), 1);
 												sideBar.selectItem(blogs[0]);
 												modalDialog.close();
-											});
+											} else {
+												$http.delete('/api/blog/' + blog.title).success(function (res) {
+													console.log(res.msg);
+													blogs.splice(blogs.indexOf(blog), 1);
+													sideBar.selectItem(blogs[0]);
+													modalDialog.close();
+												});
+											}
 										}
 									}, {
 										title: 'Cancel',
@@ -400,12 +406,14 @@ define(function () {
 							onClick: function () {
 								var newItem = {
 									href: '',
-									imageTitle: ''
+									imageTitle: '',
+									creationDate: new Date(),
+									isNew: true
 								};
 
 								newItem.buttonBar = new ContentButtonBar($scope, newItem);
 
-								$scope.newsListItems.push(newItem);
+								$scope.newsListItems.unshift(newItem);
 							}
 						}]
 					};
@@ -456,6 +464,26 @@ define(function () {
 
 						onClick: function () {
 							that.exitEditMode();
+
+							if (newsListItem.isNew) {
+								$http.post('/api/news', {
+									href: newsListItem.href,
+									imageTitle: newsListItem.imageTitle,
+									creationDate: newsListItem.creationDate
+								}).success(function (res) {
+									console.log(res.msg);
+
+									newsListItem.isNew = false;
+								});
+							} else {
+								$http.put('/api/news', {
+									href: newsListItem.href,
+									imageTitle: newsListItem.imageTitle,
+									creationDate: newsListItem.creationDate
+								}).success(function (res) {
+									console.log(res.msg);
+								});
+							}
 						}
 					}, {
 						title: 'Image',
@@ -493,7 +521,32 @@ define(function () {
 						icon: 'trash',
 
 						onClick: function () {
-							//
+							var newsListItems = $scope.newsListItems;
+
+							modalDialog.open({
+								title: 'Delete Confirmation',
+								content: "Are you sure you wish to delete news: " + newsListItem.imageTitle + "?",
+								buttons: [{
+									title: 'OK',
+									onClick: function () {
+										if (newsListItem.isNew) {
+											newsListItems.splice(newsListItems.indexOf(newsListItem), 1);
+											modalDialog.close();
+										} else {
+											$http.delete('/api/news/' + newsListItem.imageTitle).success(function (res) {
+												console.log(res.msg);
+												newsListItems.splice(newsListItems.indexOf(newsListItem), 1);
+												modalDialog.close();
+											});
+										}
+									}
+								}, {
+									title: 'Cancel',
+									onClick: function () {
+										modalDialog.close();
+									}
+								}]
+							});
 						}
 					}, {
 						title: 'Cancel',

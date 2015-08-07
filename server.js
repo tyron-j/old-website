@@ -50,16 +50,20 @@ app.get('/api/image/:category', api.getImage); // fetch titles
 app.get('/api/image/:category/:title', api.getImage); // fetch actual image
 app.get('/api/blog', api.getBlog); // fetch titles
 app.get('/api/blog/:title', api.getBlog); // fetch actual blog
+app.get('/api/news', api.getNews);
 
 app.post('/api/image/:category', api.postImage(__dirname + '/app/temp'));
 app.post('/api/blog', api.postBlog);
 app.post('/api/user', api.postUser);
+app.post('/api/news', api.postNews);
 
 app.put('/api/image', api.putImage);
 app.put('/api/blog', api.putBlog);
+app.put('/api/news', api.putNews);
 
 app.delete('/api/image/:category/:title', api.deleteImage);
 app.delete('/api/blog/:title', api.deleteBlog);
+app.delete('/api/news/:imageTitle', api.deleteNews);
 
 // routes =================================================================== //
 

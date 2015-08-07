@@ -14,11 +14,14 @@ define(function () {
 
 			$scope.newsListHeader  = 'News List';
 			$scope.headerButtonBar = buttonBarSvc.getNewsListItemAdder($scope);
-			$scope.newsListItems   = [];
 
-			/*$scope.newsListItems.forEach(function (item) {
-				item.buttonBar = new ContentButtonBar($scope, item);
-			});*/
+			$http.get('/api/news').success(function (res) {
+				$scope.newsListItems = res;
+
+				$scope.newsListItems.forEach(function (item) {
+					item.buttonBar = new ContentButtonBar($scope, item);
+				});
+			});
 
 			$scope.handleImageLoad = function (evt, item) {
 				var elem = evt.target;
