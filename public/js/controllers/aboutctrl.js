@@ -20,7 +20,9 @@ define(function () {
 				};
 			});
 
-			$scope.aboutText = '';
+			$http.get('/api/intro').success(function (res) {
+				$scope.aboutText = res.content;
+			});
 			
 			$scope.aboutExternalLinks = [{
 				src: 'https://github.com/tyron-j',
