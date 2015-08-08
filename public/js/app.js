@@ -41,6 +41,9 @@ define([
 			}).when('/resume', {
 				templateUrl: '/partials/resume',
 				controller: 'ResumeCtrl'
+			}).when('/special', {
+				templateUrl: '/partials/special',
+				controller: 'SpecialCtrl'
 			});
 
 			// temporary routes

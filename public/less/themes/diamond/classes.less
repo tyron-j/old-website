@@ -85,7 +85,7 @@
 					.calc-height(~'100% - '@std-diamond-width * sqrt(2) / 2);
 
 					margin-top: @std-diamond-width * sqrt(2) / 2;
-					overflow: auto;
+					// overflow: auto;
 					position: absolute;
 					width: 100%;
 
@@ -367,6 +367,12 @@
 			}
 		}
 	}
+}
+
+.novel-container {
+	.widget; // to-do: this is not a widget
+
+	.set-in-center(@horizontal-golden-width / 2, @horizontal-golden-height);
 }
 
 .image {
