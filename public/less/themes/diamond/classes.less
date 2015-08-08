@@ -390,6 +390,43 @@
 	.widget; // to-do: this is not a widget
 
 	.set-in-center(@horizontal-golden-width / 2, @horizontal-golden-height);
+
+	@novel-header-height: 75px;
+
+	& > .novel-header {
+		.set-dimensions(100%, @novel-header-height);
+
+		background-color: @green-sea;
+		font-size: @std-header-font-size;
+		line-height: @novel-header-height;
+		padding-left: @std-text-padding;
+		padding-right: @std-text-padding;
+
+		& > sup {
+			font-size: @std-font-size / 2;
+		}
+	}
+
+	& > .novel-content {
+		.set-dimensions(100%, @horizontal-golden-height - @novel-header-height);
+
+		overflow: auto;
+
+		& > img {
+			width: 100%;
+			opacity: 0;
+
+			&.loaded {
+				border-bottom: 3px solid @green-sea;
+				opacity: 1;
+				transition: @std-transition;
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+	}
 }
 
 .image {
