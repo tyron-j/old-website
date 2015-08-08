@@ -1,5 +1,7 @@
 // update
 
+// to-do: self-terminate once all processes have finished
+
 // dependencies
 var fs     = require('fs');
 var db     = require('./app/utils/db');
