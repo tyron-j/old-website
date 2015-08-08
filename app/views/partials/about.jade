@@ -26,7 +26,8 @@ div(class='about-container')
 					ng-class='{ "preloader preloader-intersection": !imageLoaded }')
 					img(ng-src='{{ aboutPicture.src }}',
 						ui-on-load='handleImageLoad(evt)')
-			div(class='about-card-content')
+			div(class='about-card-content',
+				ng-class='{ "preloader preloader-intersection": !aboutText }')
 				div(class='about-card-scroll-content-container')
 					div(class='about-card-scroll-content')
 						| {{ aboutText }}
