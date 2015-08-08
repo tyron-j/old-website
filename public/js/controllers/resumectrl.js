@@ -47,7 +47,7 @@ define(function () {
 			$http.get('/api/skill').success(function (res) {
 				$scope.resumeContent[2].items = res;
 			});
-			
+
 			$scope.buttonBar = buttonBarSvc.resumeMenu;
 		}
 	];

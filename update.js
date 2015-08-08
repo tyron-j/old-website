@@ -34,20 +34,20 @@ db.connection.on('connected', function () {
 			}
 
 			signal.success("Deleted experiences in database");
-		});
 
-		var exps = JSON.parse(data);
+			var exps = JSON.parse(data);
 
-		exps.forEach(function (exp, idx) {
-			exp.relevance = idx;
+			exps.forEach(function (exp, idx) {
+				exp.relevance = idx;
 
-			(new Experience(exp)).save(function (err, e) {
-				if (err) {
-					signal.error("Failed to save experience to database");
-					throw err; // to-do: handle error gracefully
-				}
+				(new Experience(exp)).save(function (err, e) {
+					if (err) {
+						signal.error("Failed to save experience to database");
+						throw err; // to-do: handle error gracefully
+					}
 
-				signal.success("Saved experience to database");
+					signal.success("Saved experience to database");
+				});
 			});
 		});
 	});
@@ -96,20 +96,20 @@ db.connection.on('connected', function () {
 			}
 
 			signal.success("Deleted skills in database");
-		});
 
-		var skills = JSON.parse(data);
+			var skills = JSON.parse(data);
 
-		skills.forEach(function (skl, idx) {
-			skl.relevance = idx;
+			skills.forEach(function (skl, idx) {
+				skl.relevance = idx;
 
-			(new Skill(skl)).save(function (err, s) {
-				if (err) {
-					signal.error("Failed to save skill to database");
-					throw err; // to-do: handle error gracefully
-				}
+				(new Skill(skl)).save(function (err, s) {
+					if (err) {
+						signal.error("Failed to save skill to database");
+						throw err; // to-do: handle error gracefully
+					}
 
-				signal.success("Saved skill to database");
+					signal.success("Saved skill to database");
+				});
 			});
 		});
 	});
