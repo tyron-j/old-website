@@ -1,7 +1,5 @@
 // update
 
-// to-do: self-terminate once all processes have finished
-
 // dependencies
 var fs     = require('fs');
 var db     = require('./app/utils/db');
@@ -14,6 +12,53 @@ var Skill      = require('./app/models/skill');
 
 // variables
 var uploadDir = __dirname + '/app/update';
+var status    = {
+	experience: {
+		doneUpdating: false,
+		numCompleted: 0,
+		numTotal: null
+	},
+
+	intro: {
+		doneUpdating: false,
+		numCompleted: 0,
+		numTotal: 1
+	},
+
+	skill: {
+		doneUpdating: false,
+		numCompleted: 0,
+		numTotal: null
+	}
+};
+
+// functions
+var closeApp = function () {
+	if (db.connection.readyState === 1) { // if connected
+		db.connection.close(function () {
+			process.exit();
+		});
+	} else {
+		process.exit();
+	}
+};
+
+var updateStatus = function (model, numTotal) {
+	if (status[model].numTotal === null && numTotal) {
+		status[model].numTotal = numTotal;
+	} else {
+		status[model].numCompleted++;
+
+		if (status[model].numCompleted === status[model].numTotal) {
+			status[model].doneUpdating = true;
+			signal.success("Done updating " + model + "s");
+
+			if (status.experience.doneUpdating && status.intro.doneUpdating && status.skill.doneUpdating) {
+				closeApp();
+			}
+		}
+	}
+};
 
 // connect to db
 db.connect(process.env.MONGOLAB_URI);
@@ -37,6 +82,8 @@ db.connection.on('connected', function () {
 
 			var exps = JSON.parse(data);
 
+			updateStatus('experience', exps.length);
+
 			exps.forEach(function (exp, idx) {
 				exp.relevance = idx;
 
@@ -47,6 +94,7 @@ db.connection.on('connected', function () {
 					}
 
 					signal.success("Saved experience to database");
+					updateStatus('experience');
 				});
 			});
 		});
@@ -78,6 +126,7 @@ db.connection.on('connected', function () {
 				}
 
 				signal.success("Saved intro to database");
+				updateStatus('intro');
 			})
 		});
 	});
@@ -99,6 +148,8 @@ db.connection.on('connected', function () {
 
 			var skills = JSON.parse(data);
 
+			updateStatus('skill', skills.length);
+
 			skills.forEach(function (skl, idx) {
 				skl.relevance = idx;
 
@@ -109,6 +160,7 @@ db.connection.on('connected', function () {
 					}
 
 					signal.success("Saved skill to database");
+					updateStatus('skill');
 				});
 			});
 		});
@@ -116,14 +168,4 @@ db.connection.on('connected', function () {
 });
 
 // close
-(function (closeApp) { // immediate function
-	process.on('SIGINT', closeApp);
-})(function () { // callback
-	if (db.connection.readyState === 1) { // if connected
-		db.connection.close(function () {
-			process.exit();
-		});
-	} else {
-		process.exit();
-	}
-});
+process.on('SIGINT', closeApp);
