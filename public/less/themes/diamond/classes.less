@@ -595,11 +595,12 @@
 						margin-left: @resume-content-grid-diamond-width * (sqrt(2) / 2);
 					}
 
-					& > .resume-content-grid-diamond-content {
+					& > a.resume-content-grid-diamond-content {
 						.set-dimensions(@resume-content-grid-diamond-width * sqrt(2));
 						.rotate(-45deg);
 
 						background-color: @green-sea;
+						display: block;
 						margin-left: -@resume-content-grid-diamond-width * (sqrt(2) - 1) / 2;
 						margin-top: -@resume-content-grid-diamond-width * (sqrt(2) - 1) / 2;
 						position: absolute; // this is required for some reason

@@ -13,6 +13,11 @@ module.exports = db.model('Skill', new db.Schema({
 		required: true
 	},
 
+	href: {
+		type: String,
+		required: false
+	},
+
 	relevance: { // index of relevance
 		type: Number,
 		required: true
