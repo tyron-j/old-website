@@ -34,8 +34,16 @@
 				margin-top: -100px * (sqrt(2) - 1) / 2;
 				position: absolute; // this is required for some reason
 
-				&:hover {
+				&.lit {
 					.text-shadow(@std-text-shadow, white);
+
+					transition: @std-transition;
+				}
+
+				&.unlit {
+					.text-shadow(0, white);
+
+					transition: @std-transition;
 				}
 			}
 		}
@@ -263,8 +271,16 @@
 				margin-top: -(@home-panel-width / 4) * (sqrt(2) - 1);
 				position: relative; // holds absolute element within
 
-				&:hover {
+				&.lit {
 					.text-shadow(@std-text-shadow, white);
+
+					transition: @std-transition;
+				}
+
+				&.unlit {
+					.text-shadow(0, white);
+
+					transition: @std-transition;
 				}
 
 				@home-nav-panel-link-icon-width: 50px;
