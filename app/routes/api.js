@@ -117,7 +117,7 @@ module.exports = {
 	getExperience: function (req, res, next) {
 		models.Experience
 			.find({})
-			.sort('-relevance')
+			.sort('relevance')
 			.exec(function (err, experiences) {
 				if (experiences.length) {
 					res.send(experiences);
@@ -345,13 +345,16 @@ module.exports = {
 	},
 
 	getSkill: function (req, res, next) {
-		models.Skill.find({}, function (err, skills) {
-			if (skills.length) {
-				res.send(skills);
-			} else {
-				res.send([]);
-			}
-		});
+		models.Skill
+			.find({})
+			.sort('relevance')
+			.exec(function (err, skills) {
+				if (skills.length) {
+					res.send(skills);
+				} else {
+					res.send([]);
+				}
+			});
 	},
 
 	getUser: function (req, res, next) {

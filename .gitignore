@@ -1,6 +1,7 @@
 examples
 node_modules
 temp
+update
 **/less/fonts
 
 build.bat

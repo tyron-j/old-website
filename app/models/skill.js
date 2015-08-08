@@ -11,5 +11,10 @@ module.exports = db.model('Skill', new db.Schema({
 	icon: {
 		type: String,
 		required: true
+	},
+
+	relevance: { // index of relevance
+		type: Number,
+		required: true
 	}
 }));

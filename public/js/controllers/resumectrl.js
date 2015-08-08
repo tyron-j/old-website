@@ -4,84 +4,50 @@ define(function () {
 	'use strict';
 
 	return [
+		'$http',
 		'$scope',
 
 		'buttonBarSvc',
 		
-		function ($scope, buttonBarSvc) {
+		function ($http, $scope, buttonBarSvc) {
 			$scope.resumeHeader = 'Tyron Jung';
-			$scope.resumeContent = [{ // to-do: temporary hard-coding
-					header: {
-						icon: 'bar-chart',
-						title: 'Employment History'
-					},
-					items: [{
-						title: 'Front End Developer',
-						company: 'Genesys',
-						duration: 'May - Aug 2014',
-						tasks: [
-							'Hello my name is Tyron Jung and this is my website. I am currently testing the new-line functionality of this segment.',
-							'B'
-						]
-					}, {
-						title: 'Software Developer',
-						company: 'Trapeze Group',
-						duration: 'Sep - Dec 2013',
-						tasks: [
-							'Another test'
-						]
-					}]
-				}, {
-					header: {
-						icon: 'lightbulb-o',
-						title: 'Work Outside of Work'
-					},
-					items: [{
-						title: 'Personal Website',
-						duration: 'Ongoing',
-						tasks: [
-							'A'
-						]
-					}, {
-						title: 'Genesys Hackathon',
-						duration: 'Jul 2014',
-						tasks: [
-							'B'
-						]
-					}]
-				}, {
-					header: {
-						icon: 'sitemap',
-						title: 'Skills'
-					},
-					items: [{
-						icon: 'mongodb',
-						title: 'MongoDB'
-					}, {
-						icon: 'angular',
-						title: 'AngularJS'
-					}, {
-						icon: 'nodejs_small',
-						title: 'Node.js'
-					}, {
-						icon: 'html5',
-						title: 'HTML 5'
-					}, {
-						icon: 'css3',
-						title: 'CSS 3'
-					}, {
-						icon: 'python',
-						title: 'Python'
-					}, {
-						icon: '',
-						title: ''
-					}, {
-						icon: '',
-						title: ''
-					}]
-				}
-			];
+			$scope.resumeContent = [{
+				header: {
+					title: 'Employment History',
+					icon: 'bar-chart'
+				},
+				items: []
+			}, {
+				header: {
+					title: 'Work Outside of Work',
+					icon: 'lightbulb-o'
+				},
+				items: []
+			}, {
+				header: {
+					title: 'Skills',
+					icon: 'sitemap'
+				},
+				items: []
+			}];
 
+			$http.get('/api/experience').success(function (res) {
+				res.forEach(function (exp) {
+					switch (exp.category) {
+						case 'employment':
+							$scope.resumeContent[0].items.push(exp);
+							break;
+						case 'recreation':
+							$scope.resumeContent[1].items.push(exp);
+							break;
+					}
+				});
+			});
+
+			$http.get('/api/skill').success(function (res) {
+				$scope.resumeContent[2].items = res;
+			});
+			
 			$scope.buttonBar = buttonBarSvc.resumeMenu;
 		}
 	];
