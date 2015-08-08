@@ -681,6 +681,91 @@
 	}
 }
 
+.special-container {
+	.widget; // to-do: this is not a widget
+
+	@special-width: @vertical-golden-width;
+	@special-height: @vertical-golden-width / 1.6;
+
+	.faint(@green-sea, 50%);
+	.set-in-center(@special-width, @special-height);
+
+	cursor: pointer;
+
+	& > .special-letter-cover {
+		&.left, &.right, &.top > .top-triangle {
+			.set-dimensions(0);
+
+			border-style: solid;
+			position: absolute;
+		}
+
+		&.left {
+			border-width: @special-height 0 0 @special-width;
+			border-color: transparent transparent transparent @green-sea;
+		}
+
+		&.right {
+			border-width: 0 0 @special-height @special-width;
+			border-color: transparent transparent @green-sea transparent;
+		}
+
+		&.top {
+			@top-background-color: @turquoise;
+			@top-rectangle-height: 50px;
+			@top-seal-width: 50px;
+			@top-seal-margin: 3px;
+
+			.set-dimensions(100%, (@special-height / 2) + @top-rectangle-height + (@top-seal-width - @top-seal-margin));
+
+			&.opened {
+				.rotate-x(180deg, 0% 0%);
+
+				transition: @std-transition;
+
+				& > .top-rectangle {
+					background-color: @green-sea;
+				}
+
+				& > .top-triangle {
+					border-color: @green-sea transparent transparent transparent;
+				}
+			}
+
+			&.closed {
+				.rotate-x(0deg, 0% 0%);
+
+				transition: @std-transition;
+			}
+
+			& > .top-rectangle {
+				.set-dimensions(100%, @top-rectangle-height);
+
+				background-color: @top-background-color;
+				position: relative;
+			}
+
+			& > .top-triangle {
+				border-width: (@special-height / 2) (@special-width / 2) 0 (@special-width / 2);
+				// border-color: @green-sea transparent transparent transparent;
+				border-color: @top-background-color transparent transparent transparent;
+				position: relative;
+			}
+
+			& > .top-seal {
+				.box-shadow(@std-box-shadow, white);
+				.rotate(45deg);
+				.set-dimensions(@top-seal-width);
+
+				background-color: white;
+				margin-left: (@special-width - @top-seal-width) / 2;
+				margin-top: -(@top-seal-width - @top-seal-margin);
+				position: relative;
+			}
+		}
+	}
+}
+
 .centered { // to-do: remove
 	.set-in-center(250px);
 	
