@@ -510,7 +510,7 @@
 					.set-dimensions(@resume-content-header-icon-width);
 
 					background-color: @green-sea;
-					font-size: 25px;
+					font-size: @resume-content-header-icon-width / 2;
 					left: 0;
 					position: absolute;
 					text-align: center;
@@ -570,6 +570,7 @@
 				width: @resume-content-grid-diamond-width * sqrt(2) * 2;
 				margin: auto;
 				margin-top: @std-text-padding / 2 + @resume-border-width;
+				margin-bottom: @std-text-padding / 2 + @resume-border-width;
 				padding: @resume-content-grid-diamond-width * (sqrt(2) - 1) / 2;
 
 				& > .resume-content-grid-diamond {
@@ -606,7 +607,7 @@
 						position: absolute; // this is required for some reason
 
 						// font settings
-						font-size: 35px;
+						font-size: @resume-content-grid-diamond-width - 15px;
 						line-height: @resume-content-grid-diamond-width * sqrt(2);
 						text-align: center;
 
