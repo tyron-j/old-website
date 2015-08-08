@@ -4,7 +4,8 @@ div(class='resume-container')
 	div(class='resume-header')
 		| {{ resumeHeader }}
 		ui-button-bar(ui-model='buttonBar')
-	div(class='resume-content')
+	div(class='resume-content',
+		ng-class='{ "preloader preloader-intersection": !resumeContent[0].loaded }')
 		div(class='resume-scroll-content')
 			div(class='resume-content-header')
 				div(class='resume-content-header-icon icon icon-{{ resumeContent[0].header.icon }}')
@@ -21,7 +22,8 @@ div(class='resume-container')
 					div(class='resume-content-body-detail-diamond')
 					div(class='resume-content-body-detail-text')
 						| {{ task }}
-	div(class='resume-content')
+	div(class='resume-content',
+		ng-class='{ "preloader preloader-intersection": !resumeContent[1].loaded }')
 		div(class='resume-scroll-content')
 			div(class='resume-content-header')
 				div(class='resume-content-header-icon icon icon-{{ resumeContent[1].header.icon }}')
@@ -38,7 +40,8 @@ div(class='resume-container')
 					div(class='resume-content-body-detail-diamond')
 					div(class='resume-content-body-detail-text')
 						| {{ task }}
-	div(class='resume-content')
+	div(class='resume-content',
+		ng-class='{ "preloader preloader-intersection": !resumeContent[2].loaded }')
 		div(class='resume-scroll-content')
 			div(class='resume-content-header')
 				div(class='resume-content-header-icon icon icon-{{ resumeContent[2].header.icon }}')

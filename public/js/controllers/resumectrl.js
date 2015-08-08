@@ -16,22 +16,28 @@ define(function () {
 					title: 'Employment History',
 					icon: 'bar-chart'
 				},
+				loaded: false,
 				items: []
 			}, {
 				header: {
 					title: 'Work Outside of Work',
 					icon: 'lightbulb-o'
 				},
+				loaded: false,
 				items: []
 			}, {
 				header: {
 					title: 'Skills',
 					icon: 'sitemap'
 				},
+				loaded: false,
 				items: []
 			}];
 
 			$http.get('/api/experience').success(function (res) {
+				$scope.resumeContent[0].loaded = true;
+				$scope.resumeContent[1].loaded = true;
+
 				res.forEach(function (exp) {
 					switch (exp.category) {
 						case 'employment':
@@ -45,7 +51,8 @@ define(function () {
 			});
 
 			$http.get('/api/skill').success(function (res) {
-				$scope.resumeContent[2].items = res;
+				$scope.resumeContent[2].loaded = true;
+				$scope.resumeContent[2].items  = res;
 			});
 
 			$scope.buttonBar = buttonBarSvc.resumeMenu;
