@@ -10,8 +10,7 @@ div(class='news-list')
 				ng-repeat='item in newsListItems')
 				div(class='news-list-item-image',
 					ng-class='{ "preloader preloader-intersection": !item.imageLoaded }')
-					//- to-do: change the image fetch location
-					img(ng-src='http://localhost:9000/api/image/home/{{ item.imageTitle }}',
+					img(ng-src='http://' + locationHost + '/api/image/home/{{ item.imageTitle }}',
 						ng-class='{ horizontal: item.imageHorizontal, vertical: item.imageVertical }',
 						ui-on-load='handleImageLoad(evt, item)')
 				div(class='news-list-item-content')

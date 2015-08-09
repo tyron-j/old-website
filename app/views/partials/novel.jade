@@ -5,8 +5,7 @@ div(class='novel-container')
 		| Coming... soon<i>ish</i><sup>TM</sup>
 	div(class='novel-content'
 		ng-class='{ "preloader preloader-intersection": !firstImageLoaded }')
-		//- to-do: change image fetch location host to tyronjung.com
 		img(ng-repeat='image in images',
 			ng-class='{ loaded: image.loaded }'
-			ng-src='http://localhost:9000/api/image/novel/{{ image.title }}',
+			ng-src='http://' + locationHost + '/api/image/novel/{{ image.title }}',
 			ui-on-load='handleImageLoad(evt, image)')

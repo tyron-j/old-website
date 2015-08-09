@@ -39,15 +39,13 @@ div(class='home-container')
 			ng-style='{ "z-index": (homeNews[0].inFront ? 1 : 0) }',
 			ng-class='{ shown: homeNews[0].shown, hidden: !homeNews[0].shown }')
 			a(class='home-news-panel-content',
-				ng-href='http://localhost:9000/{{ homeNews[0].href }}')
-				//- to-do: change fetch location host to tyronjung.com
-				img(ng-src='http://localhost:9000/api/image/home/{{ homeNews[0].imageTitle }}')
+				ng-href='http://' + locationHost + '/{{ homeNews[0].href }}')
+				img(ng-src='http://' + locationHost + '/api/image/home/{{ homeNews[0].imageTitle }}')
 		div(class='home-news-panel-content-container hidden'
 			ng-class='{ shown: homeNews[1].shown, hidden: !homeNews[1].shown }')
 			a(class='home-news-panel-content',
-				ng-href='http://localhost:9000/{{ homeNews[1].href }}')
-				//- to-do: change fetch location host to tyronjung.com
-				img(ng-src='http://localhost:9000/api/image/home/{{ homeNews[1].imageTitle }}')
+				ng-href='http://' + locationHost + '/{{ homeNews[1].href }}')
+				img(ng-src='http://' + locationHost + '/api/image/home/{{ homeNews[1].imageTitle }}')
 	div(class='right home-nav-panel')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',

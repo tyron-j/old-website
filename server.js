@@ -6,14 +6,15 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var fs         = require('fs');
 
-var db     = require('./app/utils/db');
-var signal = require('./app/utils/signal');
+var db       = require('./app/utils/db');
+var location = require('./app/utils/location');
+var signal   = require('./app/utils/signal');
 
 var api    = require('./app/routes/api');
 var routes = require('./app/routes');
 
 // temporary db login logic
-var isLocalHost = process.env.LOCAL_HOST && JSON.parse(process.env.LOCAL_HOST);
+var isLocalHost = location.isLocalHost;
 var dbLogin     = isLocalHost ? process.env.MASTER_LOGIN : process.env.GUEST_LOGIN;
 var dbUri       = process.env.MONGOLAB_URI.replace('<dbuser>:<dbpassword>', dbLogin);
 
@@ -78,7 +79,7 @@ app.get('/widgets/:widget', routes.widgets);
 // solves angular page refresh issue
 // redirects every other request to index
 // must be added last
-app.get('*', routes.index(isLocalHost));
+app.get('*', routes.index);
 
 // launch =================================================================== //
 
