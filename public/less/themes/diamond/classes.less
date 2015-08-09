@@ -681,9 +681,16 @@
 	}
 }
 
-.special-container {
-	@special-width: @vertical-golden-width;
-	@special-height: @vertical-golden-width / 1.6;
+@special-width: @vertical-golden-width;
+@special-height: @vertical-golden-width / 1.6;
+
+.special-letter {
+	.set-in-center(@special-width, @special-height);
+
+	background-color: @wet-asphalt;
+}
+
+.special-letter-cover-container {
 	@top-background-color: @turquoise;
 	@top-rectangle-height: 50px;
 	@top-seal-width: 50px;
@@ -691,14 +698,13 @@
 	@open-transition-delay: 0.5s;
 
 	.box-shadow(@std-box-shadow);
-	.faint(@green-sea, 50%);
 	.set-in-center(@special-width, @special-height);
 
 	cursor: pointer;
 
 	&.opened {
 		cursor: auto;
-		
+
 		& > .special-letter-cover {
 			&.top {
 				.rotate-x(180deg, 0% 0%);
@@ -724,6 +730,10 @@
 				}
 			}
 		}
+	}
+
+	&.dropped {
+		//
 	}
 
 	&.closed {
