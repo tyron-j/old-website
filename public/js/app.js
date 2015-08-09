@@ -3,6 +3,7 @@
 define([
 	'angular',
 	'angular-animate', // to-do: consider removing ngAnimate
+	'angular-cookies',
 	'angular-route',
 	'controllers/all',
 	'directives/all'
@@ -11,6 +12,7 @@ define([
 
 	var app = ng.module('tyronApp', [
 		'ngAnimate', // to-do: consider removing ngAnimate
+		'ngCookies',
 		'ngRoute',
 		'allControllers',
 		'allDirectives'
