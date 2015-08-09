@@ -16,9 +16,9 @@ define(function () {
 				console.log("Images not ready yet!");
 			};
 
-			$http.get('/api/image/blog').success(function (res) {
+			$http.get('/api/image/blog').then(function (res) {
 				$scope.openModalSelector = function () {
-					modalSelector.open(res, [{
+					modalSelector.open(res.data, [{
 						title: 'OK',
 						onClick: function () {
 							console.log("OK pressed!");

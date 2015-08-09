@@ -14,14 +14,14 @@ define(function () {
 				$scope.imageLoaded = true;
 			};
 
-			$http.get('/api/image/about').success(function (res) {
+			$http.get('/api/image/about').then(function (res) {
 				$scope.aboutPicture = {
-					src: '/api/image/about/' + res[0].title
+					src: '/api/image/about/' + res.data[0].title
 				};
 			});
 
-			$http.get('/api/intro').success(function (res) {
-				$scope.aboutText = res.content;
+			$http.get('/api/intro').then(function (res) {
+				$scope.aboutText = res.data.content;
 			});
 			
 			$scope.aboutExternalLinks = [{

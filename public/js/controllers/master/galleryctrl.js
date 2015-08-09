@@ -29,8 +29,8 @@ define(function () {
 			$scope.targetCategory       = $scope.imageBrowserSelector.selectedItem.toLowerCase();
 			$scope.postAction           = '/api/image/' + $scope.targetCategory;
 
-			$http.get('/api/image/' + $scope.targetCategory).success(function (res) {
-				$scope.images = res;
+			$http.get('/api/image/' + $scope.targetCategory).then(function (res) {
+				$scope.images = res.data;
 			});
 
 			// to-do: consider making image browser a widget and moving these methods to a service
@@ -63,8 +63,8 @@ define(function () {
 					$scope.targetCategory = newVal.toLowerCase();
 					$scope.postAction     = '/api/image/' + $scope.targetCategory;
 
-					$http.get('/api/image/' + $scope.targetCategory).success(function (res) {
-						$scope.images     = res;
+					$http.get('/api/image/' + $scope.targetCategory).then(function (res) {
+						$scope.images = res.data;
 					});
 
 					$location.path('master/gallery/' + $scope.targetCategory);

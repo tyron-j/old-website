@@ -58,8 +58,8 @@ define(function () {
 									buttons: [{
 										title: 'OK',
 										onClick: function () {
-											$http.delete('/api/image/' + imageBeingDeleted.category + '/' + imageBeingDeleted.title).success(function (res) {
-												console.log(res.msg);
+											$http.delete('/api/image/' + imageBeingDeleted.category + '/' + imageBeingDeleted.title).then(function (res) {
+												console.log(res.data.msg);
 												images.splice(images.indexOf(imageBeingDeleted), 1);
 												modalDialog.close();
 											});
@@ -158,8 +158,8 @@ define(function () {
 												var count = 0;
 
 												selectedImages.forEach(function (image) {
-													$http.delete('/api/image/' + image.category + '/' + image.title).success(function (res) {
-														console.log(res.msg);
+													$http.delete('/api/image/' + image.category + '/' + image.title).then(function (res) {
+														console.log(res.data.msg);
 														images.splice(images.indexOf(image), 1);
 														count++;
 
@@ -269,8 +269,8 @@ define(function () {
 											content: blog.content,
 											bgImageTitle: blog.bgImageTitle,
 											creationDate: blog.creationDate
-										}).success(function (res) {
-											console.log(res.msg);
+										}).then(function (res) {
+											console.log(res.data.msg);
 
 											blog.isNew = false;
 										});
@@ -281,8 +281,8 @@ define(function () {
 											content: blog.content,
 											bgImageTitle: blog.bgImageTitle,
 											creationDate: blog.creationDate
-										}).success(function (res) {
-											console.log(res.msg);
+										}).then(function (res) {
+											console.log(res.data.msg);
 										});
 									}
 								} else { // duplicate title
@@ -306,8 +306,8 @@ define(function () {
 							onClick: function () {
 								var blog = sideBar.selectedItem;
 
-								$http.get('/api/image/blog').success(function (res) {
-									modalSelector.open(res, [{
+								$http.get('/api/image/blog').then(function (res) {
+									modalSelector.open(res.data, [{
 										title: 'OK',
 										onClick: function () {
 											if (modalSelector.selectedImage) {
@@ -352,8 +352,8 @@ define(function () {
 												sideBar.selectItem(blogs[0]);
 												modalDialog.close();
 											} else {
-												$http.delete('/api/blog/' + blog.title).success(function (res) {
-													console.log(res.msg);
+												$http.delete('/api/blog/' + blog.title).then(function (res) {
+													console.log(res.data.msg);
 													blogs.splice(blogs.indexOf(blog), 1);
 													sideBar.selectItem(blogs[0]);
 													modalDialog.close();
@@ -470,8 +470,8 @@ define(function () {
 									href: newsListItem.href,
 									imageTitle: newsListItem.imageTitle,
 									creationDate: newsListItem.creationDate
-								}).success(function (res) {
-									console.log(res.msg);
+								}).then(function (res) {
+									console.log(res.data.msg);
 
 									newsListItem.isNew = false;
 								});
@@ -480,8 +480,8 @@ define(function () {
 									href: newsListItem.href,
 									imageTitle: newsListItem.imageTitle,
 									creationDate: newsListItem.creationDate
-								}).success(function (res) {
-									console.log(res.msg);
+								}).then(function (res) {
+									console.log(res.data.msg);
 								});
 							}
 						}
@@ -491,8 +491,8 @@ define(function () {
 						hidden: true,
 
 						onClick: function () {
-							$http.get('/api/image/home').success(function (res) {
-								modalSelector.open(res, [{
+							$http.get('/api/image/home').then(function (res) {
+								modalSelector.open(res.data, [{
 									title: 'OK',
 									onClick: function () {
 										if (modalSelector.selectedImage) {
@@ -533,8 +533,8 @@ define(function () {
 											newsListItems.splice(newsListItems.indexOf(newsListItem), 1);
 											modalDialog.close();
 										} else {
-											$http.delete('/api/news/' + newsListItem.imageTitle).success(function (res) {
-												console.log(res.msg);
+											$http.delete('/api/news/' + newsListItem.imageTitle).then(function (res) {
+												console.log(res.data.msg);
 												newsListItems.splice(newsListItems.indexOf(newsListItem), 1);
 												modalDialog.close();
 											});

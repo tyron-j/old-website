@@ -34,11 +34,11 @@ define(function () {
 				items: []
 			}];
 
-			$http.get('/api/experience').success(function (res) {
+			$http.get('/api/experience').then(function (res) {
 				$scope.resumeContent[0].loaded = true;
 				$scope.resumeContent[1].loaded = true;
 
-				res.forEach(function (exp) {
+				res.data.forEach(function (exp) {
 					switch (exp.category) {
 						case 'employment':
 							$scope.resumeContent[0].items.push(exp);
@@ -50,9 +50,9 @@ define(function () {
 				});
 			});
 
-			$http.get('/api/skill').success(function (res) {
+			$http.get('/api/skill').then(function (res) {
 				$scope.resumeContent[2].loaded = true;
-				$scope.resumeContent[2].items  = res;
+				$scope.resumeContent[2].items  = res.data;
 			});
 
 			$scope.buttonBar = buttonBarSvc.resumeMenu;

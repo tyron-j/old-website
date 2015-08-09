@@ -15,8 +15,8 @@ define(function () {
 			$scope.newsListHeader  = 'News List';
 			$scope.headerButtonBar = buttonBarSvc.getNewsListItemAdder($scope);
 
-			$http.get('/api/news').success(function (res) {
-				$scope.newsListItems = res;
+			$http.get('/api/news').then(function (res) {
+				$scope.newsListItems = res.data;
 
 				$scope.newsListItems.forEach(function (item) {
 					item.buttonBar = new ContentButtonBar($scope, item);

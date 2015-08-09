@@ -8,8 +8,8 @@ define(function () {
 		'$scope',
 		
 		function ($http, $scope) {
-			$http.get('/api/image/novel').success(function (res) {
-				$scope.images = res;
+			$http.get('/api/image/novel').then(function (res) {
+				$scope.images = res.data;
 			});
 
 			$scope.firstImageLoaded = false;
