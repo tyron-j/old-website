@@ -90,7 +90,7 @@ define([
 
 			// otherwise
 			$routeProvider.otherwise({
-				redirectTo: '/home' // to-do: change to login
+				redirectTo: '/login'
 			});
 
 			$locationProvider.html5Mode(true);

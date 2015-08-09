@@ -1,9 +1,14 @@
 //- login
 
-div(class='centered')
-	form(action='/api/user', method='get')
-		div
-			label Who <i>are</i> you?
-		br
-		div
-			input(type='text', name='name')
+//- div(class='centered')
+//- 	form(action='/api/user', method='get')
+//- 		div
+//- 			label Who <i>are</i> you?
+//- 		br
+//- 		div
+//- 			input(type='text', name='name')
+
+div(class='login-container',
+	ng-class='{ "preloader preloader-intersection": !loginAgentShown }')
+	div(class='login-agent'
+		ng-if='loginAgentShown')

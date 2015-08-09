@@ -4,10 +4,14 @@ define(function () {
 	'use strict';
 
 	return [
+		'$cookies',
 		'$scope',
+		'$timeout',
 		
-		function ($scope) {
-			//
+		function ($cookies, $scope, $timeout) {
+			$timeout(function () {
+				$scope.loginAgentShown = true;
+			}, 1000);
 		}
 	];
 });
