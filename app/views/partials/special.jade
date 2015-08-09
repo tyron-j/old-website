@@ -1,11 +1,11 @@
 //- special
 
 div(class='special-container',
-	ng-click='openLetter()')
+	ng-click='openLetter()',
+	ng-class='{ opened: letterOpened, closed: !letterOpened }')
 	div(class='special-letter-cover left')
 	div(class='special-letter-cover right')
-	div(class='special-letter-cover top',
-		ng-class='{ opened: letterOpened, closed: !letterOpened }')
+	div(class='special-letter-cover top')
 		div(class='top-rectangle')
 		div(class='top-triangle')
 		div(class='top-seal')

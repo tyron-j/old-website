@@ -682,15 +682,57 @@
 }
 
 .special-container {
-	.widget; // to-do: this is not a widget
-
 	@special-width: @vertical-golden-width;
 	@special-height: @vertical-golden-width / 1.6;
+	@top-background-color: @turquoise;
+	@top-rectangle-height: 50px;
+	@top-seal-width: 50px;
+	@top-seal-margin: 3px;
+	@open-transition-delay: 0.5s;
 
+	.box-shadow(@std-box-shadow);
 	.faint(@green-sea, 50%);
 	.set-in-center(@special-width, @special-height);
 
 	cursor: pointer;
+
+	&.opened {
+		cursor: auto;
+		
+		& > .special-letter-cover {
+			&.top {
+				.rotate-x(180deg, 0% 0%);
+
+				transition: @std-transition;
+				transition-delay: @open-transition-delay;
+
+				& > .top-rectangle {
+					background-color: @green-sea;
+					transition: @std-transition;
+					transition-delay: @open-transition-delay;
+				}
+
+				& > .top-triangle {
+					border-color: @green-sea transparent transparent transparent;
+					transition: @std-transition;
+					transition-delay: @open-transition-delay;
+				}
+
+				& > .top-seal {
+					opacity: 0;
+					transition: @std-transition;
+				}
+			}
+		}
+	}
+
+	&.closed {
+		& > .special-letter-cover {
+			&.top {
+				.rotate-x(0deg, 0% 0%);
+			}
+		}
+	}
 
 	& > .special-letter-cover {
 		&.left, &.right, &.top > .top-triangle {
@@ -711,32 +753,7 @@
 		}
 
 		&.top {
-			@top-background-color: @turquoise;
-			@top-rectangle-height: 50px;
-			@top-seal-width: 50px;
-			@top-seal-margin: 3px;
-
 			.set-dimensions(100%, (@special-height / 2) + @top-rectangle-height + (@top-seal-width - @top-seal-margin));
-
-			&.opened {
-				.rotate-x(180deg, 0% 0%);
-
-				transition: @std-transition;
-
-				& > .top-rectangle {
-					background-color: @green-sea;
-				}
-
-				& > .top-triangle {
-					border-color: @green-sea transparent transparent transparent;
-				}
-			}
-
-			&.closed {
-				.rotate-x(0deg, 0% 0%);
-
-				transition: @std-transition;
-			}
 
 			& > .top-rectangle {
 				.set-dimensions(100%, @top-rectangle-height);
