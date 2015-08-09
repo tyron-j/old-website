@@ -683,11 +683,20 @@
 
 @special-width: @vertical-golden-width;
 @special-height: @vertical-golden-width / 1.6;
+@drop-transition-delay: 1s;
 
 .special-letter {
 	.set-in-center(@special-width, @special-height);
 
 	background-color: @wet-asphalt;
+
+	&.opened {
+		.box-shadow(@std-box-shadow);
+
+		height: @vertical-golden-height;
+		transition: @std-transition;
+		transition-delay: @drop-transition-delay;
+	}
 }
 
 .special-letter-cover-container {
@@ -711,6 +720,7 @@
 
 				transition: @std-transition;
 				transition-delay: @open-transition-delay;
+				z-index: -1; // in order to show letter inside
 
 				& > .top-rectangle {
 					background-color: @green-sea;
@@ -733,7 +743,10 @@
 	}
 
 	&.dropped {
-		//
+		opacity: 0;
+		top: @special-height * 1.5;
+		transition: @std-transition;
+		transition-delay: @drop-transition-delay;
 	}
 
 	&.closed {
