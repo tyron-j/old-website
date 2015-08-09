@@ -10,6 +10,7 @@ define(function () {
 			return {
 				model: { // using a singleton since there will only be one instance of a nav bar
 					inUse: false,
+					shown: false,
 					items: [],
 					masterMode: false
 				},
