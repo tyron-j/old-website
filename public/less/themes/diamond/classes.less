@@ -686,13 +686,12 @@
 @drop-transition-delay: 1s;
 
 .special-letter {
+	.box-shadow(@std-box-shadow);
 	.set-in-center(@special-width, @special-height);
 
 	background-color: @wet-asphalt;
 
 	&.opened {
-		.box-shadow(@std-box-shadow);
-
 		height: @vertical-golden-height;
 		transition: @std-transition;
 		transition-delay: @drop-transition-delay;
@@ -706,7 +705,6 @@
 	@top-seal-margin: 3px;
 	@open-transition-delay: 0.5s;
 
-	.box-shadow(@std-box-shadow);
 	.set-in-center(@special-width, @special-height);
 
 	cursor: pointer;
@@ -718,9 +716,9 @@
 			&.top {
 				.rotate-x(180deg, 0% 0%);
 
+				opacity: 0;
 				transition: @std-transition;
 				transition-delay: @open-transition-delay;
-				z-index: -1; // in order to show letter inside
 
 				& > .top-rectangle {
 					background-color: @green-sea;
