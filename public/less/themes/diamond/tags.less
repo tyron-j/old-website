@@ -17,6 +17,10 @@ body {
 
 ::-webkit-scrollbar {
 	width: @scrollbar-width;
+
+	&:horizontal {
+		height: @scrollbar-width;
+	}
 }
 
 ::-webkit-scrollbar-button {
@@ -36,5 +40,5 @@ body {
 }
 
 ::-webkit-scrollbar-corner {
-	//
+	background-color: @green-sea;
 }
