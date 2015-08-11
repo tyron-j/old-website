@@ -522,6 +522,52 @@
 
 	.set-in-center(@login-width);
 
+	& > .login-agent-text-bubble {
+		.set-dimensions(50%, 30%);
+
+		left: 0;
+		right: 0;
+		margin: auto;
+		position: absolute;
+
+		@login-agent-text-bubble-arrow-width: @login-agent-width / 2;
+
+		& > .login-agent-text-bubble-arrow, & > .login-agent-text-bubble-arrow-shadow {
+			.rotate(45deg);
+			.set-dimensions(@login-agent-text-bubble-arrow-width);
+
+			left: 0;
+			right: 0;
+			bottom: -@login-agent-text-bubble-arrow-width / 2;
+			margin: auto;
+			position: absolute;
+		}
+
+		@login-agent-text-bubble-transition-delay: @std-transition-delay * 1.5;
+
+		&.shown {
+			.box-shadow(@std-box-shadow);
+
+			background-color: @wet-asphalt;
+			transition: @std-transition;
+			transition-delay: @login-agent-text-bubble-transition-delay;
+
+			& > .login-agent-text-bubble-arrow {
+				background-color: @wet-asphalt;
+				transition: @std-transition;
+				transition-delay: @login-agent-text-bubble-transition-delay;
+			}
+
+			& > .login-agent-text-bubble-arrow-shadow {
+				.box-shadow(@std-box-shadow);
+				
+				transition: @std-transition;
+				transition-delay: @login-agent-text-bubble-transition-delay;
+				z-index: -1;
+			}
+		}
+	}
+
 	& > .login-agent {
 		.rotate(45deg);
 		.set-dimensions(@login-agent-width);

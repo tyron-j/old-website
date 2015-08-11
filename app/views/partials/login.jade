@@ -10,5 +10,9 @@
 
 div(class='login-container',
 	ng-class='{ "preloader preloader-intersection": !loginAgentShown }')
+	div(class='login-agent-text-bubble',
+		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')
+		div(class='login-agent-text-bubble-arrow')
+		div(class='login-agent-text-bubble-arrow-shadow')
 	div(class='login-agent',
 		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')
