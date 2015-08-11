@@ -14,5 +14,9 @@ div(class='login-container',
 		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')
 		div(class='login-agent-text-bubble-arrow')
 		div(class='login-agent-text-bubble-arrow-shadow')
+		span(class='login-agent-text-bubble-content')
+			| Who are you?
+		input(class='login-agent-text-bubble-input',
+			type='text')
 	div(class='login-agent',
 		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')

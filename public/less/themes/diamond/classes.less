@@ -525,10 +525,13 @@
 	& > .login-agent-text-bubble {
 		.set-dimensions(50%, 30%);
 
+		font-size: @std-font-size;
 		left: 0;
 		right: 0;
 		margin: auto;
+		padding: @std-text-padding;
 		position: absolute;
+		text-align: center;
 
 		@login-agent-text-bubble-arrow-width: @login-agent-width / 2;
 
@@ -541,6 +544,27 @@
 			bottom: -@login-agent-text-bubble-arrow-width / 2;
 			margin: auto;
 			position: absolute;
+		}
+
+		& > span.login-agent-text-bubble-content, & > input.login-agent-text-bubble-input {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		& > input.login-agent-text-bubble-input {
+			.faint(black);
+
+			border: none;
+			color: white;
+			font-family: @std-font-family;
+			font-size: @login-agent-text-bubble-font-size;
+
+			position: absolute;
+			left: ((@login-width / 2) - @login-agent-text-bubble-input-width) / 2;
+			bottom: @std-text-padding;
+			width: @login-agent-text-bubble-input-width;
+			height: @login-agent-text-bubble-font-size + 5px;
+			text-align: center;
 		}
 
 		@login-agent-text-bubble-transition-delay: @std-transition-delay * 1.5;
@@ -564,6 +588,13 @@
 				transition: @std-transition;
 				transition-delay: @login-agent-text-bubble-transition-delay;
 				z-index: -1;
+			}
+
+			& > span.login-agent-text-bubble-content, & > input.login-agent-text-bubble-input {
+				opacity: 1;
+				pointer-events: auto;
+				transition: @std-transition;
+				transition-delay: @login-agent-text-bubble-transition-delay;
 			}
 		}
 	}
