@@ -522,8 +522,6 @@
 
 	.set-in-center(@login-width);
 
-	// background-color: orange;
-
 	& > .login-agent {
 		.rotate(45deg);
 		.set-dimensions(@login-agent-width);
@@ -534,25 +532,41 @@
 		margin-top: (@login-width - @login-agent-width) / 2;
 		position: relative;
 
-		@keyframes levitate {
-			from {
-				.box-shadow(@std-box-shadow / 3, white);
+		// starting values
+		.box-shadow(@std-box-shadow, white);
 
-				bottom: 0;
+		bottom: @login-agent-width * 3;
+		opacity: 0;
+
+		&.shown {
+			.box-shadow(@std-box-shadow / 3, white);
+
+			bottom: 0;
+			opacity: 1;
+			transition: @std-transition;
+
+			// animation
+			@keyframes levitate {
+				from {
+					.box-shadow(@std-box-shadow / 3, white);
+
+					bottom: 0;
+				}
+
+				to {
+					.box-shadow(@std-box-shadow, white);
+
+					bottom: @login-agent-width;
+				}
 			}
 
-			to {
-				.box-shadow(@std-box-shadow, white);
-
-				bottom: @login-agent-width;
-			}
+			animation-delay: @std-transition-delay / 2;
+			animation-direction: alternate;
+			animation-duration: 1s;
+			animation-iteration-count: infinite;
+			animation-name: levitate;
+			animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
 		}
-
-		animation-direction: alternate;
-		animation-duration: 1s;
-		animation-iteration-count: infinite;
-		animation-name: levitate;
-		animation-timing function: cubic-bezier(0.5, 0, 0.5, 1);
 	}
 }
 

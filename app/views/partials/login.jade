@@ -10,5 +10,5 @@
 
 div(class='login-container',
 	ng-class='{ "preloader preloader-intersection": !loginAgentShown }')
-	div(class='login-agent'
-		ng-if='loginAgentShown')
+	div(class='login-agent',
+		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')
