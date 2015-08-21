@@ -34,6 +34,12 @@ define(function () {
 						this.questionMode     = true;
 						this.questionCallback = callback || this.questionCallback;
 						this.text             = question || '';
+
+						$timeout(function () { // asynchronous auto focus
+							var input = document.getElementsByClassName('login-agent-text-bubble-input')[0];
+
+							input && input.focus();
+						});
 					},
 
 					receiveAnswer: function (evt) {
