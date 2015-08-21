@@ -71,40 +71,50 @@ define(function () {
 
 				// login logic
 				loginAgent.askQuestion("Who are you?", function (name) {
-					$http.get('/api/user?name=' + name).then(function (res) {
+					if (/^tyron(?=.*jung$)/i.test(name)) {
 						loginAgent.spewText([
-							"Prove that you are " + res.data.firstName + " by answering the following question."
-						], function () {
-							loginAgent.askQuestion(res.data.question, function (answer) {
-								$http.get('/api/user?name=' + name + '&answer=' + answer).then(function (res) {
-									loginAgent.spewText([
-										"Welcome, " + res.data.firstName + ".",
-										"I have some homemade cookies that expire automatically.",
-										"I highly recommend that you try them out."
-									], function () {
-										loginAgent.askQuestion("Would you like some?", function (answer) { // to-do: make this binary
-											//
-										});
-									});
-								}, function (res) { // fail condition
-									loginAgent.spewText([
-										"Beep - wrong answer.",
-										"You can still proceed to my website though.",
-										"Even if you're an impersonating scum."
-									], function () {
-										$location.path('home');
-									});
-								});
-							});
-						});
-					}, function (res) { // fail condition
-						loginAgent.spewText([
-							"It appears we haven't met.",
-							"You can still proceed to my website though."
+							"Nice try.",
+							"You can still proceed to my website though.",
+							"Even if you're an impersonating scum."
 						], function () {
 							$location.path('home');
 						});
-					});
+					} else {
+						$http.get('/api/user?name=' + name).then(function (res) {
+							loginAgent.spewText([
+								"Prove that you are " + res.data.firstName + " by answering the following question."
+							], function () {
+								loginAgent.askQuestion(res.data.question, function (answer) {
+									$http.get('/api/user?name=' + name + '&answer=' + answer).then(function (res) {
+										loginAgent.spewText([
+											"Welcome, " + res.data.firstName + ".",
+											"I have some homemade cookies that expire automatically.",
+											"I highly recommend that you try them out."
+										], function () {
+											loginAgent.askQuestion("Would you like some?", function (answer) { // to-do: make this binary
+												//
+											});
+										});
+									}, function (res) { // fail condition
+										loginAgent.spewText([
+											"Beep - wrong answer.",
+											"You can still proceed to my website though.",
+											"Even if you're an impersonating scum."
+										], function () {
+											$location.path('home');
+										});
+									});
+								});
+							});
+						}, function (res) { // fail condition
+							loginAgent.spewText([
+								"It appears we haven't met.",
+								"You can still proceed to my website though."
+							], function () {
+								$location.path('home');
+							});
+						});
+					}
 				});
 			}
 		}
