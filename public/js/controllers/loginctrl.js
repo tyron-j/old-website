@@ -9,64 +9,71 @@ define(function () {
 		'$timeout',
 		
 		function ($cookies, $scope, $timeout) {
-			// temporary cookie logic
-			$timeout(function () {
-				$scope.loginAgentShown = true;
-			});
+			var userName   = $cookies.get('userName');
+			var userAnswer = $cookies.get('userAnswer');
 
-			// login agent model
-			var loginAgent = $scope.loginAgent = { // singleton; to-do: consider turning this into a global widget
-				questionMode: false,
-				questionCallback: function () {
-					console.error("No question was passed into the login agent"); // default logic
-				},
-				textDelay: 3000, // constant for how long each text is displayed
-				text: '',
+			if (userName && userAnswer) {
+				//
+			} else {
+				// asynchronous to show initial animation
+				$timeout(function () {
+					$scope.loginAgentShown = true;
+				}, 1000);
 
-				askQuestion: function (question, callback) {
-					this.questionMode     = true;
-					this.questionCallback = callback || this.questionCallback;
-					this.text             = question || '';
-				},
+				// login agent model
+				var loginAgent = $scope.loginAgent = { // singleton; to-do: consider turning this into a global widget
+					questionMode: false,
+					questionCallback: function () {
+						console.error("No question was passed into the login agent"); // default logic
+					},
+					textDelay: 3000, // constant for how long each text is displayed
+					text: '',
 
-				receiveAnswer: function (evt) {
-					this.questionMode = false;
-					this.text         = '';
+					askQuestion: function (question, callback) {
+						this.questionMode     = true;
+						this.questionCallback = callback || this.questionCallback;
+						this.text             = question || '';
+					},
 
-					this.questionCallback(evt.target.value);
-				},
+					receiveAnswer: function (evt) {
+						this.questionMode = false;
+						this.text         = '';
 
-				// textQueue must be array
-				spewText: function (textQueue, callback) {
-					var that = this;
+						this.questionCallback(evt.target.value);
+					},
 
-					if (textQueue.length) {
+					// textQueue must be array
+					spewText: function (textQueue, callback) {
+						var that = this;
 
-						this.text = textQueue.shift();
+						if (textQueue.length) {
 
-						$timeout(function () {
-							that.spewText(textQueue, callback);
-						}, this.textDelay);
-					} else {
-						that.text = '';
+							this.text = textQueue.shift();
 
-						callback();
+							$timeout(function () {
+								that.spewText(textQueue, callback);
+							}, this.textDelay);
+						} else {
+							that.text = '';
+
+							callback();
+						}
 					}
-				}
-			};
+				};
 
-			// login logic
-			loginAgent.askQuestion("Who are you?", function (answer) {
-				console.log(answer);
+				// login logic
+				loginAgent.askQuestion("Who are you?", function (answer) {
+					console.log(answer);
 
-				loginAgent.spewText([
-					"I don't think calling something commercial",
-					"means that it needs to be publicly acceptable",
-					"what's wrong with that?"
-				], function () {
-					//
+					loginAgent.spewText([
+						"I don't think calling something commercial",
+						"means that it needs to be publicly acceptable",
+						"what's wrong with that?"
+					], function () {
+						//
+					});
 				});
-			});
+			}
 		}
 	];
 });
