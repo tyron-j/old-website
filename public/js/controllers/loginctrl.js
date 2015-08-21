@@ -5,10 +5,11 @@ define(function () {
 
 	return [
 		'$cookies',
+		'$http',
 		'$scope',
 		'$timeout',
 		
-		function ($cookies, $scope, $timeout) {
+		function ($cookies, $http, $scope, $timeout) {
 			var userName   = $cookies.get('userName');
 			var userAnswer = $cookies.get('userAnswer');
 
@@ -62,15 +63,17 @@ define(function () {
 				};
 
 				// login logic
-				loginAgent.askQuestion("Who are you?", function (answer) {
-					console.log(answer);
-
-					loginAgent.spewText([
-						"I don't think calling something commercial",
-						"means that it needs to be publicly acceptable",
-						"what's wrong with that?"
-					], function () {
-						//
+				loginAgent.askQuestion("Who are you?", function (name) {
+					$http.get('/api/user?name=' + name).then(function (res) {
+						loginAgent.spewText([
+							"Prove that you are " + res.data.firstName + "."
+						], function () {
+							loginAgent.askQuestion(res.data.question, function (answer) {
+								//
+							});
+						});
+					}, function (res) { // fail condition
+						console.error(res.data.msg);
 					});
 				});
 			}

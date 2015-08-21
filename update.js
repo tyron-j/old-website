@@ -9,6 +9,7 @@ var signal = require('./app/utils/signal');
 var Experience = require('./app/models/experience');
 var Intro      = require('./app/models/intro');
 var Skill      = require('./app/models/skill');
+var User       = require('./app/models/user');
 
 // variables
 var uploadDir = __dirname + '/app/update';
@@ -26,6 +27,12 @@ var status    = {
 	},
 
 	skill: {
+		doneUpdating: false,
+		numCompleted: 0,
+		numTotal: null
+	},
+
+	user: {
 		doneUpdating: false,
 		numCompleted: 0,
 		numTotal: null
@@ -161,6 +168,39 @@ db.connection.on('connected', function () {
 
 					signal.success("Saved skill to database");
 					updateStatus('skill');
+				});
+			});
+		});
+	});
+
+	// update users
+	fs.readFile(uploadDir + '/users.json', function (err, data) {
+		if (err) {
+			signal.error("Failed to read users");
+			throw err; // to-do: handle error gracefully
+		}
+
+		User.remove({}, function (err) {
+			if (err) {
+				signal.error("Failed to delete users in database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			signal.success("Deleted users in database");
+
+			var users = JSON.parse(data);
+
+			updateStatus('user', users.length);
+
+			users.forEach(function (user) {
+				(new User(user)).save(function (err, s) {
+					if (err) {
+						signal.error("Failed to save user to database");
+						throw err; // to-do: handle error gracefully
+					}
+
+					signal.success("Saved user to database");
+					updateStatus('user');
 				});
 			});
 		});

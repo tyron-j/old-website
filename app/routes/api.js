@@ -358,45 +358,25 @@ module.exports = {
 	},
 
 	getUser: function (req, res, next) {
-		var name = req.query.name.toLowerCase().split(' ');
+		var name      = req.query.name.split(' ');
+		var firstName = name.shift();
+		var lastName  = name.pop();
 
-		models.User.findOne({
-			name: {
-				first: name[0],
-				last: name[1]
-			}
-		}, function (err, user) { // to-do: change redirects
-			if (err || !user) {
-				// to-do: recognize Dan Ryan properly and remove this if/else block
-				if (/^dan/i.test(req.query.name) && /ryan/i.test(req.query.name) && /chan$/i.test(req.query.name)) {
-					res.redirect('/danryan');
-				} else {
-					res.redirect('/unauthorized');
+		models.User
+			.findOne({
+				firstName: new RegExp(firstName, 'i'),
+				lastName: new RegExp(lastName, 'i')
+			})
+			.select('firstName lastName question')
+			.exec(function (err, user) {
+				if (user) {
+					res.send(user);
+				} else { // to-do: handle no matches properly
+					res.status(404);
+					res.send({
+						msg: "User not found"
+					});
 				}
-			} else {
-				res.redirect('/hello');
-			}
-		});
-	},
-
-	postUser: function (req, res, next) {
-		// req.body seems to work only with post requests
-		var name = req.body.name.toLowerCase().split(' ');
-		var user = new models.User({
-			name: {
-				first: name[0],
-				last: name[1]
-			}
-		});
-
-		user.save(function (err, u) {
-			if (err) {
-				signal.error("Failed to save " + name.join(' ') + " to database");
-				throw err; // to-do: handle error gracefully
-			}
-
-			signal.success("Saved " + name.join(' ') + " to database");
-			res.redirect('/success'); // to-do: change redirect
-		});
+			});
 	}
 };

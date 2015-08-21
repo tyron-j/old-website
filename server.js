@@ -59,7 +59,6 @@ app.get('/api/skill', api.getSkill);
 app.post('/api/blog', api.postBlog);
 app.post('/api/image/:category', api.postImage(__dirname + '/app/temp'));
 app.post('/api/news', api.postNews);
-app.post('/api/user', api.postUser);
 
 app.put('/api/blog', api.putBlog);
 app.put('/api/image', api.putImage);
