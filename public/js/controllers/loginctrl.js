@@ -12,7 +12,7 @@ define(function () {
 			// temporary cookie logic
 			$timeout(function () {
 				$scope.loginAgentShown = true;
-			}, 1000);
+			});
 
 			// login agent model
 			var loginAgent = $scope.loginAgent = { // singleton; to-do: consider turning this into a global widget
@@ -29,16 +29,18 @@ define(function () {
 					this.text             = question || '';
 				},
 
-				receiveAnswer: function (answer) {
+				receiveAnswer: function (evt) {
 					this.questionMode = false;
+					this.text         = '';
 
-					this.questionCallback(answer);
+					this.questionCallback(evt.target.value);
 				},
 
 				// textQueue must be array
 				spewText: function (textQueue, callback) {
+					var that = this;
+
 					if (textQueue.length) {
-						var that = this;
 
 						this.text = textQueue.shift();
 
@@ -46,13 +48,25 @@ define(function () {
 							that.spewText(textQueue, callback);
 						}, this.textDelay);
 					} else {
+						that.text = '';
+
 						callback();
 					}
 				}
 			};
 
 			// login logic
-			loginAgent.askQuestion("Who are you?");
+			loginAgent.askQuestion("Who are you?", function (answer) {
+				console.log(answer);
+
+				loginAgent.spewText([
+					"I don't think calling something commercial",
+					"means that it needs to be publicly acceptable",
+					"what's wrong with that?"
+				], function () {
+					//
+				});
+			});
 		}
 	];
 });

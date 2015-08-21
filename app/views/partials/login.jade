@@ -19,6 +19,7 @@ div(class='login-container',
 		//- to-do: implement ui-enter; then when enter is pressed, call loginAgent.receiveAnswer(answer)
 		input(class='login-agent-text-bubble-input',
 			type='text',
-			ng-if='loginAgent.questionMode')
+			ng-if='loginAgent.questionMode',
+			ui-on-enter='loginAgent.receiveAnswer(evt)')
 	div(class='login-agent',
 		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')
