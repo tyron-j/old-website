@@ -76,7 +76,12 @@ define(function () {
 						], function () {
 							loginAgent.askQuestion(res.data.question, function (answer) {
 								$http.get('/api/user?name=' + name + '&answer=' + answer).then(function (res) {
-									//
+									loginAgent.spewText([
+										"Welcome, " + res.data.firstName + ".",
+										"I have some homemade cookies that expire automatically."
+									], function () {
+										loginAgent.askQuestion("Would you like some?"); // to-do: make this binary
+									});
 								}, function (res) { // fail condition
 									console.error(res.data.msg); // to-do: handle error properly
 								});
