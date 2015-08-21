@@ -9,11 +9,13 @@ define(function () {
 		'$timeout',
 		
 		function ($cookies, $scope, $timeout) {
+			// temporary cookie logic
 			$timeout(function () {
 				$scope.loginAgentShown = true;
 			}, 1000);
 
-			var loginAgent = { // singleton; to-do: consider turning this into a global widget
+			// login agent model
+			var loginAgent = $scope.loginAgent = { // singleton; to-do: consider turning this into a global widget
 				questionMode: false,
 				questionCallback: function () {
 					console.error("No question was passed into the login agent"); // default logic
@@ -48,6 +50,9 @@ define(function () {
 					}
 				}
 			};
+
+			// login logic
+			loginAgent.askQuestion("Who are you?");
 		}
 	];
 });

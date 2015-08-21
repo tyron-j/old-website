@@ -10,6 +10,6 @@ define(function () {
 			scope: {
 				model: '=uiModel'
 			}
-		}
+		};
 	};
 });

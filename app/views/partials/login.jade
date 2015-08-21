@@ -15,10 +15,10 @@ div(class='login-container',
 		div(class='login-agent-text-bubble-arrow')
 		div(class='login-agent-text-bubble-arrow-shadow')
 		span(class='login-agent-text-bubble-content')
-			| Who are you?
-		//- to-do: ng-if loginAgent.questionMode
+			| {{ loginAgent.text }}
 		//- to-do: implement ui-enter; then when enter is pressed, call loginAgent.receiveAnswer(answer)
 		input(class='login-agent-text-bubble-input',
-			type='text')
+			type='text',
+			ng-if='loginAgent.questionMode')
 	div(class='login-agent',
 		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')
