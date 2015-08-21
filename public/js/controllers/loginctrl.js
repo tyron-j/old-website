@@ -69,11 +69,15 @@ define(function () {
 							"Prove that you are " + res.data.firstName + "."
 						], function () {
 							loginAgent.askQuestion(res.data.question, function (answer) {
-								//
+								$http.get('/api/user?name=' + name + '&answer=' + answer).then(function (res) {
+									//
+								}, function (res) { // fail condition
+									console.error(res.data.msg); // to-do: handle error properly
+								});
 							});
 						});
 					}, function (res) { // fail condition
-						console.error(res.data.msg);
+						console.error(res.data.msg); // to-do: handle error properly
 					});
 				});
 			}

@@ -361,13 +361,23 @@ module.exports = {
 		var name      = req.query.name.split(' ');
 		var firstName = name.shift();
 		var lastName  = name.pop();
+		var answer    = req.query.answer;
+
+		var selection = 'firstName lastName';
+		var query     = {
+			firstName: new RegExp(firstName, 'i'),
+			lastName: new RegExp(lastName, 'i')
+		};
+
+		if (answer) {
+			query.answer = new RegExp(answer, 'i');
+		} else {
+			selection += ' question';
+		}
 
 		models.User
-			.findOne({
-				firstName: new RegExp(firstName, 'i'),
-				lastName: new RegExp(lastName, 'i')
-			})
-			.select('firstName lastName question')
+			.findOne(query)
+			.select(selection)
 			.exec(function (err, user) {
 				if (user) {
 					res.send(user);

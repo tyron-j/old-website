@@ -18,8 +18,8 @@ module.exports = db.model('User', new db.Schema({
 		required: true
 	},
 
-	answers: {
-		type: [ String ],
+	answer: {
+		type: [ String ], // possible answers
 		required: true
 	}
 }));
