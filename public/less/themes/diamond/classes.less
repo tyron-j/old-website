@@ -546,7 +546,7 @@
 			position: absolute;
 		}
 
-		& > span.login-agent-text-bubble-content, & > input.login-agent-text-bubble-input {
+		& > span.login-agent-text-bubble-content, & > input.login-agent-text-bubble-input, & > .login-agent-text-bubble-button-container {
 			opacity: 0;
 			pointer-events: none;
 		}
@@ -565,6 +565,32 @@
 			width: @login-agent-text-bubble-input-width;
 			height: @login-agent-text-bubble-font-size + 5px;
 			text-align: center;
+		}
+
+		@login-agent-text-bubble-button-margin: 30px;
+		@login-agent-text-bubble-button-width: ((@login-width / 2 - 3 * @login-agent-text-bubble-button-margin) / 2);
+		@login-agent-text-bubble-button-height: 20px;
+
+		& > .login-agent-text-bubble-button-container {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: @login-agent-text-bubble-button-height + 2 * @login-agent-text-bubble-button-margin;
+
+			& > .login-agent-text-bubble-button {
+				cursor: pointer;
+				float: left; // to-do: inline-block renders strangely
+				background-color: @green-sea;
+				width: @login-agent-text-bubble-button-width;
+				height: @login-agent-text-bubble-button-height;
+				margin-top: @login-agent-text-bubble-button-margin;
+				margin-left: @login-agent-text-bubble-button-margin;
+
+				&:hover {
+					background-color: @turquoise;
+				}
+			}
 		}
 
 		@login-agent-text-bubble-transition-delay: @std-transition-delay * 1.5;
@@ -590,7 +616,7 @@
 				z-index: -1;
 			}
 
-			& > span.login-agent-text-bubble-content, & > input.login-agent-text-bubble-input {
+			& > span.login-agent-text-bubble-content, & > input.login-agent-text-bubble-input,  & > .login-agent-text-bubble-button-container {
 				opacity: 1;
 				pointer-events: auto;
 				transition: @std-transition;

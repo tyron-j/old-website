@@ -24,14 +24,18 @@ define(function () {
 
 				// login agent model
 				var loginAgent = $scope.loginAgent = { // singleton; to-do: consider turning this into a global widget
+					binaryMode: false, // binary question
 					questionMode: false,
+
 					questionCallback: function () {
 						console.error("No question was passed into the login agent"); // default logic
 					},
+
 					textDelay: 3000, // constant for how long each text is displayed
 					text: '',
 
-					askQuestion: function (question, callback) {
+					askQuestion: function (question, callback, binaryMode) {
+						this.binaryMode       = !!binaryMode;
 						this.questionMode     = true;
 						this.questionCallback = callback || this.questionCallback;
 						this.text             = question || '';
@@ -44,10 +48,15 @@ define(function () {
 					},
 
 					receiveAnswer: function (evt) {
+						if (this.binaryMode) {
+							this.questionCallback(evt); // evt parameter is binary
+						} else {
+							this.questionCallback(evt.target.value);
+						}
+
+						this.binaryMode   = false;
 						this.questionMode = false;
 						this.text         = '';
-
-						this.questionCallback(evt.target.value);
 					},
 
 					// textQueue must be array
@@ -55,7 +64,6 @@ define(function () {
 						var that = this;
 
 						if (textQueue.length) {
-
 							this.text = textQueue.shift();
 
 							$timeout(function () {
@@ -92,8 +100,12 @@ define(function () {
 											"I highly recommend that you try them out."
 										], function () {
 											loginAgent.askQuestion("Would you like some?", function (answer) { // to-do: make this binary
-												//
-											});
+												if (answer === true) {
+													console.log("Receiving cookies...");
+												} else {
+													console.log("Skipping cookies...");
+												}
+											}, true);
 										});
 									}, function (res) { // fail condition
 										loginAgent.spewText([
