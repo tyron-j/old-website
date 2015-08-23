@@ -15,7 +15,7 @@ define(function () {
 			var userAnswer = $cookies.get('userAnswer');
 
 			if (userName && userAnswer) {
-				//
+				$location.path('home');
 			} else {
 				// asynchronous to show initial animation
 				$timeout(function () {
@@ -48,15 +48,17 @@ define(function () {
 					},
 
 					receiveAnswer: function (evt) {
+						// these have to be called before questionCallback
+						this.questionMode = false;
+						this.text         = '';
+
 						if (this.binaryMode) {
 							this.questionCallback(evt); // evt parameter is binary
 						} else {
 							this.questionCallback(evt.target.value);
 						}
 
-						this.binaryMode   = false;
-						this.questionMode = false;
-						this.text         = '';
+						this.binaryMode = false;
 					},
 
 					// textQueue must be array
@@ -99,11 +101,29 @@ define(function () {
 											"I have some homemade cookies that expire automatically.",
 											"I highly recommend that you try them out."
 										], function () {
-											loginAgent.askQuestion("Would you like some?", function (answer) { // to-do: make this binary
-												if (answer === true) {
-													console.log("Receiving cookies...");
+											loginAgent.askQuestion("Would you like some?", function (wantsCookie) { // to-do: make this binary
+												if (wantsCookie === true) {
+													$cookies.put('userName', name, {
+														expires: new Date(Date.now() + 30 * 1000)
+													});
+
+													$cookies.put('userAnswer', answer, {
+														expires: new Date(Date.now() + 30 * 1000)
+													});
+
+													loginAgent.spewText([
+														"There you go, cookies.",
+														"You can go to the website now. :)"
+													], function () {
+														$location.path('home');
+													});
 												} else {
-													console.log("Skipping cookies...");
+													loginAgent.spewText([
+														"Shame, they're really good.",
+														"In any case, please proceed to my website."
+													], function () {
+														$location.path('home');
+													});
 												}
 											}, true);
 										});

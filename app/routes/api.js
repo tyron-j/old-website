@@ -365,8 +365,8 @@ module.exports = {
 
 		var selection = 'firstName lastName';
 		var query     = {
-			firstName: new RegExp(firstName, 'i'),
-			lastName: new RegExp(lastName, 'i')
+			firstName: firstName && new RegExp(firstName, 'i'),
+			lastName: lastName && new RegExp(lastName, 'i')
 		};
 
 		if (answer) {
