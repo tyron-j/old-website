@@ -104,11 +104,11 @@ define(function () {
 											loginAgent.askQuestion("Would you like some?", function (wantsCookie) { // to-do: make this binary
 												if (wantsCookie === true) {
 													$cookies.put('userName', name, {
-														expires: new Date(Date.now() + 30 * 1000)
+														expires: new Date(Date.now() + 30 * 1000) // to-do: it currently lasts only 30s
 													});
 
 													$cookies.put('userAnswer', answer, {
-														expires: new Date(Date.now() + 30 * 1000)
+														expires: new Date(Date.now() + 30 * 1000) // to-do: it currently lasts only 30s
 													});
 
 													loginAgent.spewText([
