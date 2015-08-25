@@ -847,11 +847,18 @@
 	.set-in-center(@special-width, @special-height);
 
 	background-color: @wet-asphalt;
+	overflow: auto;
 
 	&.opened {
 		height: @vertical-golden-height;
 		transition: @std-transition;
 		transition-delay: @drop-transition-delay;
+	}
+
+	& > .special-letter-scroll-content {
+		font-size: @blog-content-font-size;
+		padding: @blog-text-padding;
+		white-space: pre-wrap; // displays new lines correctly
 	}
 }
 
@@ -902,6 +909,7 @@
 		top: @special-height * 1.6;
 		transition: @std-transition;
 		transition-delay: @drop-transition-delay;
+		pointer-events: none;
 	}
 
 	&.closed {

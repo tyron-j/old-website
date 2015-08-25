@@ -8,7 +8,7 @@ define(function () {
 		
 		function ($scope) {
 			$scope.openLetter = function () {
-				$scope.letterOpened = !$scope.letterOpened; // implicit property; to-do: mark all implicit properties
+				$scope.letterOpened = true; // implicit property; to-do: mark all implicit properties
 			};
 		}
 	];
