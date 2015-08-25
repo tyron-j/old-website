@@ -55,6 +55,7 @@ app.get('/api/image/:category/:title', api.getImage); // fetch actual image
 app.get('/api/intro', api.getIntro);
 app.get('/api/news', api.getNews);
 app.get('/api/skill', api.getSkill);
+app.get('/api/special', api.getSpecial);
 
 app.post('/api/blog', api.postBlog);
 app.post('/api/image/:category', api.postImage(__dirname + '/app/temp'));

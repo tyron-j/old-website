@@ -1,6 +1,8 @@
 // login controller
 
-define(function () {
+define([
+	'models/user'
+], function (userModel) {
 	'use strict';
 
 	return [
@@ -15,6 +17,10 @@ define(function () {
 			var userAnswer = $cookies.get('userAnswer');
 
 			if (userName && userAnswer) {
+				// update local model
+				userModel.name   = userName;
+				userModel.answer = userAnswer;
+				
 				$location.path('home');
 			} else {
 				// asynchronous to show initial animation
@@ -96,6 +102,10 @@ define(function () {
 							], function () {
 								loginAgent.askQuestion(res.data.question, function (answer) {
 									$http.get('/api/user?name=' + name + '&answer=' + answer).then(function (res) {
+										// update local model
+										userModel.name   = name;
+										userModel.answer = answer;
+
 										loginAgent.spewText([
 											"Welcome, " + res.data.firstName + ".",
 											"I have some homemade cookies that expire automatically.",

@@ -388,5 +388,32 @@ module.exports = {
 					});
 				}
 			});
+	},
+
+	getSpecial: function (req, res, next) {
+		var name      = req.query.name.split(' ');
+		var firstName = name.shift();
+		var lastName  = name.pop();
+		var answer    = req.query.answer;
+
+		var query     = {
+			firstName: firstName && new RegExp(firstName, 'i'),
+			lastName: lastName && new RegExp(lastName, 'i'),
+			answer: answer && new RegExp(answer, 'i')
+		};
+
+		models.User
+			.findOne(query)
+			.select('specialLetter')
+			.exec(function (err, user) {
+				if (user && user.specialLetter) {
+					res.send(user.specialLetter);
+				} else {
+					res.status(404);
+					res.send({
+						msg: "Special letter not found"
+					});
+				}
+			});
 	}
 };
