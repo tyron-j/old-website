@@ -21,5 +21,10 @@ module.exports = db.model('User', new db.Schema({
 	answer: {
 		type: [ String ], // possible answers
 		required: true
+	},
+
+	specialLetter: {
+		type: String,
+		required: true
 	}
 }));

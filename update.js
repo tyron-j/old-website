@@ -60,7 +60,7 @@ var updateStatus = function (model, numTotal) {
 			status[model].doneUpdating = true;
 			signal.success("Done updating " + model + "s");
 
-			if (status.experience.doneUpdating && status.intro.doneUpdating && status.skill.doneUpdating) {
+			if (status.experience.doneUpdating && status.intro.doneUpdating && status.skill.doneUpdating && status.user.doneUpdating) {
 				closeApp();
 			}
 		}
@@ -193,14 +193,25 @@ db.connection.on('connected', function () {
 			updateStatus('user', users.length);
 
 			users.forEach(function (user) {
-				(new User(user)).save(function (err, s) {
+				var userName = user.firstName + ' ' + user.lastName;
+
+				fs.readFile(uploadDir + '/special/' + userName.toLowerCase() + '.txt', function (err, data) {
 					if (err) {
-						signal.error("Failed to save user to database");
+						signal.error("Failed to read special letter for user: " + userName);
 						throw err; // to-do: handle error gracefully
 					}
 
-					signal.success("Saved user to database");
-					updateStatus('user');
+					user.specialLetter = data;
+
+					(new User(user)).save(function (err, s) {
+						if (err) {
+							signal.error("Failed to save user to database");
+							throw err; // to-do: handle error gracefully
+						}
+
+						signal.success("Saved user to database");
+						updateStatus('user');
+					});
 				});
 			});
 		});

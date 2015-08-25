@@ -3,6 +3,7 @@
 div(class='special-letter',
 	ng-class='{ opened: letterOpened, closed: !letterOpened }')
 	div(class='special-letter-scroll-content')
+		| {{ specialLetter }}
 div(class='special-letter-cover-container',
 	ng-click='openLetter()',
 	ng-class='{ "opened dropped": letterOpened, closed: !letterOpened }')
