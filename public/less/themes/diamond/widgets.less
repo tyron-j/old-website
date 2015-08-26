@@ -136,6 +136,16 @@
 }
 
 .nav-bar {
+	&.inUse {
+		margin-top: 0;
+		transition: @std-transition;
+	}
+
+	&.notInUse {
+		margin-top: -@nav-bar-height;
+		transition: @std-transition;
+	}
+
 	& > .nav-bar-content { // animated nav bar
 		&.shown {
 			transition: @std-transition;

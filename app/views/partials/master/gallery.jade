@@ -12,9 +12,7 @@ div(class='image-browser')
 					title='{{ image.title.split(".")[0] }}',
 					ng-class='{ shown: image === inspectedImage, hidden: image !== inspectedImage }')
 					| {{ image.title.split('.')[0] }}
-				//- to-do: change url to http://tyronjung.com/api/image/{{ image.category }}/{{ image.title }}
-				//- after moving image fetching api to unprotected api
-				img(ng-src='http://localhost:9000/api/image/{{ image.category }}/{{ image.title }}',
+				img(ng-src='http://' + locationHost + '/api/image/{{ image.category }}/{{ image.title }}',
 					ng-mouseover='inspectImage(image)',
 					ng-click='toggleImageSelection(image)',
 					ng-class='{ horizontal: image.horizontal, vertical: !image.horizontal }'

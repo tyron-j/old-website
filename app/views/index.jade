@@ -7,12 +7,10 @@ block view
 	//- to-do: consider using ng-cloak for each individual element for progressive rendering
 	div(ng-controller='MainCtrl',
 		ng-cloak)
-		//- to-do: remove isLocalHost condition
-		if isLocalHost
-			ui-bg-image(ui-model='bgImage')
-			ui-modal-dialog(ui-model='modalDialog')
-			ui-modal-selector(ui-model='modalSelector')
-			ui-nav-bar(ui-model='navBar')
-			ui-side-bar(ui-model='sideBar')
+		ui-bg-image(ui-model='bgImage')
+		ui-modal-dialog(ui-model='modalDialog')
+		ui-modal-selector(ui-model='modalSelector')
+		ui-nav-bar(ui-model='navBar')
+		ui-side-bar(ui-model='sideBar')
 		//- partial view
 		div(ng-view)

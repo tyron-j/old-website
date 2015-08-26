@@ -2,7 +2,7 @@
 
 define([
 	'angular',
-	'angular-animate', // to-do: consider removing ngAnimate
+	'angular-cookies',
 	'angular-route',
 	'controllers/all',
 	'directives/all'
@@ -10,7 +10,7 @@ define([
 	'use strict';
 
 	var app = ng.module('tyronApp', [
-		'ngAnimate', // to-do: consider removing ngAnimate
+		'ngCookies',
 		'ngRoute',
 		'allControllers',
 		'allDirectives'
@@ -41,6 +41,9 @@ define([
 			}).when('/resume', {
 				templateUrl: '/partials/resume',
 				controller: 'ResumeCtrl'
+			}).when('/special', {
+				templateUrl: '/partials/special',
+				controller: 'SpecialCtrl'
 			});
 
 			// temporary routes

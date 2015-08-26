@@ -133,6 +133,20 @@
 	transform: rotate(@rotation);
 }
 
+.rotate-x (@rotation, @origin: 0% 50%) {
+	-webkit-transform: rotateX(@rotation);
+	-moz-transform: rotateX(@rotation);
+	-ms-transform: rotateX(@rotation);
+	-o-transform: rotateX(@rotation);
+	transform: rotateX(@rotation);
+
+	-webkit-transform-origin: @origin;
+	-moz-transform-origin: @origin;
+	-ms-transform-origin: @origin;
+	-o-transform-origin: @origin;
+	transform-origin: @origin;
+}
+
 .set-dimensions (@width, @height: @width) {
 	width: @width;
 	height: @height;
@@ -157,6 +171,12 @@
 .stack-right () {
 	position: relative;
 	float: right;
+}
+
+.text-shadow (@blur: 0, @color: black) {
+	-webkit-text-shadow: 0 0 @blur @color;
+	-moz-text-shadow: 0 0 @blur @color;
+	text-shadow: 0 0 @blur @color;
 }
 
 .unselectable () {

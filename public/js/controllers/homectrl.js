@@ -36,21 +36,21 @@ define(function () {
 				icon: 'envelope-o'
 			}];
 
-			$http.get('/api/news').success(function (res) {
+			$http.get('/api/news').then(function (res) {
 				$scope.homeNews = [{ // to-do: fetch these from db via http
 					shown: true,
 					inFront: false, // needed for CSS shortcomings
-					href: res[0].href,
-					imageTitle: res[0].imageTitle
+					href: res.data[0].href,
+					imageTitle: res.data[0].imageTitle
 				}, {
 					shown: false,
-					href: res[1].href,
-					imageTitle: res[1].imageTitle
+					href: res.data[1].href,
+					imageTitle: res.data[1].imageTitle
 				}];
 
 				var homeNewsIdx = 1; // initial values
 				var resIdx      = 1; // initial values
-				var resLen      = res.length;
+				var resLen      = res.data.length;
 
 				var intervalPromise;
 				var timeoutPromise;
@@ -64,8 +64,8 @@ define(function () {
 					}
 					
 					$scope.homeNews[0].inFront              = !$scope.homeNews[0].inFront;
-					$scope.homeNews[homeNewsIdx].href       = res[resIdx].href;
-					$scope.homeNews[homeNewsIdx].imageTitle = res[resIdx].imageTitle;
+					$scope.homeNews[homeNewsIdx].href       = res.data[resIdx].href;
+					$scope.homeNews[homeNewsIdx].imageTitle = res.data[resIdx].imageTitle;
 				};
 
 				var switchImg = function () {

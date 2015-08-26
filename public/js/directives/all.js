@@ -3,6 +3,7 @@
 define([
 	'angular',
 
+	'./onenter',
 	'./onload',
 
 	'./widgets/bgimage',
@@ -13,11 +14,12 @@ define([
 	'./widgets/modalselector',
 	'./widgets/navbar',
 	'./widgets/sidebar'
-], function (ng, onLoad, bgImage, buttonBar, comboBox, modalDialog, modalImage, modalSelector, navBar, sideBar) {
+], function (ng, onEnter, onLoad, bgImage, buttonBar, comboBox, modalDialog, modalImage, modalSelector, navBar, sideBar) {
 	'use strict';
 
 	// to-do: use [].slice.call(args)
 	return ng.module('allDirectives', [])
+		.directive('uiOnEnter', onEnter)
 		.directive('uiOnLoad', onLoad)
 
 		.directive('uiBgImage', bgImage)

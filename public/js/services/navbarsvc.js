@@ -10,6 +10,7 @@ define(function () {
 			return {
 				model: { // using a singleton since there will only be one instance of a nav bar
 					inUse: false,
+					shown: false,
 					items: [],
 					masterMode: false
 				},
@@ -51,19 +52,19 @@ define(function () {
 					subItems: [{
 						title: 'Home',
 						href: 'master/home'
-					}, {
+					}/*, {
 						title: 'About',
 						href: 'master/about'
-					}, {
+					}*/, {
 						title: 'Blog',
 						href: 'master/blog'
 					}, {
 						title: 'Gallery',
 						href: 'master/gallery'
-					}, {
+					}/*, {
 						title: 'Resume',
 						href: 'master/resume'
-					}]
+					}*/]
 				}, {
 					title: 'Tests',
 					subItems: [{

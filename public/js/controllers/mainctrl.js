@@ -20,6 +20,18 @@ define(function () {
 			$scope.modalSelector = modalSelectorSvc.model;
 			$scope.navBar        = navBarSvc.model;
 			$scope.sideBar       = sideBarSvc.model;
+
+			$scope.$on('$locationChangeStart', function (evt, next, current) {
+				var splitPath    = next.split('/');
+				var splitPathLen = splitPath.length;
+				var finalPath    = splitPath.pop();
+
+				if (splitPathLen !== 4 || finalPath !== 'login') {
+					$scope.navBar.inUse = true;
+				} else {
+					$scope.navBar.inUse = false;
+				}
+			});
 		}
 	];
 });

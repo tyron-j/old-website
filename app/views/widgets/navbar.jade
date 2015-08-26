@@ -1,11 +1,11 @@
 //- nav bar
 
 div(class='nav-bar',
-	ng-class='{ master: model.masterMode }',
-	ng-mouseover='model.inUse = true',
-	ng-mouseleave='model.inUse = false')
+	ng-class='{ master: model.masterMode, inUse: model.inUse, notInUse: !model.inUse }',
+	ng-mouseover='model.shown = true',
+	ng-mouseleave='model.shown = false')
 	div(class='nav-bar-content',
-		ng-class='{ shown: model.inUse, hidden: !model.inUse }')
+		ng-class='{ shown: model.shown, hidden: !model.shown }')
 		//- to-do: make this optional
 		div(class='nav-bar-beacon')
 			div(class='nav-bar-beacon-content')

@@ -4,6 +4,9 @@ div(class='home-container')
 	div(class='left home-nav-panel')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
+				ng-mouseover='homeLinks[0].lit = true',
+				ng-mouseleave='homeLinks[0].lit = false',
+				ng-class='{ lit: homeLinks[0].lit, unlit: !homeLinks[0].lit }',
 				ng-href='{{ homeLinks[0].href }}')
 				div(class='home-nav-panel-link-inner-content')
 					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[0].icon }}')
@@ -12,6 +15,9 @@ div(class='home-container')
 		div(class='home-nav-panel-filler')
 		div(class='home-nav-panel-link home-nav-panel-link-edge')
 			a(class='home-nav-panel-link-content',
+				ng-mouseover='homeLinks[1].lit = true',
+				ng-mouseleave='homeLinks[1].lit = false',
+				ng-class='{ lit: homeLinks[1].lit, unlit: !homeLinks[1].lit }',
 				ng-href='{{ homeLinks[1].href }}')
 				div(class='home-nav-panel-link-inner-content')
 					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[1].icon }}')
@@ -19,28 +25,33 @@ div(class='home-container')
 						| {{ homeLinks[1].title }}
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
+				ng-mouseover='homeLinks[2].lit = true',
+				ng-mouseleave='homeLinks[2].lit = false',
+				ng-class='{ lit: homeLinks[2].lit, unlit: !homeLinks[2].lit }',
 				ng-href='{{ homeLinks[2].href }}')
 				div(class='home-nav-panel-link-inner-content')
 					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[2].icon }}')
 					div(class='home-nav-panel-link-title')
 						| {{ homeLinks[2].title }}
-	div(class='home-news-panel preloader preloader-intersection')
+	div(class='home-news-panel')
+		div(class='home-news-panel-preloader preloader preloader-intersection')
 		div(class='home-news-panel-content-container',
 			ng-style='{ "z-index": (homeNews[0].inFront ? 1 : 0) }',
 			ng-class='{ shown: homeNews[0].shown, hidden: !homeNews[0].shown }')
 			a(class='home-news-panel-content',
-				ng-href='http://localhost:9000/{{ homeNews[0].href }}')
-				//- to-do: change fetch location host to tyronjung.com
-				img(ng-src='http://localhost:9000/api/image/home/{{ homeNews[0].imageTitle }}')
+				ng-href='http://' + locationHost + '/{{ homeNews[0].href }}')
+				img(ng-src='http://' + locationHost + '/api/image/home/{{ homeNews[0].imageTitle }}')
 		div(class='home-news-panel-content-container hidden'
 			ng-class='{ shown: homeNews[1].shown, hidden: !homeNews[1].shown }')
 			a(class='home-news-panel-content',
-				ng-href='http://localhost:9000/{{ homeNews[1].href }}')
-				//- to-do: change fetch location host to tyronjung.com
-				img(ng-src='http://localhost:9000/api/image/home/{{ homeNews[1].imageTitle }}')
+				ng-href='http://' + locationHost + '/{{ homeNews[1].href }}')
+				img(ng-src='http://' + locationHost + '/api/image/home/{{ homeNews[1].imageTitle }}')
 	div(class='right home-nav-panel')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
+				ng-mouseover='homeLinks[3].lit = true',
+				ng-mouseleave='homeLinks[3].lit = false',
+				ng-class='{ lit: homeLinks[3].lit, unlit: !homeLinks[3].lit }',
 				ng-href='{{ homeLinks[3].href }}')
 				div(class='home-nav-panel-link-inner-content')
 					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[3].icon }}')
@@ -48,6 +59,9 @@ div(class='home-container')
 						| {{ homeLinks[3].title }}
 		div(class='home-nav-panel-link home-nav-panel-link-edge')
 			a(class='home-nav-panel-link-content',
+				ng-mouseover='homeLinks[4].lit = true',
+				ng-mouseleave='homeLinks[4].lit = false',
+				ng-class='{ lit: homeLinks[4].lit, unlit: !homeLinks[4].lit }',
 				ng-href='{{ homeLinks[4].href }}')
 				div(class='home-nav-panel-link-inner-content')
 					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[4].icon }}')
@@ -56,6 +70,9 @@ div(class='home-container')
 		div(class='home-nav-panel-filler')
 		div(class='home-nav-panel-link')
 			a(class='home-nav-panel-link-content',
+				ng-mouseover='homeLinks[5].lit = true',
+				ng-mouseleave='homeLinks[5].lit = false',
+				ng-class='{ lit: homeLinks[5].lit, unlit: !homeLinks[5].lit }',
 				ng-href='{{ homeLinks[5].href }}')
 				div(class='home-nav-panel-link-inner-content')
 					div(class='home-nav-panel-link-icon icon icon-{{ homeLinks[5].icon }}')

@@ -18,47 +18,113 @@ module.exports = {
 		};
 	},
 
-	getUser: function (req, res, next) {
-		var name = req.query.name.toLowerCase().split(' ');
-
-		models.User.findOne({
-			name: {
-				first: name[0],
-				last: name[1]
-			}
-		}, function (err, user) { // to-do: change redirects
-			if (err || !user) {
-				// to-do: recognize Dan Ryan properly and remove this if/else block
-				if (/^dan/i.test(req.query.name) && /ryan/i.test(req.query.name) && /chan$/i.test(req.query.name)) {
-					res.redirect('/danryan');
+	getBlog: function (req, res, next) {
+		if (req.params.title) {
+			models.Blog.findOne({
+				title: req.params.title
+			},
+			'category content bgImageTitle creationDate',
+			function (err, blog) {
+				if (blog) {
+					res.send(blog);
 				} else {
-					res.redirect('/unauthorized');
+					var failMsg = "Could not find " + req.params.title;
+
+					signal.error(failMsg);
+					res.send(failMsg);
 				}
-			} else {
-				res.redirect('/hello');
-			}
-		});
+			});
+		} else {
+			models.Blog
+				.find({})
+				.sort('-creationDate')
+				.select('title')
+				.exec(function (err, blogs) {
+					if (blogs.length) {
+						res.send(blogs);
+					} else {
+						res.send([]);
+					}
+				});
+		}
 	},
 
-	postUser: function (req, res, next) {
-		// req.body seems to work only with post requests
-		var name = req.body.name.toLowerCase().split(' ');
-		var user = new models.User({
-			name: {
-				first: name[0],
-				last: name[1]
-			}
+	postBlog: function (req, res, next) {
+		var blog = new models.Blog({
+			category: req.body.category,
+			title: req.body.title,
+			content: req.body.content,
+			bgImageTitle: req.body.bgImageTitle,
+			creationDate: req.body.creationDate
 		});
 
-		user.save(function (err, u) {
+		blog.save(function (err, b) {
 			if (err) {
-				signal.error("Failed to save " + name.join(' ') + " to database");
+				signal.error("Failed to save " + req.body.title + " to database");
 				throw err; // to-do: handle error gracefully
 			}
 
-			signal.success("Saved " + name.join(' ') + " to database");
-			res.redirect('/success'); // to-do: change redirect
+			var successMsg = "Saved " + req.body.title + " to database";
+
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
+			});
 		});
+	},
+
+	putBlog: function (req, res, next) {
+		models.Blog.findOneAndUpdate({
+			creationDate: req.body.creationDate // creationDate works as a unique identifier
+		}, {
+			category: req.body.category,
+			title: req.body.title,
+			content: req.body.content,
+			bgImageTitle: req.body.bgImageTitle
+		}, function (err, b) { // to-do: handle no matches
+			if (err) {
+				signal.error("Failed to update " + req.body.title + " in database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			var successMsg = "Updated " + req.body.title + " in database";
+
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
+			});
+		});
+	},
+
+	deleteBlog: function (req, res, next) {
+		models.Blog.findOneAndRemove({
+			title: req.params.title
+		}, function (err, b) {
+			if (err) {
+				signal.error("Failed to delete " + req.params.title + " in database");
+				throw err; // to-do: handle error gracefully
+			}
+
+			var successMsg = "Deleted " + req.params.title + " in database";
+
+			signal.success(successMsg);
+			res.send({
+				msg: successMsg
+			});
+		});
+	},
+
+	getExperience: function (req, res, next) {
+		models.Experience
+			.find({})
+			.sort('relevance')
+			.exec(function (err, experiences) {
+				if (experiences.length) {
+					res.send(experiences);
+				} else {
+					res.send([]);
+				}
+			});
 	},
 
 	getImage: function (req, res, next) { // to-do: update this function
@@ -172,107 +238,24 @@ module.exports = {
 		//
 	},
 
+	getIntro: function (req, res, next) {
+		models.Intro.findOne({}, function (err, intro) {
+			if (intro) {
+				res.send(intro);
+			} else {
+				var failMsg = "Could not find intro";
+
+				signal.error(failMsg);
+				res.send(failMsg);
+			}
+		});
+	},
+
 	deleteImage: function (req, res, next) {
 		models.Image.findOneAndRemove({
 			category: req.params.category,
 			title: req.params.title
 		}, function (err, a) {
-			if (err) {
-				signal.error("Failed to delete " + req.params.title + " in database");
-				throw err; // to-do: handle error gracefully
-			}
-
-			var successMsg = "Deleted " + req.params.title + " in database";
-
-			signal.success(successMsg);
-			res.send({
-				msg: successMsg
-			});
-		});
-	},
-
-	getBlog: function (req, res, next) {
-		if (req.params.title) {
-			models.Blog.findOne({
-				title: req.params.title
-			},
-			'category content bgImageTitle creationDate',
-			function (err, blog) {
-				if (blog) {
-					res.send(blog);
-				} else {
-					var failMsg = "Could not find " + req.params.title;
-
-					signal.error(failMsg);
-					res.send(failMsg);
-				}
-			});
-		} else {
-			models.Blog
-				.find({})
-				.sort('-creationDate')
-				.select('title')
-				.exec(function (err, blogs) {
-					if (blogs.length) {
-						res.send(blogs);
-					} else {
-						res.send([]);
-					}
-				});
-		}
-	},
-
-	postBlog: function (req, res, next) {
-		var blog = new models.Blog({
-			category: req.body.category,
-			title: req.body.title,
-			content: req.body.content,
-			bgImageTitle: req.body.bgImageTitle,
-			creationDate: req.body.creationDate
-		});
-
-		blog.save(function (err, b) {
-			if (err) {
-				signal.error("Failed to save " + req.body.title + " to database");
-				throw err; // to-do: handle error gracefully
-			}
-
-			var successMsg = "Saved " + req.body.title + " to database";
-
-			signal.success(successMsg);
-			res.send({
-				msg: successMsg
-			});
-		});
-	},
-
-	putBlog: function (req, res, next) {
-		models.Blog.findOneAndUpdate({
-			creationDate: req.body.creationDate // creationDate works as a unique identifier
-		}, {
-			category: req.body.category,
-			title: req.body.title,
-			content: req.body.content,
-			bgImageTitle: req.body.bgImageTitle
-		}, function (err, b) { // to-do: handle no matches
-			if (err) {
-				signal.error("Failed to update " + req.body.title + " in database");
-				throw err; // to-do: handle error gracefully
-			}
-
-			var successMsg = "Updated " + req.body.title + " in database";
-
-			signal.success(successMsg);
-			res.send({
-				msg: successMsg
-			});
-		});
-	},
-
-	deleteBlog: function (req, res, next) {
-		models.Blog.findOneAndRemove({
-			title: req.params.title
-		}, function (err, b) {
 			if (err) {
 				signal.error("Failed to delete " + req.params.title + " in database");
 				throw err; // to-do: handle error gracefully
@@ -359,5 +342,78 @@ module.exports = {
 				msg: successMsg
 			});
 		});
+	},
+
+	getSkill: function (req, res, next) {
+		models.Skill
+			.find({})
+			.sort('relevance')
+			.exec(function (err, skills) {
+				if (skills.length) {
+					res.send(skills);
+				} else {
+					res.send([]);
+				}
+			});
+	},
+
+	getUser: function (req, res, next) {
+		var name      = req.query.name.split(' ');
+		var firstName = name.shift();
+		var lastName  = name.pop();
+		var answer    = req.query.answer;
+
+		var selection = 'firstName lastName';
+		var query     = {
+			firstName: firstName && new RegExp(firstName, 'i'),
+			lastName: lastName && new RegExp(lastName, 'i')
+		};
+
+		if (answer) {
+			query.answer = new RegExp(answer, 'i');
+		} else {
+			selection += ' question';
+		}
+
+		models.User
+			.findOne(query)
+			.select(selection)
+			.exec(function (err, user) {
+				if (user) {
+					res.send(user);
+				} else { // to-do: handle no matches properly
+					res.status(404);
+					res.send({
+						msg: "User not found"
+					});
+				}
+			});
+	},
+
+	getSpecial: function (req, res, next) {
+		var name      = req.query.name.split(' ');
+		var firstName = name.shift();
+		var lastName  = name.pop();
+		var answer    = req.query.answer;
+
+		var query     = {
+			firstName: firstName && new RegExp(firstName, 'i'),
+			lastName: lastName && new RegExp(lastName, 'i'),
+			answer: answer && new RegExp(answer, 'i')
+		};
+
+		models.User
+			.findOne(query)
+			.select('specialLetter')
+			.exec(function (err, user) {
+				if (user && user.specialLetter) {
+					res.send(user.specialLetter);
+				} else {
+					res.status(404);
+					res.send({
+						msg: "Special letter not found"
+					});
+				}
+			});
 	}
 };

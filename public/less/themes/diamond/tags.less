@@ -12,3 +12,33 @@ body {
 	min-height: @vertical-golden-height;
 	position: relative; // holds absolute element within
 }
+
+@scrollbar-width: 5px;
+
+::-webkit-scrollbar {
+	width: @scrollbar-width;
+
+	&:horizontal {
+		height: @scrollbar-width;
+	}
+}
+
+::-webkit-scrollbar-button {
+	//
+}
+
+::-webkit-scrollbar-track {
+	.faint(black);
+}
+
+::-webkit-scrollbar-track-piece {
+	//
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: @green-sea;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: @green-sea;
+}

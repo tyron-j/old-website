@@ -1,9 +1,32 @@
 //- login
 
-div(class='centered')
-	form(action='/api/user', method='get')
-		div
-			label Who <i>are</i> you?
-		br
-		div
-			input(type='text', name='name')
+//- div(class='centered')
+//- 	form(action='/api/user', method='get')
+//- 		div
+//- 			label Who <i>are</i> you?
+//- 		br
+//- 		div
+//- 			input(type='text', name='name')
+
+div(class='login-container',
+	ng-class='{ "preloader preloader-intersection": !loginAgentShown }')
+	div(class='login-agent-text-bubble',
+		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')
+		div(class='login-agent-text-bubble-arrow')
+		div(class='login-agent-text-bubble-arrow-shadow')
+		span(class='login-agent-text-bubble-content')
+			| {{ loginAgent.text }}
+		input(class='login-agent-text-bubble-input',
+			type='text',
+			ng-if='!loginAgent.binaryMode && loginAgent.questionMode',
+			ui-on-enter='loginAgent.receiveAnswer(evt)')
+		div(class='login-agent-text-bubble-button-container',
+			ng-if='loginAgent.binaryMode && loginAgent.questionMode')
+			div(class='login-agent-text-bubble-button',
+				ng-click='loginAgent.receiveAnswer(true)')
+				| Yes
+			div(class='login-agent-text-bubble-button',
+				ng-click='loginAgent.receiveAnswer(false)')
+				| No
+	div(class='login-agent',
+		ng-class='{ shown: loginAgentShown, hidden: !loginAgentShown }')

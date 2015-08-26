@@ -58,8 +58,8 @@ define(function () {
 					var ignoreBgImageTitleChange;
 					var ignoreLocationChangeStart;
 
-					$http.get('/api/blog').success(function (res) {
-						var blogs = res;
+					$http.get('/api/blog').then(function (res) {
+						var blogs = res.data;
 
 						sideBar.open({
 							title: 'Blogs',
@@ -116,11 +116,11 @@ define(function () {
 
 				selectBlog: function (blog) { // this function varies based on the side bar's content
 					if (!blog.content) { // if not already fetched
-						$http.get('/api/blog/' + blog.title).success(function (res) {
-							blog.category     = res.category;
-							blog.content      = res.content;
-							blog.bgImageTitle = res.bgImageTitle;
-							blog.creationDate = res.creationDate;
+						$http.get('/api/blog/' + blog.title).then(function (res) {
+							blog.category     = res.data.category;
+							blog.content      = res.data.content;
+							blog.bgImageTitle = res.data.bgImageTitle;
+							blog.creationDate = res.data.creationDate;
 						});
 					}
 
