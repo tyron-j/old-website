@@ -40,13 +40,6 @@ app.use(function (req, res, next) {
 // api ====================================================================== //
 
 // unprotected api
-app.get('/api/user', api.getUser);
-
-// temporary middleware to protect api and master views
-app.use('/api/*', api.authenticate(isLocalHost));
-app.use('*/master/*', api.authenticate(isLocalHost)); // also protects partials
-
-// protected api
 app.get('/api/blog', api.getBlog); // fetch titles
 app.get('/api/blog/:title', api.getBlog); // fetch actual blog
 app.get('/api/experience', api.getExperience);
@@ -56,7 +49,13 @@ app.get('/api/intro', api.getIntro);
 app.get('/api/news', api.getNews);
 app.get('/api/skill', api.getSkill);
 app.get('/api/special', api.getSpecial);
+app.get('/api/user', api.getUser);
 
+// temporary middleware to protect api and master views
+app.use('/api/*', api.authenticate(isLocalHost));
+app.use('*/master/*', api.authenticate(isLocalHost)); // also protects partials
+
+// protected api
 app.post('/api/blog', api.postBlog);
 app.post('/api/image/:category', api.postImage(__dirname + '/app/temp'));
 app.post('/api/news', api.postNews);
