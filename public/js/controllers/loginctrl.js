@@ -111,7 +111,7 @@ define([
 											"I have some homemade cookies that expire automatically.",
 											"I highly recommend that you try them out."
 										], function () {
-											loginAgent.askQuestion("Would you like some?", function (wantsCookie) { // to-do: make this binary
+											loginAgent.askQuestion("Would you like some?", function (wantsCookie) {
 												if (wantsCookie === true) {
 													$cookies.put('userName', name, {
 														expires: new Date(Date.now() + 31 * 24 * 60 * 60 * 1000)
