@@ -21,7 +21,7 @@ define(function () {
 							console.log("Setting new load timeout");
 							setLoadTimeout(image);
 						}
-					}, 5000);
+					}, 10000);
 				};
 
 				images.forEach(function (image) {
