@@ -20,7 +20,7 @@ define(function () {
 
 							setLoadTimeout(image);
 						}
-					}, 10000);
+					}, 5000);
 				};
 
 				images.forEach(function (image) {
