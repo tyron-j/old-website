@@ -16,7 +16,7 @@ define(function () {
 				var setLoadTimeout = function (image) {
 					image.loadTimeout = $timeout(function () {
 						if (!image.loaded) {
-							image.title += '$time=' + (new Date()).getTime();
+							image.title = image.originalTitle + '?time=' + (new Date()).getTime();
 
 							console.log("Setting new load timeout");
 							setLoadTimeout(image);
@@ -25,6 +25,8 @@ define(function () {
 				};
 
 				images.forEach(function (image) {
+					image.originalTitle = image.title;
+
 					setLoadTimeout(image);
 				});
 			});
