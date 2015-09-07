@@ -6,18 +6,36 @@ define(function () {
 	return [
 		'$http',
 		'$scope',
+		'$timeout',
 
 		'modalImageSvc',
 		
-		function ($http, $scope, modalImageSvc) {
+		function ($http, $scope, $timeout, modalImageSvc) {
 			$http.get('/api/image/gallery').then(function (res) {
-				$scope.images = res.data;
+				var images         = $scope.images = res.data;
+				var setLoadTimeout = function (image) {
+					image.loadTimeout = $timeout(function () {
+						if (!image.loaded) {
+							image.title += '$time=' + (new Date()).getTime();
+
+							console.log("Setting new load timeout");
+							setLoadTimeout(image);
+						}
+					}, 5000);
+				};
+
+				images.forEach(function (image) {
+					setLoadTimeout(image);
+				});
 			});
 
 			$scope.modalImage = modalImageSvc.model;
 
 			$scope.handleImageLoad = function (evt, image) {
 				image.loaded = true; // client-exclusive property
+
+				console.log("Image loaded");
+				$timeout.cancel(image.loadTimeout);
 			};
 
 			// to-do: use custom ::-webkit-scrollbar styles
