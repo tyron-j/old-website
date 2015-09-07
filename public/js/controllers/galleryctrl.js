@@ -18,7 +18,6 @@ define(function () {
 						if (!image.loaded) {
 							image.title = image.originalTitle + '?time=' + (new Date()).getTime();
 
-							console.log("Setting new load timeout");
 							setLoadTimeout(image);
 						}
 					}, 10000);
@@ -36,7 +35,6 @@ define(function () {
 			$scope.handleImageLoad = function (evt, image) {
 				image.loaded = true; // client-exclusive property
 
-				console.log("Image loaded");
 				$timeout.cancel(image.loadTimeout);
 			};
 
